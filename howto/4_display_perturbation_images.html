@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This notebook demonstrates how to retrieve and plot all channels for one site using the <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait">jump_portrait</a> library.</p>
-<div id="28eabed2" class="cell" data-execution_count="1">
+<div id="6e2f272e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -306,45 +306,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Downloading data from 'https://zenodo.org/records/12211976/files/babel.db' to file '/home/runner/.cache/pooch/2eaa6a2f4915f72d7100683f53982ed8-babel.db'.</code></pre>
-</div>
 </div>
 <p>First, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this. Here we retrieve image locations for the “RAB30” gene:</p>
-<div id="f2aaeb6f" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gene_info.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8d34c07d" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gene_info.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/well.csv.gz' to file '/home/runner/.cache/pooch/4efbf4dd3dd9aaecc8ccb9fc3c6b4122-well.csv.gz'.
 Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/plate.csv.gz' to file '/home/runner/.cache/pooch/a530bb82de29e39332bdef6f29397769-plate.csv.gz'.
-worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  1.15it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  1.20it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  1.11it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  1.04it/s]worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.16it/s]worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
-worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.15it/s]worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.15it/s]
-worker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.10it/s]worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.09it/s]
-worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.05it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.07it/s]
-worker #4:  50%|█████     | 1/2 [00:02&lt;00:02,  2.28s/it]worker #4: 100%|██████████| 2/2 [00:03&lt;00:00,  1.42s/it]worker #4: 100%|██████████| 2/2 [00:03&lt;00:00,  1.55s/it]</code></pre>
+worker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  2.70it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  1.53it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  1.34it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  1.45it/s]worker #2: 100%|██████████| 2/2 [00:00&lt;00:00,  2.58it/s]worker #2: 100%|██████████| 2/2 [00:00&lt;00:00,  2.59it/s]
+worker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.98it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.90it/s]
+worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.90it/s]worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.79it/s]
+worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  2.08it/s]worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.95it/s]
+worker #4:  50%|█████     | 1/2 [00:00&lt;00:00,  2.11it/s]worker #4: 100%|██████████| 2/2 [00:01&lt;00:00,  1.85it/s]worker #4: 100%|██████████| 2/2 [00:01&lt;00:00,  1.88it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>(90, 47)</code></pre>
 </div>
 </div>
 <p>There are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR &amp; ORF). We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:</p>
-<div id="98e7655b" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cmpd_info_byjcp <span class="op">=</span> get_item_location_info(<span class="st">"JCP2022_011844"</span>, input_column<span class="op">=</span><span class="st">"JCP2022"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byinchi.shape)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byjcp.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2bf09181" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cmpd_info_byjcp <span class="op">=</span> get_item_location_info(<span class="st">"JCP2022_011844"</span>, input_column<span class="op">=</span><span class="st">"JCP2022"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byinchi.shape)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byjcp.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.16it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.16it/s]
-worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.06it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.06it/s]
-worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.01it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.01it/s]
-worker #3: 100%|██████████| 1/1 [00:01&lt;00:00,  1.03s/it]worker #3: 100%|██████████| 1/1 [00:01&lt;00:00,  1.03s/it]
-worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.22it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.22it/s]
-worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.27it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.27it/s]
-worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.17it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.17it/s]
-worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.11it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.11it/s]
-worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.01it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.01it/s]
-worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.34it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.34it/s]</code></pre>
+<pre><code>worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.07it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.07it/s]
+worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  2.57it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  2.57it/s]
+worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.45it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.45it/s]
+worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  2.37it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  2.37it/s]
+worker #3: 100%|██████████| 1/1 [00:01&lt;00:00,  1.25s/it]worker #3: 100%|██████████| 1/1 [00:01&lt;00:00,  1.25s/it]
+worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.60it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.60it/s]
+worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.58it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.58it/s]
+worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  2.29it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  2.29it/s]
+worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  2.12it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  2.12it/s]
+worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  3.25it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  3.25it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(34, 77)
@@ -352,114 +349,114 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.34it/s]w
 </div>
 </div>
 <p>There are 34 sites corresponding to this compound. We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.</p>
-<div id="492a6866" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    source: <span class="bu">str</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    batch: <span class="bu">str</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    plate: <span class="bu">str</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    well: <span class="bu">str</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    site: <span class="bu">int</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    label: <span class="bu">str</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    int_percentile: <span class="bu">float</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot all channels from one image.</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">    source : String</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">        Source ID for image of interest.</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">    batch : String</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Batch ID for image of interest.</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">    plate : String</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Plate ID for image of interest.</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">    well : String</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">        Well ID for image of interest.</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">    site : String</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Site ID for image of interest.</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">    label : String</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">        Label to display in lower left corner.</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">    int_percentile: float</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">        Rescale the image from 0 - this percentile of intensity values.</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make images</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="fl">2.6</span> <span class="op">*</span> n_cols, <span class="fl">2.6</span> <span class="op">*</span> n_rows))[<span class="dv">1</span>]</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    channel_rgb <span class="op">=</span> {</span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AGP"</span>: <span class="st">"#FF7F00"</span>,  <span class="co"># Orange</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DNA"</span>: <span class="st">"#0000FF"</span>,  <span class="co"># Blue</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ER"</span>: <span class="st">"#00FF00"</span>,  <span class="co"># Green</span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mito"</span>: <span class="st">"#FF0000"</span>,  <span class="co"># Red</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"RNA"</span>: <span class="st">"#FFFF00"</span>,  <span class="co"># Yellow</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, (channel, rgb) <span class="kw">in</span> <span class="bu">zip</span>(axes, channel_rgb.items()):</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(channel, (<span class="st">"#000"</span>, rgb))</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> get_jump_image(source, batch, plate, well, channel, site, <span class="va">None</span>)</span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>        ax.imshow(img, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span>np.percentile(img, int_percentile), cmap<span class="op">=</span>cmap)</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add channel name label in the top left corner</span></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>        ax.text(</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.05</span>,</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.95</span>,</span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>            channel,</span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>            horizontalalignment<span class="op">=</span><span class="st">"left"</span>,</span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>            verticalalignment<span class="op">=</span><span class="st">"top"</span>,</span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="dv">18</span>,</span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>            bbox<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>                facecolor<span class="op">=</span><span class="st">"white"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>, boxstyle<span class="op">=</span><span class="st">"round,pad=0.3"</span></span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>            ),</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>            transform<span class="op">=</span>ax.transAxes,</span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put label in last subplot</span></span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>        label,</span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>        horizontalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes,</span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show plot</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="269f026d" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    source: <span class="bu">str</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    batch: <span class="bu">str</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    plate: <span class="bu">str</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    well: <span class="bu">str</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    site: <span class="bu">int</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    label: <span class="bu">str</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    int_percentile: <span class="bu">float</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot all channels from one image.</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">    source : String</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">        Source ID for image of interest.</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">    batch : String</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Batch ID for image of interest.</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">    plate : String</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Plate ID for image of interest.</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">    well : String</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">        Well ID for image of interest.</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">    site : String</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Site ID for image of interest.</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">    label : String</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">        Label to display in lower left corner.</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">    int_percentile: float</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">        Rescale the image from 0 - this percentile of intensity values.</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make images</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="fl">2.6</span> <span class="op">*</span> n_cols, <span class="fl">2.6</span> <span class="op">*</span> n_rows))[<span class="dv">1</span>]</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    channel_rgb <span class="op">=</span> {</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AGP"</span>: <span class="st">"#FF7F00"</span>,  <span class="co"># Orange</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DNA"</span>: <span class="st">"#0000FF"</span>,  <span class="co"># Blue</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ER"</span>: <span class="st">"#00FF00"</span>,  <span class="co"># Green</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mito"</span>: <span class="st">"#FF0000"</span>,  <span class="co"># Red</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"RNA"</span>: <span class="st">"#FFFF00"</span>,  <span class="co"># Yellow</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, (channel, rgb) <span class="kw">in</span> <span class="bu">zip</span>(axes, channel_rgb.items()):</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(channel, (<span class="st">"#000"</span>, rgb))</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> get_jump_image(source, batch, plate, well, channel, site, <span class="va">None</span>)</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>        ax.imshow(img, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span>np.percentile(img, int_percentile), cmap<span class="op">=</span>cmap)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add channel name label in the top left corner</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>        ax.text(</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.05</span>,</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.95</span>,</span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>            channel,</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>            horizontalalignment<span class="op">=</span><span class="st">"left"</span>,</span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>            verticalalignment<span class="op">=</span><span class="st">"top"</span>,</span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="dv">18</span>,</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>            bbox<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>                facecolor<span class="op">=</span><span class="st">"white"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>, boxstyle<span class="op">=</span><span class="st">"round,pad=0.3"</span></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>            transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put label in last subplot</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>        label,</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>        horizontalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show plot</span></span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:</p>
-<div id="91dba462" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    source,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    batch,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    plate,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    well,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    site,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>) <span class="op">=</span> cmpd_info_byjcp.select(pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))).row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b160c0a9" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>) <span class="op">=</span> cmpd_info_byjcp.select(pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))).row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we define the label and make the plot:</p>
-<div id="10ba954b" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="ch">\n\n</span><span class="st">plate:</span><span class="ch">\n</span><span class="sc">{}</span><span class="ch">\n</span><span class="st">well: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">site: </span><span class="sc">{}</span><span class="st">"</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>display_site(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    source,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    batch,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    plate,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    well,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    site,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"JCP2022_011844"</span>, plate, well, site),</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ec961e8d" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="ch">\n\n</span><span class="st">plate:</span><span class="ch">\n</span><span class="sc">{}</span><span class="ch">\n</span><span class="st">well: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">site: </span><span class="sc">{}</span><span class="st">"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>display_site(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"JCP2022_011844"</span>, plate, well, site),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -469,19 +466,19 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.34it/s]w
 </div>
 </div>
 <p>Here, we plot one of the RAB30 ORF images:</p>
-<div id="0bec2133" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> gene_info.<span class="bu">filter</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>).select(pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))).row(<span class="dv">0</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>display_site(</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    source,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    batch,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    plate,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    well,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    site,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"RAB30 (ORF)"</span>, plate, well, site),</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0b0091d7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> gene_info.<span class="bu">filter</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>).select(pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))).row(<span class="dv">0</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>display_site(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"RAB30 (ORF)"</span>, plate, well, site),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -491,19 +488,19 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.34it/s]w
 </div>
 </div>
 <p>And for CRISPR:</p>
-<div id="8849303c" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> gene_info.<span class="bu">filter</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"CRISPR"</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>).select(pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))).row(<span class="dv">0</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>display_site(</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    source,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    batch,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    plate,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    well,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    site,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"RAB30 (CRISPR)"</span>, plate, well, site),</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="59d66788" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> gene_info.<span class="bu">filter</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"CRISPR"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>).select(pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))).row(<span class="dv">0</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>display_site(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"RAB30 (CRISPR)"</span>, plate, well, site),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
