@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/5_explore_distance_clusters.html</loc>
-    <lastmod>2025-03-04T01:29:30.839Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/14_display_perturbation_images.html</loc>
+    <lastmod>2025-03-04T19:55:46.829Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/0_howto.html</loc>
-    <lastmod>2025-03-04T01:26:36.846Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/13_calculate_activity.html</loc>
+    <lastmod>2025-03-04T19:55:46.451Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/4_display_perturbation_images.html</loc>
-    <lastmod>2025-03-04T01:29:30.469Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/15_explore_distance_clusters.html</loc>
+    <lastmod>2025-03-04T19:55:47.223Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/3_calculate_activity.html</loc>
-    <lastmod>2025-03-04T01:29:30.088Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/reference/computational_pipelines.html</loc>
-    <lastmod>2025-03-04T01:26:36.848Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/cite.html</loc>
-    <lastmod>2025-03-04T01:26:36.846Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/explanations/quirks_details.html</loc>
-    <lastmod>2025-03-04T01:26:36.846Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/explanations/FAQ.html</loc>
-    <lastmod>2025-03-04T01:26:36.846Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/index.html</loc>
-    <lastmod>2025-03-04T01:26:36.846Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/explanations/data_description.html</loc>
-    <lastmod>2025-03-04T01:26:36.846Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/readme.html</loc>
-    <lastmod>2025-03-04T01:26:36.848Z</lastmod>
-  </url>
-  <url>
-    <loc>https://broadinstitute.github.io/jump_hub/reference/interactive_tools.html</loc>
-    <lastmod>2025-03-04T01:26:36.848Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/11_retrieve_profiles.html</loc>
+    <lastmod>2025-03-04T19:55:45.696Z</lastmod>
   </url>
   <url>
     <loc>https://broadinstitute.github.io/jump_hub/reference/glossary.html</loc>
-    <lastmod>2025-03-04T01:26:36.848Z</lastmod>
+    <lastmod>2025-03-04T19:54:03.224Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/1_retrieve_profiles.html</loc>
-    <lastmod>2025-03-04T01:29:29.250Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/cite.html</loc>
+    <lastmod>2025-03-04T19:54:03.221Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/6_query_genes_externally.html</loc>
-    <lastmod>2025-03-04T01:29:31.222Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/explanations/quirks_details.html</loc>
+    <lastmod>2025-03-04T19:54:03.221Z</lastmod>
   </url>
   <url>
-    <loc>https://broadinstitute.github.io/jump_hub/howto/2_add_metadata.html</loc>
-    <lastmod>2025-03-04T01:29:29.659Z</lastmod>
+    <loc>https://broadinstitute.github.io/jump_hub/explanations/FAQ.html</loc>
+    <lastmod>2025-03-04T19:54:03.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/index.html</loc>
+    <lastmod>2025-03-04T19:54:03.222Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/explanations/data_description.html</loc>
+    <lastmod>2025-03-04T19:54:03.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/readme.html</loc>
+    <lastmod>2025-03-04T19:54:03.223Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/reference/computational_pipelines.html</loc>
+    <lastmod>2025-03-04T19:54:03.223Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/16_query_genes_externally.html</loc>
+    <lastmod>2025-03-04T19:55:47.608Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/0_howto.html</loc>
+    <lastmod>2025-03-04T19:54:03.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/12_add_metadata.html</loc>
+    <lastmod>2025-03-04T19:55:46.080Z</lastmod>
+  </url>
+  <url>
+    <loc>https://broadinstitute.github.io/jump_hub/howto/0_howto_interactive_tools.html</loc>
+    <lastmod>2025-03-04T19:54:03.222Z</lastmod>
   </url>
 </urlset>
