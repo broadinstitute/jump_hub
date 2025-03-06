@@ -289,8 +289,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="jumprr-tools" class="level4">
 <h4 class="anchored" data-anchor-id="jumprr-tools">JUMPrr tools</h4>
 <ul>
-<li><p>What is the source and version of the replicability metrics displayed in Broad’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr">JUMPrr tools</a>?</p>
-<p>These two files (<a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz">ORF</a> and <a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Morphmap/blob/c47ad6c953d70eb9e6c9b671c5fe6b2c82600cfc/03.retrieve-annotations/output/phenotypic-activity-wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.csv.gz">CRISPR</a>) contain the mAP and corrected p values for replicate retrieval (phenotypic activity). They won’t contain all ORF and CRISPR reagents because some of them were filtered out for QC reasons.</p></li>
 <li><p>X_Feature: For each row, is the <code>Feature</code> value an average for all the cells in the <code>Metadata_image</code> using the listed <code>Mask</code>(region of the cell: Nucleus, Cell, or Cytoplasm)? Or is it associated with a single cell in that image?</p>
 <p>Any <code>Feature</code> is the average of all cells and all replicates (typically four in total) for the specific mask and feature.</p></li>
 <li><p>How are <code>Statistic</code> and <code>Median</code> calculated for each row?</p>
@@ -298,10 +296,7 @@ ul.task-list li input[type="checkbox"] {
 <li><code>Statistic</code> is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates from which those replicates came; typically each replicate is in an independent plate).</li>
 <li><code>Median</code> is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.</li>
 </ul></li>
-<li><p>How do I perform a case-insensitive search?</p>
-<ul>
-<li>Replace the <code>=</code> operator with the <code>like</code> operator.</li>
-</ul></li>
+<li><p>How do I perform a case-insensitive search?</p></li>
 </ul>
 </section>
 <section id="morpheus" class="level4">
