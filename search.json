@@ -4,7 +4,7 @@
     "href": "howto/14_display_perturbation_images.html",
     "title": "Plot all channels for one site",
     "section": "",
-    "text": "This notebook demonstrates how to retrieve and plot all channels for one site using the jump_portrait library.\n\nimport matplotlib.colors as mpl  # noqa: CPY001\nimport numpy as np\nimport polars as pl\nfrom jump_portrait.fetch import get_item_location_info, get_jump_image\nfrom matplotlib import pyplot as plt\n\n#\n\nFirst, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this. Here we retrieve image locations for the “RAB30” gene:\n\ngene_info = get_item_location_info(\"RAB30\")\ngene_info.shape\n\nDownloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/well.csv.gz' to file '/home/runner/.cache/pooch/4efbf4dd3dd9aaecc8ccb9fc3c6b4122-well.csv.gz'.\nDownloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/plate.csv.gz' to file '/home/runner/.cache/pooch/a530bb82de29e39332bdef6f29397769-plate.csv.gz'.\nworker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  3.76it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  3.48it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  4.20it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  3.56it/s]worker #0: 100%|██████████| 2/2 [00:00&lt;00:00,  4.01it/s]worker #0: 100%|██████████| 2/2 [00:00&lt;00:00,  3.97it/s]\nworker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 2/2 [00:00&lt;00:00,  3.52it/s]worker #1: 100%|██████████| 2/2 [00:00&lt;00:00,  3.51it/s]\nworker #2: 100%|██████████| 2/2 [00:00&lt;00:00,  3.91it/s]worker #2: 100%|██████████| 2/2 [00:00&lt;00:00,  3.95it/s]\nworker #3: 100%|██████████| 2/2 [00:00&lt;00:00,  3.76it/s]worker #3: 100%|██████████| 2/2 [00:00&lt;00:00,  3.72it/s]\nworker #4:  50%|█████     | 1/2 [00:00&lt;00:00,  4.00it/s]worker #4: 100%|██████████| 2/2 [00:00&lt;00:00,  3.21it/s]worker #4: 100%|██████████| 2/2 [00:00&lt;00:00,  3.31it/s]\n\n\n(90, 47)\n\n\nThere are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR & ORF). We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:\n\ncmpd_info_byinchi = get_item_location_info(\"CLETVKMYAXARPO-UHFFFAOYSA-N\")\ncmpd_info_byjcp = get_item_location_info(\"JCP2022_011844\", input_column=\"JCP2022\")\n\nprint(cmpd_info_byinchi.shape)\nprint(cmpd_info_byjcp.shape)\n\nworker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.64it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.64it/s]\nworker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.58it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.58it/s]\nworker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.53it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.53it/s]\nworker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  3.28it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  3.28it/s]\nworker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.09it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.09it/s]\nworker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  4.02it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  4.02it/s]\nworker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.84it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.83it/s]\nworker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.65it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.65it/s]\nworker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.36it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.36it/s]\nworker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  3.75it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  3.75it/s]\n\n\n(34, 77)\n(34, 77)\n\n\nThere are 34 sites corresponding to this compound. We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.\n\ndef display_site(\n    source: str,\n    batch: str,\n    plate: str,\n    well: str,\n    site: int,\n    label: str,\n    int_percentile: float,\n) -&gt; None:\n    \"\"\"Plot all channels from one image.\n\n    Parameters\n    ----------\n    source : String\n        Source ID for image of interest.\n    batch : String\n        Batch ID for image of interest.\n    plate : String\n        Plate ID for image of interest.\n    well : String\n        Well ID for image of interest.\n    site : String\n        Site ID for image of interest.\n    label : String\n        Label to display in lower left corner.\n    int_percentile: float\n        Rescale the image from 0 - this percentile of intensity values.\n\n    \"\"\"\n    n_rows = 2\n    n_cols = 3\n\n    # Make images\n    axes = plt.subplots(n_rows, n_cols, figsize=(2.6 * n_cols, 2.6 * n_rows))[1]\n    axes = axes.ravel()\n\n    channel_rgb = {\n        \"AGP\": \"#FF7F00\",  # Orange\n        \"DNA\": \"#0000FF\",  # Blue\n        \"ER\": \"#00FF00\",  # Green\n        \"Mito\": \"#FF0000\",  # Red\n        \"RNA\": \"#FFFF00\",  # Yellow\n    }\n\n    for ax, (channel, rgb) in zip(axes, channel_rgb.items()):\n        cmap = mpl.LinearSegmentedColormap.from_list(channel, (\"#000\", rgb))\n\n        img = get_jump_image(source, batch, plate, well, channel, site, None)\n\n        ax.imshow(img, vmin=0, vmax=np.percentile(img, int_percentile), cmap=cmap)\n        ax.axis(\"off\")\n\n        # Add channel name label in the top left corner\n        ax.text(\n            0.05,\n            0.95,\n            channel,\n            horizontalalignment=\"left\",\n            verticalalignment=\"top\",\n            fontsize=18,\n            color=\"black\",\n            bbox=dict(\n                facecolor=\"white\", alpha=0.8, edgecolor=\"none\", boxstyle=\"round,pad=0.3\"\n            ),\n            transform=ax.transAxes,\n        )\n\n    # put label in last subplot\n    ax = axes[-1]\n    ax.text(\n        0.5,\n        0.5,\n        label,\n        horizontalalignment=\"center\",\n        verticalalignment=\"center\",\n        fontsize=20,\n        color=\"black\",\n        transform=ax.transAxes,\n    )\n    ax.axis(\"off\")\n\n    # show plot\n    plt.tight_layout()\n\nWe can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:\n\n(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n) = cmpd_info_byjcp.select(\n    pl.col(f\"Metadata_{x}\" for x in (\"Source\", \"Batch\", \"Plate\", \"Well\", \"Site\"))\n).row(0)\n\nNext, we define the label and make the plot:\n\nlabel = \"{}\\n\\nplate:\\n{}\\nwell: {}\\nsite: {}\"\n\ndisplay_site(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n    label.format(\"JCP2022_011844\", plate, well, site),\n    99.5,\n)\n\n\n\n\n\n\n\n\nHere, we plot one of the RAB30 ORF images:\n\nsource, batch, plate, well, site = (\n    gene_info.filter(pl.col(\"Metadata_PlateType\") == \"ORF\")\n    .select(\n        pl.col(f\"Metadata_{x}\" for x in (\"Source\", \"Batch\", \"Plate\", \"Well\", \"Site\"))\n    )\n    .row(0)\n)\ndisplay_site(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n    label.format(\"RAB30 (ORF)\", plate, well, site),\n    99.5,\n)\n\n\n\n\n\n\n\n\nAnd for CRISPR:\n\nsource, batch, plate, well, site = (\n    gene_info.filter(pl.col(\"Metadata_PlateType\") == \"CRISPR\")\n    .select(\n        pl.col(f\"Metadata_{x}\" for x in (\"Source\", \"Batch\", \"Plate\", \"Well\", \"Site\"))\n    )\n    .row(0)\n)\ndisplay_site(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n    label.format(\"RAB30 (CRISPR)\", plate, well, site),\n    99.5,\n)",
+    "text": "This notebook demonstrates how to retrieve and plot all channels for one site using the jump_portrait library.\n\nimport matplotlib.colors as mpl  # noqa: CPY001\nimport numpy as np\nimport polars as pl\nfrom jump_portrait.fetch import get_item_location_info, get_jump_image\nfrom matplotlib import pyplot as plt\n\n#\n\nFirst, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this. Here we retrieve image locations for the “RAB30” gene:\n\ngene_info = get_item_location_info(\"RAB30\")\ngene_info.shape\n\nDownloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/well.csv.gz' to file '/home/runner/.cache/pooch/4efbf4dd3dd9aaecc8ccb9fc3c6b4122-well.csv.gz'.\nDownloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/plate.csv.gz' to file '/home/runner/.cache/pooch/a530bb82de29e39332bdef6f29397769-plate.csv.gz'.\nworker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  1.32it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  1.31it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  1.28it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  1.27it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]\nworker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]\nworker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]\nworker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.16it/s]worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.18it/s]\nworker #4:  50%|█████     | 1/2 [00:00&lt;00:00,  1.43it/s]worker #4: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]worker #4: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]\n\n\n(90, 47)\n\n\nThere are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR & ORF). We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:\n\ncmpd_info_byinchi = get_item_location_info(\"CLETVKMYAXARPO-UHFFFAOYSA-N\")\ncmpd_info_byjcp = get_item_location_info(\"JCP2022_011844\", input_column=\"JCP2022\")\n\nprint(cmpd_info_byinchi.shape)\nprint(cmpd_info_byjcp.shape)\n\nworker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.51it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.51it/s]\nworker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.46it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.46it/s]\nworker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.23it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.23it/s]\nworker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.21it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.21it/s]\nworker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.26it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.26it/s]\nworker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.52it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.52it/s]\nworker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.47it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.47it/s]\nworker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.44it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.44it/s]\nworker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.24it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.24it/s]\nworker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.37it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.37it/s]\n\n\n(34, 77)\n(34, 77)\n\n\nThere are 34 sites corresponding to this compound. We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.\n\ndef display_site(\n    source: str,\n    batch: str,\n    plate: str,\n    well: str,\n    site: int,\n    label: str,\n    int_percentile: float,\n) -&gt; None:\n    \"\"\"Plot all channels from one image.\n\n    Parameters\n    ----------\n    source : String\n        Source ID for image of interest.\n    batch : String\n        Batch ID for image of interest.\n    plate : String\n        Plate ID for image of interest.\n    well : String\n        Well ID for image of interest.\n    site : String\n        Site ID for image of interest.\n    label : String\n        Label to display in lower left corner.\n    int_percentile: float\n        Rescale the image from 0 - this percentile of intensity values.\n\n    \"\"\"\n    n_rows = 2\n    n_cols = 3\n\n    # Make images\n    axes = plt.subplots(n_rows, n_cols, figsize=(2.6 * n_cols, 2.6 * n_rows))[1]\n    axes = axes.ravel()\n\n    channel_rgb = {\n        \"AGP\": \"#FF7F00\",  # Orange\n        \"DNA\": \"#0000FF\",  # Blue\n        \"ER\": \"#00FF00\",  # Green\n        \"Mito\": \"#FF0000\",  # Red\n        \"RNA\": \"#FFFF00\",  # Yellow\n    }\n\n    for ax, (channel, rgb) in zip(axes, channel_rgb.items()):\n        cmap = mpl.LinearSegmentedColormap.from_list(channel, (\"#000\", rgb))\n\n        img = get_jump_image(source, batch, plate, well, channel, site, None)\n\n        ax.imshow(img, vmin=0, vmax=np.percentile(img, int_percentile), cmap=cmap)\n        ax.axis(\"off\")\n\n        # Add channel name label in the top left corner\n        ax.text(\n            0.05,\n            0.95,\n            channel,\n            horizontalalignment=\"left\",\n            verticalalignment=\"top\",\n            fontsize=18,\n            color=\"black\",\n            bbox=dict(\n                facecolor=\"white\", alpha=0.8, edgecolor=\"none\", boxstyle=\"round,pad=0.3\"\n            ),\n            transform=ax.transAxes,\n        )\n\n    # put label in last subplot\n    ax = axes[-1]\n    ax.text(\n        0.5,\n        0.5,\n        label,\n        horizontalalignment=\"center\",\n        verticalalignment=\"center\",\n        fontsize=20,\n        color=\"black\",\n        transform=ax.transAxes,\n    )\n    ax.axis(\"off\")\n\n    # show plot\n    plt.tight_layout()\n\nWe can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:\n\n(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n) = cmpd_info_byjcp.select(\n    pl.col(f\"Metadata_{x}\" for x in (\"Source\", \"Batch\", \"Plate\", \"Well\", \"Site\"))\n).row(0)\n\nNext, we define the label and make the plot:\n\nlabel = \"{}\\n\\nplate:\\n{}\\nwell: {}\\nsite: {}\"\n\ndisplay_site(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n    label.format(\"JCP2022_011844\", plate, well, site),\n    99.5,\n)\n\n\n\n\n\n\n\n\nHere, we plot one of the RAB30 ORF images:\n\nsource, batch, plate, well, site = (\n    gene_info.filter(pl.col(\"Metadata_PlateType\") == \"ORF\")\n    .select(\n        pl.col(f\"Metadata_{x}\" for x in (\"Source\", \"Batch\", \"Plate\", \"Well\", \"Site\"))\n    )\n    .row(0)\n)\ndisplay_site(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n    label.format(\"RAB30 (ORF)\", plate, well, site),\n    99.5,\n)\n\n\n\n\n\n\n\n\nAnd for CRISPR:\n\nsource, batch, plate, well, site = (\n    gene_info.filter(pl.col(\"Metadata_PlateType\") == \"CRISPR\")\n    .select(\n        pl.col(f\"Metadata_{x}\" for x in (\"Source\", \"Batch\", \"Plate\", \"Well\", \"Site\"))\n    )\n    .row(0)\n)\ndisplay_site(\n    source,\n    batch,\n    plate,\n    well,\n    site,\n    label.format(\"RAB30 (CRISPR)\", plate, well, site),\n    99.5,\n)",
     "crumbs": [
       "How-To Guides",
       "Plot all channels for one site"
@@ -77,55 +77,155 @@
     ]
   },
   {
-    "objectID": "cite.html",
-    "href": "cite.html",
-    "title": "Citing the JUMP Resources",
+    "objectID": "reference/computational_pipelines.html",
+    "href": "reference/computational_pipelines.html",
+    "title": "Computational Pipelines",
     "section": "",
-    "text": "All data is released under the CC0 1.0 Universal (CC0 1.0) license, but academic citation is expected and appreciated, given the effort invested in creating and maintaining this resource.\n\n\nPlease use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\n\n\n\nTo cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nCimini et al., 2022: doi:10.1038/s41596-023-00840-9\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
+    "text": "CellProfiler pipelines for segmentation and feature extraction as well as QC and illumination correction can be found on Github here.\n\n\n\nThe complete workflow for processing CellProfiler features (including annotation, normalization, and feature selection) is documented in the jump-profiling-recipe repository. Version v0.1.0 was used to generate the processed profiles available in the JUMP datasets.",
     "crumbs": [
-      "Cite"
+      "Reference",
+      "Computational Pipelines"
     ]
   },
   {
-    "objectID": "cite.html#citing-the-resource-as-a-whole",
-    "href": "cite.html#citing-the-resource-as-a-whole",
-    "title": "Citing the JUMP Resources",
+    "objectID": "reference/computational_pipelines.html#image-processing-pipeline",
+    "href": "reference/computational_pipelines.html#image-processing-pipeline",
+    "title": "Computational Pipelines",
     "section": "",
-    "text": "Please use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
+    "text": "CellProfiler pipelines for segmentation and feature extraction as well as QC and illumination correction can be found on Github here.",
     "crumbs": [
-      "Cite"
+      "Reference",
+      "Computational Pipelines"
     ]
   },
   {
-    "objectID": "cite.html#citing-individual-datasets",
-    "href": "cite.html#citing-individual-datasets",
-    "title": "Citing the JUMP Resources",
+    "objectID": "reference/computational_pipelines.html#profile-generation",
+    "href": "reference/computational_pipelines.html#profile-generation",
+    "title": "Computational Pipelines",
     "section": "",
-    "text": "To cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nCimini et al., 2022: doi:10.1038/s41596-023-00840-9\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
+    "text": "The complete workflow for processing CellProfiler features (including annotation, normalization, and feature selection) is documented in the jump-profiling-recipe repository. Version v0.1.0 was used to generate the processed profiles available in the JUMP datasets.",
     "crumbs": [
-      "Cite"
+      "Reference",
+      "Computational Pipelines"
     ]
   },
   {
-    "objectID": "explanations/known_issues.html",
-    "href": "explanations/known_issues.html",
+    "objectID": "readme.html",
+    "href": "readme.html",
+    "title": "JUMP hub",
+    "section": "",
+    "text": "Repository to generate the one-in-all resource for morphological profiling, specialized in data from JUMP Cell Painting. Here is the main website.\nThis repository generates the website and also contains the dependencies to run the notebooks and ensure their correctness.\n\n\nAdditionally, this repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data.\nPython notebooks are in the colab branch. Notebooks are autogenerated using these scripts."
+  },
+  {
+    "objectID": "readme.html#notes",
+    "href": "readme.html#notes",
+    "title": "JUMP hub",
+    "section": "",
+    "text": "Additionally, this repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data.\nPython notebooks are in the colab branch. Notebooks are autogenerated using these scripts."
+  },
+  {
+    "objectID": "explanations/quirks_details.html",
+    "href": "explanations/quirks_details.html",
     "title": "JUMP documentation and examples",
     "section": "",
-    "text": "Small subsets of the data may have shown technical issues. These are summarized in here and on this (WIP) table.",
+    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 1 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.\nThe treatment compounds were assayed at 10 uM at all sites, apart from source_7 where the compounds were assayed at 0.625 uM (the goal being to assay some of the compounds at a low concentration in addition to the higher concentration used for most of data production). The positive control compounds in compound, ORF and CRISPR plates were assayed at 5 uM. JUMP-Target-1-Compound and JUMP-Target-2-Compound plates were also assayed at 5 uM\nDue to some plates having letters and numbers and others only numbers, be careful when loading multiple load_data_csvs. We treat all columns and strings to avoid any potential casting issue.",
     "crumbs": [
       "Explanations",
-      "Known issues"
+      "Quirks and details"
     ]
   },
   {
-    "objectID": "explanations/known_issues.html#known-issues",
-    "href": "explanations/known_issues.html#known-issues",
+    "objectID": "explanations/quirks_details.html#quirks-and-details",
+    "href": "explanations/quirks_details.html#quirks-and-details",
     "title": "JUMP documentation and examples",
     "section": "",
-    "text": "Small subsets of the data may have shown technical issues. These are summarized in here and on this (WIP) table.",
+    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 1 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.\nThe treatment compounds were assayed at 10 uM at all sites, apart from source_7 where the compounds were assayed at 0.625 uM (the goal being to assay some of the compounds at a low concentration in addition to the higher concentration used for most of data production). The positive control compounds in compound, ORF and CRISPR plates were assayed at 5 uM. JUMP-Target-1-Compound and JUMP-Target-2-Compound plates were also assayed at 5 uM\nDue to some plates having letters and numbers and others only numbers, be careful when loading multiple load_data_csvs. We treat all columns and strings to avoid any potential casting issue.",
     "crumbs": [
       "Explanations",
-      "Known issues"
+      "Quirks and details"
+    ]
+  },
+  {
+    "objectID": "explanations/FAQ.html",
+    "href": "explanations/FAQ.html",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "The easiest way to set things up will be installing from pip in your environment of choice:\npip install jump-deps\n\n\n\n\n\n\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository, which are used to generate the explorable table.\n\n\n\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nMost chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nDetails on the pipelines at each step can be found on this page.\n\n\n\nYes, many genes are associated with multiple targets and are correctly annotated as such. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4. Other genes are annotated as targeting genes in disparate families.\n\n\n\nSometimes, two compounds were given separate JCPs because they had different names and broad_sample names. But after all of the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nIn CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here).",
+    "crumbs": [
+      "Explanations",
+      "Frequently Asked Questions"
+    ]
+  },
+  {
+    "objectID": "explanations/FAQ.html#analyses",
+    "href": "explanations/FAQ.html#analyses",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "The easiest way to set things up will be installing from pip in your environment of choice:\npip install jump-deps",
+    "crumbs": [
+      "Explanations",
+      "Frequently Asked Questions"
+    ]
+  },
+  {
+    "objectID": "explanations/FAQ.html#data",
+    "href": "explanations/FAQ.html#data",
+    "title": "Frequently Asked Questions",
+    "section": "",
+    "text": "The easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository, which are used to generate the explorable table.\n\n\n\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nMost chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nDetails on the pipelines at each step can be found on this page.\n\n\n\nYes, many genes are associated with multiple targets and are correctly annotated as such. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4. Other genes are annotated as targeting genes in disparate families.\n\n\n\nSometimes, two compounds were given separate JCPs because they had different names and broad_sample names. But after all of the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nIn CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here).",
+    "crumbs": [
+      "Explanations",
+      "Frequently Asked Questions"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "JUMP Cell Painting Hub",
+    "section": "",
+    "text": "JUMP (Joint Undertaking for Morphological Profiling) Cell Painting is an effort to produce data and resources to make use of Cell Painting data. It is the result of years of work by the JUMP-CP Consortium.\n\n\nWhat is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.\n\n\n\n\nJust exploring the data?\n\nUse a web interface; no programming required:\n\nJUMPrr tools by Carpenter–Singh Lab (Muñoz et al.)\nMorpheus by Broad Institute\nJUMP-CP Data Explorer by Ardigen\n\n\nYou can look up images for a sample, distinguishing features, most-similar genes or compounds, and more! See the Interactive Tools page for instructions for these tools.\nWant to fetch and analyze data?\n\nFollow our how-to guides for common analyses\n\nLooking to build tools?\n\nUse our Python libraries cp_measure, cpgdata, jump-portrait, jump-babel and other libraries in the monorepo\nAccess the metadata schema\n\n\n\n\n\n\nRead the papers creating the datasets for experimental and analysis details:\n\nCPJUMP1\nJUMP data production biorxiv\nMorphmap\n\nRaise an issue or ask a question on Github\nSubscribe to updates at jump-cellpainting.broadinstitute.org/more-info\n\n\n\n\nThis resource was developed by Alan F. Muñoz",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#getting-started-with-jump",
+    "href": "index.html#getting-started-with-jump",
+    "title": "JUMP Cell Painting Hub",
+    "section": "",
+    "text": "What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#choose-your-own-path",
+    "href": "index.html#choose-your-own-path",
+    "title": "JUMP Cell Painting Hub",
+    "section": "",
+    "text": "Just exploring the data?\n\nUse a web interface; no programming required:\n\nJUMPrr tools by Carpenter–Singh Lab (Muñoz et al.)\nMorpheus by Broad Institute\nJUMP-CP Data Explorer by Ardigen\n\n\nYou can look up images for a sample, distinguishing features, most-similar genes or compounds, and more! See the Interactive Tools page for instructions for these tools.\nWant to fetch and analyze data?\n\nFollow our how-to guides for common analyses\n\nLooking to build tools?\n\nUse our Python libraries cp_measure, cpgdata, jump-portrait, jump-babel and other libraries in the monorepo\nAccess the metadata schema",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#need-help-or-more-information",
+    "href": "index.html#need-help-or-more-information",
+    "title": "JUMP Cell Painting Hub",
+    "section": "",
+    "text": "Read the papers creating the datasets for experimental and analysis details:\n\nCPJUMP1\nJUMP data production biorxiv\nMorphmap\n\nRaise an issue or ask a question on Github\nSubscribe to updates at jump-cellpainting.broadinstitute.org/more-info",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "JUMP Cell Painting Hub",
+    "section": "",
+    "text": "This resource was developed by Alan F. Muñoz",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -195,155 +295,66 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "JUMP Cell Painting Hub",
-    "section": "",
-    "text": "JUMP (Joint Undertaking for Morphological Profiling) Cell Painting is an effort to produce data and resources to make use of Cell Painting data. It is the result of years of work by the JUMP-CP Consortium.\n\n\nWhat is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.\n\n\n\n\nJust exploring the data?\n\nUse a web interface; no programming required:\n\nJUMPrr tools by Carpenter–Singh Lab (Muñoz et al.)\nMorpheus by Broad Institute\nJUMP-CP Data Explorer by Ardigen\n\n\nYou can look up images for a sample, distinguishing features, most-similar genes or compounds, and more! See the Interactive Tools page for instructions for these tools.\nWant to fetch and analyze data?\n\nFollow our how-to guides for common analyses\n\nLooking to build tools?\n\nUse our Python libraries cp_measure, cpgdata, jump-portrait, jump-babel and other libraries in the monorepo\nAccess the metadata schema\n\n\n\n\n\n\nRead the papers creating the datasets for experimental and analysis details:\n\nCPJUMP1\nJUMP data production biorxiv\nMorphmap\n\nRaise an issue or ask a question on Github\nSubscribe to updates at jump-cellpainting.broadinstitute.org/more-info\n\n\n\n\nThis resource was developed by Alan F. Muñoz",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#getting-started-with-jump",
-    "href": "index.html#getting-started-with-jump",
-    "title": "JUMP Cell Painting Hub",
-    "section": "",
-    "text": "What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#choose-your-own-path",
-    "href": "index.html#choose-your-own-path",
-    "title": "JUMP Cell Painting Hub",
-    "section": "",
-    "text": "Just exploring the data?\n\nUse a web interface; no programming required:\n\nJUMPrr tools by Carpenter–Singh Lab (Muñoz et al.)\nMorpheus by Broad Institute\nJUMP-CP Data Explorer by Ardigen\n\n\nYou can look up images for a sample, distinguishing features, most-similar genes or compounds, and more! See the Interactive Tools page for instructions for these tools.\nWant to fetch and analyze data?\n\nFollow our how-to guides for common analyses\n\nLooking to build tools?\n\nUse our Python libraries cp_measure, cpgdata, jump-portrait, jump-babel and other libraries in the monorepo\nAccess the metadata schema",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#need-help-or-more-information",
-    "href": "index.html#need-help-or-more-information",
-    "title": "JUMP Cell Painting Hub",
-    "section": "",
-    "text": "Read the papers creating the datasets for experimental and analysis details:\n\nCPJUMP1\nJUMP data production biorxiv\nMorphmap\n\nRaise an issue or ask a question on Github\nSubscribe to updates at jump-cellpainting.broadinstitute.org/more-info",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#acknowledgements",
-    "href": "index.html#acknowledgements",
-    "title": "JUMP Cell Painting Hub",
-    "section": "",
-    "text": "This resource was developed by Alan F. Muñoz",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html",
-    "href": "explanations/FAQ.html",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "The easiest way to set things up will be installing from pip in your environment of choice:\npip install jump-deps\n\n\n\n\n\n\nThe easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository, which are used to generate the explorable table.\n\n\n\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nMost chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nDetails on the pipelines at each step can be found on this page.\n\n\n\nYes, many genes are associated with multiple targets and are correctly annotated as such. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4. Other genes are annotated as targeting genes in disparate families.\n\n\n\nSometimes, two compounds were given separate JCPs because they had different names and broad_sample names. But after all of the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nIn CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here).",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#analyses",
-    "href": "explanations/FAQ.html#analyses",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "The easiest way to set things up will be installing from pip in your environment of choice:\npip install jump-deps",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/FAQ.html#data",
-    "href": "explanations/FAQ.html#data",
-    "title": "Frequently Asked Questions",
-    "section": "",
-    "text": "The easiest way to find out is querying your dataset using this web tool. Alternatively, you can explore the metadata tables on the datasets repository, which are used to generate the explorable table.\n\n\n\nThe main resource to understand the technicalities of the JUMP datasets collection and assembly is on this repo.\n\n\n\nSome plates failed Quality Control (QC) but we kept them because they may be useful for developing QC methods.\n\n\n\nMost chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (issue).\n\n\n\nDetails on the pipelines at each step can be found on this page.\n\n\n\nYes, many genes are associated with multiple targets and are correctly annotated as such. For instance, JCP2022_050797 (quinidine/quinine) has the targets KCNK1 and KCNN4. Other genes are annotated as targeting genes in disparate families.\n\n\n\nSometimes, two compounds were given separate JCPs because they had different names and broad_sample names. But after all of the data cleanup steps, they ended up being the same. Hence two different entries.\n\n\n\nIn CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here).",
-    "crumbs": [
-      "Explanations",
-      "Frequently Asked Questions"
-    ]
-  },
-  {
-    "objectID": "explanations/quirks_details.html",
-    "href": "explanations/quirks_details.html",
+    "objectID": "explanations/known_issues.html",
+    "href": "explanations/known_issues.html",
     "title": "JUMP documentation and examples",
     "section": "",
-    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 1 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.\nThe treatment compounds were assayed at 10 uM at all sites, apart from source_7 where the compounds were assayed at 0.625 uM (the goal being to assay some of the compounds at a low concentration in addition to the higher concentration used for most of data production). The positive control compounds in compound, ORF and CRISPR plates were assayed at 5 uM. JUMP-Target-1-Compound and JUMP-Target-2-Compound plates were also assayed at 5 uM\nDue to some plates having letters and numbers and others only numbers, be careful when loading multiple load_data_csvs. We treat all columns and strings to avoid any potential casting issue.",
+    "text": "Small subsets of the data may have shown technical issues. These are summarized in here and on this (WIP) table.",
     "crumbs": [
       "Explanations",
-      "Quirks and details"
+      "Known issues"
     ]
   },
   {
-    "objectID": "explanations/quirks_details.html#quirks-and-details",
-    "href": "explanations/quirks_details.html#quirks-and-details",
+    "objectID": "explanations/known_issues.html#known-issues",
+    "href": "explanations/known_issues.html#known-issues",
     "title": "JUMP documentation and examples",
     "section": "",
-    "text": "There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.\n\nSource 1 and 9 use larger plates (1536 vs the standard 384)\n\nSource 7 and 13 are the same\n\nIn JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.\n\nThe definition of controls, specially positive controls, can be tricky: Some are hard-coded in broad_babel, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.\nThe treatment compounds were assayed at 10 uM at all sites, apart from source_7 where the compounds were assayed at 0.625 uM (the goal being to assay some of the compounds at a low concentration in addition to the higher concentration used for most of data production). The positive control compounds in compound, ORF and CRISPR plates were assayed at 5 uM. JUMP-Target-1-Compound and JUMP-Target-2-Compound plates were also assayed at 5 uM\nDue to some plates having letters and numbers and others only numbers, be careful when loading multiple load_data_csvs. We treat all columns and strings to avoid any potential casting issue.",
+    "text": "Small subsets of the data may have shown technical issues. These are summarized in here and on this (WIP) table.",
     "crumbs": [
       "Explanations",
-      "Quirks and details"
+      "Known issues"
     ]
   },
   {
-    "objectID": "readme.html",
-    "href": "readme.html",
-    "title": "JUMP hub",
+    "objectID": "cite.html",
+    "href": "cite.html",
+    "title": "Citing the JUMP Resources",
     "section": "",
-    "text": "Repository to generate the one-in-all resource for morphological profiling, specialized in data from JUMP Cell Painting. Here is the main website.\nThis repository generates the website and also contains the dependencies to run the notebooks and ensure their correctness.\n\n\nAdditionally, this repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data.\nPython notebooks are in the colab branch. Notebooks are autogenerated using these scripts."
-  },
-  {
-    "objectID": "readme.html#notes",
-    "href": "readme.html#notes",
-    "title": "JUMP hub",
-    "section": "",
-    "text": "Additionally, this repository can be used as a way to install essential dependencies for an exploratory analysis of JUMP morphological data.\nPython notebooks are in the colab branch. Notebooks are autogenerated using these scripts."
-  },
-  {
-    "objectID": "reference/computational_pipelines.html",
-    "href": "reference/computational_pipelines.html",
-    "title": "Computational Pipelines",
-    "section": "",
-    "text": "CellProfiler pipelines for segmentation and feature extraction as well as QC and illumination correction can be found on Github here.\n\n\n\nThe complete workflow for processing CellProfiler features (including annotation, normalization, and feature selection) is documented in the jump-profiling-recipe repository. Version v0.1.0 was used to generate the processed profiles available in the JUMP datasets.",
+    "text": "All data is released under the CC0 1.0 Universal (CC0 1.0) license, but academic citation is expected and appreciated, given the effort invested in creating and maintaining this resource.\n\n\nPlease use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\n\n\n\nTo cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nCimini et al., 2022: doi:10.1038/s41596-023-00840-9\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
     "crumbs": [
-      "Reference",
-      "Computational Pipelines"
+      "Cite"
     ]
   },
   {
-    "objectID": "reference/computational_pipelines.html#image-processing-pipeline",
-    "href": "reference/computational_pipelines.html#image-processing-pipeline",
-    "title": "Computational Pipelines",
+    "objectID": "cite.html#citing-the-resource-as-a-whole",
+    "href": "cite.html#citing-the-resource-as-a-whole",
+    "title": "Citing the JUMP Resources",
     "section": "",
-    "text": "CellProfiler pipelines for segmentation and feature extraction as well as QC and illumination correction can be found on Github here.",
+    "text": "Please use the following format to cite the JUMP Cell Painting datasets:\nWe used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
     "crumbs": [
-      "Reference",
-      "Computational Pipelines"
+      "Cite"
     ]
   },
   {
-    "objectID": "reference/computational_pipelines.html#profile-generation",
-    "href": "reference/computational_pipelines.html#profile-generation",
-    "title": "Computational Pipelines",
+    "objectID": "cite.html#citing-individual-datasets",
+    "href": "cite.html#citing-individual-datasets",
+    "title": "Citing the JUMP Resources",
     "section": "",
-    "text": "The complete workflow for processing CellProfiler features (including annotation, normalization, and feature selection) is documented in the jump-profiling-recipe repository. Version v0.1.0 was used to generate the processed profiles available in the JUMP datasets.",
+    "text": "To cite individual JUMP Cell Painting datasets, follow the guidelines in the Cell Painting Gallery citation guide. For example:\nWe used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nCimini et al., 2022: doi:10.1038/s41596-023-00840-9\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z\nWe used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (https://registry.opendata.aws/cellpainting-gallery/).\nChandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6\nWeisbart et al., 2024: doi:10.1038/s41592-024-02399-z",
+    "crumbs": [
+      "Cite"
+    ]
+  },
+  {
+    "objectID": "reference/00_gene_index.html",
+    "href": "reference/00_gene_index.html",
+    "title": "Available genes",
+    "section": "",
+    "text": "Is my Gene in JUMP or other associated tables?\n\n\nCode\nimport polars as pl\nimport pooch\nfrom itables import show\n\n\n\n\nCode\nlogger = pooch.get_logger()\nlogger.setLevel(\"WARNING\")\ndf = pl.read_csv(\n    pooch.retrieve(\n        \"https://zenodo.org/api/records/15059555/files/table.csv/content\",\n        known_hash=\"a082225c08a09f95fd6578dc7d2114aea772ff728f75314fc1350647e0ac949f\",\n    )\n)\nshow(df, maxBytes=0)\n\n\n\n\n    \n      \n      Gene\n      crispr\n      orf\n      A549\n      HeLa_DMEM\n      HeLa_HPLM\n    \n  \n\n\n    \n        \n        \n        \n        \n        \n        \n        \n        \n    \n    \n   \n    \n      \n  \n        \n    \n    \n  \n        \n    \n    \n  \n        \n    \n      \n  \n        \n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n\n            \n                \n                \n            \n        \n    \n\n\nLoading ITables v2.2.5 from the internet...\n(need help?)",
     "crumbs": [
       "Reference",
-      "Computational Pipelines"
+      "Available genes"
     ]
   },
   {
