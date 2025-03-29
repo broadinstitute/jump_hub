@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>JUMP documentation and examples</title>
+<title>JUMP documentation and examples - Explore perturbation clusters</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,10 +20,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -67,6 +101,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -80,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../explanations/data_description.html">Explanations</a></li><li class="breadcrumb-item"><a href="../explanations/quirks_details.html">Quirks and details</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/15_explore_distance_clusters.html">Explore perturbation clusters</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -145,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explanations/quirks_details.html" class="sidebar-item-text sidebar-link active">
+  <a href="../explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quirks and details</span></a>
   </div>
 </li>
@@ -227,7 +264,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Explore perturbation clusters</span></a>
   </div>
 </li>
@@ -251,37 +288,696 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#quirks-and-details" id="toc-quirks-and-details" class="nav-link active" data-scroll-target="#quirks-and-details">Quirks and details</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/explanations/quirks_details.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/explanations/quirks_details.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="quirks_details.ipynb" download="quirks_details.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="15_explore_distance_clusters.ipynb" download="15_explore_distance_clusters.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/15_explore_distance_clusters.html">Explore perturbation clusters</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Explore perturbation clusters</h1>
+</div>
 
 
 
-<section id="quirks-and-details" class="level2">
-<h2 class="anchored" data-anchor-id="quirks-and-details">Quirks and details</h2>
-<p>There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.</p>
-<ul>
-<li>Source 1 and 9 use larger plates (1536 vs the standard 384)<br>
-</li>
-<li>Source 7 and 13 are the same<br>
-</li>
-<li>In JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.<br>
-</li>
-<li>The definition of controls, specially positive controls, can be tricky: Some are hard-coded in <a href="https://github.com/broadinstitute/monorepo/blob/febe56c27e490c110d8b5a871de974a4293176c6/libs/jump_babel/tools/gen_database.py#L70-L87">broad_babel</a>, based on internal knowledge that was not recorded at the time of assembling the datasets. In certain datasets, such as ORF, there are additional types of positive controls: poscon_orf, poscon_cp (compound probe), and poscon_diverse.</li>
-<li>The treatment compounds were assayed at 10 uM at all sites, apart from source_7 where the compounds were assayed at 0.625 uM (the goal being to assay some of the compounds at a low concentration in addition to the higher concentration used for most of data production). The positive control compounds in compound, ORF and CRISPR plates were assayed at 5 uM. JUMP-Target-1-Compound and JUMP-Target-2-Compound plates were also assayed at 5 uM</li>
-<li>Due to some plates having letters and numbers and others only numbers, be careful when loading multiple <code>load_data_csv</code>s. We treat all columns and strings to avoid any potential casting issue.</li>
-</ul>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-</section>
+</header>
+
+
+<p>A common question we aim to ask is “What other perturbations look like mine?” The easiest way to get the answer for this question is using our <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">browsable datasets</a>. In this case we would like to use the ‘Matches’ databases, which provide cosines similarities between perturbations within a dataset, obtained from all-vs-all calculations.</p>
+<p>The limitation of this approach is that the size of JUMP results in two challenges: - Calculating the distances across all pairs of perturbations is intractable for most computers without a GPU (Graphics Processing Unit). - The resultant similarity matrix is too big for web browser-based exploration, so we limit the browsable similarity dataset to the top 100 most correlated/anticorrelated pairs of perturbations.</p>
+<p>Despite the aforementioned problems, we provide the full matrix of perturbation distances in case it is of use to data analysts. You can find this and other datasets on <a href="https://zenodo.org/records/13259495/latest">Zenodo</a>. The data files of interest for this exercise are “{org,crispr}_cosinesim_full.parquet”.</p>
+<p>The following analysis focuses on showcasing how to query one of these distance matrices to find all the distances between any given perturbation and all others. One use-case of this is testing how similar perturbation A and B are relative to perturbation C’s similarity to A.</p>
+<hr>
+<div id="a8d91d1a" class="cell" title="Imports" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> choices, seed</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We select the CRISPR dataset for this example. As with previous examples, this is a lazy-loaded data frame. This enables us to download very big datasets without worrying about whether or not they will fill into memory. In these datasets, the values range between 0 and 2, where 0 means that two profiles are the same, 1 means that they are orthogonal (completely uncorrelated) and 2 means that they are completely anticorrelated.</p>
+<div id="9c610bad" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>latest_id <span class="op">=</span> requests.get(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://zenodo.org/api/records/15029005/versions/latest"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>).json()[<span class="st">"id"</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>distances <span class="op">=</span> pl.scan_parquet(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"https://zenodo.org/api/records/</span><span class="sc">{</span>latest_id<span class="sc">}</span><span class="ss">/files/crispr_cosinesim_full.parquet/content"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>distances.head().collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (5, 7_977)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">JCP2022_800002</th>
+<th data-quarto-table-cell-role="th">JCP2022_804257</th>
+<th data-quarto-table-cell-role="th">JCP2022_800001</th>
+<th data-quarto-table-cell-role="th">JCP2022_807659</th>
+<th data-quarto-table-cell-role="th">JCP2022_804265</th>
+<th data-quarto-table-cell-role="th">JCP2022_806265</th>
+<th data-quarto-table-cell-role="th">JCP2022_806261</th>
+<th data-quarto-table-cell-role="th">JCP2022_806729</th>
+<th data-quarto-table-cell-role="th">JCP2022_803314</th>
+<th data-quarto-table-cell-role="th">JCP2022_802979</th>
+<th data-quarto-table-cell-role="th">JCP2022_806962</th>
+<th data-quarto-table-cell-role="th">JCP2022_806268</th>
+<th data-quarto-table-cell-role="th">JCP2022_804038</th>
+<th data-quarto-table-cell-role="th">JCP2022_806179</th>
+<th data-quarto-table-cell-role="th">JCP2022_800727</th>
+<th data-quarto-table-cell-role="th">JCP2022_802154</th>
+<th data-quarto-table-cell-role="th">JCP2022_807376</th>
+<th data-quarto-table-cell-role="th">JCP2022_804145</th>
+<th data-quarto-table-cell-role="th">JCP2022_802626</th>
+<th data-quarto-table-cell-role="th">JCP2022_805727</th>
+<th data-quarto-table-cell-role="th">JCP2022_806728</th>
+<th data-quarto-table-cell-role="th">JCP2022_800720</th>
+<th data-quarto-table-cell-role="th">JCP2022_806322</th>
+<th data-quarto-table-cell-role="th">JCP2022_800211</th>
+<th data-quarto-table-cell-role="th">JCP2022_807625</th>
+<th data-quarto-table-cell-role="th">JCP2022_806262</th>
+<th data-quarto-table-cell-role="th">JCP2022_800722</th>
+<th data-quarto-table-cell-role="th">JCP2022_806355</th>
+<th data-quarto-table-cell-role="th">JCP2022_807689</th>
+<th data-quarto-table-cell-role="th">JCP2022_802978</th>
+<th data-quarto-table-cell-role="th">JCP2022_804339</th>
+<th data-quarto-table-cell-role="th">JCP2022_802156</th>
+<th data-quarto-table-cell-role="th">JCP2022_805842</th>
+<th data-quarto-table-cell-role="th">JCP2022_803539</th>
+<th data-quarto-table-cell-role="th">JCP2022_801752</th>
+<th data-quarto-table-cell-role="th">JCP2022_806465</th>
+<th data-quarto-table-cell-role="th">JCP2022_804256</th>
+<th data-quarto-table-cell-role="th">…</th>
+<th data-quarto-table-cell-role="th">JCP2022_807231</th>
+<th data-quarto-table-cell-role="th">JCP2022_806253</th>
+<th data-quarto-table-cell-role="th">JCP2022_807298</th>
+<th data-quarto-table-cell-role="th">JCP2022_806029</th>
+<th data-quarto-table-cell-role="th">JCP2022_801701</th>
+<th data-quarto-table-cell-role="th">JCP2022_804355</th>
+<th data-quarto-table-cell-role="th">JCP2022_807736</th>
+<th data-quarto-table-cell-role="th">JCP2022_807296</th>
+<th data-quarto-table-cell-role="th">JCP2022_800623</th>
+<th data-quarto-table-cell-role="th">JCP2022_802285</th>
+<th data-quarto-table-cell-role="th">JCP2022_807807</th>
+<th data-quarto-table-cell-role="th">JCP2022_803076</th>
+<th data-quarto-table-cell-role="th">JCP2022_807682</th>
+<th data-quarto-table-cell-role="th">JCP2022_802284</th>
+<th data-quarto-table-cell-role="th">JCP2022_807601</th>
+<th data-quarto-table-cell-role="th">JCP2022_800922</th>
+<th data-quarto-table-cell-role="th">JCP2022_803868</th>
+<th data-quarto-table-cell-role="th">JCP2022_807282</th>
+<th data-quarto-table-cell-role="th">JCP2022_806012</th>
+<th data-quarto-table-cell-role="th">JCP2022_803064</th>
+<th data-quarto-table-cell-role="th">JCP2022_804173</th>
+<th data-quarto-table-cell-role="th">JCP2022_806750</th>
+<th data-quarto-table-cell-role="th">JCP2022_805191</th>
+<th data-quarto-table-cell-role="th">JCP2022_806954</th>
+<th data-quarto-table-cell-role="th">JCP2022_807207</th>
+<th data-quarto-table-cell-role="th">JCP2022_803842</th>
+<th data-quarto-table-cell-role="th">JCP2022_805262</th>
+<th data-quarto-table-cell-role="th">JCP2022_806300</th>
+<th data-quarto-table-cell-role="th">JCP2022_800955</th>
+<th data-quarto-table-cell-role="th">JCP2022_806451</th>
+<th data-quarto-table-cell-role="th">JCP2022_802973</th>
+<th data-quarto-table-cell-role="th">JCP2022_806353</th>
+<th data-quarto-table-cell-role="th">JCP2022_806629</th>
+<th data-quarto-table-cell-role="th">JCP2022_807055</th>
+<th data-quarto-table-cell-role="th">JCP2022_803920</th>
+<th data-quarto-table-cell-role="th">JCP2022_803433</th>
+<th data-quarto-table-cell-role="th">JCP2022_806755</th>
+</tr>
+<tr class="odd">
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>…</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.999999</td>
+<td>-0.059666</td>
+<td>0.554029</td>
+<td>-0.04492</td>
+<td>0.084458</td>
+<td>0.198055</td>
+<td>0.163457</td>
+<td>0.04502</td>
+<td>0.218653</td>
+<td>-0.030881</td>
+<td>-0.115019</td>
+<td>0.067704</td>
+<td>0.063909</td>
+<td>-0.086127</td>
+<td>-0.13761</td>
+<td>0.018139</td>
+<td>0.277487</td>
+<td>0.12156</td>
+<td>0.196142</td>
+<td>0.185373</td>
+<td>0.22161</td>
+<td>0.049051</td>
+<td>0.079069</td>
+<td>0.095291</td>
+<td>-0.006358</td>
+<td>0.164252</td>
+<td>0.010382</td>
+<td>0.170655</td>
+<td>-0.004739</td>
+<td>0.123559</td>
+<td>0.222634</td>
+<td>0.287115</td>
+<td>0.14852</td>
+<td>0.048594</td>
+<td>0.133295</td>
+<td>0.055545</td>
+<td>0.204936</td>
+<td>…</td>
+<td>0.024226</td>
+<td>0.103723</td>
+<td>0.129336</td>
+<td>0.060186</td>
+<td>0.153712</td>
+<td>0.292536</td>
+<td>-0.027199</td>
+<td>0.046661</td>
+<td>0.225604</td>
+<td>0.18097</td>
+<td>0.038953</td>
+<td>0.129692</td>
+<td>0.297067</td>
+<td>0.204258</td>
+<td>0.055386</td>
+<td>-0.100995</td>
+<td>0.222322</td>
+<td>0.107088</td>
+<td>-0.049594</td>
+<td>0.031274</td>
+<td>0.111466</td>
+<td>-0.012866</td>
+<td>0.166112</td>
+<td>0.070627</td>
+<td>0.196426</td>
+<td>0.018184</td>
+<td>0.077372</td>
+<td>0.00168</td>
+<td>0.029651</td>
+<td>0.004144</td>
+<td>-0.038176</td>
+<td>0.017746</td>
+<td>0.082222</td>
+<td>0.133553</td>
+<td>0.256799</td>
+<td>0.150499</td>
+<td>-0.148298</td>
+</tr>
+<tr class="even">
+<td>-0.059666</td>
+<td>1.0</td>
+<td>0.068846</td>
+<td>0.257723</td>
+<td>-0.055745</td>
+<td>0.160068</td>
+<td>0.066599</td>
+<td>0.22666</td>
+<td>-0.096645</td>
+<td>0.182161</td>
+<td>0.060595</td>
+<td>-0.092432</td>
+<td>-0.140241</td>
+<td>-0.166251</td>
+<td>0.351551</td>
+<td>0.104548</td>
+<td>0.175636</td>
+<td>-0.080915</td>
+<td>0.268312</td>
+<td>0.081598</td>
+<td>-0.078976</td>
+<td>0.085061</td>
+<td>0.175086</td>
+<td>0.156591</td>
+<td>-0.144433</td>
+<td>-0.067159</td>
+<td>0.079739</td>
+<td>-0.026523</td>
+<td>0.021242</td>
+<td>0.004414</td>
+<td>-0.073372</td>
+<td>-0.250735</td>
+<td>-0.171763</td>
+<td>0.022862</td>
+<td>0.099566</td>
+<td>0.028122</td>
+<td>0.118512</td>
+<td>…</td>
+<td>-0.117186</td>
+<td>-0.007871</td>
+<td>-0.202407</td>
+<td>-0.008858</td>
+<td>-0.0298</td>
+<td>0.004507</td>
+<td>0.120804</td>
+<td>-0.120418</td>
+<td>-0.007359</td>
+<td>-0.063996</td>
+<td>-0.158035</td>
+<td>-0.047624</td>
+<td>-0.244117</td>
+<td>-0.115544</td>
+<td>-0.052336</td>
+<td>-0.244374</td>
+<td>-0.015342</td>
+<td>-0.114599</td>
+<td>-0.165442</td>
+<td>0.071</td>
+<td>-0.113728</td>
+<td>-0.147148</td>
+<td>0.131772</td>
+<td>0.063718</td>
+<td>0.022331</td>
+<td>0.03019</td>
+<td>0.038044</td>
+<td>0.033832</td>
+<td>0.003136</td>
+<td>0.077804</td>
+<td>0.18082</td>
+<td>0.108754</td>
+<td>-0.149983</td>
+<td>0.164068</td>
+<td>-0.032468</td>
+<td>0.032573</td>
+<td>-0.004394</td>
+</tr>
+<tr class="odd">
+<td>0.554029</td>
+<td>0.068846</td>
+<td>1.0</td>
+<td>-0.021055</td>
+<td>-0.020687</td>
+<td>0.118124</td>
+<td>-0.013529</td>
+<td>0.061264</td>
+<td>0.2244</td>
+<td>-0.030042</td>
+<td>-0.047166</td>
+<td>0.062176</td>
+<td>0.133311</td>
+<td>-0.013311</td>
+<td>0.13743</td>
+<td>0.234339</td>
+<td>0.275142</td>
+<td>0.016155</td>
+<td>0.040506</td>
+<td>0.174523</td>
+<td>0.081297</td>
+<td>0.104565</td>
+<td>-0.032407</td>
+<td>0.064835</td>
+<td>-0.033852</td>
+<td>-0.079085</td>
+<td>0.096579</td>
+<td>0.033903</td>
+<td>0.148587</td>
+<td>-0.07763</td>
+<td>-0.050441</td>
+<td>0.037421</td>
+<td>0.082778</td>
+<td>0.259523</td>
+<td>0.210857</td>
+<td>-0.163036</td>
+<td>-0.038427</td>
+<td>…</td>
+<td>-0.121878</td>
+<td>-0.08347</td>
+<td>-0.071407</td>
+<td>-0.029764</td>
+<td>-0.174943</td>
+<td>0.032168</td>
+<td>-0.034776</td>
+<td>-0.048515</td>
+<td>0.084959</td>
+<td>-0.018989</td>
+<td>-0.136231</td>
+<td>-0.166889</td>
+<td>0.070155</td>
+<td>0.08003</td>
+<td>-0.251378</td>
+<td>-0.229524</td>
+<td>-0.10137</td>
+<td>-0.188785</td>
+<td>-0.240738</td>
+<td>-0.106309</td>
+<td>-0.117439</td>
+<td>-0.156961</td>
+<td>0.194933</td>
+<td>0.087295</td>
+<td>0.163761</td>
+<td>-0.037735</td>
+<td>0.089135</td>
+<td>-0.00075</td>
+<td>0.091534</td>
+<td>0.099934</td>
+<td>-0.056077</td>
+<td>0.029897</td>
+<td>0.240103</td>
+<td>0.050657</td>
+<td>0.138434</td>
+<td>-0.004588</td>
+<td>0.064069</td>
+</tr>
+<tr class="even">
+<td>-0.04492</td>
+<td>0.257723</td>
+<td>-0.021055</td>
+<td>1.0</td>
+<td>0.089644</td>
+<td>0.067335</td>
+<td>-0.025578</td>
+<td>0.123663</td>
+<td>0.071905</td>
+<td>-0.054312</td>
+<td>-0.013086</td>
+<td>-0.052465</td>
+<td>-0.064159</td>
+<td>-0.153556</td>
+<td>-0.031052</td>
+<td>-0.047702</td>
+<td>0.151906</td>
+<td>0.087058</td>
+<td>0.173544</td>
+<td>0.108165</td>
+<td>-0.010884</td>
+<td>0.02935</td>
+<td>0.046775</td>
+<td>0.083638</td>
+<td>-0.08622</td>
+<td>-0.049466</td>
+<td>0.02173</td>
+<td>0.127262</td>
+<td>-0.111813</td>
+<td>-0.140585</td>
+<td>0.031657</td>
+<td>0.0149</td>
+<td>-0.247056</td>
+<td>-0.049721</td>
+<td>-0.078341</td>
+<td>0.0766</td>
+<td>-0.017871</td>
+<td>…</td>
+<td>0.167638</td>
+<td>0.115937</td>
+<td>-0.164784</td>
+<td>-0.001704</td>
+<td>-0.1072</td>
+<td>0.024382</td>
+<td>-0.02293</td>
+<td>0.026179</td>
+<td>0.024607</td>
+<td>0.02788</td>
+<td>0.026813</td>
+<td>-0.026553</td>
+<td>-0.128696</td>
+<td>0.085213</td>
+<td>0.014539</td>
+<td>-0.111764</td>
+<td>-0.02768</td>
+<td>-0.172535</td>
+<td>0.056149</td>
+<td>0.145808</td>
+<td>0.048146</td>
+<td>0.073506</td>
+<td>-0.042293</td>
+<td>-0.027689</td>
+<td>0.098935</td>
+<td>-0.015072</td>
+<td>-0.000547</td>
+<td>-0.197055</td>
+<td>0.110045</td>
+<td>0.065167</td>
+<td>0.082572</td>
+<td>0.00901</td>
+<td>-0.067736</td>
+<td>-0.049077</td>
+<td>-0.073309</td>
+<td>0.013022</td>
+<td>0.079246</td>
+</tr>
+<tr class="odd">
+<td>0.084458</td>
+<td>-0.055745</td>
+<td>-0.020687</td>
+<td>0.089644</td>
+<td>1.0</td>
+<td>0.071703</td>
+<td>-0.21677</td>
+<td>-0.076589</td>
+<td>-0.111722</td>
+<td>-0.066612</td>
+<td>-0.403551</td>
+<td>0.165195</td>
+<td>-0.231783</td>
+<td>-0.241109</td>
+<td>-0.180663</td>
+<td>-0.123104</td>
+<td>0.181903</td>
+<td>0.061007</td>
+<td>0.087123</td>
+<td>0.193722</td>
+<td>-0.170243</td>
+<td>-0.158525</td>
+<td>-0.015301</td>
+<td>0.125622</td>
+<td>-0.09637</td>
+<td>-0.085084</td>
+<td>-0.218039</td>
+<td>0.071628</td>
+<td>-0.124489</td>
+<td>-0.025015</td>
+<td>0.139949</td>
+<td>0.122845</td>
+<td>-0.052666</td>
+<td>-0.233101</td>
+<td>-0.232259</td>
+<td>0.141092</td>
+<td>0.130888</td>
+<td>…</td>
+<td>0.265287</td>
+<td>0.286886</td>
+<td>-0.002355</td>
+<td>-0.038169</td>
+<td>0.014438</td>
+<td>0.145315</td>
+<td>-0.05106</td>
+<td>0.022923</td>
+<td>0.172217</td>
+<td>0.019209</td>
+<td>0.040451</td>
+<td>0.002263</td>
+<td>0.075561</td>
+<td>0.039665</td>
+<td>0.065675</td>
+<td>0.023255</td>
+<td>-0.088189</td>
+<td>0.139301</td>
+<td>0.073221</td>
+<td>0.068625</td>
+<td>0.185319</td>
+<td>0.193696</td>
+<td>-0.021219</td>
+<td>0.158883</td>
+<td>0.103153</td>
+<td>0.27625</td>
+<td>-0.047337</td>
+<td>-0.073299</td>
+<td>0.049652</td>
+<td>-0.065445</td>
+<td>0.165883</td>
+<td>0.172696</td>
+<td>-0.025268</td>
+<td>0.084685</td>
+<td>0.012524</td>
+<td>0.104712</td>
+<td>-0.056433</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Note that the only metadata information in this matrix are the column names as JUMP IDs (JCP2022_X), meaning that we will need to use a mapper from these JUMP ids to conventional names; feel free to look at the previous how-to that demonstrates that. We will now select three features at random and look at their correlation matrix</p>
+<div id="f7f06c4b" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>seed(<span class="dv">42</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> distances.collect_schema().names()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ncols <span class="op">=</span> <span class="bu">len</span>(cols)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sampled_col_idx <span class="op">=</span> <span class="bu">sorted</span>(choices(<span class="bu">range</span>(ncols), k<span class="op">=</span><span class="dv">3</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sampled_cols <span class="op">=</span> [cols[ix] <span class="cf">for</span> ix <span class="kw">in</span> sampled_col_idx]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sampled_distances <span class="op">=</span> (</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    distances.with_row_index()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.col(<span class="st">"index"</span>).is_in(sampled_col_idx))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    .select(pl.col(sampled_cols))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    .collect()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>sampled_distances</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 3)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">JCP2022_805125</th>
+<th data-quarto-table-cell-role="th">JCP2022_802572</th>
+<th data-quarto-table-cell-role="th">JCP2022_801315</th>
+</tr>
+<tr class="odd">
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.0</td>
+<td>0.01572</td>
+<td>0.066012</td>
+</tr>
+<tr class="even">
+<td>0.01572</td>
+<td>1.0</td>
+<td>0.12222</td>
+</tr>
+<tr class="odd">
+<td>0.066012</td>
+<td>0.12222</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<p>Finally, we plot them in a heatmap for easier visualisation</p>
+<div id="64e21812" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pandas_correlation <span class="op">=</span> sampled_distances.to_pandas()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pandas_correlation.index <span class="op">=</span> pandas_correlation.columns</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    pandas_correlation,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    annot<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    fmt<span class="op">=</span><span class="st">".3f"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    vmin<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    vmax<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span>sns.color_palette(<span class="st">"vlag"</span>, as_cmap<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.yticks(rotation<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="15_explore_distance_clusters_files/figure-html/cell-5-output-1.png" width="643" height="470" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Whilst in this case it is not a terribly interesting result, this shows that we see no correlation between three randomly selected perturbations.</p>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -842,4 +1538,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/explanations/quirks_details.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/explanations/quirks_details.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/15_explore_distance_clusters.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/15_explore_distance_clusters.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
