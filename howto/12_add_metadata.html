@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>JUMP documentation and examples</title>
+<title>JUMP documentation and examples - Incorporate metadata into profiles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -67,6 +101,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -80,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/12_add_metadata.html">Incorporate metadata into profiles</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -95,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">JUMP documentation and examples</a> 
+      <a href="../">JUMP documentation and examples</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -112,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -127,25 +164,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/data_description.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/data_description.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dataset Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/known_issues.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/known_issues.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Known issues</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quirks and details</span></a>
   </div>
 </li>
@@ -162,19 +199,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available genes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/computational_pipelines.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/computational_pipelines.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Computational Pipelines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/glossary.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glossary and Acronyms</span></a>
   </div>
 </li>
@@ -191,49 +228,49 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/0_howto.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/0_howto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How-to Guides</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/0_howto_interactive_tools.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/0_howto_interactive_tools.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Interactive Tools</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retrieve JUMP profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/12_add_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/12_add_metadata.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Incorporate metadata into profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculate phenotypic activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Plot all channels for one site</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explore perturbation clusters</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Query information of genes</span></a>
   </div>
 </li>
@@ -241,7 +278,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cite.html" class="sidebar-item-text sidebar-link">
+  <a href="../cite.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cite</span></a>
   </div>
 </li>
@@ -251,77 +288,288 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#jump-cell-painting-hub" id="toc-jump-cell-painting-hub" class="nav-link active" data-scroll-target="#jump-cell-painting-hub">JUMP Cell Painting Hub</a>
-  <ul class="collapse">
-  <li><a href="#getting-started-with-jump" id="toc-getting-started-with-jump" class="nav-link" data-scroll-target="#getting-started-with-jump">Getting Started with JUMP</a></li>
-  <li><a href="#choose-your-own-path" id="toc-choose-your-own-path" class="nav-link" data-scroll-target="#choose-your-own-path">Choose Your Own Path</a></li>
-  <li><a href="#need-help-or-more-information" id="toc-need-help-or-more-information" class="nav-link" data-scroll-target="#need-help-or-more-information">Need help or more information?</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/index.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.ipynb" download="index.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="12_add_metadata.ipynb" download="12_add_metadata.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/12_add_metadata.html">Incorporate metadata into profiles</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Incorporate metadata into profiles</h1>
+</div>
 
 
 
-<section id="jump-cell-painting-hub" class="level1">
-<h1>JUMP Cell Painting Hub</h1>
-<p>JUMP (Joint Undertaking for Morphological Profiling) Cell Painting is an effort to produce data and resources to make use of <a href="https://jump-cellpainting.broadinstitute.org/cell-painting">Cell Painting</a> data. It is the result of years of work by the JUMP-CP <a href="https://jump-cellpainting.broadinstitute.org/partners">Consortium</a>.</p>
-<section id="getting-started-with-jump" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started-with-jump">Getting Started with JUMP</h2>
-<p>What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.</p>
-</section>
-<section id="choose-your-own-path" class="level2">
-<h2 class="anchored" data-anchor-id="choose-your-own-path">Choose Your Own Path</h2>
-<ol type="1">
-<li><p>Just exploring the data?</p>
-<ul>
-<li>Use a web interface; no programming required:
-<ul>
-<li><a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">JUMPrr tools</a> by Carpenter–Singh Lab (Muñoz et al.)</li>
-<li><a href="./howto/0_howto_interactive_tools.html">Morpheus</a> by Broad Institute</li>
-<li><a href="https://phenaid.ardigen.com/jumpcpexplorer/">JUMP-CP Data Explorer</a> by Ardigen</li>
-</ul></li>
-</ul>
-<p>You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more! See the <a href="./howto/0_howto_interactive_tools.html">Interactive Tools</a> page for instructions for these tools.</p></li>
-<li><p>Want to fetch and analyze data?</p>
-<ul>
-<li>Follow our <a href="./howto/0_howto.html">how-to guides</a> for common analyses</li>
-</ul></li>
-<li><p>Looking to build tools?</p>
-<ul>
-<li>Use our Python libraries <a href="https://github.com/afermg/cp_measure">cp_measure</a>, <a href="https://github.com/broadinstitute/cpg/tree/main/cpgdata">cpgdata</a>, <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait">jump-portrait</a>, <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">jump-babel</a> and other libraries in the <a href="https://github.com/broadinstitute/monorepo/tree/main">monorepo</a></li>
-<li>Access the <a href="https://github.com/jump-cellpainting/datasets/tree/main/metadata">metadata schema</a></li>
-</ul></li>
-</ol>
-</section>
-<section id="need-help-or-more-information" class="level2">
-<h2 class="anchored" data-anchor-id="need-help-or-more-information">Need help or more information?</h2>
-<ul>
-<li>Read the papers creating the datasets for experimental and analysis details:
-<ul>
-<li><a href="https://www.nature.com/articles/s41592-024-02241-6">CPJUMP1</a></li>
-<li><a href="https://www.biorxiv.org/content/10.1101/2023.03.23.534023">JUMP data production biorxiv</a></li>
-<li><a href="https://www.biorxiv.org/content/10.1101/2024.12.02.624527">Morphmap</a></li>
-</ul></li>
-<li>Raise an issue or ask a question on <a href="https://github.com/jump-cellpainting/datasets/issues">Github</a></li>
-<li>Subscribe to updates at <a href="https://jump-cellpainting.broadinstitute.org/more-info">jump-cellpainting.broadinstitute.org/more-info</a></li>
-</ul>
-</section>
-<section id="acknowledgements" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This resource was developed by <a href="https://github.com/afermg">Alan F. Muñoz</a></p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-</section>
-</section>
+</header>
+
+
+<p>A very common task when processing morphological profiles is knowing which ones are treatments and which ones are controls. Here we will explore how we can use broad-babel to accomplish this task.</p>
+<div id="86549bf1" class="cell" title="Imports" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> broad_babel.query <span class="im">import</span> get_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will be using the CRISPR dataset specificed in our index csv.</p>
+<div id="6c453543" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CRISPR_URL <span class="op">=</span> pl.read_csv(INDEX_FILE).<span class="bu">filter</span>(pl.col(<span class="st">"subset"</span>) <span class="op">==</span> <span class="st">"crispr"</span>).item(<span class="dv">0</span>, <span class="st">"url"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">=</span> pl.scan_parquet(CRISPR_URL)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(profiles.collect_schema().names()[:<span class="dv">6</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Metadata_Source', 'Metadata_Plate', 'Metadata_Well', 'Metadata_JCP2022', 'X_1', 'X_2']</code></pre>
+</div>
+</div>
+<p>For simplicity the contents of our processed profiles are minimal: “The profile origin” (source, plate and well) and the unique JUMP identifier for that perturbation. We will use broad-babel to further expand on this metadata, but for simplicity’s sake let us sample subset of data.</p>
+<div id="05b994fb" class="cell" title="Subset data" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series().sort()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> jcp_ids.sample(<span class="dv">10</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a well-known control</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>subsample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>('JCP2022_801270',
+ 'JCP2022_802425',
+ 'JCP2022_802356',
+ 'JCP2022_805808',
+ 'JCP2022_804300',
+ 'JCP2022_801205',
+ 'JCP2022_802539',
+ 'JCP2022_803663',
+ 'JCP2022_800116',
+ 'JCP2022_801847',
+ 'JCP2022_800002')</code></pre>
+</div>
+</div>
+<p>We will use these JUMP ids to obtain a mapper that indicates the perturbation type (trt, negcon or, rarely, poscon)</p>
+<div id="082d6552" class="cell" title="Pull mapper" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>{'JCP2022_800116': 'trt',
+ 'JCP2022_805808': 'trt',
+ 'JCP2022_802425': 'trt',
+ 'JCP2022_803663': 'trt',
+ 'JCP2022_802539': 'trt',
+ 'JCP2022_801847': 'trt',
+ 'JCP2022_800002': 'negcon',
+ 'JCP2022_804300': 'trt',
+ 'JCP2022_802356': 'trt',
+ 'JCP2022_801270': 'trt',
+ 'JCP2022_801205': 'trt'}</code></pre>
+</div>
+</div>
+<p>A couple of important notes about broad_babel’s get mapper and other functions: - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls - ‘get-mapper’ works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the ‘compounds’ dataset it is likely to fail. For these cases we suggest the more general function ‘run_query’. You can read more on this and other use-cases on Babel’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">readme</a>.</p>
+<p>We will now repeat the process to get their ‘standard’ name</p>
+<div id="ef1fc4c5" class="cell" title="Fetch standard name" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    input_column<span class="op">=</span><span class="st">"JCP2022"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    output_columns<span class="op">=</span><span class="st">"JCP2022,standard_key"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>{'JCP2022_803663': 'KIF16B',
+ 'JCP2022_804300': 'MSX1',
+ 'JCP2022_800002': 'non-targeting',
+ 'JCP2022_805808': 'RAD51B',
+ 'JCP2022_801847': 'DMRT2',
+ 'JCP2022_802425': 'FLNC',
+ 'JCP2022_802539': 'G6PC',
+ 'JCP2022_801205': 'CDK20',
+ 'JCP2022_800116': 'ACOT11',
+ 'JCP2022_801270': 'CFB',
+ 'JCP2022_802356': 'FDX1'}</code></pre>
+</div>
+</div>
+<p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.</p>
+<div id="76e0b89d" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>).collect()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>profiles_with_meta <span class="op">=</span> subsample_profiles.with_columns(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(pert_mapper).alias(<span class="st">"pert_type"</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_JCP2022"</span>).replace(name_mapper).alias(<span class="st">"name"</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>profiles_with_meta.select(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    pl.col((<span class="st">"name"</span>, <span class="st">"pert_type"</span>, <span class="st">"^Metadata.*$"</span>, <span class="st">"^X_[0-3]$"</span>))</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>).sort(by<span class="op">=</span><span class="st">"pert_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2_806, 9)</small>
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">pert_type</th>
+<th data-quarto-table-cell-role="th">Metadata_Source</th>
+<th data-quarto-table-cell-role="th">Metadata_Plate</th>
+<th data-quarto-table-cell-role="th">Metadata_Well</th>
+<th data-quarto-table-cell-role="th">Metadata_JCP2022</th>
+<th data-quarto-table-cell-role="th">X_1</th>
+<th data-quarto-table-cell-role="th">X_2</th>
+<th data-quarto-table-cell-role="th">X_3</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>str</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"A02"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.223417</td>
+<td>-0.049487</td>
+<td>-0.826231</td>
+</tr>
+<tr class="even">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"L23"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.079349</td>
+<td>-0.016958</td>
+<td>-0.277558</td>
+</tr>
+<tr class="odd">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"I23"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.023832</td>
+<td>-0.00537</td>
+<td>-0.29832</td>
+</tr>
+<tr class="even">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"J02"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.169491</td>
+<td>-0.023422</td>
+<td>-0.088187</td>
+</tr>
+<tr class="odd">
+<td>"non-targeting"</td>
+<td>"negcon"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R1-01"</td>
+<td>"O23"</td>
+<td>"JCP2022_800002"</td>
+<td>-0.295112</td>
+<td>-0.124241</td>
+<td>1.055193</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>"CFB"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-19"</td>
+<td>"G12"</td>
+<td>"JCP2022_801270"</td>
+<td>0.023277</td>
+<td>0.021747</td>
+<td>-0.914867</td>
+</tr>
+<tr class="even">
+<td>"DMRT2"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-21"</td>
+<td>"C10"</td>
+<td>"JCP2022_801847"</td>
+<td>-0.208865</td>
+<td>-0.046884</td>
+<td>0.845933</td>
+</tr>
+<tr class="odd">
+<td>"MSX1"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R5-24"</td>
+<td>"C03"</td>
+<td>"JCP2022_804300"</td>
+<td>-0.003333</td>
+<td>0.053181</td>
+<td>0.078227</td>
+</tr>
+<tr class="even">
+<td>"CFB"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R6-19"</td>
+<td>"G12"</td>
+<td>"JCP2022_801270"</td>
+<td>0.18701</td>
+<td>0.072405</td>
+<td>0.381239</td>
+</tr>
+<tr class="odd">
+<td>"CFB"</td>
+<td>"trt"</td>
+<td>"source_13"</td>
+<td>"CP-CC9-R7-19"</td>
+<td>"G12"</td>
+<td>"JCP2022_801270"</td>
+<td>0.051818</td>
+<td>-0.129935</td>
+<td>-0.481606</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -882,4 +1130,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/index.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/12_add_metadata.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/12_add_metadata.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
