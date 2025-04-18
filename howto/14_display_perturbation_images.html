@@ -316,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This notebook demonstrates how to retrieve and plot all channels for one site using the <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait">jump_portrait</a> library.</p>
-<div id="88f03850" class="cell" data-execution_count="1">
+<div id="642d5365" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -326,40 +326,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>First, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this. Here we retrieve image locations for the “RAB30” gene:</p>
-<div id="930e74d7" class="cell" data-execution_count="2">
+<div id="28cbf02e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gene_info.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/well.csv.gz' to file '/home/runner/.cache/pooch/4efbf4dd3dd9aaecc8ccb9fc3c6b4122-well.csv.gz'.
 Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/plate.csv.gz' to file '/home/runner/.cache/pooch/a530bb82de29e39332bdef6f29397769-plate.csv.gz'.
-worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  2.32it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  2.41it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  1.95it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  1.70it/s]worker #0: 100%|██████████| 2/2 [00:00&lt;00:00,  2.72it/s]worker #0: 100%|██████████| 2/2 [00:00&lt;00:00,  2.67it/s]
-worker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 2/2 [00:00&lt;00:00,  2.30it/s]worker #1: 100%|██████████| 2/2 [00:00&lt;00:00,  2.31it/s]
-worker #3: 100%|██████████| 2/2 [00:00&lt;00:00,  2.28it/s]worker #3: 100%|██████████| 2/2 [00:00&lt;00:00,  2.17it/s]
-worker #4:  50%|█████     | 1/2 [00:00&lt;00:00,  2.01it/s]worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
-worker #4: 100%|██████████| 2/2 [00:00&lt;00:00,  2.46it/s]worker #4: 100%|██████████| 2/2 [00:00&lt;00:00,  2.38it/s]</code></pre>
+worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  4.24it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  4.05it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  2.61it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  2.21it/s]worker #2: 100%|██████████| 2/2 [00:00&lt;00:00,  3.52it/s]worker #2: 100%|██████████| 2/2 [00:00&lt;00:00,  3.34it/s]
+worker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 2/2 [00:00&lt;00:00,  3.25it/s]worker #0: 100%|██████████| 2/2 [00:00&lt;00:00,  3.04it/s]
+worker #3: 100%|██████████| 2/2 [00:00&lt;00:00,  3.32it/s]worker #3: 100%|██████████| 2/2 [00:00&lt;00:00,  3.41it/s]
+worker #1: 100%|██████████| 2/2 [00:00&lt;00:00,  2.61it/s]worker #1: 100%|██████████| 2/2 [00:00&lt;00:00,  2.77it/s]
+worker #4:  50%|█████     | 1/2 [00:00&lt;00:00,  4.34it/s]worker #4: 100%|██████████| 2/2 [00:00&lt;00:00,  3.04it/s]worker #4: 100%|██████████| 2/2 [00:00&lt;00:00,  3.19it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>(90, 47)</code></pre>
 </div>
 </div>
 <p>There are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR &amp; ORF). We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:</p>
-<div id="d3ec532d" class="cell" data-execution_count="3">
+<div id="869442d7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cmpd_info_byjcp <span class="op">=</span> get_item_location_info(<span class="st">"JCP2022_011844"</span>, input_column<span class="op">=</span><span class="st">"JCP2022"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byinchi.shape)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byjcp.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.05it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.05it/s]
-worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  2.60it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  2.60it/s]
-worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  2.25it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  2.25it/s]
-worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.68it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.68it/s]
-worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  2.68it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  2.68it/s]
-worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.45it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  3.45it/s]
-worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.22it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.21it/s]
-worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  2.92it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  2.91it/s]
-worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  2.92it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  2.92it/s]
-worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.40it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.39it/s]</code></pre>
+<pre><code>worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  5.64it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  5.63it/s]
+worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.04it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  3.04it/s]
+worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  2.93it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  2.93it/s]
+worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.21it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.21it/s]
+worker #1: 100%|██████████| 1/1 [00:01&lt;00:00,  1.12s/it]worker #1: 100%|██████████| 1/1 [00:01&lt;00:00,  1.12s/it]
+worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  5.78it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  5.77it/s]
+worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  4.99it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  4.99it/s]
+worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  4.42it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  4.42it/s]
+worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  8.28it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  8.26it/s]
+worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.25it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  3.25it/s]</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(34, 77)
@@ -367,7 +367,7 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.40it/s]w
 </div>
 </div>
 <p>There are 34 sites corresponding to this compound. We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.</p>
-<div id="edb0301b" class="cell" data-execution_count="4">
+<div id="4a6ff0a1" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    source: <span class="bu">str</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    batch: <span class="bu">str</span>,</span>
@@ -453,7 +453,7 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.40it/s]w
 <span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:</p>
-<div id="4291edff" class="cell" data-execution_count="5">
+<div id="d6363d8e" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    source,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    batch,</span>
@@ -465,7 +465,7 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.40it/s]w
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>).row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we define the label and make the plot:</p>
-<div id="eee0707e" class="cell" data-execution_count="6">
+<div id="4c19523d" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="ch">\n\n</span><span class="st">plate:</span><span class="ch">\n</span><span class="sc">{}</span><span class="ch">\n</span><span class="st">well: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">site: </span><span class="sc">{}</span><span class="st">"</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>display_site(</span>
@@ -486,7 +486,7 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.40it/s]w
 </div>
 </div>
 <p>Here, we plot one of the RAB30 ORF images:</p>
-<div id="30c72ae4" class="cell" data-execution_count="7">
+<div id="562f70bf" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> (</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
@@ -512,7 +512,7 @@ worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  4.40it/s]w
 </div>
 </div>
 <p>And for CRISPR:</p>
-<div id="8c2965cd" class="cell" data-execution_count="8">
+<div id="d6fefdc0" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> (</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"CRISPR"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>

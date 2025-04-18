@@ -288,19 +288,19 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="step-1.-understand-the-information-displayed-in-the-browser."><strong>Step 1. Understand the information displayed in the browser.</strong></h2>
 <p>When you open one of the interactive tables, such as the CRISPR knock-outs <a href="http://broad.io/crispr_feature">table</a>, you will see an informational section explaining the available columns, and a filtering tool (Figure 1), followed by the data from CRISPR knockouts of all available genes.</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure1.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure1.png/content">
 </center>
 <p><em><strong>Figure 1.</strong> Information section of the CRISPR Feature Ranking table. The red boxes highlight two key components: the first provides definitions for each column; the second one shows the tool to filter based on the content values, such as gene name, subcellular compartment or statistical significance associated with each perturbation</em></p>
 <p>Below you will find the full table (Figure 2), which displays aggregated results across replicates for each perturbation.</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure2.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure2.png/content">
 </center>
 <p><em><strong>Figure 2.</strong> Each column can be sorted in ascending or descending order by clicking on the header. Sorting is applied to one column at a time and is based on the data type: numerical values are sorted by magnitude, while text is sorted alphabetically. The entries displayed are the 30 most statistically significant features for each gene (Feature Rank), and for each feature, the 30 genes with the most significant values (Gene Rank). A value of 999999 indicates an unassigned entry.</em></p>
 <p><strong>Step 2: Explore the data to answer the following questions:</strong></p>
 <p><strong>2.1. Can I find my gene in the JUMP collection of perturbations?</strong></p>
 <p>The JUMP Hub includes a reference tool to quickly check whether a specific gene is included in the collection of genetic perturbations. From any page on the <a href="https://broad.io/jump">JUMP Hub</a>, click on the “Available Genes” tab in the sidebar. Here you can type the name gene of interest to search. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the <a href="https://github.com/broadinstitute/2022_PERISCOPE">PERISCOPE</a> dataset. and <a href="https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization">Lacoste</a> to a dataset focusing on pathogenic coding variants. This feature is especially useful when you’re exploring potential targets or pathways and want to collate data from multiple morphology-based datasets (Figure 3).</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure3.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure3.png/content">
 </center>
 <p><em><strong>Figure 3.</strong> Overview of the gene reference tool (red box on the left), to quickly check whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knockout) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa_DMEM and HeLa_HPLM) and Lacoste datasets.</em></p>
 <p><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></p>
@@ -311,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
 <p>If you’re unsure of the exact name used in the dataset, we recommend make your search case-insensitive by changing the default filter operator from “=” to “like”, and entering a pattern that partially matches a text string, such as “SLC2A%” (Figure 4C).</p>
 <p>You can also search for alternative names commonly used in the literature. To do this, select the “Synonyms” column, change the filter operator to “contains” or “like”, and enter an alternative name such as GLUT2, or another known synonym of your compound of interest (Figure 4D).</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure4.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure4.png/content">
 </center>
 <p><em><strong>Figure 4.</strong> Common usage of filtering options. Panel A shows the full list of columns available for custom filtering, including metadata such as Corrected p-value, Compartment, and others that support more advanced queries beyond gene-level filtering. B and C, illustrate how the number of entries returned depends on the filter type: a broader search using partial names (e.g., “SLC2A%”) yields more entries than an exact match (e.g., “SLC2A2”), which can help identify related genes within the same family. For instance, the GLUT (glucose transporter) family is encoded by different members of the SLC2A gene family (e.g., SLC2A1, SLC2A2, etc.), each representing a distinct transporter rather than isoforms of the same gene. D, highlights the utility of the Synonyms column, which maps alternative gene names used in the literature, especially useful for genes with multiple aliases or legacy names not directly listed under the Perturbation column.</em></p>
 <p>The table below describes the available logical operators (Table1).</p>
@@ -392,18 +392,18 @@ ul.task-list li input[type="checkbox"] {
 <p><em><strong>Table 1.</strong> Filtering operators used to refine values displayed in the dataset. Include or exclude rows based on specific conditions, such as matching exact values, checking for patterns in text, or evaluating numerical comparisons.</em></p>
 <p>You can combine multiple filters. For instance, to focus on features associated with the SLC2A2 perturbation specifically in the “Cells” and “Nuclei” compartments, select the <em>Compartment</em> column, use the “<strong>in”</strong> operator, and enter “Cells, Nuclei” (Figure 5). Similarly, you can filter by other fields, such as perturbation (e.g., a list of genes), experiment type, or cell type. Once the filters are applied, you can copy the filtered table by clicking the JSON hyperlink (Figure 5, red box). To export the content, press Ctrl+A to select all, then Ctrl+C to copy it, and finally paste it into a text editor.</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure5.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure5.png/content">
 </center>
 <p><em><strong>Figure 5.</strong> Example of combined filters applied to display gene-related data limited to the “Cells” and “Nuclei” compartments. The red box highlights available export options, such as JSON, which can streamline the integration of filtered results into external analysis pipelines or visualization tools.</em></p>
 <p>After applying the filter for the <strong>SLC2A2</strong> perturbation, we can evaluate whether the perturbation is significantly different to the negative control condition by examining the <strong>Corrected p-value</strong> column. The Corrected p-value represents the statistical significance of how distinctive the overall morphological profile of a perturbation is when compared to the negative control (after false discovery rate correction). In this case, the corrected p-value is <strong>0.00018</strong> (all rows display the same value in that column, since this value is computed per perturbation, not per feature). This value (p-value&lt;0.05) indicates a highly significant difference from the control condition, suggesting that overexpressing <strong>SLC2A2</strong> induces a strong and consistent morphological effect (Figure 6).</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure6.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure6.png/content">
 </center>
 <p><strong>Figure 6.</strong> <em>The user interface displays the Corrected p-value, which is calculated at the perturbation level. As a result, all rows associated with the SLC2A2 perturbation share the same value (0.00018). When exploring multiple perturbations, sorting by Corrected p-value can help prioritize those with the most statistically significant morphological effects, making it a useful strategy for identifying relevant hits. The rows are sorted in ascending/descending order by clicking the name column header.</em></p>
 <p><strong>2.2.1. What are the specific morphology changes/features?</strong></p>
 <p>In this section you will be able to identify which features are the most statistically significant within a perturbation. In this filtered view of the SLC2A2 perturbation, all values in the <strong>Feature significance</strong> column are <strong>0.0,</strong> which corresponds to values rounded to five decimal places and indicates that each listed morphological feature is statistically significant when compared to the control condition (Figure 7). If you’d like more information about the features extracted by CellProfiler, such as how they’re named and calculated, you can check out the <a href="https://cellprofiler-manual.s3.amazonaws.com/CellProfiler-4.0.4/index.html">Cellprofiler Handbook</a>.</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure7.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure7.png/content">
 </center>
 <p><em><strong>Figure 7.</strong> Top 4 features from the filtered CRISPR dataset for the SLC2A2 perturbation. The rows are sorted in ascending order based on the Feature Significance column (highlighted with a red box). All p-values in this column are displayed as 0.0, which reflects values approximated to five decimal places (i.e., &lt; 0.00001). Since many features share these low values, we recommend using <strong>Feature Rank</strong> to prioritize features, as it provides their relative importance for each gene.</em></p>
 <p><strong><em>Search for your gene in ORF dataset.</em></strong></p>
@@ -411,7 +411,7 @@ ul.task-list li input[type="checkbox"] {
 <p>After filtering, we examined the <strong>Corrected p-value</strong> column. In this case, the p-value is <strong>0.09482</strong>, which is above the 0.05 threshold, indicating that overexpressing <em>SLC2A2</em> does not produce a statistically significant morphological change. This contrasts with the CRISPR knockout dataset, where the loss of <em>SLC2A2</em> resulted in a strong and significant phenotypic effect.</p>
 <p>However, in the case of SLC2A2, it is still possible to identify individual morphological features that are statistically significant, even if the overall perturbation does not show significant changes compared to the control. In this filtered view, a few features have <strong>Feature Significance</strong> values below 0.05, indicating meaningful differences relative to the control condition (Figure 8).</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure8.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure8.png/content">
 </center>
 <p><em><strong>Figure 8.</strong> Top four morphological features based on feature significance (per-feature p-values), ranked in increasing order, indicating statistically significant differences compared to the control condition. The Channel and Suffix columns appear empty because these features solely come from an object mask and not a fluorescence image. The rows are sorted in ascending/descending order by clicking the name column header.</em></p>
 <p><strong>2.2.2. What other genes look similar or anticorrelated to my genes?“</strong></p>
@@ -425,7 +425,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In contrast, when examining the <em>SLC2A2</em> overexpression in the ORF <a href="http://broad.io/orf">dataset</a>, the range of Perturbation-Match Similarity scores is much narrower, spanning approximately from 0.27 to -0.223. This limited dynamic range may reflect the fact that <em>SLC2A2</em> overexpression induces a weaker morphological phenotype compared to its knockout.</p>
 <p>Taken together, these comparisons provide a starting point for hypothesis generation and pathway exploration, particularly when integrating multiple types of perturbations.</p>
 <center>
-<img src="https://zenodo.org/api/records/15242970/files/Figure9.png/content">
+<img src="https://zenodo.org/api/records/15243111/files/Figure9.png/content">
 </center>
 <p><em><strong>Figure 9.</strong> Comparison between the selected perturbation, SLC2A2, and all other perturbations in the CRISPR dataset, ranked by morphological similarity. The Perturbation-Match Similarity column (red box) indicates how similar or anticorrelated each perturbation is to SLC2A2 (click on column name to sort it). The Match Resources column (blue box) provides external links to databases with additional information about the genes being compared. The merged images of all Cell Painting channels for SLC2A2 and its matched perturbation can be inspected in the “Perturbation example image” and “Match example image” columns, allowing visual assessment of their morphological signatures to facilitate the evaluation of similarities or differences between perturbations.</em></p>
 <p><strong>References:</strong></p>
