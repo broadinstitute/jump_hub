@@ -263,11 +263,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#jump_rr-tutorial." id="toc-jump_rr-tutorial." class="nav-link active" data-scroll-target="#jump_rr-tutorial.">JUMP_rr tutorial.</a>
   <ul class="collapse">
-  <li><a href="#step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" id="toc-step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" class="nav-link" data-scroll-target="#step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions"><strong>Step-by-step tutorial: Using JUMP_rr to answer key biological questions</strong></a>
-  <ul class="collapse">
-  <li><a href="#step-1.-understand-the-information-displayed-in-the-browser." id="toc-step-1.-understand-the-information-displayed-in-the-browser." class="nav-link" data-scroll-target="#step-1.-understand-the-information-displayed-in-the-browser."><strong>Step 1. Understand the information displayed in the browser.</strong></a></li>
-  <li><a href="#step-2-explore-the-data-to-answer-the-following-questions" id="toc-step-2-explore-the-data-to-answer-the-following-questions" class="nav-link" data-scroll-target="#step-2-explore-the-data-to-answer-the-following-questions"><strong>Step 2: Explore the data to answer the following questions:</strong></a></li>
-  </ul></li>
+  <li><a href="#step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" id="toc-step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" class="nav-link" data-scroll-target="#step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions"><strong>Step-by-step tutorial: Using JUMP_rr to answer key biological questions</strong></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/1_jumprr_steps.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/1_jumprr_steps.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="1_jumprr_steps.ipynb" download="1_jumprr_steps.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
@@ -282,9 +278,8 @@ ul.task-list li input[type="checkbox"] {
 <h1>JUMP_rr tutorial.</h1>
 <section id="step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" class="level2">
 <h2 class="anchored" data-anchor-id="step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions"><strong>Step-by-step tutorial: Using JUMP_rr to answer key biological questions</strong></h2>
-<p align="justify">
-The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">tools</a> allow you to explore the JUMP dataset of genetic and chemical perturbations and their effects on cell morphology features. The data shown have been aggregated across replicates for each gene and by applying different filters, you can investigate how specific perturbations influence cells, their structures, and the strength of the changes.
-</p>
+<div style="text-align: justify;">
+<p>The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">tools</a> allow you to explore the JUMP dataset of genetic and chemical perturbations and their effects on cell morphology features. The data shown have been aggregated across replicates for each gene and by applying different filters, you can investigate how specific perturbations influence cells, their structures, and the strength of the changes.</p>
 <p>In this tutorial, you will learn how to:</p>
 <p><strong>Step 1: Understand the information displayed in the browser.</strong><br>
 <strong>Step 2: Explore the data to answer the following questions:</strong></p>
@@ -292,8 +287,8 @@ The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree
 <strong>2.2.</strong> Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?<br>
   <strong>2.2.1.</strong> If yes, what are the specific morphological changes or features?<br>
   <strong>2.2.2.</strong> What other genes look similar or anticorrelated to my gene?</p>
-<section id="step-1.-understand-the-information-displayed-in-the-browser." class="level3">
-<h3 class="anchored" data-anchor-id="step-1.-understand-the-information-displayed-in-the-browser."><strong>Step 1. Understand the information displayed in the browser.</strong></h3>
+<section id="step-1.-understand-the-information-displayed-in-the-browser." class="level2">
+<h2 class="anchored" data-anchor-id="step-1.-understand-the-information-displayed-in-the-browser."><strong>Step 1. Understand the information displayed in the browser.</strong></h2>
 <p>When you open one of the interactive tables, such as the CRISPR knock-outs <a href="http://broad.io/crispr_feature">table</a>, you will see an informational section explaining the available columns, and a filtering tool (Figure 1), followed by the data from CRISPR knockouts of all available genes.</p>
 <p><img src="https://zenodo.org/api/records/15243111/files/Figure1.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><em><strong>Figure 1.</strong> Information section of the CRISPR Feature Ranking table. The red boxes highlight two key components: the first provides definitions for each column; the second one shows the tool to filter based on the content values, such as gene name, subcellular compartment or statistical significance associated with each perturbation</em></p>
@@ -301,16 +296,16 @@ The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree
 <p><img src="https://zenodo.org/api/records/15243111/files/Figure2.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><em><strong>Figure 2.</strong> Each column can be sorted in ascending or descending order by clicking on the header. Sorting is applied to one column at a time and is based on the data type: numerical values are sorted by magnitude, while text is sorted alphabetically. The entries displayed are the 30 most statistically significant features for each gene (Feature Rank), and for each feature, the 30 genes with the most significant values (Gene Rank). A value of 999999 indicates an unassigned entry.</em></p>
 </section>
-<section id="step-2-explore-the-data-to-answer-the-following-questions" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-explore-the-data-to-answer-the-following-questions"><strong>Step 2: Explore the data to answer the following questions:</strong></h3>
-<section id="can-i-find-my-gene-in-the-jump-collection-of-perturbations" class="level4">
-<h4 class="anchored" data-anchor-id="can-i-find-my-gene-in-the-jump-collection-of-perturbations"><strong>2.1. Can I find my gene in the JUMP collection of perturbations?</strong></h4>
+<section id="step-2-explore-the-data-to-answer-the-following-questions" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-explore-the-data-to-answer-the-following-questions"><strong>Step 2: Explore the data to answer the following questions:</strong></h2>
+<section id="can-i-find-my-gene-in-the-jump-collection-of-perturbations" class="level3">
+<h3 class="anchored" data-anchor-id="can-i-find-my-gene-in-the-jump-collection-of-perturbations"><strong>2.1. Can I find my gene in the JUMP collection of perturbations?</strong></h3>
 <p>The JUMP Hub includes a reference tool to quickly check whether a specific gene is included in the collection of genetic perturbations. From any page on the <a href="https://broad.io/jump">JUMP Hub</a>, click on the “Available Genes” tab in the sidebar. Here you can type the name gene of interest to search. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the <a href="https://github.com/broadinstitute/2022_PERISCOPE">PERISCOPE</a> dataset. and <a href="https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization">Lacoste</a> to a dataset focusing on pathogenic coding variants. This feature is especially useful when you’re exploring potential targets or pathways and want to collate data from multiple morphology-based datasets (Figure 3).</p>
 <p><img src="https://zenodo.org/api/records/15243111/files/Figure3.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><em><strong>Figure 3.</strong> Overview of the gene reference tool (red box on the left), to quickly check whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knockout) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa_DMEM and HeLa_HPLM) and Lacoste datasets.</em></p>
 </section>
-<section id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="level4">
-<h4 class="anchored" data-anchor-id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></h4>
+<section id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="level3">
+<h3 class="anchored" data-anchor-id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></h3>
 <p>To answer this question, we’ll start by exploring the CRISPR knockout dataset to identify genes whose loss affects the phenotype of interest. Then, we’ll use the ORF overexpression dataset to contrast results with gene overexpression.</p>
 <p><strong><em>Search for your gene in the CRISPR dataset.</em></strong></p>
 <p>Let us explore data related to the SLC2A2 gene. This gene encodes <strong>GLUT2</strong>, a glucose transporter primarily expressed in organs such as liver, pancreas and intestine. It plays a key role in glucose sensing and homeostasis. Given its involvement in metabolic processes, changes in SLC2A2 activity or expression could have significant phenotypic consequences that may be captured in image-based profiling data.</p>
@@ -401,8 +396,9 @@ The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree
 <p>After applying the filter for the <strong>SLC2A2</strong> perturbation, we can evaluate whether the perturbation is significantly different to the negative control condition by examining the <strong>Corrected p-value</strong> column. The Corrected p-value represents the statistical significance of how distinctive the overall morphological profile of a perturbation is when compared to the negative control (after false discovery rate correction). In this case, the corrected p-value is <strong>0.00018</strong> (all rows display the same value in that column, since this value is computed per perturbation, not per feature). This value (p-value&lt;0.05) indicates a highly significant difference from the control condition, suggesting that overexpressing <strong>SLC2A2</strong> induces a strong and consistent morphological effect (Figure 6).</p>
 <p><img src="https://zenodo.org/api/records/15243111/files/Figure6.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><strong>Figure 6.</strong> <em>The user interface displays the Corrected p-value, which is calculated at the perturbation level. As a result, all rows associated with the SLC2A2 perturbation share the same value (0.00018). When exploring multiple perturbations, sorting by Corrected p-value can help prioritize those with the most statistically significant morphological effects, making it a useful strategy for identifying relevant hits. The rows are sorted in ascending/descending order by clicking the name column header.</em></p>
-<section id="what-are-the-specific-morphology-changesfeatures" class="level5">
-<h5 class="anchored" data-anchor-id="what-are-the-specific-morphology-changesfeatures"><strong>2.2.1. What are the specific morphology changes/features?</strong></h5>
+</section>
+<section id="what-are-the-specific-morphology-changesfeatures" class="level3">
+<h3 class="anchored" data-anchor-id="what-are-the-specific-morphology-changesfeatures"><strong>2.2.1. What are the specific morphology changes/features?</strong></h3>
 <p>In this section you will be able to identify which features are the most statistically significant within a perturbation. In this filtered view of the SLC2A2 perturbation, all values in the <strong>Feature significance</strong> column are <strong>0.0,</strong> which corresponds to values rounded to five decimal places and indicates that each listed morphological feature is statistically significant when compared to the control condition (Figure 7). If you’d like more information about the features extracted by CellProfiler, such as how they’re named and calculated, you can check out the <a href="https://cellprofiler-manual.s3.amazonaws.com/CellProfiler-4.0.4/index.html">Cellprofiler Handbook</a>.</p>
 <p><img src="https://zenodo.org/api/records/15243111/files/Figure7.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><em><strong>Figure 7.</strong> Top 4 features from the filtered CRISPR dataset for the SLC2A2 perturbation. The rows are sorted in ascending order based on the Feature Significance column (highlighted with a red box). All p-values in this column are displayed as 0.0, which reflects values approximated to five decimal places (i.e., &lt; 0.00001). Since many features share these low values, we recommend using <strong>Feature Rank</strong> to prioritize features, as it provides their relative importance for each gene.</em></p>
@@ -413,8 +409,8 @@ The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree
 <p><img src="https://zenodo.org/api/records/15243111/files/Figure8.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><em><strong>Figure 8.</strong> Top four morphological features based on feature significance (per-feature p-values), ranked in increasing order, indicating statistically significant differences compared to the control condition. The Channel and Suffix columns appear empty because these features solely come from an object mask and not a fluorescence image. The rows are sorted in ascending/descending order by clicking the name column header.</em></p>
 </section>
-<section id="what-other-genes-look-similar-or-anticorrelated-to-my-genes" class="level5">
-<h5 class="anchored" data-anchor-id="what-other-genes-look-similar-or-anticorrelated-to-my-genes"><strong>2.2.2. What other genes look similar or anticorrelated to my genes?“</strong></h5>
+<section id="what-other-genes-look-similar-or-anticorrelated-to-my-genes" class="level3">
+<h3 class="anchored" data-anchor-id="what-other-genes-look-similar-or-anticorrelated-to-my-genes"><strong>2.2.2. What other genes look similar or anticorrelated to my genes?“</strong></h3>
 <p>Before exploring which perturbations produce the most similar or anti-similar (i.e., features that are high in one are lower in the other one), it’s important to understand the broader context and potential of image-based gene profiling.</p>
 <p>Morphological profiles can cluster genes into biologically meaningful groups, uncovering known pathways and reveal functional connections, such as a regulatory interaction between pathways (Rohban et al.&nbsp;2017). This clustering is based on the similarity of high-dimensional morphological features extracted from images after gene overexpression. Comparing these profiles systematically can also identify <em>anti-correlated</em> perturbations, such as cases where one perturbation reverses the phenotype of another (Rohban et al., 2022). This is particularly relevant for therapeutic discovery, as finding antagonistic morphological profiles may highlight candidate compounds or genes that <em>suppress</em> an undesired phenotype.</p>
 <p>The “matches” table thus quantifies similarity (or anticorrelation) of profiles and is a powerful resource to uncover potential functional relationships between genes, explore unknown gene roles, or even identify suppressors or enhancers within a biological pathway. These insights can help prioritize follow-up experiments and hypothesis generation, especially when analyzing genes or perturbations with poorly characterized functions.</p>
@@ -427,11 +423,11 @@ The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree
 <p><strong>References:</strong></p>
 <p>Mohammad Hossein Rohban, Shantanu Singh, Xiaoyun Wu, Julia B Berthet, Mark-Anthony Bray, Yashaswi Shrestha, Xaralabos Varelas, Jesse S Boehm, Anne E Carpenter (2017) Systematic morphological profiling of human gene and allele function via Cell Painting eLife 6:e24060</p>
 <p>Mohammad H. Rohban, Ashley M. Fuller, Ceryl Tan, Jonathan T. Goldstein, Deepsing Syangtan, Amos Gutnick, Ann DeVine, Madhura P. Nijsure, Megan Rigby, Joshua R. Sacher, Steven M. Corsello, Grace B. Peppler, Marta Bogaczynska, Andrew Boghossian, Gabrielle E. Ciotti, Allison T. Hands, Aroonroj Mekareeya, Minh Doan, Jennifer P. Gale, Rik Derynck, Thomas Turbyville, Joel D. Boerckel, Shantanu Singh, Laura L. Kiessling, Thomas L. Schwarz, Xaralabos Varelas, Florence F. Wagner, Ran Kafri, T.S. Karin Eisinger-Mathason, Anne E. Carpenter (2022) Virtual screening for small-molecule pathway regulators by image-profile matching. <em>Cell Systems</em>, 13(9): 724–736.e9.</p>
+</section>
+</section>
+</div>
 
 
-</section>
-</section>
-</section>
 </section>
 </section>
 
