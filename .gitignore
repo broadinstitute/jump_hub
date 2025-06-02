@@ -3,3 +3,5 @@
 .devenv/
 .venv/
 /docs/
+.claude/
+CLAUDE.md.local
