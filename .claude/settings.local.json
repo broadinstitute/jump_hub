@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(nix develop)",
+      "Bash(jupytext --version)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}
