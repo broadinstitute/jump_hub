@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs_master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs";
     systems.url = "github:nix-systems/default";
     devenv.url = "github:cachix/devenv";
   };
@@ -28,7 +28,7 @@
               config.allowUnfree = true;
             };
 
-            mpkgs = import inputs.nixpkgs_master {
+            mpkgs = import inputs.nixpkgs-unstable {
               system = system;
               config.allowUnfree = true;
             };

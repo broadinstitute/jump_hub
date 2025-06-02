@@ -314,6 +314,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1748898554,
+        "narHash": "sha256-Sr38Qv8dKt9xqPiNKHL9VTY5JfQJn+LBZajAx+XFDFQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "58a409aee80f4aedd4caa1e11a1e40dbc070d52c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1713361204,
@@ -342,22 +357,6 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-24.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_master": {
-      "locked": {
-        "lastModified": 1725566996,
-        "narHash": "sha256-BD2RvK7Hb8z0oM2VP0pwPY+Tsr0x8unRHjJdh1YMstY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "da6e1b10cfcfb99a708f8ee3d1b0040c61eb3c4b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -419,7 +418,7 @@
       "inputs": {
         "devenv": "devenv",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs_master": "nixpkgs_master",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "systems": "systems_3"
       }
     },
