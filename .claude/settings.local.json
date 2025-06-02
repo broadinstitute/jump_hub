@@ -6,7 +6,8 @@
       "Bash(nix develop)",
       "Bash(jupytext --version)",
       "Bash(git checkout:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "mcp__github__get_pull_request"
     ],
     "deny": []
   }
