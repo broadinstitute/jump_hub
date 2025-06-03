@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>howto – JUMP documentation and examples</title>
+<title>contributing – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8efc0b4a9bd72c43849ef15176497a1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-9a19055a673f3aeac9703a8e1c10f5d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8efc0b4a9bd72c43849ef15176497a1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8efc0b4a9bd72c43849ef15176497a1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9a19055a673f3aeac9703a8e1c10f5d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8efc0b4a9bd72c43849ef15176497a1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -245,7 +280,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/0_howto.html">Online notebooks</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      JUMP documentation and examples
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">JUMP documentation and examples</a> 
+      <a href="./">JUMP documentation and examples</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -277,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -292,25 +329,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explanations/data_description.html" class="sidebar-item-text sidebar-link">
+  <a href="./explanations/data_description.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dataset Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="./explanations/FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explanations/known_issues.html" class="sidebar-item-text sidebar-link">
+  <a href="./explanations/known_issues.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Known issues</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
+  <a href="./explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quirks and details</span></a>
   </div>
 </li>
@@ -327,13 +364,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/computational_pipelines.html" class="sidebar-item-text sidebar-link">
+  <a href="./reference/computational_pipelines.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Computational Pipelines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/glossary.html" class="sidebar-item-text sidebar-link">
+  <a href="./reference/glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glossary and Acronyms</span></a>
   </div>
 </li>
@@ -341,28 +378,28 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">How-To Guides</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/0_howto.html" class="sidebar-item-text sidebar-link active">
+  <a href="./howto/0_howto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Online notebooks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/0_howto_interactive_tools.html" class="sidebar-item-text sidebar-link">
+  <a href="./howto/0_howto_interactive_tools.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Interactive Tools</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
+  <a href="./howto/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">JUMP_rr tutorial</span></a>
   </div>
 </li>
@@ -370,7 +407,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../cite.html" class="sidebar-item-text sidebar-link">
+  <a href="./cite.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cite</span></a>
   </div>
 </li>
@@ -384,49 +421,81 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#online-notebooks" id="toc-online-notebooks" class="nav-link active" data-scroll-target="#online-notebooks">Online notebooks</a></li>
+  <li><a href="#contributing-to-jump-hub" id="toc-contributing-to-jump-hub" class="nav-link active" data-scroll-target="#contributing-to-jump-hub">Contributing to JUMP Hub</a>
+  <ul class="collapse">
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a>
+  <ul class="collapse">
+  <li><a href="#setup-development-environment" id="toc-setup-development-environment" class="nav-link" data-scroll-target="#setup-development-environment">Setup Development Environment</a></li>
+  <li><a href="#make-changes" id="toc-make-changes" class="nav-link" data-scroll-target="#make-changes">Make Changes</a></li>
+  </ul></li>
+  <li><a href="#deployment-process-automated" id="toc-deployment-process-automated" class="nav-link" data-scroll-target="#deployment-process-automated">Deployment Process (Automated)</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/0_howto.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/0_howto.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="0_howto.ipynb" download="0_howto.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/CONTRIBUTING.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/CONTRIBUTING.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="CONTRIBUTING.ipynb" download="CONTRIBUTING.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/0_howto.html">Online notebooks</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
 
-<section id="online-notebooks" class="level1">
-<h1>Online notebooks</h1>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>You can use the sidebar on the left to find tutorials demoing the most common analyses, or click the links in the list below to run the guides directly on your browser in a Google Colab live coding environment.</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/11_retrieve_profiles.ipynb">Retrieve JUMP profiles</a></td>
-</tr>
-<tr class="even">
-<td><a href="https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/12_add_metadata.ipynb">Add metadata to profiles</a></td>
-</tr>
-<tr class="odd">
-<td><a href="https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/13_calculate_activity.ipynb">Calculate phenotypic activity</a></td>
-</tr>
-<tr class="even">
-<td><a href="https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/14_display_perturbation_images.ipynb">Display perturbation images</a></td>
-</tr>
-<tr class="odd">
-<td><a href="https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/15_explore_distance_clusters.ipynb">Explore perturbation clusters</a></td>
-</tr>
-<tr class="even">
-<td><a href="https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/16_query_genes_externally.ipynb">Query genes for more info</a></td>
-</tr>
-</tbody>
-</table>
-<p>If you are running the analyses on your computer, we have published a package containing all dependencies, you need only install in your environment using <code>pip install jump_deps</code> (Python 3.10 or 3.11).</p>
+<section id="contributing-to-jump-hub" class="level1">
+<h1>Contributing to JUMP Hub</h1>
+<section id="quick-start" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start">Quick Start</h2>
+<section id="setup-development-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setup-development-environment">Setup Development Environment</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clone the repo</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/broadinstitute/jump_hub.git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> jump_hub</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Use Nix (includes everything: Python, uv, Quarto)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">nix</span> develop <span class="at">--impure</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Type 'exit' to leave the Nix environment</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Manual setup</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> sync <span class="at">--group</span> dev</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Also install Quarto: https://quarto.org/docs/get-started/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="make-changes" class="level3">
+<h3 class="anchored" data-anchor-id="make-changes">Make Changes</h3>
+<section id="for-documentation-most-common" class="level4">
+<h4 class="anchored" data-anchor-id="for-documentation-most-common">For Documentation (most common)</h4>
+<ol type="1">
+<li><strong>Edit markdown files</strong> in <code>explanations/</code>, <code>howto/</code>, or <code>reference/</code></li>
+<li><strong>Preview changes</strong>: <code>quarto preview</code></li>
+<li><strong>Check rendering</strong>: Navigate to your changed pages in the preview</li>
+</ol>
+</section>
+<section id="for-code-tutorials" class="level4">
+<h4 class="anchored" data-anchor-id="for-code-tutorials">For Code Tutorials</h4>
+<ol type="1">
+<li><strong>Edit Python scripts</strong> in <code>scripts/</code> (these use Jupytext percent format with <code># %%</code> markers)</li>
+<li><strong>Test your script runs</strong>: <code>uv run python scripts/your_tutorial.py</code></li>
+<li><strong>Preview website</strong>: <code>quarto preview</code> (Quarto can render .py files directly)</li>
+</ol>
+<p><strong>Important</strong>: DO NOT generate .ipynb files locally - they are created automatically during deployment</p>
+</section>
+</section>
+</section>
+<section id="deployment-process-automated" class="level2">
+<h2 class="anchored" data-anchor-id="deployment-process-automated">Deployment Process (Automated)</h2>
+<p>When changes are merged to <code>main</code>, GitHub Actions automatically:</p>
+<ol type="1">
+<li><strong>Converts Python scripts to notebooks</strong>: Using Jupytext, all scripts in <code>scripts/</code> are converted to Jupyter notebooks</li>
+<li><strong>Builds and publishes website</strong>: Quarto renders all content and publishes to GitHub Pages (<code>gh-pages</code> branch)</li>
+<li><strong>Creates Google Colab versions</strong>:
+<ul>
+<li>Notebooks from the built site are copied</li>
+<li>A <code>!pip install jump_deps</code> cell is inserted at the beginning of each notebook</li>
+<li>These are pushed to the <code>colab</code> branch for easy Google Colab access</li>
+</ul></li>
+</ol>
+<p>This process is handled by: - <code>.github/workflows/build_website.yml</code> - Triggers on push to main - <code>tools/deploy.sh</code> - Orchestrates the conversion, build, and Colab generation - <code>tools/insert_colab_cell.py</code> - Adds dependency installation to Colab notebooks</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -847,4 +916,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/0_howto.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/0_howto.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/CONTRIBUTING.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/CONTRIBUTING.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
