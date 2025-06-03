@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>jumprr_steps – JUMP documentation and examples</title>
+<title>Plot all channels for one site – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -245,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/1_jumprr_steps.html">JUMP_rr tutorial</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/14_display_perturbation_images.html">Plot all channels for one site</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -368,7 +403,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/1_jumprr_steps.html" class="sidebar-item-text sidebar-link active">
+  <a href="../howto/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">JUMP_rr tutorial</span></a>
   </div>
 </li>
@@ -392,7 +427,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../howto/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Plot all channels for one site</span></a>
   </div>
 </li>
@@ -422,208 +457,257 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#jump_rr-tutorial" id="toc-jump_rr-tutorial" class="nav-link active" data-scroll-target="#jump_rr-tutorial">JUMP_rr tutorial</a>
-  <ul class="collapse">
-  <li><a href="#step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" id="toc-step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" class="nav-link" data-scroll-target="#step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions"><strong>Step-by-step tutorial: Using JUMP_rr to answer key biological questions</strong></a></li>
-  <li><a href="#step-2-explore-the-data-to-answer-the-following-questions" id="toc-step-2-explore-the-data-to-answer-the-following-questions" class="nav-link" data-scroll-target="#step-2-explore-the-data-to-answer-the-following-questions"><strong>Step 2: Explore the data to answer the following questions:</strong></a>
-  <ul class="collapse">
-  <li><a href="#was-my-gene-tested-in-the-jump-collection-of-perturbations" id="toc-was-my-gene-tested-in-the-jump-collection-of-perturbations" class="nav-link" data-scroll-target="#was-my-gene-tested-in-the-jump-collection-of-perturbations"><strong>2.1. Was my gene tested in the JUMP collection of perturbations?</strong></a></li>
-  <li><a href="#does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" id="toc-does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="nav-link" data-scroll-target="#does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></a></li>
-  <li><a href="#what-are-the-specific-morphology-changesfeatures" id="toc-what-are-the-specific-morphology-changesfeatures" class="nav-link" data-scroll-target="#what-are-the-specific-morphology-changesfeatures"><strong>2.2.1. What are the specific morphology changes/features?</strong></a></li>
-  <li><a href="#what-other-genes-look-similar-or-anti-similar-to-my-genes" id="toc-what-other-genes-look-similar-or-anti-similar-to-my-genes" class="nav-link" data-scroll-target="#what-other-genes-look-similar-or-anti-similar-to-my-genes"><strong>2.2.2. What other genes look similar or anti-similar to my genes?</strong></a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/1_jumprr_steps.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/1_jumprr_steps.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="1_jumprr_steps.ipynb" download="1_jumprr_steps.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="14_display_perturbation_images.ipynb" download="14_display_perturbation_images.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/1_jumprr_steps.html">JUMP_rr tutorial</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
 
 
-
-
-
-<section id="jump_rr-tutorial" class="level1">
-<h1>JUMP_rr tutorial</h1>
-<section id="step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions" class="level2">
-<h2 class="anchored" data-anchor-id="step-by-step-tutorial-using-jump_rr-to-answer-key-biological-questions"><strong>Step-by-step tutorial: Using JUMP_rr to answer key biological questions</strong></h2>
-<div style="text-align: justify;">
-<p>The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">tools</a> allow you to explore the JUMP dataset of genetic and chemical perturbations and their effects on cell morphology features. By applying different filters, you can investigate how specific perturbations influence cells, their structures, and the strength of the changes.</p>
-<p>In this tutorial, you will learn how to:</p>
-<p><strong>Step 1: Understand the information displayed in the browser.</strong><br>
-<strong>Step 2: Explore the data to answer the following questions:</strong></p>
-<p><strong>2.1</strong>. Is my gene in the JUMP dataset?<br>
-<strong>2.2.</strong> Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?<br>
-  <strong>2.2.1.</strong> If yes, what are the specific morphological changes or features?<br>
-  <strong>2.2.2.</strong> What other genes look similar or anticorrelated to my gene?</p>
-<section id="step-1.-understand-the-information-displayed-in-the-browser." class="level2">
-<h2 class="anchored" data-anchor-id="step-1.-understand-the-information-displayed-in-the-browser."><strong>Step 1. Understand the information displayed in the browser.</strong></h2>
-<p>When you open one of the interactive tables, such as the CRISPR knock-outs Feature Ranking <a href="http://broad.io/crispr_feature">table</a>, you will see an informational section explaining the available data columns for that table, and a filtering tool, followed by the data (Figure 1).</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure1.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 1.</strong> <strong>Information section of the CRISPR Feature Ranking table.</strong> The red boxes highlight two key components: the first provides definitions for each column; the second one shows the tool to filter based on the content values, such as gene name, subcellular compartment or statistical significance associated with each perturbation.</em></p>
-<p>Below you will find the full table (Figure 2), which displays aggregated results across replicates for each perturbation. A small triangle on one of the columns shows how the data is currently sorted and you can sort by a data column by clicking its header. Clicking again reverses the sort order. For most tables, sorting by corrected p-value from lowest to highest is a helpful view.</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure2.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 2.</strong> <strong>The data section of the CRISPR Feature Ranking table, sorted by row ID.</strong> Each column can be sorted in ascending or descending order by clicking on the header. Sorting is applied to one column at a time and is based on the data type: numerical values are sorted by magnitude, while text is sorted alphabetically. The entries displayed in the Feature Ranking table are the 30 most statistically significant features for each gene (Feature Rank), and for each feature, the 30 genes with the most significant values (Gene Rank). A value of 999999 indicates an unassigned entry. How to use and interpret the Feature Ranking table is described in section 2.2.1.</em></p>
-</section>
-</div>
-</section>
-<section id="step-2-explore-the-data-to-answer-the-following-questions" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-explore-the-data-to-answer-the-following-questions"><strong>Step 2: Explore the data to answer the following questions:</strong></h2>
-<section id="was-my-gene-tested-in-the-jump-collection-of-perturbations" class="level3">
-<h3 class="anchored" data-anchor-id="was-my-gene-tested-in-the-jump-collection-of-perturbations"><strong>2.1. Was my gene tested in the JUMP collection of perturbations?</strong></h3>
-<div style="text-align: justify;">
-<p>The JUMP Hub includes a reference tool (Figure 3) to quickly check whether a specific gene is included in any of the catalogued genetic perturbation datasets, including the JUMP CRISPR and ORF datasets that are available via JUMP_rr tables. You can click on the ‘Available Genes’ tab in the sidebar from the <a href="https://broad.io/jump">JUMP Hub</a> page. Here, you can type the name of the gene of interest to search. Although all gene names in the tool are displayed in capital letters, the search is not case-sensitive. However, the tool does not recognize synonyms or alternative gene names, so queries must match the official gene symbols used in the datasets. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the <a href="https://github.com/broadinstitute/2022_PERISCOPE">PERISCOPE</a> dataset, and <a href="https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization">Lacoste</a> to a dataset focusing on pathogenic coding variants. This tool is especially useful when you want to collate data from multiple morphology-based datasets.</p>
-<p>Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not express well so this is roughly the maximum that could be tested) and 7,975 genes were tested in JUMP CRISPR dataset (due to resource limitations). Overall, 15,243 unique human genes were tested in one or the other datasets (or both), giving a ~75% chance your gene was tested in JUMP.</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure3.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 3.</strong> <strong>Querying the glucose transporter gene SLC2A in JUMP datasets using the “Available genes” tool.</strong> Overview of the gene reference tool (red box on the left), to quickly check whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knock-out) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa_DMEM and HeLa_HPLM) and Lacoste datasets.</em></p>
-</div>
-</section>
-<section id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="level3">
-<h3 class="anchored" data-anchor-id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></h3>
-<div style="text-align: justify;">
-<p>To answer this question, you will start by exploring the <strong>CRISPR knock-out dataset</strong> to identify genes whose loss affects the phenotype of interest. Then, you will use the ORF overexpression dataset to contrast results with gene overexpression. Of the 15,243 genes tested in JUMP, 68% (10,352) yielded a detectable phenotype (statistically significant “phenotypic activity”), that is, an image-based profile with a signal distinct from negative controls by ORF, CRISPR, or both.</p>
-<p>To begin exploring these morphological phenotypes, navigate to the <strong>“How to Guide → Interactive Tools”</strong>. Then, click on the <strong>“JUMPer tools”</strong> option, this will take you to the repository where the interactive tables are hosted. Once in the repository, scroll down to the <strong>“Quick Data Access”</strong> section. There, you’ll find links to the CRISPR, ORF, and Compound datasets. Click on the table of interest in the <strong>“Feature Ranking”</strong> column to see the morphological features associated with each perturbation. You can also directly access the feature ranking tables using the following short links:</p>
-<ul>
-<li><a href="http://broad.io/crispr_feature">CRISPR knock-out feature table</a><br>
-</li>
-<li><a href="http://broad.io/orf_feature">ORF overexpression feature table</a><br>
-</li>
-<li><a href="http://broad.io/feature">Compound feature table</a></li>
-</ul>
-<p><strong><em>Search for your gene in the CRISPR dataset.</em></strong></p>
-<p>Click on the “Feature Ranking” link for the CRISPR knock-down dataset to open a table displaying the morphological features associated with each gene perturbation. From there, you can use the filtering tools to search for your gene of interest and sort the data by criteria such as statistical significance or subcellular compartment. This view helps you determine whether a gene perturbation induces detectable phenotypic changes, and reveals the specific morphological features altered in the cells.</p>
-<p>Let us explore data related to the SLC2A2 gene. This gene encodes a glucose transporter primarily expressed in organs such as liver, pancreas and intestine. It plays a key role in glucose sensing and homeostasis. Given its involvement in metabolic processes, changes in SLC2A2 activity or expression could have significant phenotypic consequences that may be captured in image-based profiling data.</p>
-<p>To look for this you can use the Filter Tool, which helps narrow down the dataset based on specific search criteria. When you open the filter menu, a list of all available column names will appear (Figure 4A). In this case, you would select the “Perturbation” column, use the default operator “=”, and enter “SLC2A2” in the search field to display only the rows associated with that gene (Figure 4B).</p>
-<p>If you’re unsure of the exact name used in the dataset, we recommend make your search case-insensitive by changing the default filter operator from “=” to “like”, and entering a pattern that partially matches a text string, such as “SLC2A%”, since “%” act as a wildcard representing any characters (Figure 4C).</p>
-<p>You can also search for alternative names commonly used in the literature. To do this, select the “Synonyms” column, change the filter operator to “contains” or “like”, and enter an alternative name such as GLUT2, or another known synonym of your compound of interest (Figure 4D).</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure4.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 4.</strong> <strong>Common filtering methods that can be used in the Feature Ranking table</strong>. Panel A shows the full list of columns available for custom filtering, including metadata such as Corrected p-value, Compartment, and others that support more advanced queries beyond gene-level filtering. B and C illustrate how the number of entries returned depends on the filter type: a broader search using partial names (e.g., “SLC2A%”) yields more entries than an exact match (e.g., “SLC2A2”), which can help identify related genes within the same family. D highlights the utility of the Synonyms column, which maps alternative gene names used in the literature, especially useful for genes with multiple aliases or legacy names not directly listed under the Perturbation column.</em></p>
-</div>
-<p>The table below describes the available logical operators (Table1).</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Operator</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>=</td>
-<td>Selects results that exactly match the specified value.</td>
-</tr>
-<tr class="even">
-<td>!=</td>
-<td>Excludes results that exactly match the specified value.</td>
-</tr>
-<tr class="odd">
-<td>contains</td>
-<td>Searches for values that include a specific string within the text.</td>
-</tr>
-<tr class="even">
-<td>ends with</td>
-<td>Selects values that end with a specific string.</td>
-</tr>
-<tr class="odd">
-<td>starts with</td>
-<td>Selects values that start with a specific string.</td>
-</tr>
-<tr class="even">
-<td>&gt;</td>
-<td>Selects numeric values greater than the specified value.</td>
-</tr>
-<tr class="odd">
-<td>≥</td>
-<td>Selects numeric values greater than or equal to the specified value.</td>
-</tr>
-<tr class="even">
-<td>&lt;</td>
-<td>Selects numeric values less than the specified value.</td>
-</tr>
-<tr class="odd">
-<td>≤</td>
-<td>Selects numeric values less than or equal to the specified value.</td>
-</tr>
-<tr class="even">
-<td>like</td>
-<td>Searches for patterns that partially match a text string (e.g., “SLC%”).</td>
-</tr>
-<tr class="odd">
-<td>not like</td>
-<td>Excludes results that partially match a specific pattern.</td>
-</tr>
-<tr class="even">
-<td>in</td>
-<td>Selects rows where the column value is within a specified list of values.</td>
-</tr>
-<tr class="odd">
-<td>not in</td>
-<td>Excludes rows where the column value is within a specified list of values.</td>
-</tr>
-<tr class="even">
-<td>is blank</td>
-<td>Filters rows where the value is an empty string or space — the field exists but has no visible content.</td>
-</tr>
-<tr class="odd">
-<td>is not blank</td>
-<td>Filters rows where the field contains visible content (text, numbers, etc.), excluding empty or space-only values.</td>
-</tr>
-</tbody>
-</table>
-<div style="text-align: justify;">
-<p><em><strong>Table 1.</strong> <strong>Filtering operators can be used to refine values displayed in the dataset</strong>. Include or exclude rows based on specific conditions, such as matching exact values, checking for patterns in text, or evaluating numerical comparisons.</em></p>
-<p>You can combine multiple filters. If you want to filter for several values within the same column for example, multiple compartments or gene names, select the appropriate column, choose the <strong>‘in’</strong> operator, and enter a list of values separated by commas (e.g., ‘Cytoplasm, Nuclei’) (Figure 5). Once the filters are applied, you can copy the filtered table by clicking the JSON hyperlink (Figure 5, red box). To export the content, press Ctrl+A to select all, then Ctrl+C to copy it, and finally paste it into a text editor. Note that export as a “CSV” option is not yet available.</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure5.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 5.</strong> <strong>Combined filters and export options that can be used to explore and integrate gene-related data.</strong> Example of combined filters applied to display gene-related data for SLC2A2 limited to the “Cells” and “Nuclei” compartments. The red box highlights available export options, such as JSON, which can streamline the integration of filtered results into external analysis pipelines or visualization tools.</em></p>
-<p>After applying the filter for the <strong>SLC2A2</strong> perturbation, you can evaluate whether the perturbation is significantly different to the negative control condition by examining the <strong>Corrected p-value</strong> column. The Corrected p-value represents the statistical significance of how distinctive the overall morphological profile of a perturbation is when compared to the negative control (after false discovery rate correction). In this case, the corrected p-value is <strong>0.00018</strong> (all rows display the same value in that column, because this value is computed per perturbation, not per feature). This value (p-value&lt;0.05) indicates a significant difference from the control condition, suggesting that knocking out <strong>SLC2A2</strong> induces a strong and consistent morphological effect (Figure 6).</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure6.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 6.</strong> <strong>Corrected p-value that can be used to prioritize perturbations with significant morphological effects</strong> The user interface displays the “Corrected p-value” for SLC2A2, which is calculated at the perturbation level. As a result, all rows associated with the SLC2A2 perturbation share the same value (0.00018). When exploring multiple perturbations, sorting by Corrected p-value (or filtering based on it) can help prioritize those with the most statistically significant morphological effects, making it a useful strategy for identifying relevant information. The rows are sorted in ascending/descending order by clicking the name column header.</em></p>
-</div>
-</section>
-<section id="what-are-the-specific-morphology-changesfeatures" class="level3">
-<h3 class="anchored" data-anchor-id="what-are-the-specific-morphology-changesfeatures"><strong>2.2.1. What are the specific morphology changes/features?</strong></h3>
-<div style="text-align: justify;">
-<p>In this section you will be able to identify which features are the most statistically significant within a perturbation. In this filtered view of the SLC2A2 perturbation, all values in the <strong>Feature significance</strong> column are <strong>0.0,</strong> which corresponds to values rounded to five decimal places and indicates that each listed morphological feature is statistically significant when compared to the control condition (Figure 7). If you’d like more information about the features extracted by CellProfiler, such as how they’re named, you can check out the “<em>How Measurements are Named</em>” section in <a href="https://cellprofiler-manual.s3.amazonaws.com/CellProfiler-4.0.4/help/output_measurements.html">CellProfiler Handbook</a>.</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure7.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 7.</strong> <strong>Top features that can be sorted and prioritized based on Feature Significance for the SLC2A2 perturbation in the JUMP CRISPR dataset.</strong> Top four features from the filtered CRISPR dataset are sorted in ascending order based on the Feature Significance column (highlighted with a red box). All p-values in this column are displayed as 0.0, which reflects values approximated to five decimal places (i.e., &lt; 0.00001). Because many features share these low values, we recommend using <strong>Feature Rank</strong> to prioritize features, as it provides their relative importance for each perturbation.</em></p>
-<p><strong><em>Search for your gene in ORF dataset.</em></strong></p>
-<p>To explore whether overexpressing SLC2A2 produces a morphological phenotype, you will repeat the same filtering process in the ORF overexpression dataset’s Feature Ranking table, link <a href="http://broad.io/orf_feature">here</a>. Using the Filter Tool, you will select the Synonyms column, keep the operator as “=”, and enter “SLC2A2” in the search field.</p>
-<p>After filtering, you can examinate the <strong>Corrected p-value</strong> column. In this case, the value is <strong>0.09482</strong>, which is above the 0.05 threshold, indicating that overexpressing <em>SLC2A2</em> does not produce a statistically significant morphological change. This contrasts with the CRISPR knock-out dataset, where the loss of <em>SLC2A2</em> resulted in a strong and significant phenotypic effect.</p>
-<p>However, in the case of SLC2A2, it is still possible to identify individual morphological features that are statistically significant, even if the overall perturbation does not show significant changes compared to the control. In this filtered view, a few features have <strong>Feature Significance</strong> values below 0.05, indicating meaningful differences relative to the control condition (Figure 8).These p-values are corrected for multiple hypothesis testing.</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure8.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 8.</strong> <strong>Top features that can be sorted and prioritized based on Feature Significance for the SLC2A2 perturbation in the JUMP ORF dataset.</strong> The top features from the filtered dataset are sorted in ascending order based on the JUMP ORF Feature Ranking table, based on feature significance (per-feature p-values), ranked in increasing order, indicating statistically significant differences compared to the control condition. The Channel and Suffix columns are empty because these features solely come from an object mask and not a fluorescence image. The rows are sorted in ascending/descending order by clicking the name column header.</em></p>
-</div>
-</section>
-<section id="what-other-genes-look-similar-or-anti-similar-to-my-genes" class="level3">
-<h3 class="anchored" data-anchor-id="what-other-genes-look-similar-or-anti-similar-to-my-genes"><strong>2.2.2. What other genes look similar or anti-similar to my genes?</strong></h3>
-<div style="text-align: justify;">
-<p>Before exploring which perturbations produce the most similar or anti-similar image-based profile (i.e., features that are high in one are lower in the other one), it’s important to understand the broader context and potential of image-based profiling.</p>
-<p>Morphological profiles can cluster genes into biologically meaningful groups, uncovering known pathways and revealing functional connections, such as a regulatory interaction between pathways (Rohban et al.&nbsp;2017). This clustering is based on the similarity of high-dimensional morphological features extracted from images after gene overexpression or CRISPR knock-out. Comparing these profiles systematically can also identify <em>anti-correlated</em> perturbations, such as cases where one perturbation produces the opposite phenotype of another (Rohban et al., 2022). This is particularly relevant for therapeutic discovery, as finding antagonistic morphological profiles may highlight candidate compounds or genes that <em>suppress</em> an undesired phenotype.</p>
-<p>The “matches” table thus quantifies correlation (or anticorrelation) of profiles and is a powerful resource to uncover potential functional relationships between genes, explore unknown gene roles, or identify suppressors or enhancers within a biological pathway (Chandrasekaran et al., 2024; Ramezani et al., 2025). These insights can help prioritize follow-up experiments and hypothesis generation, especially when analyzing genes or perturbations with poorly characterized functions.</p>
-<p>To analyze the SLC2A2 perturbation in the CRISPR matches <a href="http://broad.io/crispr">table</a>, begin by opening the <strong>Filter</strong> menu. From the list of available columns, select <strong>“Perturbation”</strong>, choose the <strong>“like”</strong> operator, and type <strong>“SLC2A2”</strong> in the search field. Then, sort the <strong>“Perturbation-Match Similarity”</strong> column in <strong>descending order</strong> by clicking on the name in that column to view the perturbations with the strongest phenotypic similarity at the top (Figure 9). The similarity scores range theoretically from -1 (strong anti-similarity) to 1 (strong similarity), although values above 0.8 and below -0.8 are rarely seen, and values above 0.3 and below -0.3 tend to indicate a reliable “match”. Typically, scores above 0.3 and below -0.3 indicate a reliable “match” or “anti-match.” As observed in Section 2.2 <em>Search for your gene in the CRISPR dataset</em>, SLC2A2 knock-out displays a strong phenotypic effect, and when compared to other perturbations, a wide range of similarity scores is observed, from a maximum of 0.621, strong phenotypic similarity - a “match”, to a minimum of -0.513, strong phenotypic anti-similarity - an “anti-match” (Figure 9, red box). <strong>The “Perturbation example images” and “Match example image”</strong> shown in the table are randomly sampled from replicates across the experiment (not necessarily from the same plate or batch as the match), providing an unbiased visual representation of each condition. The “Match resources column links to external databases where additional information about the matching/anti-matching gene can be explored (Figure 9, blue box). These images are also useful to check for technical artifacts (e.g., out-of-focus fields, staining issues) or abnormal cell counts (too few or too many cells), which may affect the interpretation of the morphological phenotype.</p>
-<p>Now, let’s analyze the SLC2A2 overexpression in the ORF matches table to explore the matches there. Start by opening the <strong>Filter</strong> menu. From the list of available columns, select <strong>“Perturbation”</strong>, choose the <strong>“like”</strong> operator, and enter <strong>“SLC2A2”</strong> in the search field. Next, sort the <strong>“Perturbation-Match Similarity”</strong> column in descending order by clicking on its header as you did for the CRISPR table. In this case, the range of similarity scores is narrower than in the CRISPR dataset, spanning approximately from <strong>0.27</strong> to <strong>-0.223</strong>. This limited dynamic range may reflect the fact that <em>SLC2A2</em> overexpression induces a weaker morphological phenotype compared to its knock-out as you explored in the Section 2.2.1. <em>Search for your gene in the ORF dataset.</em></p>
-<p>Taken together, these comparisons provide a starting point for hypothesis generation and pathway exploration, particularly when integrating multiple types of perturbations.</p>
-<p><img src="https://zenodo.org/api/records/15252378/files/Figure9.png/content" style="max-width: 100%; height: auto; display: block;"></p>
-<p><em><strong>Figure 9.</strong> <strong>Comparison between the selected perturbation, SLC2A2, in the CRISPR Match table.</strong> After filtering for SCL2A2, the top 4 strongest matches are shown. The Perturbation-Match Similarity column (red box) indicates how similar or anti-similar each perturbation is to SLC2A2 (click on column name to sort it). The Match Resources column (blue box) provides external links to databases with additional information about the genes being compared. The merged images of all Cell Painting channels for SLC2A2 and its matched perturbation can be inspected in the “Perturbation example image” and “Match example image” columns, allowing visual assessment of their morphological signatures to visual comparison of morphological signatures and potential technical artifacts.</em></p>
-<p><strong>References:</strong></p>
-<p>Mohammad Hossein Rohban, Shantanu Singh, Xiaoyun Wu, Julia B Berthet, Mark-Anthony Bray, Yashaswi Shrestha, Xaralabos Varelas, Jesse S Boehm, Anne E Carpenter (2017) Systematic morphological profiling of human gene and allele function via Cell Painting eLife 6:e24060</p>
-<p>Mohammad H. Rohban, Ashley M. Fuller, Ceryl Tan, Jonathan T. Goldstein, Deepsing Syangtan, Amos Gutnick, Ann DeVine, Madhura P. Nijsure, Megan Rigby, Joshua R. Sacher, Steven M. Corsello, Grace B. Peppler, Marta Bogaczynska, Andrew Boghossian, Gabrielle E. Ciotti, Allison T. Hands, Aroonroj Mekareeya, Minh Doan, Jennifer P. Gale, Rik Derynck, Thomas Turbyville, Joel D. Boerckel, Shantanu Singh, Laura L. Kiessling, Thomas L. Schwarz, Xaralabos Varelas, Florence F. Wagner, Ran Kafri, T.S. Karin Eisinger-Mathason, Anne E. Carpenter (2022) Virtual screening for small-molecule pathway regulators by image-profile matching. <em>Cell Systems</em>, 13(9): 724–736.e9.</p>
-<p>Srinivas Niranj Chandrasekaran, Eric Alix, John Arevalo, Adriana Borowa, Patrick J. Byrne, William G. Charles, Zitong S. Chen, Beth A. Cimini, Boxiong Deng, John G. Doench, Jessica D. Ewald, Briana Fritchman, Colin J. Fuller, Jedidiah Gaetz, Amy Goodale, Marzieh Haghighi, Yu Han, Zahra Hanifehlou, Holger Hennig, Desiree Hernandez, Christina B. Jacob, Tim James, Tomasz Jetka, Alexandr A. Kalinin, Ben Komalo, Maria Kost-Alimova, Tomasz Krawiec, Brittany A. Marion, Glynn Martin, Nicola Jane McCarthy, Lisa Miller, Arne Monsees, Nikita Moshkov, Alán F. Muñoz, Arnaud Ogier, Magdalena Otrocka, Krzysztof Rataj, David E. Root, Francesco Rubbo, Simon Scrace, Douglas W. Selinger, Rebecca A. Senft, Peter Sommer, Amandine Thibaudeau, Sarah Trisorus, Rahul Valiya Veettil, William J. Van Trump, Sui Wang, Michał Warchoł, Erin Weisbart, Amélie Weiss, Michael Wiest, Agata Zaremba, Andrei Zinovyev, Shantanu Singh, Anne E. Carpenter (2024) Morphological map of under- and over-expression of genes in human cells. bioRxiv. https://doi.org/10.1101/2024.12.02.624527</p>
-<p>Ramezani, M., Weisbart, E., Bauman, J. et al.&nbsp;A genome-wide atlas of human cell morphology. Nat Methods 22, 621–633 (2025). https://doi.org/10.1038/s41592-024-02537-7</p>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../howto/0_howto.html">How-To Guides</a></li><li class="breadcrumb-item"><a href="../howto/14_display_perturbation_images.html">Plot all channels for one site</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Plot all channels for one site</h1>
 </div>
 
 
-</section>
-</section>
-</section>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This notebook demonstrates how to retrieve and plot all channels for one site using the <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait">jump_portrait</a> library.</p>
+<div id="d67fcc68" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mpl  <span class="co"># noqa: CPY001</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jump_portrait.fetch <span class="im">import</span> get_item_location_info, get_jump_image</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>First, we need to get location information telling us where all images corresponding to a specific perturbation can be found. We will use the “get_item_location” function from jump_portrait for this. Here we retrieve image locations for the “RAB30” gene:</p>
+<div id="9be91720" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gene_info <span class="op">=</span> get_item_location_info(<span class="st">"RAB30"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gene_info.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/well.csv.gz' to file '/home/runner/.cache/pooch/4efbf4dd3dd9aaecc8ccb9fc3c6b4122-well.csv.gz'.
+Downloading data from 'https://github.com/jump-cellpainting/datasets/raw/c68deb2babc83747e6b14d8a77e5655138a6086a/metadata/plate.csv.gz' to file '/home/runner/.cache/pooch/a530bb82de29e39332bdef6f29397769-plate.csv.gz'.
+worker #0:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #3:  50%|█████     | 1/2 [00:00&lt;00:00,  1.26it/s]worker #2:  50%|█████     | 1/2 [00:00&lt;00:00,  1.21it/s]worker #0:  50%|█████     | 1/2 [00:00&lt;00:00,  1.01it/s]worker #1:  50%|█████     | 1/2 [00:00&lt;00:00,  1.05it/s]worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]worker #2: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.20it/s]worker #3: 100%|██████████| 2/2 [00:01&lt;00:00,  1.21it/s]
+worker #4:   0%|          | 0/2 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.18it/s]worker #1: 100%|██████████| 2/2 [00:01&lt;00:00,  1.16it/s]
+worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.14it/s]worker #0: 100%|██████████| 2/2 [00:01&lt;00:00,  1.11it/s]
+worker #4:  50%|█████     | 1/2 [00:00&lt;00:00,  1.06it/s]worker #4: 100%|██████████| 2/2 [00:01&lt;00:00,  1.06it/s]worker #4: 100%|██████████| 2/2 [00:01&lt;00:00,  1.06it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>(90, 47)</code></pre>
+</div>
+</div>
+<p>There are 90 images: 9 sites/well X 5 replicate wells X 2 data types (CRISPR &amp; ORF). We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:</p>
+<div id="52446d6e" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cmpd_info_byinchi <span class="op">=</span> get_item_location_info(<span class="st">"CLETVKMYAXARPO-UHFFFAOYSA-N"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cmpd_info_byjcp <span class="op">=</span> get_item_location_info(<span class="st">"JCP2022_011844"</span>, input_column<span class="op">=</span><span class="st">"JCP2022"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byinchi.shape)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cmpd_info_byjcp.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.09it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.09it/s]
+worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.08it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.08it/s]
+worker #3: 100%|██████████| 1/1 [00:01&lt;00:00,  1.03s/it]worker #3: 100%|██████████| 1/1 [00:01&lt;00:00,  1.03s/it]
+worker #1: 100%|██████████| 1/1 [00:01&lt;00:00,  1.15s/it]worker #1: 100%|██████████| 1/1 [00:01&lt;00:00,  1.15s/it]
+worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.09it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.09it/s]
+worker #0:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #3:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.39it/s]worker #2: 100%|██████████| 1/1 [00:00&lt;00:00,  1.39it/s]
+worker #4:   0%|          | 0/1 [00:00&lt;?, ?it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.31it/s]worker #1: 100%|██████████| 1/1 [00:00&lt;00:00,  1.31it/s]
+worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.20it/s]worker #3: 100%|██████████| 1/1 [00:00&lt;00:00,  1.20it/s]
+worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.04it/s]worker #0: 100%|██████████| 1/1 [00:00&lt;00:00,  1.04it/s]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(34, 77)
+(34, 77)</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.27it/s]worker #4: 100%|██████████| 1/1 [00:00&lt;00:00,  1.27it/s]</code></pre>
+</div>
+</div>
+<p>There are 34 sites corresponding to this compound. We’ve written a function to display all channels for a specific image. Note that this is just one possible way to display images - we’ve included the function here so that you can modify it to suit your own needs.</p>
+<div id="97dcba84" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> display_site(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    source: <span class="bu">str</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    batch: <span class="bu">str</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    plate: <span class="bu">str</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    well: <span class="bu">str</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    site: <span class="bu">int</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    label: <span class="bu">str</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    int_percentile: <span class="bu">float</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot all channels from one image.</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">    source : String</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">        Source ID for image of interest.</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">    batch : String</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">        Batch ID for image of interest.</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">    plate : String</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">        Plate ID for image of interest.</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">    well : String</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">        Well ID for image of interest.</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">    site : String</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">        Site ID for image of interest.</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">    label : String</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">        Label to display in lower left corner.</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">    int_percentile: float</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">        Rescale the image from 0 - this percentile of intensity values.</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make images</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> plt.subplots(n_rows, n_cols, figsize<span class="op">=</span>(<span class="fl">2.6</span> <span class="op">*</span> n_cols, <span class="fl">2.6</span> <span class="op">*</span> n_rows))[<span class="dv">1</span>]</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    channel_rgb <span class="op">=</span> {</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"AGP"</span>: <span class="st">"#FF7F00"</span>,  <span class="co"># Orange</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DNA"</span>: <span class="st">"#0000FF"</span>,  <span class="co"># Blue</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ER"</span>: <span class="st">"#00FF00"</span>,  <span class="co"># Green</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mito"</span>: <span class="st">"#FF0000"</span>,  <span class="co"># Red</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"RNA"</span>: <span class="st">"#FFFF00"</span>,  <span class="co"># Yellow</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, (channel, rgb) <span class="kw">in</span> <span class="bu">zip</span>(axes, channel_rgb.items()):</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> mpl.LinearSegmentedColormap.from_list(channel, (<span class="st">"#000"</span>, rgb))</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> get_jump_image(source, batch, plate, well, channel, site, <span class="va">None</span>)</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>        ax.imshow(img, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span>np.percentile(img, int_percentile), cmap<span class="op">=</span>cmap)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add channel name label in the top left corner</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>        ax.text(</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.05</span>,</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>            <span class="fl">0.95</span>,</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>            channel,</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>            horizontalalignment<span class="op">=</span><span class="st">"left"</span>,</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>            verticalalignment<span class="op">=</span><span class="st">"top"</span>,</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="dv">18</span>,</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>            bbox<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>                facecolor<span class="op">=</span><span class="st">"white"</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>, boxstyle<span class="op">=</span><span class="st">"round,pad=0.3"</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>            ),</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>            transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># put label in last subplot</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    ax.text(</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.5</span>,</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>        label,</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>        horizontalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>        transform<span class="op">=</span>ax.transAxes,</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>    <span class="co"># show plot</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:</p>
+<div id="12a0dd25" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>) <span class="op">=</span> cmpd_info_byjcp.select(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>).row(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we define the label and make the plot:</p>
+<div id="419214e2" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>label <span class="op">=</span> <span class="st">"</span><span class="sc">{}</span><span class="ch">\n\n</span><span class="st">plate:</span><span class="ch">\n</span><span class="sc">{}</span><span class="ch">\n</span><span class="st">well: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">site: </span><span class="sc">{}</span><span class="st">"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>display_site(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"JCP2022_011844"</span>, plate, well, site),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_display_perturbation_images_files/figure-html/cell-7-output-1.png" width="723" height="476" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here, we plot one of the RAB30 ORF images:</p>
+<div id="be1ce5d9" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> (</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"ORF"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    .row(<span class="dv">0</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>display_site(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"RAB30 (ORF)"</span>, plate, well, site),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_display_perturbation_images_files/figure-html/cell-8-output-1.png" width="738" height="489" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And for CRISPR:</p>
+<div id="aeea6641" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>source, batch, plate, well, site <span class="op">=</span> (</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    gene_info.<span class="bu">filter</span>(pl.col(<span class="st">"Metadata_PlateType"</span>) <span class="op">==</span> <span class="st">"CRISPR"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    .select(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="ss">f"Metadata_</span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> (<span class="st">"Source"</span>, <span class="st">"Batch"</span>, <span class="st">"Plate"</span>, <span class="st">"Well"</span>, <span class="st">"Site"</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    .row(<span class="dv">0</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>display_site(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    source,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    batch,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    plate,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    well,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    site,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    label.<span class="bu">format</span>(<span class="st">"RAB30 (CRISPR)"</span>, plate, well, site),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">99.5</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="14_display_perturbation_images_files/figure-html/cell-9-output-1.png" width="720" height="460" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1043,4 +1127,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/1_jumprr_steps.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/1_jumprr_steps.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/14_display_perturbation_images.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/14_display_perturbation_images.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
