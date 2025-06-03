@@ -1,72 +1,76 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs_master.url = "github:NixOS/nixpkgs/master";
     systems.url = "github:nix-systems/default";
-    devenv.url = "github:cachix/devenv";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
   };
 
-  nixConfig = {
-    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-    extra-substituters = "https://devenv.cachix.org";
-  };
-
-  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
-    let
-      forEachSystem = nixpkgs.lib.genAttrs (import systems);
-    in
-    {
-      packages = forEachSystem (system: {
-        devenv-up = self.devShells.${system}.default.config.procfileScript;
-      });
-
-      devShells = forEachSystem
-        (system:
-          let
+  outputs = { self, nixpkgs, flake-utils, systems, ... } @ inputs:
+      flake-utils.lib.eachDefaultSystem (system:
+        let
             pkgs = import nixpkgs {
               system = system;
               config.allowUnfree = true;
             };
 
-            mpkgs = import inputs.nixpkgs-unstable {
+            mpkgs = import inputs.nixpkgs_master {
               system = system;
               config.allowUnfree = true;
             };
-          in
-          {
-            default = devenv.lib.mkShell {
-              inherit inputs pkgs;
-              modules = [
-                {
-                  stdenv = pkgs.clangStdenv;
-                  env.NIX_LD = nixpkgs.lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
-                  env.NIX_LD_LIBRARY_PATH = nixpkgs.lib.makeLibraryPath (with pkgs; [
-                  # Add needed packages here
-                  pkgs.libz # for numpy
-                  pkgs.stdenv.cc.cc
-                  pkgs.libGL
-                  ]);
-                  # https://devenv.sh/reference/options/
-                  packages = with pkgs; [
-                    mpkgs.uv
-                    python311
-                    quarto
-                    which
-                    ruff
-                    pyright
-                    marksman # markdown LSP
-                  ];
-                  enterShell = ''
-                    export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH
-                    export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
-                    if [ ! -d ".venv" ]; then
-                       uv sync --group dev
-                    fi
-                    source .venv/bin/activate
-                  '';
-                }
+
+            libList = [
+                # Add needed packages here
+                # pkgs.libz # Numpy
+                # pkgs.stdenv.cc.cc
+                # pkgs.libGL
+                # pkgs.glib
+                # pkgs.ruff
+                # pkgs.ruff-lsp
               ];
-            };
-          });
-    };
+          in
+          with pkgs;
+        {
+          devShells = {
+            default  = let
+              # These packages get built by Nix, and will be ahead on the PATH
+                pwp = (python312.withPackages (p: with p; [
+                   ]));
+            in mkShell {
+               NIX_LD = runCommand "ld.so" {} ''
+                        ln -s "$(cat '${pkgs.stdenv.cc}/nix-support/dynamic-linker')" $out
+                      '';
+                NIX_LD_LIBRARY_PATH = lib.makeLibraryPath libList;
+                packages = [
+                    which
+                    uv
+                    quarto
+                    marksman # markdown LSP
+                    pwp
+                    python311Packages.venvShellHook # This has to be here
+                ]
+                ++ libList;
+                venvDir = "./.venv";
+                postVenvCreation = ''
+                    unset SOURCE_DATE_EPOCH
+                  '';
+                postShellHook = ''
+                    unset SOURCE_DATE_EPOCH
+                  '';
+                shellHook = ''
+                    export UV_PYTHON=${pkgs.python312}
+                    export LD_LIBRARY_PATH=$NIX_LD_LIBRARY_PATH:$LD_LIBRARY_PATH
+                    export PYTHON_KEYRING_BACKEND=keyring.backends.fail.Keyring
+
+                    uv sync --group dev
+
+                    runHook venvShellHook
+                    export PYTHONPATH=${pwp}/${pwp.sitePackages}:$PYTHONPATH
+                    export QUARTO_PYTHON=.venv/bin/python
+                '';
+             };
+          };
+        }
+      );
 }
