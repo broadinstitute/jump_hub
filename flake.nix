@@ -22,8 +22,8 @@
 
             libList = [
                 # Add needed packages here
-                # pkgs.libz # Numpy
-                # pkgs.stdenv.cc.cc
+                pkgs.libz # Numpy
+                pkgs.stdenv.cc.cc
                 # pkgs.libGL
                 # pkgs.glib
                 # pkgs.ruff
@@ -45,7 +45,7 @@
                 packages = [
                     which
                     uv
-                    quarto
+                    quartoMinimal
                     marksman # markdown LSP
                     pwp
                     python311Packages.venvShellHook # This has to be here
