@@ -23,20 +23,28 @@
 import polars as pl
 
 # %% [markdown]
-# The shapes of the available datasets are:
+# The JUMP Cell Painting project provides several processed datasets for morphological profiling:
 #
-# a) `cpg0016-jump[crispr]`: CRISPR knockouts genetic perturbations.
-# a) `cpg0016-jump[orf]`: Overexpression genetic perturbations.
-# a) `cpg0016-jump[compound]`: Chemical perturbations.
+# - **`crispr`**: CRISPR knockout genetic perturbations
+# - **`orf`**: Open Reading Frame (ORF) overexpression perturbations
+# - **`compound`**: Chemical compound perturbations
+# - **`all`**: Combined dataset containing all perturbation types
 #
-# Their explicit location is determined by the transformations that produce the datasets.
-# The aws paths of the dataframes are built from a prefix below:
+# Each dataset is available in two versions:
+# - **Standard**: Fully processed including batch correction
+# - **Interpretable**: Same processing but without batch correction steps (which involve transformations that lose the original feature space)
+#
+# All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs.
+# Snakemake workflows for producing these assembled profiles are available [here](https://github.com/broadinstitute/jump-profiling-recipe/).
+# The specific commit used to produce the profiles can be found in the folder path of each parquet file.
+# For example, `jump-profiling-recipe_2024_a917fa7` indicates commit `a917fa7` was used.
+# The index file below contains the exact locations and metadata for each dataset:
 
 # %% Paths
-INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"
+INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"
 
 # %% [markdown]
-# We use a version-controlled csv to release the latest corrected profiles
+# We use the version-controlled CSV above to release the latest corrected profiles
 
 # %%
 profile_index = pl.read_csv(INDEX_FILE)
