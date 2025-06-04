@@ -486,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>A very common task when processing morphological profiles is knowing which ones are treatments and which ones are controls. Here we will explore how we can use broad-babel to accomplish this task.</p>
-<div id="f5f56b29" class="cell" title="Imports" data-execution_count="1">
+<div id="0a7d0fa7" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> broad_babel.query <span class="im">import</span> get_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -494,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We will be using the CRISPR dataset specificed in our index csv.</p>
-<div id="d47815c3" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
+<div id="490d5266" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>CRISPR_URL <span class="op">=</span> pl.read_csv(INDEX_FILE).<span class="bu">filter</span>(pl.col(<span class="st">"subset"</span>) <span class="op">==</span> <span class="st">"crispr"</span>).item(<span class="dv">0</span>, <span class="st">"url"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">=</span> pl.scan_parquet(CRISPR_URL)</span>
@@ -504,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>For simplicity the contents of our processed profiles are minimal: “The profile origin” (source, plate and well) and the unique JUMP identifier for that perturbation. We will use broad-babel to further expand on this metadata, but for simplicity’s sake let us sample subset of data.</p>
-<div id="3d68d634" class="cell" title="Subset data" data-execution_count="3">
+<div id="a6384c03" class="cell" title="Subset data" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> (</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series().sort()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -527,28 +527,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We will use these JUMP ids to obtain a mapper that indicates the perturbation type (trt, negcon or, rarely, poscon)</p>
-<div id="b858a3db" class="cell" title="Pull mapper" data-execution_count="4">
+<div id="2410ad6f" class="cell" title="Pull mapper" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>{'JCP2022_800116': 'trt',
+ 'JCP2022_801847': 'trt',
+ 'JCP2022_803663': 'trt',
+ 'JCP2022_804300': 'trt',
+ 'JCP2022_800002': 'negcon',
  'JCP2022_805808': 'trt',
  'JCP2022_801270': 'trt',
- 'JCP2022_804300': 'trt',
  'JCP2022_802539': 'trt',
- 'JCP2022_803663': 'trt',
+ 'JCP2022_802425': 'trt',
  'JCP2022_802356': 'trt',
- 'JCP2022_801205': 'trt',
- 'JCP2022_800002': 'negcon',
- 'JCP2022_801847': 'trt',
- 'JCP2022_802425': 'trt'}</code></pre>
+ 'JCP2022_801205': 'trt'}</code></pre>
 </div>
 </div>
 <p>A couple of important notes about broad_babel’s get mapper and other functions: - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls - ‘get-mapper’ works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the ‘compounds’ dataset it is likely to fail. For these cases we suggest the more general function ‘run_query’. You can read more on this and other use-cases on Babel’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">readme</a>.</p>
 <p>We will now repeat the process to get their ‘standard’ name</p>
-<div id="d0dfb4ca" class="cell" title="Fetch standard name" data-execution_count="5">
+<div id="c0fb9170" class="cell" title="Fetch standard name" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>),</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    input_column<span class="op">=</span><span class="st">"JCP2022"</span>,</span>
@@ -556,21 +556,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>{'JCP2022_804300': 'MSX1',
- 'JCP2022_802356': 'FDX1',
- 'JCP2022_802539': 'G6PC',
- 'JCP2022_803663': 'KIF16B',
+<pre><code>{'JCP2022_805808': 'RAD51B',
  'JCP2022_800116': 'ACOT11',
- 'JCP2022_800002': 'non-targeting',
  'JCP2022_802425': 'FLNC',
+ 'JCP2022_804300': 'MSX1',
  'JCP2022_801205': 'CDK20',
- 'JCP2022_805808': 'RAD51B',
+ 'JCP2022_800002': 'non-targeting',
+ 'JCP2022_801847': 'DMRT2',
+ 'JCP2022_802539': 'G6PC',
  'JCP2022_801270': 'CFB',
- 'JCP2022_801847': 'DMRT2'}</code></pre>
+ 'JCP2022_803663': 'KIF16B',
+ 'JCP2022_802356': 'FDX1'}</code></pre>
 </div>
 </div>
 <p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.</p>
-<div id="350d7fe4" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
+<div id="cd34f477" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>).collect()</span>
