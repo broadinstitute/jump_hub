@@ -427,7 +427,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#interactive-tools" id="toc-interactive-tools" class="nav-link active" data-scroll-target="#interactive-tools">Interactive Tools</a></li>
-  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
+  <li><a href="#details-and-usage" id="toc-details-and-usage" class="nav-link" data-scroll-target="#details-and-usage">Details and usage</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/0_howto_interactive_tools.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/0_howto_interactive_tools.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="0_howto_interactive_tools.ipynb" download="0_howto_interactive_tools.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -442,43 +442,57 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="interactive-tools">Interactive Tools</h3>
 <p>There are several no-code options for exploring JUMP data. These are very useful for querying perturbations without needing experience in data analysis or programming. Detailed usage instructions are below this brief overview listing:</p>
 <ol type="1">
-<li><p><strong>JUMPer tools</strong> <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr">here</a></p>
+<li><p><strong>JUMP Round-Robin (jump_rr) tools</strong></p>
 <ul>
-<li>Type in your gene/compound of interest and retrieve a list of similar genes/compounds<br>
-</li>
-<li>Tools to browse images and inspect enriched features<br>
-</li>
+<li>Type in your gene/compound of interest and retrieve a list of similar genes/compounds</li>
+<li>Tools to browse images and inspect enriched features</li>
+<li>Visualize images of the perturbed cells</li>
 <li>No account creation required</li>
 </ul></li>
-<li><p><strong>Morpheus</strong> <a href="https://software.broadinstitute.org/morpheus/">here</a></p>
+<li><p><strong>Reference tools</strong> If you are not sure if your genes or compounds of interest are in JUMP, you can check it usingn one of our tools embedded on this website.</p>
+<ul>
+<li><strong>Gene availability</strong>: Is my Gene in a JUMP (or JUMP-adjacent) dataset?</li>
+<li><strong>Compound availability</strong>: Is my compound in JUMP? If not, what is the closest equivalent?</li>
+</ul></li>
+<li><p><strong>Morpheus</strong></p>
 <ul>
 <li>Explore matrices of data and perform basic calculations</li>
 <li>Explore heatmaps showing similarity among clustered samples</li>
 <li>No account creation required</li>
 </ul></li>
-<li><p><strong>Ardigen phenAID JUMP-CP Explorer</strong> <a href="https://phenaid.ardigen.com/jumpcpexplorer/">here</a></p>
+<li><p><strong>Ardigen phenAID JUMP-CP Explorer</strong></p>
 <ul>
-<li>Search similarities among perturbations and more</li>
+<li>Search similarities among perturbations and look at their images</li>
 <li>Account creation required, but access is free</li>
 </ul></li>
 </ol>
 </section>
-<section id="usage" class="level3">
-<h3 class="anchored" data-anchor-id="usage">Usage</h3>
+<section id="details-and-usage" class="level3">
+<h3 class="anchored" data-anchor-id="details-and-usage">Details and usage</h3>
 <section id="jumprr-tools" class="level4">
 <h4 class="anchored" data-anchor-id="jumprr-tools">JUMPrr tools</h4>
+<p>A collection of online tables to explore, visualize and compare perturbations and their effect in cells.</p>
 <ul>
-<li><p>X_Feature: For each row, is the <code>Feature</code> value an average for all the cells in the <code>Metadata_image</code> using the listed <code>Mask</code>(region of the cell: Nucleus, Cell, or Cytoplasm)? Or is it associated with a single cell in that image?</p>
-<p>Any <code>Feature</code> is the average of all cells and all replicates (typically four in total) for the specific mask and feature.</p></li>
-<li><p>How are <code>Statistic</code> and <code>Median</code> calculated for each row?</p>
-<ul>
-<li><code>Statistic</code> is the probability of a given distribution (four replicates) to occur relative to their negative controls (in the four plates from which those replicates came; typically each replicate is in an independent plate).</li>
-<li><code>Median</code> is the median feature across all (~4) replicates. Each of these replicates’ value was in turn the mean of all the sites and cells in a given well.</li>
-</ul></li>
-<li><p>I have a compound and want to find the closest JUMP analog</p></li>
+<li>We provide a step-by-step <a href="https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html">tutorial</a></li>
+<li>The tables links and a flow diagram are available in its GitHub repository</li>
 </ul>
+</section>
+<section id="perturbation-availability" class="level4">
+<h4 class="anchored" data-anchor-id="perturbation-availability">Perturbation availability</h4>
+<section id="gene-availability" class="level5">
+<h5 class="anchored" data-anchor-id="gene-availability">Gene availability</h5>
+<p>A table to query which genes are available in the JUMP datasets. It contains the JUMP dataset alongside others with data from genetic perturbations.</p>
+<ul>
+<li><a href="https://broadinstitute.github.io/jump_hub/reference/00_gene_index.html">Link</a> to the gene availability table</li>
+<li><a href="https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations">Tutorial and details</a></li>
+</ul>
+</section>
+<section id="compound-availability" class="level5">
+<h5 class="anchored" data-anchor-id="compound-availability">Compound availability</h5>
+<p>I have a compound and would like to find its JUMP id or its most similar equivalent.</p>
 <iframe width="780" height="500" src="https://marimo.app/?slug=qpqzxd&amp;mode=read&amp;include-code=false&amp;show-chrome=false&amp;embed=true" title="PubChem to JUMP">
 </iframe>
+</section>
 </section>
 <section id="morpheus" class="level4">
 <h4 class="anchored" data-anchor-id="morpheus">Morpheus</h4>
