@@ -39,9 +39,9 @@ There are several no-code options for exploring JUMP data. These are very useful
 
 #### Morpheus
 
-* How can I use [Morpheus](https://software.broadinstitute.org/morpheus/) to view relationships among samples? 
+* How can I use Morpheus to view relationships among samples? 
 1. Download the ORF and/or CRISPR data from [https://doi.org/10.5281/zenodo.14025602](https://doi.org/10.5281/zenodo.14025602) or from [https://zenodo.org/records/14165010](https://zenodo.org/records/14165010) (a smaller file with only genes having cosine similarity \> 0.5 with other genes).
-2. Drag and drop one of those files into Morpheus (at https://software.broadinstitute.org/morpheus/ in your web browser; no need to install it)
+2. Drag and drop one of those files into [Morpheus](https://software.broadinstitute.org/morpheus/) in your web browser; no need to install it)
 3. Go to Tools \> Similarity Matrix and choose Metric \= cosine similarity and Compute matrix for \= Columns
 4. Cluster the genes using Tools \> Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns
    ![][image1]
