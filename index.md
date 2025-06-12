@@ -10,12 +10,7 @@ What is the purpose of this website? To provide up-to-date info on everything JU
 
 1. Just exploring the data?
    
-   - Use a web interface; no programming required:
-     * [JUMPrr tools](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access) by Carpenter–Singh Lab (Muñoz et al.) 
-     * [Morpheus](./howto/0_howto_interactive_tools.md) by Broad Institute
-     * [JUMP-CP Data Explorer](https://phenaid.ardigen.com/jumpcpexplorer/) by Ardigen 
-
-   You can look up images for a sample, distinguishing features, most-similar genes or compounds, and more\! See the [Interactive Tools](./howto/0_howto_interactive_tools.md) page for instructions for these tools. 
+   - Use a web interface; no programming required. You can look up images for a gene or compound, distinguishing features, most-similar genes or compounds, and more\! See the [Interactive Tools](./howto/0_howto_interactive_tools.md) page for instructions for these tools. 
 
 
 2. Want to fetch and analyze data?
@@ -35,7 +30,7 @@ What is the purpose of this website? To provide up-to-date info on everything JU
   - [JUMP data production biorxiv](https://www.biorxiv.org/content/10.1101/2023.03.23.534023)
   - [Morphmap](https://www.biorxiv.org/content/10.1101/2024.12.02.624527)
 - Raise an issue or ask a question on [Github](https://github.com/jump-cellpainting/datasets/issues)
-- Subscribe to updates at [jump-cellpainting.broadinstitute.org/more-info](https://jump-cellpainting.broadinstitute.org/more-info)
+- Subscribe to (very infrequent) updates at [jump-cellpainting.broadinstitute.org/more-info](https://jump-cellpainting.broadinstitute.org/more-info)
 
 ## Acknowledgements
 
