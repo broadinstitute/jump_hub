@@ -44,10 +44,12 @@ There are several no-code options for exploring JUMP data. These are very useful
 2. Drag and drop one of those files into [Morpheus](https://software.broadinstitute.org/morpheus/) in your web browser; no need to install it)
 3. Go to Tools \> Similarity Matrix and choose Metric \= cosine similarity and Compute matrix for \= Columns
 4. Cluster the genes using Tools \> Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns
+   
    ![][image1]
-5. Click the gear icon towards the top right and choose “Annotations” tab  
-6. Choose Symbol (for Rows and Columns) so that gene names will appear. You can also choose various annotations of genes, like biological process or molecular function but those names are long and make it hard to see unless you have a huge screen.  
-7. Play around\!   
+   
+6. Click the gear icon towards the top right and choose “Annotations” tab  
+7. Choose Symbol (for Rows and Columns) so that gene names will appear. You can also choose various annotations of genes, like biological process or molecular function but those names are long and make it hard to see unless you have a huge screen.  
+8. Play around\!   
    - To find a gene of interest, in the search box type Symbol: then start typing the name and it will appear as highlighted in the scroll bar so you can scroll to find it. But if you are looking for top matches to a gene, note that clustering can have weird behavior, putting the closest match pretty far away depending on the other data points. The broad.io Datasette links (JUMPer tools) more directly answer the “top/bottom matches” question and take less hands-on time to configure and less compute time to load.  
      - doubleclick a gene name and the data matrix will sort to show you the closest matches on one end and the strongest anti-correlators at the other. To go back to your original view, just keep clicking the same gene you originally sorted by, it will change back to the previous sort eventually.  
      - note that in clustered view you can't see anti-correlations which anecdotally seem more strong/common in CRISPR data. So clusters are a bit more interesting in ORF data.  
