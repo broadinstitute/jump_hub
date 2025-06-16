@@ -3,8 +3,8 @@
 Reference for terms and their definition.
 
 - **Image-based profiling** (also called morphological profiling): Method to study cell phenotypes by quantifying their shape, size and intensity features. The many features that are captured make up the profile of the cell or the population of cells in a sample.  
-- **Phenotypic activity**: Metric that indicates how well we can distinguish a perturbation from its negative controls, which quantifies how strong the phenotype is ([Kalinin, et al. elaborates on the term](https://www.biorxiv.org/content/10.1101/2024.04.01.587631v1)).  
-- **Phenotypic consistency**: Metric that indicates how well a perturbation’s profile  matches profiles of samples that are expected to be biologically related, according to an annotated resource (e.g., known gene-gene or compound-target interactions ([Kalinin, et al.](https://www.biorxiv.org/content/10.1101/2024.04.01.587631v1)).  
+- **Phenotypic activity**: Metric that indicates how well we can distinguish a perturbation from its negative controls, which quantifies how strong the phenotype is ([Kalinin, et al. elaborates on the term](https://doi.org/10.1038/s41467-025-60306-2)).  
+- **Phenotypic consistency**: Metric that indicates how well a perturbation’s profile  matches profiles of samples that are expected to be biologically related, according to an annotated resource (e.g., known gene-gene or compound-target interactions ([Kalinin, et al.](https://doi.org/10.1038/s41467-025-60306-2)).  
 - **Phenotypic distinctiveness**: Metric showing how distinctive a perturbation is relative to the other perturbations in a given experiment (not limited to negative controls, as in phenotypic activity).  
 - **Cosine similarity**: Metric capturing how close two vectors are. It assumes all the elements in them (usually features) have the same weight.  
 - **Retrievability:** Umbrella term for the methods that assess the quality of matching among a set of samples in a profiling experiment: **phenotypic activity**, **consistency**, and **distinctiveness**.  
@@ -13,7 +13,7 @@ Reference for terms and their definition.
 ## Acronyms
 
 - **JUMP**: Joint Undertaking for Morphological Profiling  
-- **mAP**: mean Average Precision ([Kalinin, et al.](https://www.biorxiv.org/content/10.1101/2024.04.01.587631v1) explains mAP in the context of image-based profiling)  
+- **mAP**: mean Average Precision ([Kalinin, et al.](https://doi.org/10.1038/s41467-025-60306-2) explains mAP in the context of image-based profiling)  
 - **CRISPR**: Clustered Regularly Interspaced Short Palindromic Repeats. This method was used to produce the CRISPR datasets, in which genes were knocked out.  
 - **ORF**: Open Reading Frame. This method was used to produce the ORF datasets, in which genes were overexpressed.
 
