@@ -48,7 +48,7 @@ import polars as pl
 #
 # The index file below contains the **recommended profiles** for each subset:
 #
-# > **Note for future**: Project-specific custom profiles will be available through separate index files as needed.
+# > **Note for maintainers**: Maintainers may consider adding project-specific custom profiles through separate index files as needed.
 
 # %% Paths
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"
