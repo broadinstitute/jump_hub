@@ -33,8 +33,6 @@ import polars as pl
 # - **`compound`**: Chemical compound perturbations
 # - **`all`**: Combined dataset containing all perturbation types (use for cross-modality comparisons)
 #
-# ### Standard vs Interpretable Versions
-#
 # Each dataset is available in two processing versions:
 #
 # - **Standard** (e.g., `crispr`, `compound`, `orf`): Fully processed including batch correction steps. **Recommended for most analyses** as they provide better cross-dataset comparability.
@@ -46,14 +44,14 @@ import polars as pl
 #
 # To understand exactly how each profile was generated:
 # 1. Extract the commit from the URL path (e.g., `jump-profiling-recipe_2024_a917fa7` → commit `a917fa7`)
-# 2. Extract the pipeline string from the URL (the folder name after the subset, e.g., 
+# 2. Extract the pipeline string from the URL (the folder name after the subset, e.g.,
 #    `ORF/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/`)
 # 3. In the repository at that commit, check the `inputs/` directory for configuration files:
 #    - Individual subsets (orf/crispr/compound) → check orf.json, crispr.json, compound.json
 #    - Combined "all" subsets → check pipeline_1.json, pipeline_2.json, pipeline_3.json
 # 4. Find the config file where the "pipeline" value matches your pipeline string
 #
-# Note: "_interpretable" versions are intermediate files from the same pipeline, captured before 
+# Note: "_interpretable" versions are intermediate files from the same pipeline, captured before
 # multivariate transformations like sphering or harmony. They use the same config but represent
 # an earlier step in the processing pipeline (e.g., `profiles_wellpos_cc_var_mad_outlier_featselect`
 # is the interpretable version before `_sphering_harmony` is applied).
