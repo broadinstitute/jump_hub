@@ -62,8 +62,6 @@ profile_index = pl.read_csv(INDEX_FILE)
 profile_index
 
 # %% [markdown]
-# ## Pipeline Information Encoded in File Names
-#
 # The processing pipeline applied to each dataset is encoded directly in the parquet file names.
 # The filename shows the sequence of processing steps that were applied, as defined in the
 # [JUMP profiling recipe documentation](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md).
