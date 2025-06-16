@@ -58,7 +58,35 @@ INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.
 
 # %%
 profile_index = pl.read_csv(INDEX_FILE)
+
 profile_index
+
+# %% [markdown]
+# ## Pipeline Information Encoded in File Names
+#
+# The processing pipeline applied to each dataset is encoded directly in the parquet file names.
+# The filename shows the sequence of processing steps that were applied, as defined in the
+# [JUMP profiling recipe documentation](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md).
+#
+# Key pipeline steps include:
+# - `profiles`: Base profiles (initial data loading)
+# - `var`: Variance thresholding - dropping features with very low variability
+# - `mad`: Robust standardization - normalizing features so that controls on each plate have a mean of 0 and a standard deviation of 1
+# - `int`: Inverse Normal Transformation - transforming feature distributions to be more normally distributed
+# - `featselect`: Feature selection - various methods to select features including reducing features to the most diverse ones
+# - `harmony`: Harmony batch correction - removing technical variations between batches (this is the default)
+#
+# Let's extract and display the pipeline information from the file names:
+
+# %%
+pl.Config.set_fmt_str_lengths(200)
+display_df = profile_index.with_columns(
+    pl.col("url").str.extract(r"([^/]+)\.parquet$").alias("pipeline")
+).select("subset", "pipeline")
+display_df
+
+# %%
+pl.Config.set_fmt_str_lengths(50)
 
 # %% [markdown]
 # We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
