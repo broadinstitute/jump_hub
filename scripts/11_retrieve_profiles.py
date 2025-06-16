@@ -23,23 +23,32 @@
 import polars as pl
 
 # %% [markdown]
-# The JUMP Cell Painting project provides several processed datasets for morphological profiling:
+# ## JUMP Cell Painting Datasets & Recommendations
+#
+# The JUMP Cell Painting project provides several processed datasets for morphological profiling.
+# Choose the dataset that matches your perturbation type:
 #
 # - **`crispr`**: CRISPR knockout genetic perturbations
 # - **`orf`**: Open Reading Frame (ORF) overexpression perturbations
 # - **`compound`**: Chemical compound perturbations
-# - **`all`**: Combined dataset containing all perturbation types
+# - **`all`**: Combined dataset containing all perturbation types (use for cross-modality comparisons)
 #
-# Each dataset is available in two versions:
+# ### Standard vs Interpretable Versions
 #
-# - **Standard**: Fully processed including batch correction
-# - **Interpretable**: Same processing but without batch correction steps (which involve transformations that lose the original feature space)
+# Each dataset is available in two processing versions:
+#
+# - **Standard** (e.g., `crispr`, `compound`, `orf`): Fully processed including batch correction steps. **Recommended for most analyses** as they provide better cross-dataset comparability and have undergone additional quality control.
+#
+# - **Interpretable** (e.g., `crispr_interpretable`, `compound_interpretable`, `orf_interpretable`): Same initial processing but without batch correction transformations that modify the original feature space. Use these when you need to interpret individual morphological features or understand the biological meaning of specific measurements.
 #
 # All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs.
 # Snakemake workflows for producing these assembled profiles are available [here](https://github.com/broadinstitute/jump-profiling-recipe/).
 # The specific commit used to produce the profiles can be found in the folder path of each parquet file.
 # For example, `jump-profiling-recipe_2024_a917fa7` indicates commit `a917fa7` was used.
-# The index file below contains the exact locations and metadata for each dataset:
+#
+# The index file below contains the **recommended profiles** for each subset:
+#
+# > **Note for future**: Project-specific custom profiles will be available through separate index files as needed.
 
 # %% Paths
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"
@@ -49,7 +58,7 @@ INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.
 
 # %%
 profile_index = pl.read_csv(INDEX_FILE)
-profile_index.head()
+profile_index
 
 # %% [markdown]
 # We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
