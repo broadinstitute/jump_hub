@@ -18,7 +18,7 @@ https://s3.amazonaws.com/bucket/project/profiles/FORK_jump-profiling-recipe_YEAR
 
 **Components:**
 - `username_jump-profiling-recipe_2024_a1b2c3d` - Fork owner, tool name, year, and commit hash
-- `SUBSET/` - Data type (COMPOUND, ORF, CRISPR, etc.)
+- `SUBSET/` - Data description (COMPOUND, ORF, CRISPR, compound_subset1, orf_combined, etc.)
 - `pipeline_directory/` - The exact pipeline string used
 - `filename.parquet` - Final output file
 
@@ -43,7 +43,7 @@ echo "Using fork: $FORK_OWNER, commit: $COMMIT"
 
 # Set variables for your specific case
 YEAR=$(date +%Y)  # Current year, or use the year you processed the data
-SUBSET="COMPOUND"  # Change to ORF, CRISPR, etc. based on your data type
+SUBSET="COMPOUND"  # Descriptive name for your data (COMPOUND, ORF, compound_subset1, orf_combined, etc.)
 PIPELINE="profiles_var_mad_int_featselect_harmony"  # Your actual pipeline string
 
 # Upload with structured path including fork and commit info
@@ -77,7 +77,7 @@ Create `manifests/profile_index.csv` (replace with your actual URLs from Step 1)
 "compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet",""
 ```
 
-**Note**: Replace `username_jump-profiling-recipe_2024_a1b2c3d` with your actual fork owner, year and commit hash, `COMPOUND` with your data type, and the pipeline strings with your actual processing pipeline.
+**Note**: Replace `username_jump-profiling-recipe_2024_a1b2c3d` with your actual fork owner, year and commit hash, `COMPOUND` with your data description (can be any descriptive name like `compound_subset1`, `orf_combined`, etc.), and the pipeline strings with your actual processing pipeline.
 
 ### 3. Add ETags (for S3 files)
 
@@ -119,21 +119,6 @@ import polars as pl
 profile_index = pl.read_csv(INDEX_FILE)
 # ... continue with scripts/11_retrieve_profiles.py workflow
 ```
-
-## Tips
-
-- **Multiple versions**: Include both standard and interpretable versions when relevant
-- **Document processing**: Add a README explaining your pipeline choices and parameters  
-- **Version everything**: Tag your repository when you update profiles or manifests
-- **Multiple data types**: You can include ORF, CRISPR, and compound data in the same manifest
-
-## Troubleshooting
-
-**403 Forbidden when accessing S3**: Check that your files have `--acl public-read` permissions
-
-**ETag mismatch**: Re-fetch the ETag after any file updates
-
-**Pipeline not found**: Ensure your pipeline string matches available rules in jump-profiling-recipe
 
 ## Example Projects
 
