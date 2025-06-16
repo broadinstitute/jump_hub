@@ -8,14 +8,25 @@ Have custom-processed JUMP profiles? Here's how to share them with others.
 - AWS CLI configured (for S3 upload)
 - A GitHub repository for your project
 
-## Starting Point
+## URL Structure for Reproducibility
 
-You've already processed your profiles and they're in:
+Your manifest URLs should follow the JUMP dataset convention to ensure full reproducibility. Following the [JUMP dataset pattern](../scripts/11_retrieve_profiles.py), your URLs should encode:
+
 ```
-outputs/{scenario}/{pipeline}.parquet
+https://s3.amazonaws.com/bucket/project/profiles/FORK_jump-profiling-recipe_YEAR_COMMIT/SUBSET/pipeline_directory/filename.parquet
 ```
 
-Now let's make them accessible to others.
+**Components:**
+- `username_jump-profiling-recipe_2024_a1b2c3d` - Fork owner, tool name, year, and commit hash
+- `SUBSET/` - Data type (COMPOUND, ORF, CRISPR, etc.)
+- `pipeline_directory/` - The exact pipeline string used
+- `filename.parquet` - Final output file
+
+This allows others to:
+1. Extract the fork and commit: `username_jump-profiling-recipe_2024_a1b2c3d` → `username/jump-profiling-recipe` at commit `a1b2c3d`
+2. Extract the pipeline: `profiles_var_mad_int_featselect_harmony`
+3. Find the config: Check `inputs/config/` in that specific fork at that commit
+4. Match the pipeline: Find the config file where `"pipeline"` matches your string
 
 ## Steps
 
@@ -24,23 +35,30 @@ Now let's make them accessible to others.
 Make your profiles publicly accessible using a structured path that includes processing provenance:
 
 ```bash
-# Get the commit hash from your jump-profiling-recipe
+# Get the fork owner and commit hash from your jump-profiling-recipe
 cd /path/to/jump-profiling-recipe
+FORK_OWNER=$(git remote get-url origin | sed 's/.*github\.com[:/]\([^/]*\)\/.*/\1/')  # Extract GitHub username
 COMMIT=$(git rev-parse --short HEAD)
-echo "Using commit: $COMMIT"
+echo "Using fork: $FORK_OWNER, commit: $COMMIT"
 
-# Upload with structured path including commit info
-aws s3 cp outputs/compound/profiles_var_mad_int_featselect_harmony.parquet \
-  s3://your-bucket/your-project/profiles/jump-profiling-recipe_2024_${COMMIT}/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet \
+# Set variables for your specific case
+YEAR=$(date +%Y)  # Current year, or use the year you processed the data
+SUBSET="COMPOUND"  # Change to ORF, CRISPR, etc. based on your data type
+PIPELINE="profiles_var_mad_int_featselect_harmony"  # Your actual pipeline string
+
+# Upload with structured path including fork and commit info
+aws s3 cp outputs/compound/${PIPELINE}.parquet \
+  s3://your-bucket/your-project/profiles/${FORK_OWNER}_jump-profiling-recipe_${YEAR}_${COMMIT}/${SUBSET}/${PIPELINE}/${PIPELINE}.parquet \
   --acl public-read
 
-# For interpretable version
-aws s3 cp outputs/compound/profiles_var_mad_int.parquet \
-  s3://your-bucket/your-project/profiles/jump-profiling-recipe_2024_${COMMIT}/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet \
+# For interpretable version (adjust pipeline name as needed)
+INTERPRETABLE_PIPELINE="profiles_var_mad_int"  # Pipeline without final transformations
+aws s3 cp outputs/compound/${INTERPRETABLE_PIPELINE}.parquet \
+  s3://your-bucket/your-project/profiles/${FORK_OWNER}_jump-profiling-recipe_${YEAR}_${COMMIT}/${SUBSET}/${PIPELINE}/${INTERPRETABLE_PIPELINE}.parquet \
   --acl public-read
 
 # Verify it's accessible
-curl -I https://s3.amazonaws.com/your-bucket/your-project/profiles/jump-profiling-recipe_2024_${COMMIT}/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet
+curl -I https://s3.amazonaws.com/your-bucket/your-project/profiles/${FORK_OWNER}_jump-profiling-recipe_${YEAR}_${COMMIT}/${SUBSET}/${PIPELINE}/${PIPELINE}.parquet
 ```
 
 ### 2. Create manifest in your project repo
@@ -51,30 +69,33 @@ In your project repository, create the directory structure:
 mkdir -p manifests
 ```
 
-Create `manifests/profile_index.csv`:
+Create `manifests/profile_index.csv` (replace with your actual URLs from Step 1):
 
 ```csv
 "subset","url","etag"
-"compound","https://s3.amazonaws.com/your-bucket/your-project/profiles/jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet",""
-"compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/profiles/jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet",""
+"compound","https://s3.amazonaws.com/your-bucket/your-project/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet",""
+"compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet",""
 ```
+
+**Note**: Replace `username_jump-profiling-recipe_2024_a1b2c3d` with your actual fork owner, year and commit hash, `COMPOUND` with your data type, and the pipeline strings with your actual processing pipeline.
 
 ### 3. Add ETags (for S3 files)
 
-ETags ensure data integrity. Get them from your S3 files:
+ETags are checksums that ensure data integrity when downloading. Get them from your S3 files:
 
 ```bash
-# Get ETag for each file
-curl -I https://s3.amazonaws.com/your-bucket/your-project/profiles/jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet | grep ETag
+# Get ETag for each file (using your variables from Step 1)
+curl -I https://s3.amazonaws.com/your-bucket/your-project/profiles/${FORK_OWNER}_jump-profiling-recipe_${YEAR}_${COMMIT}/${SUBSET}/${PIPELINE}/${PIPELINE}.parquet | grep ETag
 # Output example: ETag: "d41d8cd98f00b204e9800998ecf8427e-1"
 ```
 
-Update your CSV with the ETag values (include the quotes):
+Update your CSV with the ETag values (include the quotes). For multiple data types:
 
 ```csv
 "subset","url","etag"
-"compound","https://s3.amazonaws.com/your-bucket/your-project/profiles/jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet","d41d8cd98f00b204e9800998ecf8427e-1"
-"compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/profiles/jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet","a71b2c3d4e5f6789abcdef1234567890-2"
+"compound","https://s3.amazonaws.com/your-bucket/your-project/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet","d41d8cd98f00b204e9800998ecf8427e-1"
+"compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet","a71b2c3d4e5f6789abcdef1234567890-2"
+"orf","https://s3.amazonaws.com/your-bucket/your-project/profiles/username_jump-profiling-recipe_2024_a1b2c3d/ORF/profiles_wellpos_cc_var_mad_outlier_featselect/profiles_wellpos_cc_var_mad_outlier_featselect.parquet","b82c3d4e5f6789abcdef1234567890a7-3"
 ```
 
 ### 4. Commit and push
@@ -99,67 +120,20 @@ profile_index = pl.read_csv(INDEX_FILE)
 # ... continue with scripts/11_retrieve_profiles.py workflow
 ```
 
-## Understanding Your Files
-
-Your processed profiles follow this naming pattern:
-```
-profiles_{pipeline_steps}.parquet
-```
-
-For example:
-- `profiles_var_mad_int_featselect_harmony.parquet` - fully processed with batch correction
-- `profiles_var_mad_outlier.parquet` - interpretable version without transformations
-
-Include both versions in your manifest when relevant.
-
-## Making Your Processing Traceable
-
-Your manifest URLs should follow the same structure as the main JUMP datasets to ensure full reproducibility. This allows others to trace back exactly how your profiles were generated.
-
-### URL Structure Pattern
-
-Following the [JUMP dataset convention](../scripts/11_retrieve_profiles.py), your URLs should encode:
-
-```
-https://s3.amazonaws.com/bucket/project/profiles/jump-profiling-recipe_YEAR_COMMIT/SUBSET/pipeline_directory/filename.parquet
-```
-
-**Components:**
-- `jump-profiling-recipe_2024_a1b2c3d` - Tool name, year, and commit hash
-- `SUBSET/` - Data type (COMPOUND, ORF, CRISPR, etc.)
-- `pipeline_directory/` - The exact pipeline string used
-- `filename.parquet` - Final output file
-
-### How Others Can Reproduce Your Processing
-
-With this URL structure, anyone can:
-
-1. **Extract the commit**: `jump-profiling-recipe_2024_a1b2c3d` → commit `a1b2c3d`
-2. **Extract the pipeline**: `profiles_var_mad_int_featselect_harmony` 
-3. **Find the config**: Check `inputs/config/` in jump-profiling-recipe at that commit
-4. **Match the pipeline**: Find the config file where `"pipeline"` matches your string
-
-### Save Your Configuration
-
-Along with your manifest, save the exact configuration used:
-
-```bash
-# In your project repo
-mkdir -p processing_configs
-cp /path/to/jump-profiling-recipe/inputs/config/your_config.json processing_configs/
-git add processing_configs/your_config.json manifests/profile_index.csv
-```
-
-This ensures complete reproducibility of your processing pipeline.
-
 ## Tips
 
-- **Follow URL conventions**: Use the structured path format with commit information
-- **Save your config**: Include the exact jump-profiling-recipe config in your repo
 - **Multiple versions**: Include both standard and interpretable versions when relevant
-- **Document processing**: Add a README explaining your pipeline choices and parameters
+- **Document processing**: Add a README explaining your pipeline choices and parameters  
 - **Version everything**: Tag your repository when you update profiles or manifests
-- **Cross-reference**: Link to the specific commit and config used in your documentation
+- **Multiple data types**: You can include ORF, CRISPR, and compound data in the same manifest
+
+## Troubleshooting
+
+**403 Forbidden when accessing S3**: Check that your files have `--acl public-read` permissions
+
+**ETag mismatch**: Re-fetch the ETag after any file updates
+
+**Pipeline not found**: Ensure your pipeline string matches available rules in jump-profiling-recipe
 
 ## Example Projects
 
