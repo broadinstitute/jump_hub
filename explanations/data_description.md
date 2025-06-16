@@ -4,7 +4,7 @@
 
 This collection comprises 4 datasets:
 
-- Principal dataset (`cpg0016`): 116k chemical and \~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells  
+- Principal dataset (`cpg0016`): 116k chemical and \~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells. This includes JUMP-ORF, JUMP-CRISPR, and JUMP-compounds  
 - 3 pilot datasets testing:  
   - Different perturbation conditions (`cpg0000-jump-pilot`, including different cell types)  
   - Staining conditions (`cpg0001-cellpainting-protocol`)  
@@ -95,7 +95,7 @@ From 12 sources (data-generating centers):
    You can find the profile : https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv
 
    - Parquet tables in which profiles were preprocessed with varying optimized pipelines.
-   - The "Interpretable" tables means that they are processed to the point where features retain their original mapping from the original features' names (relating to size, shape, intensity, etc.). 
+   - The "Interpretable" tables means that they are processed to the point where features retain their original mapping from the original features' names (relating to size, shape, intensity, etc.). In other words, the batch correction step transforms features into a new space so that they no longer reflect their original meanings, so the "Interpretable" profiles are those just before this step. They will not be optimally aligned, but they will still have the original feature meanings.
 
 
 
