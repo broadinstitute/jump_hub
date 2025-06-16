@@ -37,7 +37,7 @@ import polars as pl
 #
 # Each dataset is available in two processing versions:
 #
-# - **Standard** (e.g., `crispr`, `compound`, `orf`): Fully processed including batch correction steps. **Recommended for most analyses** as they provide better cross-dataset comparability and have undergone additional quality control.
+# - **Standard** (e.g., `crispr`, `compound`, `orf`): Fully processed including batch correction steps. **Recommended for most analyses** as they provide better cross-dataset comparability.
 #
 # - **Interpretable** (e.g., `crispr_interpretable`, `compound_interpretable`, `orf_interpretable`): Same initial processing but without batch correction transformations that modify the original feature space. Use these when you need to interpret individual morphological features or understand the biological meaning of specific measurements.
 #
