@@ -1,13 +1,13 @@
 #!/usr/bin/env jupyter
 # ---
-# title: Query information of genes
+# title: Query genes for more info
 # jupyter:
 #   jupytext:
 #     text_representation:
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.16.4
+#       jupytext_version: 1.17.2
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -58,9 +58,9 @@ for id_ in ids.values():
     stream = Entrez.esummary(db="gene", id=id_)
     record = Entrez.read(stream)
 
-    entries.append(
-        {k: record["DocumentSummarySet"]["DocumentSummary"][0][k] for k in fields}
-    )
+    entries.append({
+        k: record["DocumentSummarySet"]["DocumentSummary"][0][k] for k in fields
+    })
 
 # %%
 # Show the resultant information in a human-readable format

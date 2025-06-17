@@ -1,12 +1,12 @@
 # ---
-# title: Plot all channels for one site
+# title: Display perturbation images
 # jupyter:
 #   jupytext:
 #     text_representation:
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.16.4
+#       jupytext_version: 1.17.2
 #   kernelspec:
 #     display_name: randompython
 #     language: python
