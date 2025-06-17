@@ -4,7 +4,7 @@
 
 This collection comprises 4 datasets:
 
-- Principal dataset (`cpg0016`): 116k chemical and \~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells  
+- Principal dataset (`cpg0016`): 116k chemical and \~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells. This includes JUMP-ORF, JUMP-CRISPR, and JUMP-compounds  
 - 3 pilot datasets testing:  
   - Different perturbation conditions (`cpg0000-jump-pilot`, including different cell types)  
   - Staining conditions (`cpg0001-cellpainting-protocol`)  
@@ -19,15 +19,16 @@ This collection comprises 4 datasets:
 ### Perturbation Types in cpg0016
 
 - **Genetic Perturbations:**  
-  - CRISPR knockdowns of 7,977 genes (pooled guides targeting each gene are arrayed into plates)  
-  - ORF (overexpression) reagents for 15,131 unique genes, with some overlap with CRISPR targets  
+  - CRISPR knockdowns of \~8k genes (pooled guides targeting each gene are arrayed into plates)  
+  - ORF (overexpression) reagents for \~12k unique genes, with \~5k that overlap with CRISPR targets
+ 
+  Do note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.
+  
 - **Chemical Perturbations:**  
   - Partners exchanged \~115,795 compounds  
   - \~5 replicates of each compound  
   - Performed as 1-2 replicates at 3-5 different sites globally  
     
-
-  Do note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.
 
 ### Control Sets of genes and compounds
 
@@ -92,10 +93,10 @@ From 12 sources (data-generating centers):
    
 
 4. **Index **
-   You can find the profile : https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv
+   You can find the profile index [here](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv)
 
    - Parquet tables in which profiles were preprocessed with varying optimized pipelines.
-   - The "Interpretable" tables means that they are processed to the point where features retain their original mapping from the original features' names (relating to size, shape, intensity, etc.). 
+   - The "Interpretable" tables means that they are processed to the point where features retain their original mapping from the original features' names (relating to size, shape, intensity, etc.). In other words, the batch correction step transforms features into a new space so that they no longer reflect their original meanings, so the "Interpretable" profiles are those just before this step. They will not be optimally aligned, but they will still have the original feature meanings.
 
 
 
