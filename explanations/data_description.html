@@ -475,7 +475,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="dataset-collection">Dataset Collection</h2>
 <p>This collection comprises 4 datasets:</p>
 <ul>
-<li>Principal dataset (<code>cpg0016</code>): 116k chemical and ~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells<br>
+<li>Principal dataset (<code>cpg0016</code>): 116k chemical and ~22k gene perturbations, split across 12 data-generating centers using human U2OS osteosarcoma cells. This includes JUMP-ORF, JUMP-CRISPR, and JUMP-compounds<br>
 </li>
 <li>3 pilot datasets testing:
 <ul>
@@ -498,22 +498,21 @@ ul.task-list li input[type="checkbox"] {
 <section id="perturbation-types-in-cpg0016" class="level3">
 <h3 class="anchored" data-anchor-id="perturbation-types-in-cpg0016">Perturbation Types in cpg0016</h3>
 <ul>
-<li><strong>Genetic Perturbations:</strong>
+<li><p><strong>Genetic Perturbations:</strong></p>
 <ul>
-<li>CRISPR knockdowns of 7,977 genes (pooled guides targeting each gene are arrayed into plates)<br>
+<li>CRISPR knockdowns of ~8k genes (pooled guides targeting each gene are arrayed into plates)<br>
 </li>
-<li>ORF (overexpression) reagents for 15,131 unique genes, with some overlap with CRISPR targets<br>
-</li>
-</ul></li>
-<li><strong>Chemical Perturbations:</strong>
+<li>ORF (overexpression) reagents for ~12k unique genes, with ~5k that overlap with CRISPR targets</li>
+</ul>
+<p>Do note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.</p></li>
+<li><p><strong>Chemical Perturbations:</strong></p>
 <ul>
 <li>Partners exchanged ~115,795 compounds<br>
 </li>
 <li>~5 replicates of each compound<br>
 </li>
 <li>Performed as 1-2 replicates at 3-5 different sites globally</li>
-</ul>
-Do note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.</li>
+</ul></li>
 </ul>
 </section>
 <section id="control-sets-of-genes-and-compounds" class="level3">
@@ -591,10 +590,10 @@ Do note that these numbers were based on JUMP Cell Painting IDs and there may be
 </li>
 <li>Well-aggregated profiles after feature selection applied</li>
 </ul></li>
-<li><p><strong>Index </strong> You can find the profile : https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv</p>
+<li><p><strong>Index </strong> You can find the profile index <a href="https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv">here</a></p>
 <ul>
 <li>Parquet tables in which profiles were preprocessed with varying optimized pipelines.</li>
-<li>The “Interpretable” tables means that they are processed to the point where features retain their original mapping from the original features’ names (relating to size, shape, intensity, etc.).</li>
+<li>The “Interpretable” tables means that they are processed to the point where features retain their original mapping from the original features’ names (relating to size, shape, intensity, etc.). In other words, the batch correction step transforms features into a new space so that they no longer reflect their original meanings, so the “Interpretable” profiles are those just before this step. They will not be optimally aligned, but they will still have the original feature meanings.</li>
 </ul></li>
 <li><p><strong>Processed JUMP reference tables (JUMP_rr tables)</strong> <a href="https://zenodo.org/records/14046034">This</a> dataset provides multiple precomputed analysis tables to make JUMP data exploration accessible:</p></li>
 </ol>
