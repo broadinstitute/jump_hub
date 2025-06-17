@@ -2,7 +2,7 @@
 
 Have custom-processed JUMP profiles? Here's how to share them with others.
 
-**Note**: This guide describes the recommended approach for new projects. Some existing datasets may use different URL structures with metadata embedded in paths.
+**Note**: This guide describes the recommended approach for new projects. Some existing datasets may use different URL structures with metadata embedded in paths. While existing JUMP manifests use CSV format, we now recommend JSON for new projects due to its flexibility and structure.
 
 ## Prerequisites
 
@@ -15,14 +15,14 @@ Have custom-processed JUMP profiles? Here's how to share them with others.
 Store your processed profiles using semantic paths with versioning metadata tracked in the manifest:
 
 ```
-https://s3.amazonaws.com/bucket/project/data/subset/version/profiles.parquet
+https://s3.amazonaws.com/bucket/project/source_all/workspace/profiles/subset/version/pipeline_filename.parquet
 ```
 
 **Components:**
-- `data/` - Indicates processed profile data
+- `source_all/workspace/profiles/` - Standard JUMP dataset path structure
 - `subset/` - Data description (compound_no_source7, orf_combined, crispr, etc.)
 - `version/` - Dataset version (v1.0, v1.1, v2.0, etc.)
-- `profiles.parquet` - Standard filename for processed profiles
+- `pipeline_filename.parquet` - Filename preserves the pipeline string (e.g., `profiles_var_mad_int_featselect_harmony.parquet`)
 
 **Approach:**
 - **Semantic paths** organize data by subset and version for easy navigation
@@ -33,60 +33,40 @@ https://s3.amazonaws.com/bucket/project/data/subset/version/profiles.parquet
 **Provenance Tracking:**
 Processing details (recipe version, config, commit) are captured in the manifest using GitHub permalinks that provide permanent links to the exact code and configuration used.
 
-## Working Example
-
-Here's a complete example:
-
-**Repository Setup:**
-- Project repo: `jump-cellpainting/2024_Chandrasekaran_Production`
-- Processing repo: `broadinstitute/jump-profiling-recipe` at commit `598189f`
-- Config used: `inputs/config/compound.json`
-
-**S3 URLs:**
-```
-# Final processed version (v1.0)
-https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7/v1.0/profiles.parquet
-
-# Interpretable version (v1.0)  
-https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7_interpretable/v1.0/profiles.parquet
-```
-
-**Manifest with provenance:**
-```csv
-"subset","url","etag","recipe_permalink","config_permalink"
-"compound_no_source7","https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7/v1.0/profiles.parquet","35cb79ad41b1a4eb9afeab0d90035dfa-330","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
-"compound_no_source7_interpretable","https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7_interpretable/v1.0/profiles.parquet","3ece1cc202c4a2190e84a95a2dd2d6b3-418","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
-```
-
 ## Steps
+
+We'll walk through creating a manifest for the 2024_Chandrasekaran_Production project as an example.
 
 ### 1. Upload to S3
 
 Upload your profiles using semantic paths:
 
 ```bash
-# Get commit hash from your jump-profiling-recipe for provenance tracking
-cd /path/to/jump-profiling-recipe
-COMMIT=$(git rev-parse --short HEAD)
-echo "Using commit: $COMMIT"
+# Note the version/commit of jump-profiling-recipe used
+# For the Chandrasekaran example, we used v0.6.0
 
-# Set variables for your specific case
-SUBSET="compound_no_source7"  # Descriptive name for your data 
-VERSION="v1.0"  # Dataset version (v1.0, v1.1, etc.)
+# Set variables for the Chandrasekaran example
+SUBSET="compound_no_source7"  # Descriptive name for this data subset
+VERSION="v1.0"  # Dataset version 
+PROFILES_FILE="profiles_var_mad_int_featselect_harmony.parquet"  # Final processed profiles
+INTERPRETABLE_PROFILES_FILE="profiles_var_mad_int_featselect.parquet"  # Interpretable profiles
 
-# Upload to semantic path:
-aws s3 cp /path/to/your/profiles.parquet \
-  s3://your-bucket/your-project/data/${SUBSET}/${VERSION}/profiles.parquet
+# Upload to semantic paths:
+aws s3 cp /path/to/${PROFILES_FILE} \
+  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/${PROFILES_FILE}
 
-# For interpretable version (if you have both files):
-aws s3 cp /path/to/your/profiles_interpretable.parquet \
-  s3://your-bucket/your-project/data/${SUBSET}_interpretable/${VERSION}/profiles.parquet
+aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
+  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
 
 # Verify upload succeeded
-aws s3 ls s3://your-bucket/your-project/data/ --recursive --human-readable
+aws s3 ls s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/ --recursive --human-readable
 ```
 
-**Note:** Replace `/path/to/your/` with your actual file location, `your-bucket` and `your-project` with your actual S3 bucket and project names.
+This creates the final URLs:
+```
+https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet
+https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet
+```
 
 ### 2. Create manifest in your project repo
 
@@ -96,82 +76,83 @@ In your project repository, create the directory structure:
 mkdir -p manifests
 ```
 
-Create `manifests/profile_index.csv` with GitHub permalinks for provenance:
+Create `manifests/profile_index.json` for the Chandrasekaran example:
 
-```csv
-"subset","url","etag","recipe_permalink","config_permalink"
-"compound_no_source7","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7/v1.0/profiles.parquet","","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
-"compound_no_source7_interpretable","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7_interpretable/v1.0/profiles.parquet","","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
+```json
+{
+    "datasets": [
+        {
+            "subset": "compound_no_source7",
+            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
+            "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
+            "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
+            "etag": ""
+        },
+        {
+            "subset": "compound_no_source7_interpretable",
+            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet",
+            "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
+            "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
+            "etag": ""
+        }
+    ]
+}
 ```
 
-**Replace with your values:**
-- `your-bucket/your-project` - Your actual S3 bucket and project names
-- `598189f` - Your actual commit hash from Step 1
-- `compound.json` - Your actual config file used
-- `compound_no_source7` - Your actual subset name
+The permalinks provide complete provenance - linking to the exact recipe version and config file used.
 
 ### 3. Add ETags for data integrity
 
 ETags are checksums that ensure data integrity when downloading:
 
 ```bash
-# Get ETag for each file (replace with your actual URLs)
-curl -I https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7/v1.0/profiles.parquet | grep ETag
+# Get ETag for each file
+curl -I https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet | grep ETag
 
 # Example output: 
-# ETag: "d41d8cd98f00b204e9800998ecf8427e-1"
+# ETag: "35cb79ad41b1a4eb9afeab0d90035dfa-330"
 ```
 
-Update your CSV with the ETag values:
-
-```csv
-"subset","url","etag","recipe_permalink","config_permalink"
-"compound_no_source7","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7/v1.0/profiles.parquet","d41d8cd98f00b204e9800998ecf8427e-1","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
-"compound_no_source7_interpretable","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7_interpretable/v1.0/profiles.parquet","a71b2c3d4e5f6789abcdef1234567890-2","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
-```
+Insert the ETag values into your JSON manifest from Step 2.
 
 ### 4. Commit and push
 
 ```bash
-git add manifests/profile_index.csv
+git add manifests/profile_index.json
 git commit -m "Add profile manifest"
 git push
 ```
 
 ### 5. Use your manifest
 
-Now anyone can use your profiles with full provenance tracking:
+Your Chandrasekaran project manifest is now ready for use:
 
 ```python
 # In any analysis script
-import polars as pl
+import requests
 
-INDEX_FILE = "https://raw.githubusercontent.com/your-org/your-project/main/manifests/profile_index.csv"
-profile_index = pl.read_csv(INDEX_FILE)
+INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/2024_Chandrasekaran_Production/main/manifests/profile_index.json"
+manifest = requests.get(INDEX_FILE).json()
 
-# Users can now access both data and provenance:
-# - profile_index["url"] - Data URLs
-# - profile_index["recipe_permalink"] - Exact processing code
-# - profile_index["config_permalink"] - Exact configuration used
+# Access data and provenance for each dataset:
+for dataset in manifest["datasets"]:
+    print(dataset["subset"], dataset["url"])
+    # dataset["recipe_permalink"] - Exact processing code
+    # dataset["config_permalink"] - Exact configuration used
 
 # Continue with standard retrieval process
 # ... follow scripts/11_retrieve_profiles.py workflow
 ```
 
-**Benefits for users:**
-- **Organized URLs** - structured by subset and version for easy navigation
-- **Complete reproducibility** - permalinks to exact code and config
-- **Version tracking** - can identify dataset versions  
-- **Permanent links** - GitHub permalinks never change
+This provides complete reproducibility while organizing data by subset and version.
 
 ## Example Projects
 
 See these projects for reference:
-- [Main JUMP datasets](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv) - the standard pattern
-- [2024_Chandrasekaran_Production](https://github.com/jump-cellpainting/2024_Chandrasekaran_Production/blob/main/manifests/profile_index.csv) - compound data example
-- Your project manifest will follow the same structure
+- [Main JUMP datasets](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv) - uses CSV format (legacy)
+- [2024_Chandrasekaran_Production](https://github.com/jump-cellpainting/2024_Chandrasekaran_Production/blob/main/manifests/profile_index.json) - uses JSON format (recommended)
 
-Compare your manifest format to these examples to ensure compatibility.
+Note: Existing projects may still use CSV format. New projects should use JSON as shown in this guide.
 
 ## Need to Process Data First?
 
