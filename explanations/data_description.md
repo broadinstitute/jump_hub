@@ -19,8 +19,8 @@ This collection comprises 4 datasets:
 ### Perturbation Types in cpg0016
 
 - **Genetic Perturbations:**  
-  - CRISPR knockdowns of 7,977 genes (pooled guides targeting each gene are arrayed into plates)  
-  - ORF (overexpression) reagents for 15,131 unique genes, with some overlap with CRISPR targets
+  - CRISPR knockdowns of \~8k genes (pooled guides targeting each gene are arrayed into plates)  
+  - ORF (overexpression) reagents for \~12k unique genes, with \~5k that overlap with CRISPR targets
  
   Do note that these numbers were based on JUMP Cell Painting IDs and there may be some minor duplication of genes.
   
