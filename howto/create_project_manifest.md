@@ -2,100 +2,88 @@
 
 Have custom-processed JUMP profiles? Here's how to share them with others.
 
+**Note**: This guide describes the recommended approach for new projects. Some existing datasets may use different URL structures with metadata embedded in paths.
+
 ## Prerequisites
 
 - Processed profiles from [jump-profiling-recipe](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md)
 - AWS CLI configured (for S3 upload)
 - A GitHub repository for your project
 
-## URL Structure for Reproducibility
+## URL Structure with Manifest-Based Provenance
 
-Your manifest URLs should follow the JUMP dataset convention with workspace nesting:
+Store your processed profiles using semantic paths with versioning metadata tracked in the manifest:
 
 ```
-https://s3.amazonaws.com/bucket/project/source_all/workspace/profiles/FORK_jump-profiling-recipe_YEAR_COMMIT/SUBSET/pipeline_directory/filename.parquet
+https://s3.amazonaws.com/bucket/project/data/subset/version/profiles.parquet
 ```
 
 **Components:**
-- `FORK_jump-profiling-recipe_YEAR_COMMIT` - Fork owner, tool name, year, and commit hash
-- `SUBSET/` - Data description (COMPOUND, ORF, CRISPR, compound_no_source7, orf_combined, etc.)
-- `pipeline_directory/` - The exact pipeline string used
-- `filename.parquet` - Final output file (may differ from pipeline name)
+- `data/` - Indicates processed profile data
+- `subset/` - Data description (compound_no_source7, orf_combined, crispr, etc.)
+- `version/` - Dataset version (v1.0, v1.1, v2.0, etc.)
+- `profiles.parquet` - Standard filename for processed profiles
 
-**Important:** The pipeline directory name and actual filename may differ:
-- Pipeline directory: `profiles_var_mad_int_featselect_harmony`
-- Harmony file: `profiles_var_mad_int_featselect_harmony.parquet`  
-- Interpretable file: `profiles_var_mad_int_featselect.parquet`
+**Approach:**
+- **Semantic paths** organize data by subset and version for easy navigation
+- **Independent versioning** allows you to version different subsets separately
+- **Manifest-based provenance** captures all processing details without embedding them in paths
+- **GitHub permalinks** provide permanent references to exact code and configuration
 
-This allows others to:
-1. Extract the fork and commit: `username_jump-profiling-recipe_2024_a1b2c3d` → `username/jump-profiling-recipe` at commit `a1b2c3d`
-2. Extract the pipeline: `profiles_var_mad_int_featselect_harmony`
-3. Find the config: Check `inputs/config/` in that specific fork at that commit
-4. Match the pipeline: Find the config file where `"pipeline"` matches your string
+**Provenance Tracking:**
+Processing details (recipe version, config, commit) are captured in the manifest using GitHub permalinks that provide permanent links to the exact code and configuration used.
 
 ## Working Example
 
-Here's a complete example from the 2024_Chandrasekaran_Production project:
+Here's a complete example:
 
 **Repository Setup:**
 - Project repo: `jump-cellpainting/2024_Chandrasekaran_Production`
 - Processing repo: `broadinstitute/jump-profiling-recipe` at commit `598189f`
-- Data type: Compound profiles without source 7
+- Config used: `inputs/config/compound.json`
 
-**Variables:**
-```bash
-FORK_OWNER="broadinstitute"
-COMMIT="598189f" 
-YEAR="2024"
-SUBSET="compound_no_source7"  # Descriptive name for this specific dataset
-PIPELINE="profiles_var_mad_int_featselect_harmony"
+**S3 URLs:**
+```
+# Final processed version (v1.0)
+https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7/v1.0/profiles.parquet
+
+# Interpretable version (v1.0)  
+https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7_interpretable/v1.0/profiles.parquet
 ```
 
-**Final S3 URLs:**
-```
-# Final processed version
-https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/jump-profiling-recipe_2024_598189f/compound_no_source7/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet
-
-# Interpretable version  
-https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/jump-profiling-recipe_2024_598189f/compound_no_source7/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect.parquet
-```
-
-**Final manifest:**
+**Manifest with provenance:**
 ```csv
-"subset","url","etag"
-"compound_no_source7","https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/jump-profiling-recipe_2024_598189f/compound_no_source7/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet","35cb79ad41b1a4eb9afeab0d90035dfa-330"
-"compound_no_source7_interpretable","https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/jump-profiling-recipe_2024_598189f/compound_no_source7/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect.parquet","3ece1cc202c4a2190e84a95a2dd2d6b3-418"
+"subset","url","etag","recipe_permalink","config_permalink"
+"compound_no_source7","https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7/v1.0/profiles.parquet","35cb79ad41b1a4eb9afeab0d90035dfa-330","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
+"compound_no_source7_interpretable","https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/data/compound_no_source7_interpretable/v1.0/profiles.parquet","3ece1cc202c4a2190e84a95a2dd2d6b3-418","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
 ```
 
 ## Steps
 
 ### 1. Upload to S3
 
-Make your profiles publicly accessible using a structured path that includes processing provenance:
+Upload your profiles using semantic paths:
 
 ```bash
-# Get the fork owner and commit hash from your jump-profiling-recipe
+# Get commit hash from your jump-profiling-recipe for provenance tracking
 cd /path/to/jump-profiling-recipe
-FORK_OWNER=$(git remote get-url origin | sed 's/.*github\.com[:/]\([^/]*\)\/.*/\1/')  # Extract GitHub username
 COMMIT=$(git rev-parse --short HEAD)
-echo "Using fork: $FORK_OWNER, commit: $COMMIT"
+echo "Using commit: $COMMIT"
 
 # Set variables for your specific case
-YEAR=$(date +%Y)  # Current year, or use the year you processed the data
 SUBSET="compound_no_source7"  # Descriptive name for your data 
-PIPELINE="profiles_var_mad_int_featselect_harmony"  # Your actual pipeline string
+VERSION="v1.0"  # Dataset version (v1.0, v1.1, etc.)
 
-# Upload to workspace path (cellpainting-gallery pattern):
-aws s3 cp /path/to/your/${PIPELINE}.parquet \
-  s3://your-bucket/your-project/source_all/workspace/profiles/jump-profiling-recipe_${YEAR}_${COMMIT}/${SUBSET}/${PIPELINE}/${PIPELINE}.parquet
+# Upload to semantic path:
+aws s3 cp /path/to/your/profiles.parquet \
+  s3://your-bucket/your-project/data/${SUBSET}/${VERSION}/profiles.parquet
 
 # For interpretable version (if you have both files):
-INTERPRETABLE_FILE="profiles_var_mad_int_featselect.parquet"  # Adjust filename as needed
-aws s3 cp /path/to/your/${INTERPRETABLE_FILE} \
-  s3://your-bucket/your-project/source_all/workspace/profiles/jump-profiling-recipe_${YEAR}_${COMMIT}/${SUBSET}/${PIPELINE}/${INTERPRETABLE_FILE}
+aws s3 cp /path/to/your/profiles_interpretable.parquet \
+  s3://your-bucket/your-project/data/${SUBSET}_interpretable/${VERSION}/profiles.parquet
 
 # Verify upload succeeded
-aws s3 ls s3://your-bucket/your-project/ --recursive --human-readable | grep ${COMMIT}
+aws s3 ls s3://your-bucket/your-project/data/ --recursive --human-readable
 ```
 
 **Note:** Replace `/path/to/your/` with your actual file location, `your-bucket` and `your-project` with your actual S3 bucket and project names.
@@ -108,15 +96,19 @@ In your project repository, create the directory structure:
 mkdir -p manifests
 ```
 
-Create `manifests/profile_index.csv` (replace with your actual URLs from Step 1):
+Create `manifests/profile_index.csv` with GitHub permalinks for provenance:
 
 ```csv
-"subset","url","etag"
-"compound","https://s3.amazonaws.com/your-bucket/your-project/source_all/workspace/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet",""
-"compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/source_all/workspace/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect.parquet",""
+"subset","url","etag","recipe_permalink","config_permalink"
+"compound_no_source7","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7/v1.0/profiles.parquet","","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
+"compound_no_source7_interpretable","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7_interpretable/v1.0/profiles.parquet","","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
 ```
 
-**Note**: Replace `username_jump-profiling-recipe_2024_a1b2c3d` with your actual fork owner, year and commit hash, `COMPOUND` with your data description (can be any descriptive name like `compound_subset1`, `orf_combined`, etc.), and the pipeline strings with your actual processing pipeline.
+**Replace with your values:**
+- `your-bucket/your-project` - Your actual S3 bucket and project names
+- `598189f` - Your actual commit hash from Step 1
+- `compound.json` - Your actual config file used
+- `compound_no_source7` - Your actual subset name
 
 ### 3. Add ETags for data integrity
 
@@ -124,7 +116,7 @@ ETags are checksums that ensure data integrity when downloading:
 
 ```bash
 # Get ETag for each file (replace with your actual URLs)
-curl -I https://s3.amazonaws.com/your-bucket/your-project/.../your-file.parquet | grep ETag
+curl -I https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7/v1.0/profiles.parquet | grep ETag
 
 # Example output: 
 # ETag: "d41d8cd98f00b204e9800998ecf8427e-1"
@@ -133,10 +125,9 @@ curl -I https://s3.amazonaws.com/your-bucket/your-project/.../your-file.parquet 
 Update your CSV with the ETag values:
 
 ```csv
-"subset","url","etag"
-"compound","https://s3.amazonaws.com/your-bucket/your-project/source_all/workspace/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet","d41d8cd98f00b204e9800998ecf8427e-1"
-"compound_interpretable","https://s3.amazonaws.com/your-bucket/your-project/source_all/workspace/profiles/username_jump-profiling-recipe_2024_a1b2c3d/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet","a71b2c3d4e5f6789abcdef1234567890-2"
-"orf","https://s3.amazonaws.com/your-bucket/your-project/source_all/workspace/profiles/username_jump-profiling-recipe_2024_a1b2c3d/ORF/profiles_wellpos_cc_var_mad_outlier_featselect/profiles_wellpos_cc_var_mad_outlier_featselect.parquet","b82c3d4e5f6789abcdef1234567890a7-3"
+"subset","url","etag","recipe_permalink","config_permalink"
+"compound_no_source7","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7/v1.0/profiles.parquet","d41d8cd98f00b204e9800998ecf8427e-1","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
+"compound_no_source7_interpretable","https://s3.amazonaws.com/your-bucket/your-project/data/compound_no_source7_interpretable/v1.0/profiles.parquet","a71b2c3d4e5f6789abcdef1234567890-2","https://github.com/broadinstitute/jump-profiling-recipe/tree/598189f","https://github.com/broadinstitute/jump-profiling-recipe/blob/598189f/inputs/config/compound.json"
 ```
 
 ### 4. Commit and push
@@ -149,17 +140,29 @@ git push
 
 ### 5. Use your manifest
 
-Now anyone can use your profiles:
+Now anyone can use your profiles with full provenance tracking:
 
 ```python
 # In any analysis script
-INDEX_FILE = "https://raw.githubusercontent.com/your-org/your-project/main/manifests/profile_index.csv"
-
-# Then use the standard retrieval process
 import polars as pl
+
+INDEX_FILE = "https://raw.githubusercontent.com/your-org/your-project/main/manifests/profile_index.csv"
 profile_index = pl.read_csv(INDEX_FILE)
-# ... continue with scripts/11_retrieve_profiles.py workflow
+
+# Users can now access both data and provenance:
+# - profile_index["url"] - Data URLs
+# - profile_index["recipe_permalink"] - Exact processing code
+# - profile_index["config_permalink"] - Exact configuration used
+
+# Continue with standard retrieval process
+# ... follow scripts/11_retrieve_profiles.py workflow
 ```
+
+**Benefits for users:**
+- **Organized URLs** - structured by subset and version for easy navigation
+- **Complete reproducibility** - permalinks to exact code and config
+- **Version tracking** - can identify dataset versions  
+- **Permanent links** - GitHub permalinks never change
 
 ## Example Projects
 
