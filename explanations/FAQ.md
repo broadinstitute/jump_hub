@@ -32,7 +32,8 @@ Some genetic and chemical perturbations are positive or negative controls (see n
 
 You can find all positive and negative controls for JUMP-ORF, -CRISPR, and -compound [here](https://lite.datasette.io/?url=https://zenodo.org/api/records/13255965/files/babel.db/content#/babel/babel?_filter_column=pert_type&_filter_op=contains&_filter_value=con&_sort=rowid).
 For the compounds dataset the only negative control is 'JCP2022_033924' (DMSO). 
-Most chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map ([issue](https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031)).
+<!-- Maintainer note: Details at https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031 -->
+Most chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map.
 
 ### Which pipelines produced the final datasets?
 
@@ -48,4 +49,5 @@ Sometimes, two compounds were given separate JCP IDs because they had different 
 
 ### Do JCP IDs within either the CRISPR or ORF datasets refer to the same gene?
 
-In CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here [(private github)](https://github.com/jump-cellpainting/morphmap/issues/178)).
+<!-- Maintainer note: Technical analysis at https://github.com/jump-cellpainting/morphmap/issues/178 -->
+In CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level by aggregating profiles by `Metadata_NCBI_Gene_ID` rather than by `Metadata_JCP2022`. This approach was selected after testing six different consensus strategies and evaluating their performance using phenotypic activity metrics.
