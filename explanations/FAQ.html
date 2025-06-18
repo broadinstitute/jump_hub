@@ -491,7 +491,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="what-are-the-identifiers-for-positive-and-negative-controls" class="level3">
 <h3 class="anchored" data-anchor-id="what-are-the-identifiers-for-positive-and-negative-controls">What are the identifiers for positive and negative controls?</h3>
-<p>You can find all positive and negative controls for JUMP-ORF, -CRISPR, and -compound <a href="https://lite.datasette.io/?url=https://zenodo.org/api/records/13255965/files/babel.db/content#/babel/babel?_filter_column=pert_type&amp;_filter_op=contains&amp;_filter_value=con&amp;_sort=rowid">here</a>. For the compounds dataset the only negative control is ‘JCP2022_033924’ (DMSO). Most chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map (<a href="https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031">issue</a>).</p>
+<p>You can find all positive and negative controls for JUMP-ORF, -CRISPR, and -compound <a href="https://lite.datasette.io/?url=https://zenodo.org/api/records/13255965/files/babel.db/content#/babel/babel?_filter_column=pert_type&amp;_filter_op=contains&amp;_filter_value=con&amp;_sort=rowid">here</a>. For the compounds dataset the only negative control is ‘JCP2022_033924’ (DMSO). <!-- Maintainer note: Details at https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031 --> Most chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map.</p>
 </section>
 <section id="which-pipelines-produced-the-final-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="which-pipelines-produced-the-final-datasets">Which pipelines produced the final datasets?</h3>
@@ -507,7 +507,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="do-jcp-ids-within-either-the-crispr-or-orf-datasets-refer-to-the-same-gene" class="level3">
 <h3 class="anchored" data-anchor-id="do-jcp-ids-within-either-the-crispr-or-orf-datasets-refer-to-the-same-gene">Do JCP IDs within either the CRISPR or ORF datasets refer to the same gene?</h3>
-<p>In CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level (more info here <a href="https://github.com/jump-cellpainting/morphmap/issues/178">(private github)</a>).</p>
+<!-- Maintainer note: Technical analysis at https://github.com/jump-cellpainting/morphmap/issues/178 -->
+<p>In CRISPR, each JCP ID corresponds to a different gene. But in ORF there are frequently multiple reagents representing the same gene. In this case, we compute consensus profiles at the gene level by aggregating profiles by <code>Metadata_NCBI_Gene_ID</code> rather than by <code>Metadata_JCP2022</code>. This approach was selected after testing six different consensus strategies and evaluating their performance using phenotypic activity metrics.</p>
 
 
 </section>
