@@ -1,4 +1,4 @@
-# Chemical Compounds in JUMP
+# Available chemicals in JUMP
 For a given compound, find its JUMP id or its most similar equivalent. It may take a few seconds to load.
 
 The similarity is calculated using the Jaccard index between the query's PubChem fingerprints and all the JUMP compounds available on PubChem.

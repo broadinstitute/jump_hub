@@ -1,5 +1,6 @@
 #!/usr/bin/env jupyter
 # ---
+# title: Available genes in JUMP
 # jupyter:
 #   jupytext:
 #     text_representation:
@@ -14,7 +15,6 @@
 # ---
 
 # %% [markdown]
-# # Available genes
 # Is my gene of interest in JUMP or other associated tables? We provide a [tutorial](https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations) with details.
 # %%
 # | code-fold: true
