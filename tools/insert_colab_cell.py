@@ -15,16 +15,14 @@ def insert_deps_cell(filepath: Path, out_dir: Path):
         nb = nbformat.read(f, as_version=4)
 
     # Create a new cell with some content
-    new_cell = from_dict(
-        {
-            "cell_type": "code",
-            "execution_count": 0,
-            "metadata": {},
-            "outputs": [],
-            "source": "!pip install jump_deps",
-            "id": nb.cells[0]["id"][::-1],
-        }
-    )
+    new_cell = from_dict({
+        "cell_type": "code",
+        "execution_count": 0,
+        "metadata": {},
+        "outputs": [],
+        "source": "!pip install jump_deps",
+        "id": nb.cells[0]["id"][::-1],
+    })
     # Append the new cell to the notebook's cells list
     nb.cells.insert(1, new_cell)
 
@@ -37,7 +35,7 @@ def insert_deps_cell(filepath: Path, out_dir: Path):
 
 if __name__ == "__main__":
     # Load the notebook from a file
-    input_path = Path("howto")
+    input_path = Path("howto/notebooks")
     colab_dir = Path("colab")
     colab_dir.mkdir(exist_ok=True, parents=True)
 

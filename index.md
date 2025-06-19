@@ -10,12 +10,12 @@ What is the purpose of this website? To provide up-to-date info on everything JU
 
 1. Just exploring the data?
    
-   - Use a web interface; no programming required. You can look up images for a gene or compound, distinguishing features, most-similar genes or compounds, and more\! See the [Interactive Tools](./howto/0_howto_interactive_tools.md) page for instructions for these tools. 
+   - Use a web interface; no programming required. You can look up images for a gene or compound, distinguishing features, most-similar genes or compounds, and more\! See the [Interactive Tools](./howto/interactive/0_howto_interactive_tools.md) page for instructions for these tools. 
 
 
 2. Want to fetch and analyze data?
    
-   - Follow our [how-to guides](./howto/0_howto.md) for common analyses
+   - Follow our [how-to guides](./howto/notebooks/0_overview.md) for common analyses
 
 
 3. Looking to build tools?
