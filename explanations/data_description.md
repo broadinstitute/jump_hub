@@ -93,7 +93,7 @@ From 12 sources (data-generating centers):
    
 
 4. **Index **
-   You can find the profile index [here](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv)
+   You can find the profile index [here](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json)
 
    - Parquet tables in which profiles were preprocessed with varying optimized pipelines.
    - The "Interpretable" tables means that they are processed to the point where features retain their original mapping from the original features' names (relating to size, shape, intensity, etc.). In other words, the batch correction step transforms features into a new space so that they no longer reflect their original meanings, so the "Interpretable" profiles are those just before this step. They will not be optimally aligned, but they will still have the original feature meanings.
@@ -141,9 +141,9 @@ Many of the processed datasets and manifest files can be found associated with t
 
 ### Coming Soon
 
-- Extension of metadata and notebooks to pilots ([issue](https://github.com/jump-cellpainting/datasets-private/issues/93))
-- Curated compound annotations from ChEMBL ([issue](https://github.com/jump-cellpainting/datasets-private/issues/78))
-- Deep learning embeddings using pre-trained networks ([issue](https://github.com/jump-cellpainting/datasets-private/issues/50))
+- Extension of metadata and notebooks to pilots ([private issue](https://github.com/jump-cellpainting/datasets-private/issues/93))
+- Curated compound annotations from ChEMBL ([private issue](https://github.com/jump-cellpainting/datasets-private/issues/78))
+- Deep learning embeddings using pre-trained networks ([private issue](https://github.com/jump-cellpainting/datasets-private/issues/50))
 
 ### Quality Notes
 

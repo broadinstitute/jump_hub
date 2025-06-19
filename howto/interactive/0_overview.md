@@ -28,12 +28,12 @@ There are several no-code options for exploring JUMP data. These are very useful
 #### JUMP\_rr tools
 
  - A collection of online tables to explore, visualize and compare perturbations and their effects in cells.
- - Start with our step-by-step [tutorial](https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html)
+ - Start with our step-by-step [tutorial](https://broadinstitute.github.io/jump_hub/howto/interactive/1_jumprr_steps.html)
  - Links to the different JUMP\_rr tools are available on [this](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access) repository
  - In addition to the Graphical User Interface, you can also query using SQL.
 
 #### Perturbation availability tools
- - **[Gene availability](https://broadinstitute.github.io/jump_hub/reference/00_gene_index.html)**: Query this resource to find out if your gene of interest is available in the JUMP and other genetic-perturbation datasets. [Tutorial and details](https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations)
+ - **[Gene availability](https://broadinstitute.github.io/jump_hub/reference/00_gene_index.html)**: Query this resource to find out if your gene of interest is available in the JUMP and other genetic-perturbation datasets. [Tutorial and details](https://broadinstitute.github.io/jump_hub/howto/interactive/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations)
 
 - **[Compound availability](../../reference/01_chemical_query.md)**: Query this resource to find out if your chemical (or a highly similarly-structured one) is available in the JUMP dataset (using an InChiKey, JUMP ID, or common name for a chemical.
 

@@ -15,7 +15,7 @@
 # ---
 
 # %% [markdown]
-# Is my gene of interest in JUMP or other associated tables? We provide a [tutorial](https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations) with details.
+# Is my gene of interest in JUMP or other associated tables? We provide a [tutorial](https://broadinstitute.github.io/jump_hub/howto/interactive/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations) with details.
 # %%
 # | code-fold: true
 import polars as pl

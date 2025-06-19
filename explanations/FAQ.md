@@ -14,7 +14,7 @@ pip install jump-deps
 
 ### Does JUMP contain my compound/gene of interest?
 
-The easiest way to find out is to follow the instructions on the perturbation availability  [section](https://broadinstitute.github.io/jump_hub/howto/0_howto_interactive_tools.html#perturbation-availability). Alternatively, you can explore the [metadata tables](https://github.com/jump-cellpainting/datasets/tree/main/metadata) on the datasets repository, which are used to generate the explorable table.
+The easiest way to find out is to follow the instructions on the perturbation availability  [section](https://broadinstitute.github.io/jump_hub/howto/interactive/0_overview.html#perturbation-availability). Alternatively, you can explore the [metadata tables](https://github.com/jump-cellpainting/datasets/tree/main/metadata) on the datasets repository, which are used to generate the explorable table.
 
 ### Where are the datasets' specifications?
 
