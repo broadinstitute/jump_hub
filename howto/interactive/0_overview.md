@@ -1,4 +1,4 @@
-### Interactive Tools
+### Overview of Interactive tools
 
 There are several no-code options for exploring JUMP data. These are very useful for querying perturbations without needing experience in data analysis or programming. Detailed usage instructions are below this brief overview listing:
 

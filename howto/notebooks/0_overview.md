@@ -1,4 +1,4 @@
-# Notebooks overview
+# Overview of Notebooks
 
 You can use the sidebar on the left to find tutorials demoing the most common analyses, or click the links in the list below to run the guides directly only your browser in a Google Colab live coding environment.
 
