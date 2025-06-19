@@ -23,23 +23,42 @@
 import polars as pl
 
 # %% [markdown]
-# The JUMP Cell Painting project provides several processed datasets for morphological profiling:
+# ## JUMP Cell Painting Datasets & Recommendations
+#
+# The JUMP Cell Painting project provides several processed datasets for morphological profiling.
+# Choose the dataset that matches your perturbation type:
 #
 # - **`crispr`**: CRISPR knockout genetic perturbations
 # - **`orf`**: Open Reading Frame (ORF) overexpression perturbations
 # - **`compound`**: Chemical compound perturbations
-# - **`all`**: Combined dataset containing all perturbation types
+# - **`all`**: Combined dataset containing all perturbation types (use for cross-modality comparisons)
 #
-# Each dataset is available in two versions:
+# Each dataset is available in two processing versions:
 #
-# - **Standard**: Fully processed including batch correction
-# - **Interpretable**: Same processing but without batch correction steps (which involve transformations that lose the original feature space)
+# - **Standard** (e.g., `crispr`, `compound`, `orf`): Fully processed including batch correction steps. **Recommended for most analyses** as they provide better cross-dataset comparability.
+#
+# - **Interpretable** (e.g., `crispr_interpretable`, `compound_interpretable`, `orf_interpretable`): Same initial processing but without batch correction transformations that modify the original feature space. Use these when you need to interpret individual morphological features.
 #
 # All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs.
 # Snakemake workflows for producing these assembled profiles are available [here](https://github.com/broadinstitute/jump-profiling-recipe/).
-# The specific commit used to produce the profiles can be found in the folder path of each parquet file.
-# For example, `jump-profiling-recipe_2024_a917fa7` indicates commit `a917fa7` was used.
-# The index file below contains the exact locations and metadata for each dataset:
+#
+# To understand exactly how each profile was generated:
+# 1. Extract the commit from the URL path (e.g., `jump-profiling-recipe_2024_a917fa7` → commit `a917fa7`)
+# 2. Extract the pipeline string from the URL (the folder name after the subset, e.g.,
+#    `ORF/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/`)
+# 3. In the repository at that commit, check the `inputs/` directory for configuration files:
+#    - Individual subsets (orf/crispr/compound) → check orf.json, crispr.json, compound.json
+#    - Combined "all" subsets → check pipeline_1.json, pipeline_2.json, pipeline_3.json
+# 4. Find the config file where the "pipeline" value matches your pipeline string
+#
+# Note: "_interpretable" versions are intermediate files from the same pipeline, captured before
+# multivariate transformations like sphering or harmony. They use the same config but represent
+# an earlier step in the processing pipeline (e.g., `profiles_wellpos_cc_var_mad_outlier_featselect`
+# is the interpretable version before `_sphering_harmony` is applied).
+#
+# The index file below contains the **recommended profiles** for each subset:
+#
+# > **Note for maintainers**: Maintainers may consider adding project-specific custom profiles through separate index files as needed.
 
 # %% Paths
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"
@@ -49,7 +68,33 @@ INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.
 
 # %%
 profile_index = pl.read_csv(INDEX_FILE)
-profile_index.head()
+
+profile_index
+
+# %% [markdown]
+# The processing pipeline applied to each dataset is encoded directly in the parquet file names.
+# The filename shows the sequence of processing steps that were applied, as defined in the
+# [JUMP profiling recipe documentation](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md).
+#
+# Key pipeline steps include:
+# - `profiles`: Base profiles (initial data loading)
+# - `var`: Variance thresholding - dropping features with very low variability
+# - `mad`: Robust standardization - normalizing features so that controls on each plate have a mean of 0 and a standard deviation of 1
+# - `int`: Inverse Normal Transformation - transforming feature distributions to be more normally distributed
+# - `featselect`: Feature selection - various methods to select features including reducing features to the most diverse ones
+# - `harmony`: Harmony batch correction - removing technical variations between batches (this is the default)
+#
+# Let's extract and display the pipeline information from the file names:
+
+# %%
+pl.Config.set_fmt_str_lengths(200)
+display_df = profile_index.with_columns(
+    pl.col("url").str.extract(r"([^/]+)\.parquet$").alias("pipeline")
+).select("subset", "pipeline")
+display_df
+
+# %%
+pl.Config.set_fmt_str_lengths(50)
 
 # %% [markdown]
 # We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
