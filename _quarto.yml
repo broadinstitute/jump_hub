@@ -27,9 +27,12 @@ website:
             - section: Reference
               contents:
                   - auto: "reference/*"
-            - section: How-To Guides
+            - section: "How-To: Notebooks"
               contents:
-                  - auto: "howto/*"
+                  - auto: "howto/notebooks/*"
+            - section: "How-To: Interactive Tools"
+              contents:
+                  - auto: "howto/interactive/*"
             - text: Cite
               file: cite.md
         tools:
