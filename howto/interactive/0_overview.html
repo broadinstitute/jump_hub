@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Retrieve JUMP profiles – JUMP documentation and examples</title>
+<title>overview – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,45 +20,10 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,9 +70,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -283,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../howto/notebooks/0_overview.html">How-To: Notebooks</a></li><li class="breadcrumb-item"><a href="../../howto/notebooks/11_retrieve_profiles.html">Retrieve JUMP profiles</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../howto/interactive/0_howto_interactive_tools.html">How-To: Interactive Tools</a></li><li class="breadcrumb-item"><a href="../../howto/interactive/0_overview.html">Interactive Tools</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -391,13 +353,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">How-To: Notebooks</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
@@ -406,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retrieve JUMP profiles</span></a>
   </div>
 </li>
@@ -444,13 +406,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">How-To: Interactive Tools</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../howto/interactive/0_howto_interactive_tools.html" class="sidebar-item-text sidebar-link">
@@ -459,7 +421,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Interactive Tools</span></a>
   </div>
 </li>
@@ -483,976 +445,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="11_retrieve_profiles.ipynb" download="11_retrieve_profiles.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#interactive-tools" id="toc-interactive-tools" class="nav-link active" data-scroll-target="#interactive-tools">Interactive Tools</a></li>
+  <li><a href="#details-and-usage" id="toc-details-and-usage" class="nav-link" data-scroll-target="#details-and-usage">Details and usage</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/interactive/0_overview.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/interactive/0_overview.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="0_overview.ipynb" download="0_overview.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../howto/notebooks/0_overview.html">How-To: Notebooks</a></li><li class="breadcrumb-item"><a href="../../howto/notebooks/11_retrieve_profiles.html">Retrieve JUMP profiles</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Retrieve JUMP profiles</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../howto/interactive/0_howto_interactive_tools.html">How-To: Interactive Tools</a></li><li class="breadcrumb-item"><a href="../../howto/interactive/0_overview.html">Interactive Tools</a></li></ol></nav></header>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<p>This is a tutorial on how to access profiles from the <a href="https://github.com/jump-cellpainting/datasets">JUMP Cell Painting datasets</a>. We will use polars to fetch the data frames lazily, with the help of <code>s3fs</code> and <code>pyarrow</code>. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="73c83619" class="cell" title="Imports" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The JUMP Cell Painting project provides several processed datasets for morphological profiling:</p>
+<section id="interactive-tools" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-tools">Interactive Tools</h3>
+<p>There are several no-code options for exploring JUMP data. These are very useful for querying perturbations without needing experience in data analysis or programming. Detailed usage instructions are below this brief overview listing:</p>
+<ol type="1">
+<li><p><strong>JUMP Round-Robin (jump_rr) tools</strong></p>
 <ul>
-<li><strong><code>crispr</code></strong>: CRISPR knockout genetic perturbations</li>
-<li><strong><code>orf</code></strong>: Open Reading Frame (ORF) overexpression perturbations</li>
-<li><strong><code>compound</code></strong>: Chemical compound perturbations</li>
-<li><strong><code>all</code></strong>: Combined dataset containing all perturbation types</li>
-</ul>
-<p>Each dataset is available in two versions:</p>
+<li>Type in your gene/compound of interest and retrieve a list of similar genes/compounds</li>
+<li>Tools to browse images and inspect enriched features</li>
+<li>Visualize images of the perturbed cells</li>
+<li>No account creation required</li>
+</ul></li>
+<li><p><strong>Perturbation availability tools</strong> If you are not sure if your genes or compounds of interest are in JUMP, you can check it using one of our tools embedded on this website.</p></li>
+<li><p><strong>Morpheus</strong></p>
 <ul>
-<li><strong>Standard</strong>: Fully processed including batch correction</li>
-<li><strong>Interpretable</strong>: Same processing but without batch correction steps (which involve transformations that lose the original feature space)</li>
+<li>Explore matrices of data and perform basic calculations</li>
+<li>Explore heatmaps showing similarity among clustered samples</li>
+<li>No account creation required</li>
+</ul></li>
+<li><p><strong>Ardigen phenAID JUMP-CP Explorer</strong></p>
+<ul>
+<li>Search similarities among perturbations and look at their images</li>
+<li>Account creation required, but access is free</li>
+</ul></li>
+</ol>
+</section>
+<section id="details-and-usage" class="level3">
+<h3 class="anchored" data-anchor-id="details-and-usage">Details and usage</h3>
+<section id="jump_rr-tools" class="level4">
+<h4 class="anchored" data-anchor-id="jump_rr-tools">JUMP_rr tools</h4>
+<ul>
+<li>A collection of online tables to explore, visualize and compare perturbations and their effects in cells.</li>
+<li>Start with our step-by-step <a href="https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html">tutorial</a></li>
+<li>Links to the different JUMP_rr tools are available on <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">this</a> repository</li>
+<li>In addition to the Graphical User Interface, you can also query using SQL.</li>
 </ul>
-<p>All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs. Snakemake workflows for producing these assembled profiles are available <a href="https://github.com/broadinstitute/jump-profiling-recipe/">here</a>. The specific commit used to produce the profiles can be found in the folder path of each parquet file. For example, <code>jump-profiling-recipe_2024_a917fa7</code> indicates commit <code>a917fa7</code> was used. The index file below contains the exact locations and metadata for each dataset:</p>
-<div id="2e8ef771" class="cell" title="Paths" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We use the version-controlled CSV above to release the latest corrected profiles</p>
-<div id="664dc09e" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>profile_index <span class="op">=</span> pl.read_csv(INDEX_FILE)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>profile_index.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (5, 3)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">subset</th>
-<th data-quarto-table-cell-role="th">url</th>
-<th data-quarto-table-cell-role="th">etag</th>
-</tr>
-<tr class="even">
-<th>str</th>
-<th>str</th>
-<th>str</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"orf"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"c05a241135dcedda4e9cc639480b3f…</td>
-</tr>
-<tr class="even">
-<td>"crispr"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"4c59782c0dd5244f67d14323e83258…</td>
-</tr>
-<tr class="odd">
-<td>"compound"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"1368a48ddbd4c44b1bfbc084591aaf…</td>
-</tr>
-<tr class="even">
-<td>"orf_interpretable"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"97b0c31d7d678ca2a5e2353df5799f…</td>
-</tr>
-<tr class="odd">
-<td>"crispr_interpretable"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"90b08b824c06bcf16dfc5e788e74f0…</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>We do not need the ‘etag’ (used to check file integrity) column nor the ‘interpretable’ (i.e., before major modifications)</p>
-<div id="17526116" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>selected_profiles <span class="op">=</span> profile_index.<span class="bu">filter</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"subset"</span>).is_in((<span class="st">"crispr"</span>, <span class="st">"orf"</span>, <span class="st">"compound"</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>).select(pl.exclude(<span class="st">"etag"</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>filepaths <span class="op">=</span> <span class="bu">dict</span>(selected_profiles.iter_rows())</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filepaths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>{'orf': 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/ORF/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.parquet', 'crispr': 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/CRISPR/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.parquet', 'compound': 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet'}</code></pre>
-</div>
-</div>
-<p>We will lazy-load the dataframes and print the number of rows and columns</p>
-<div id="ce39d9a7" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"dataset"</span>, <span class="st">"#rows"</span>, <span class="st">"#cols"</span>, <span class="st">"#Metadata cols"</span>, <span class="st">"Size (MB)"</span>)}</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> filepaths.items():</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pl.scan_parquet(path)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> data.select(pl.<span class="bu">len</span>()).collect().item()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    schema <span class="op">=</span> data.collect_schema()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    metadata_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> schema.keys() <span class="cf">if</span> col.startswith(<span class="st">"Metadata"</span>)]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> schema.<span class="bu">len</span>()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    n_meta_cols <span class="op">=</span> <span class="bu">len</span>(metadata_cols)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    estimated_size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">4.03</span> <span class="op">*</span> n_rows <span class="op">*</span> n_cols <span class="op">/</span> <span class="fl">1e6</span>, <span class="dv">0</span>))  <span class="co"># B -&gt; MB</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">zip</span>(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        info[k].append(v)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (3, 5)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">dataset</th>
-<th data-quarto-table-cell-role="th">#rows</th>
-<th data-quarto-table-cell-role="th">#cols</th>
-<th data-quarto-table-cell-role="th">#Metadata cols</th>
-<th data-quarto-table-cell-role="th">Size (MB)</th>
-</tr>
-<tr class="even">
-<th>str</th>
-<th>i64</th>
-<th>i64</th>
-<th>i64</th>
-<th>i64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"orf"</td>
-<td>81660</td>
-<td>726</td>
-<td>4</td>
-<td>239</td>
-</tr>
-<tr class="even">
-<td>"crispr"</td>
-<td>51185</td>
-<td>263</td>
-<td>4</td>
-<td>54</td>
-</tr>
-<tr class="odd">
-<td>"compound"</td>
-<td>803853</td>
-<td>741</td>
-<td>4</td>
-<td>2400</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>Let us now focus on the <code>crispr</code> dataset and use a regex to select the metadata columns. We will then sample rows and display the overview. Note that the collect() method enforces loading some data into memory.</p>
-<div id="c3d1a658" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.scan_parquet(filepaths[<span class="st">"crispr"</span>])</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data.select(pl.col(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (5, 4)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Metadata_Source</th>
-<th data-quarto-table-cell-role="th">Metadata_Plate</th>
-<th data-quarto-table-cell-role="th">Metadata_Well</th>
-<th data-quarto-table-cell-role="th">Metadata_JCP2022</th>
-</tr>
-<tr class="even">
-<th>str</th>
-<th>str</th>
-<th>str</th>
-<th>str</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>"source_13"</td>
-<td>"CP-CC9-R2-15"</td>
-<td>"D02"</td>
-<td>"JCP2022_800002"</td>
-</tr>
-<tr class="even">
-<td>"source_13"</td>
-<td>"CP-CC9-R1-04"</td>
-<td>"J18"</td>
-<td>"JCP2022_800028"</td>
-</tr>
-<tr class="odd">
-<td>"source_13"</td>
-<td>"CP-CC9-R2-04"</td>
-<td>"J09"</td>
-<td>"JCP2022_807421"</td>
-</tr>
-<tr class="even">
-<td>"source_13"</td>
-<td>"CP-CC9-R2-26"</td>
-<td>"L14"</td>
-<td>"JCP2022_807129"</td>
-</tr>
-<tr class="odd">
-<td>"source_13"</td>
-<td>"CP-CC9-R6-01"</td>
-<td>"C12"</td>
-<td>"JCP2022_806640"</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>The following line excludes the metadata columns:</p>
-<div id="b05ea695" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_only <span class="op">=</span> data.select(pl.<span class="bu">all</span>().exclude(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data_only</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (5, 259)</small>
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">X_1</th>
-<th data-quarto-table-cell-role="th">X_2</th>
-<th data-quarto-table-cell-role="th">X_3</th>
-<th data-quarto-table-cell-role="th">X_4</th>
-<th data-quarto-table-cell-role="th">X_5</th>
-<th data-quarto-table-cell-role="th">X_6</th>
-<th data-quarto-table-cell-role="th">X_7</th>
-<th data-quarto-table-cell-role="th">X_8</th>
-<th data-quarto-table-cell-role="th">X_9</th>
-<th data-quarto-table-cell-role="th">X_10</th>
-<th data-quarto-table-cell-role="th">X_11</th>
-<th data-quarto-table-cell-role="th">X_12</th>
-<th data-quarto-table-cell-role="th">X_13</th>
-<th data-quarto-table-cell-role="th">X_14</th>
-<th data-quarto-table-cell-role="th">X_15</th>
-<th data-quarto-table-cell-role="th">X_16</th>
-<th data-quarto-table-cell-role="th">X_17</th>
-<th data-quarto-table-cell-role="th">X_18</th>
-<th data-quarto-table-cell-role="th">X_19</th>
-<th data-quarto-table-cell-role="th">X_20</th>
-<th data-quarto-table-cell-role="th">X_21</th>
-<th data-quarto-table-cell-role="th">X_22</th>
-<th data-quarto-table-cell-role="th">X_23</th>
-<th data-quarto-table-cell-role="th">X_24</th>
-<th data-quarto-table-cell-role="th">X_25</th>
-<th data-quarto-table-cell-role="th">X_26</th>
-<th data-quarto-table-cell-role="th">X_27</th>
-<th data-quarto-table-cell-role="th">X_28</th>
-<th data-quarto-table-cell-role="th">X_29</th>
-<th data-quarto-table-cell-role="th">X_30</th>
-<th data-quarto-table-cell-role="th">X_31</th>
-<th data-quarto-table-cell-role="th">X_32</th>
-<th data-quarto-table-cell-role="th">X_33</th>
-<th data-quarto-table-cell-role="th">X_34</th>
-<th data-quarto-table-cell-role="th">X_35</th>
-<th data-quarto-table-cell-role="th">X_36</th>
-<th data-quarto-table-cell-role="th">X_37</th>
-<th data-quarto-table-cell-role="th">…</th>
-<th data-quarto-table-cell-role="th">X_223</th>
-<th data-quarto-table-cell-role="th">X_224</th>
-<th data-quarto-table-cell-role="th">X_225</th>
-<th data-quarto-table-cell-role="th">X_226</th>
-<th data-quarto-table-cell-role="th">X_227</th>
-<th data-quarto-table-cell-role="th">X_228</th>
-<th data-quarto-table-cell-role="th">X_229</th>
-<th data-quarto-table-cell-role="th">X_230</th>
-<th data-quarto-table-cell-role="th">X_231</th>
-<th data-quarto-table-cell-role="th">X_232</th>
-<th data-quarto-table-cell-role="th">X_233</th>
-<th data-quarto-table-cell-role="th">X_234</th>
-<th data-quarto-table-cell-role="th">X_235</th>
-<th data-quarto-table-cell-role="th">X_236</th>
-<th data-quarto-table-cell-role="th">X_237</th>
-<th data-quarto-table-cell-role="th">X_238</th>
-<th data-quarto-table-cell-role="th">X_239</th>
-<th data-quarto-table-cell-role="th">X_240</th>
-<th data-quarto-table-cell-role="th">X_241</th>
-<th data-quarto-table-cell-role="th">X_242</th>
-<th data-quarto-table-cell-role="th">X_243</th>
-<th data-quarto-table-cell-role="th">X_244</th>
-<th data-quarto-table-cell-role="th">X_245</th>
-<th data-quarto-table-cell-role="th">X_246</th>
-<th data-quarto-table-cell-role="th">X_247</th>
-<th data-quarto-table-cell-role="th">X_248</th>
-<th data-quarto-table-cell-role="th">X_249</th>
-<th data-quarto-table-cell-role="th">X_250</th>
-<th data-quarto-table-cell-role="th">X_251</th>
-<th data-quarto-table-cell-role="th">X_252</th>
-<th data-quarto-table-cell-role="th">X_253</th>
-<th data-quarto-table-cell-role="th">X_254</th>
-<th data-quarto-table-cell-role="th">X_255</th>
-<th data-quarto-table-cell-role="th">X_256</th>
-<th data-quarto-table-cell-role="th">X_257</th>
-<th data-quarto-table-cell-role="th">X_258</th>
-<th data-quarto-table-cell-role="th">X_259</th>
-</tr>
-<tr class="even">
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>…</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0.431689</td>
-<td>0.121776</td>
-<td>-0.288611</td>
-<td>1.199042</td>
-<td>-0.758412</td>
-<td>-0.466926</td>
-<td>-0.777705</td>
-<td>-0.081231</td>
-<td>-0.619822</td>
-<td>-1.27128</td>
-<td>-0.373444</td>
-<td>0.755662</td>
-<td>-0.271196</td>
-<td>-0.219682</td>
-<td>0.268569</td>
-<td>-0.831324</td>
-<td>-0.916929</td>
-<td>0.128514</td>
-<td>0.202126</td>
-<td>-0.448374</td>
-<td>0.57358</td>
-<td>-0.148984</td>
-<td>-0.451346</td>
-<td>-0.863105</td>
-<td>-0.519879</td>
-<td>-0.485649</td>
-<td>0.067051</td>
-<td>-0.461362</td>
-<td>-0.87479</td>
-<td>0.060438</td>
-<td>-0.86988</td>
-<td>-0.053304</td>
-<td>0.479346</td>
-<td>0.415922</td>
-<td>0.55612</td>
-<td>0.057157</td>
-<td>-0.486731</td>
-<td>…</td>
-<td>0.070464</td>
-<td>0.011686</td>
-<td>-0.071482</td>
-<td>0.047634</td>
-<td>-0.137811</td>
-<td>0.010114</td>
-<td>-0.146834</td>
-<td>0.028652</td>
-<td>0.048453</td>
-<td>0.015478</td>
-<td>-0.371927</td>
-<td>-0.318295</td>
-<td>-0.07663</td>
-<td>0.099552</td>
-<td>-0.067174</td>
-<td>0.324664</td>
-<td>0.11507</td>
-<td>0.07018</td>
-<td>0.149843</td>
-<td>0.090655</td>
-<td>-0.024452</td>
-<td>-0.167478</td>
-<td>-0.063188</td>
-<td>0.10028</td>
-<td>-0.20603</td>
-<td>-0.143531</td>
-<td>-0.042267</td>
-<td>-0.103231</td>
-<td>0.166172</td>
-<td>0.268637</td>
-<td>-0.249552</td>
-<td>-0.125842</td>
-<td>-0.010658</td>
-<td>0.148293</td>
-<td>-0.002996</td>
-<td>0.018602</td>
-<td>0.120415</td>
-</tr>
-<tr class="even">
-<td>-0.286125</td>
-<td>-0.139647</td>
-<td>0.521229</td>
-<td>-0.130772</td>
-<td>-0.392223</td>
-<td>-0.478905</td>
-<td>-2.190718</td>
-<td>-0.910039</td>
-<td>-0.923397</td>
-<td>-0.89992</td>
-<td>0.809614</td>
-<td>0.195752</td>
-<td>1.051458</td>
-<td>-0.586142</td>
-<td>0.132069</td>
-<td>0.691497</td>
-<td>2.309921</td>
-<td>0.451202</td>
-<td>0.017881</td>
-<td>0.722985</td>
-<td>0.094764</td>
-<td>0.458089</td>
-<td>0.289687</td>
-<td>-0.005019</td>
-<td>-0.44384</td>
-<td>-0.292192</td>
-<td>-0.661437</td>
-<td>-0.480588</td>
-<td>-0.43835</td>
-<td>0.392833</td>
-<td>0.883042</td>
-<td>-0.183804</td>
-<td>-0.63443</td>
-<td>0.088329</td>
-<td>0.317562</td>
-<td>0.790481</td>
-<td>0.49558</td>
-<td>…</td>
-<td>0.12586</td>
-<td>0.150716</td>
-<td>0.092419</td>
-<td>0.070398</td>
-<td>-0.10096</td>
-<td>0.241489</td>
-<td>-0.02793</td>
-<td>-0.069464</td>
-<td>0.173498</td>
-<td>0.096578</td>
-<td>-0.006984</td>
-<td>-0.010409</td>
-<td>-0.122357</td>
-<td>-0.154975</td>
-<td>-0.264336</td>
-<td>-0.026424</td>
-<td>-0.107131</td>
-<td>-0.217108</td>
-<td>-0.076673</td>
-<td>-0.025199</td>
-<td>0.178872</td>
-<td>0.273566</td>
-<td>-0.011964</td>
-<td>-0.284162</td>
-<td>-0.07764</td>
-<td>-0.147836</td>
-<td>-0.030516</td>
-<td>0.039593</td>
-<td>-0.251191</td>
-<td>-0.145978</td>
-<td>-0.061276</td>
-<td>0.260967</td>
-<td>0.136172</td>
-<td>0.220407</td>
-<td>-0.016074</td>
-<td>0.24593</td>
-<td>-0.051766</td>
-</tr>
-<tr class="odd">
-<td>0.044537</td>
-<td>0.093762</td>
-<td>0.38071</td>
-<td>-0.078268</td>
-<td>-0.332677</td>
-<td>-0.492756</td>
-<td>-0.54244</td>
-<td>-0.751058</td>
-<td>0.28314</td>
-<td>0.772951</td>
-<td>-0.344511</td>
-<td>-0.291534</td>
-<td>-0.64803</td>
-<td>1.04816</td>
-<td>0.814905</td>
-<td>0.020586</td>
-<td>-1.699232</td>
-<td>-0.35928</td>
-<td>0.474136</td>
-<td>-0.500731</td>
-<td>0.16648</td>
-<td>0.460551</td>
-<td>0.773349</td>
-<td>-0.584125</td>
-<td>0.070497</td>
-<td>0.382738</td>
-<td>1.290578</td>
-<td>1.115024</td>
-<td>0.656066</td>
-<td>-0.211548</td>
-<td>0.615551</td>
-<td>1.202399</td>
-<td>0.61274</td>
-<td>0.467623</td>
-<td>0.826743</td>
-<td>0.98965</td>
-<td>0.515379</td>
-<td>…</td>
-<td>-0.035649</td>
-<td>0.084653</td>
-<td>-0.148614</td>
-<td>0.41456</td>
-<td>-0.035386</td>
-<td>0.039774</td>
-<td>0.222122</td>
-<td>0.127807</td>
-<td>0.212482</td>
-<td>-0.087575</td>
-<td>0.149949</td>
-<td>-0.146337</td>
-<td>0.031107</td>
-<td>0.048564</td>
-<td>-0.151519</td>
-<td>-0.256957</td>
-<td>-0.147494</td>
-<td>-0.051771</td>
-<td>0.000703</td>
-<td>-0.100694</td>
-<td>0.127297</td>
-<td>-0.159605</td>
-<td>0.056752</td>
-<td>0.079783</td>
-<td>-0.301415</td>
-<td>-0.033567</td>
-<td>-0.073402</td>
-<td>0.073441</td>
-<td>0.003454</td>
-<td>-0.065908</td>
-<td>0.003793</td>
-<td>0.017154</td>
-<td>0.122071</td>
-<td>0.031753</td>
-<td>-0.115469</td>
-<td>-0.183939</td>
-<td>-0.037042</td>
-</tr>
-<tr class="even">
-<td>0.045477</td>
-<td>0.020634</td>
-<td>0.312316</td>
-<td>1.316</td>
-<td>-0.831466</td>
-<td>-1.536956</td>
-<td>0.495057</td>
-<td>-1.25451</td>
-<td>-0.417021</td>
-<td>0.099831</td>
-<td>0.010575</td>
-<td>0.815467</td>
-<td>-0.793362</td>
-<td>-0.602823</td>
-<td>-0.470462</td>
-<td>-1.901034</td>
-<td>-0.749613</td>
-<td>-0.03417</td>
-<td>-0.349764</td>
-<td>-0.109558</td>
-<td>0.50934</td>
-<td>0.937879</td>
-<td>-0.567808</td>
-<td>-0.361403</td>
-<td>0.07038</td>
-<td>0.428986</td>
-<td>0.178268</td>
-<td>-0.264072</td>
-<td>-1.08156</td>
-<td>0.484804</td>
-<td>0.257085</td>
-<td>-0.387199</td>
-<td>-0.594517</td>
-<td>-0.142474</td>
-<td>0.364982</td>
-<td>0.369385</td>
-<td>-0.033974</td>
-<td>…</td>
-<td>0.080806</td>
-<td>0.047688</td>
-<td>0.081428</td>
-<td>-0.072393</td>
-<td>-0.134251</td>
-<td>0.32516</td>
-<td>-0.013819</td>
-<td>-0.231218</td>
-<td>0.235347</td>
-<td>-0.099079</td>
-<td>-0.214146</td>
-<td>-0.088035</td>
-<td>0.279149</td>
-<td>0.235552</td>
-<td>0.056753</td>
-<td>-0.002605</td>
-<td>-0.121467</td>
-<td>-0.011054</td>
-<td>0.014276</td>
-<td>0.031513</td>
-<td>0.056525</td>
-<td>-0.204108</td>
-<td>0.056208</td>
-<td>-0.007412</td>
-<td>0.295334</td>
-<td>0.059559</td>
-<td>-0.072717</td>
-<td>0.143892</td>
-<td>-0.175082</td>
-<td>0.06916</td>
-<td>-0.240234</td>
-<td>-0.243179</td>
-<td>0.132553</td>
-<td>-0.10939</td>
-<td>-0.006807</td>
-<td>-0.081922</td>
-<td>-0.033631</td>
-</tr>
-<tr class="odd">
-<td>-0.128473</td>
-<td>-0.163732</td>
-<td>0.052351</td>
-<td>-3.2502</td>
-<td>0.237454</td>
-<td>0.327462</td>
-<td>2.975345</td>
-<td>1.074392</td>
-<td>-0.642075</td>
-<td>-0.309154</td>
-<td>-1.427569</td>
-<td>0.209862</td>
-<td>-0.207053</td>
-<td>-0.785397</td>
-<td>-1.690689</td>
-<td>0.57705</td>
-<td>1.286289</td>
-<td>-0.260824</td>
-<td>-0.066723</td>
-<td>-0.378312</td>
-<td>-0.107758</td>
-<td>0.58553</td>
-<td>0.723803</td>
-<td>-0.085321</td>
-<td>-0.899026</td>
-<td>-0.508275</td>
-<td>0.946614</td>
-<td>0.681252</td>
-<td>0.591428</td>
-<td>-0.058463</td>
-<td>-0.611216</td>
-<td>-0.249337</td>
-<td>0.151805</td>
-<td>-0.201767</td>
-<td>-0.364704</td>
-<td>-0.279569</td>
-<td>0.032865</td>
-<td>…</td>
-<td>-0.103084</td>
-<td>-0.092279</td>
-<td>0.061387</td>
-<td>-0.229078</td>
-<td>0.214459</td>
-<td>0.018508</td>
-<td>-0.164547</td>
-<td>0.170245</td>
-<td>-0.028671</td>
-<td>-0.024243</td>
-<td>0.116811</td>
-<td>0.03172</td>
-<td>0.010574</td>
-<td>0.014084</td>
-<td>0.15063</td>
-<td>-0.053592</td>
-<td>-0.297773</td>
-<td>-0.033743</td>
-<td>0.264092</td>
-<td>-0.030906</td>
-<td>-0.04306</td>
-<td>-0.126682</td>
-<td>-0.050824</td>
-<td>-0.011592</td>
-<td>0.082704</td>
-<td>-0.186133</td>
-<td>0.172641</td>
-<td>-0.056459</td>
-<td>0.190109</td>
-<td>0.06259</td>
-<td>0.093085</td>
-<td>-0.251115</td>
-<td>0.141207</td>
-<td>0.180379</td>
-<td>-0.006493</td>
-<td>-0.155394</td>
-<td>-0.013597</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>Finally, we can convert this to <code>pandas</code> if we want to perform analyses with that tool. Keep in mind that this loads the entire dataframe into memory.</p>
-<div id="207ffa43" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_only.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<div>
+</section>
+<section id="perturbation-availability-tools" class="level4">
+<h4 class="anchored" data-anchor-id="perturbation-availability-tools">Perturbation availability tools</h4>
+<ul>
+<li><p><strong><a href="https://broadinstitute.github.io/jump_hub/reference/00_gene_index.html">Gene availability</a></strong>: Query this resource to find out if your gene of interest is available in the JUMP and other genetic-perturbation datasets. <a href="https://broadinstitute.github.io/jump_hub/howto/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations">Tutorial and details</a></p></li>
+<li><p><strong><a href="../../reference/01_chemical_query.html">Compound availability</a></strong>: Query this resource to find out if your chemical (or a highly similarly-structured one) is available in the JUMP dataset (using an InChiKey, JUMP ID, or common name for a chemical.</p></li>
+</ul>
+</section>
+<section id="morpheus" class="level4">
+<h4 class="anchored" data-anchor-id="morpheus">Morpheus</h4>
+<ul>
+<li>How can I use Morpheus to view relationships among samples?</li>
+</ul>
+<ol type="1">
+<li><p>Download the ORF and/or CRISPR data from <a href="https://doi.org/10.5281/zenodo.14025602">https://doi.org/10.5281/zenodo.14025602</a> or from <a href="https://zenodo.org/records/14165010">https://zenodo.org/records/14165010</a> (a smaller file with only genes having cosine similarity &gt; 0.5 with other genes).</p></li>
+<li><p>Drag and drop one of those files into <a href="https://software.broadinstitute.org/morpheus/">Morpheus</a> in your web browser; no need to install it)</p></li>
+<li><p>Go to Tools &gt; Similarity Matrix and choose Metric = cosine similarity and Compute matrix for = Columns</p></li>
+<li><p>Cluster the genes using Tools &gt; Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns</p>
+<p><img src="data:image/png;base64,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" class="img-fluid"></p></li>
+<li><p>Click the gear icon towards the top right and choose “Annotations” tab.</p></li>
+<li><p>Choose Symbol (for Rows and Columns) so that gene names will appear. You can also choose various annotations of genes, like biological process or molecular function but those names are long and make it hard to see unless you have a huge screen.</p></li>
+<li><p>Play around!</p>
+<ul>
+<li>To find a gene of interest, in the search box type Symbol: then start typing the name and it will appear as highlighted in the scroll bar so you can scroll to find it. But if you are looking for top matches to a gene, note that clustering can have weird behavior, putting the closest match pretty far away depending on the other data points. The broad.io Datasette links (JUMP_rr tools) more directly answer the “top/bottom matches” question and take less hands-on time to configure and less compute time to load.
+<ul>
+<li>doubleclick a gene name and the data matrix will sort to show you the closest matches on one end and the strongest anti-correlators at the other. To go back to your original view, just keep clicking the same gene you originally sorted by, it will change back to the previous sort eventually.</li>
+<li>note that in clustered view you can’t see anti-correlations which anecdotally seem more strong/common in CRISPR data. So clusters are a bit more interesting in ORF data.</li>
+<li>If you would like to trim the similarity matrix to only show genes with a strong match, you can follow this procedure:
+<ul>
+<li>Add a new annotation by going to Tools &gt; Create Calculated Annotation, with the name ‘#Matches’ with the formula COUNTIF(“&gt;0.7”) This counts the number of genes where the similarity is above 0.7 (you can pick whatever threshold you prefer). Repeat this step for both rows and columns. <em>Warning: although this seems like a simple step, for some reason it is fairly intensive and might require a suitably powerful computer - if the browser asks to Wait or Exit, waiting sometimes works.</em></li>
+<li>Filter samples where ‘#Matches’ &gt;=2 (because every sample matches itself); again repeat this for both rows and columns.</li>
+<li>This will yield ~350 genes in the ORF data, for example. You can increase the number of matches to filter (to 3 or 4, as you prefer).</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+<section id="ardigen-phenaid-jump-cp-explorer" class="level4">
+<h4 class="anchored" data-anchor-id="ardigen-phenaid-jump-cp-explorer">Ardigen phenAID JUMP-CP Explorer</h4>
+<p>Available here: https://phenaid.ardigen.com/jumpcpexplorer</p>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">X_1</th>
-<th data-quarto-table-cell-role="th">X_2</th>
-<th data-quarto-table-cell-role="th">X_3</th>
-<th data-quarto-table-cell-role="th">X_4</th>
-<th data-quarto-table-cell-role="th">X_5</th>
-<th data-quarto-table-cell-role="th">X_6</th>
-<th data-quarto-table-cell-role="th">X_7</th>
-<th data-quarto-table-cell-role="th">X_8</th>
-<th data-quarto-table-cell-role="th">X_9</th>
-<th data-quarto-table-cell-role="th">X_10</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">X_250</th>
-<th data-quarto-table-cell-role="th">X_251</th>
-<th data-quarto-table-cell-role="th">X_252</th>
-<th data-quarto-table-cell-role="th">X_253</th>
-<th data-quarto-table-cell-role="th">X_254</th>
-<th data-quarto-table-cell-role="th">X_255</th>
-<th data-quarto-table-cell-role="th">X_256</th>
-<th data-quarto-table-cell-role="th">X_257</th>
-<th data-quarto-table-cell-role="th">X_258</th>
-<th data-quarto-table-cell-role="th">X_259</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>0.431689</td>
-<td>0.121776</td>
-<td>-0.288611</td>
-<td>1.199042</td>
-<td>-0.758412</td>
-<td>-0.466926</td>
-<td>-0.777705</td>
-<td>-0.081231</td>
-<td>-0.619822</td>
-<td>-1.271280</td>
-<td>...</td>
-<td>-0.103231</td>
-<td>0.166172</td>
-<td>0.268637</td>
-<td>-0.249552</td>
-<td>-0.125842</td>
-<td>-0.010658</td>
-<td>0.148293</td>
-<td>-0.002996</td>
-<td>0.018602</td>
-<td>0.120415</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-0.286125</td>
-<td>-0.139647</td>
-<td>0.521229</td>
-<td>-0.130772</td>
-<td>-0.392223</td>
-<td>-0.478905</td>
-<td>-2.190718</td>
-<td>-0.910039</td>
-<td>-0.923397</td>
-<td>-0.899920</td>
-<td>...</td>
-<td>0.039593</td>
-<td>-0.251191</td>
-<td>-0.145978</td>
-<td>-0.061276</td>
-<td>0.260967</td>
-<td>0.136172</td>
-<td>0.220407</td>
-<td>-0.016074</td>
-<td>0.245930</td>
-<td>-0.051766</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.044537</td>
-<td>0.093762</td>
-<td>0.380710</td>
-<td>-0.078268</td>
-<td>-0.332677</td>
-<td>-0.492756</td>
-<td>-0.542440</td>
-<td>-0.751058</td>
-<td>0.283140</td>
-<td>0.772951</td>
-<td>...</td>
-<td>0.073441</td>
-<td>0.003454</td>
-<td>-0.065908</td>
-<td>0.003793</td>
-<td>0.017154</td>
-<td>0.122071</td>
-<td>0.031753</td>
-<td>-0.115469</td>
-<td>-0.183939</td>
-<td>-0.037042</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>0.045477</td>
-<td>0.020634</td>
-<td>0.312316</td>
-<td>1.316000</td>
-<td>-0.831466</td>
-<td>-1.536956</td>
-<td>0.495057</td>
-<td>-1.254510</td>
-<td>-0.417021</td>
-<td>0.099831</td>
-<td>...</td>
-<td>0.143892</td>
-<td>-0.175082</td>
-<td>0.069160</td>
-<td>-0.240234</td>
-<td>-0.243179</td>
-<td>0.132553</td>
-<td>-0.109390</td>
-<td>-0.006807</td>
-<td>-0.081922</td>
-<td>-0.033631</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>-0.128473</td>
-<td>-0.163732</td>
-<td>0.052351</td>
-<td>-3.250200</td>
-<td>0.237454</td>
-<td>0.327462</td>
-<td>2.975345</td>
-<td>1.074392</td>
-<td>-0.642075</td>
-<td>-0.309154</td>
-<td>...</td>
-<td>-0.056459</td>
-<td>0.190109</td>
-<td>0.062590</td>
-<td>0.093085</td>
-<td>-0.251115</td>
-<td>0.141207</td>
-<td>0.180379</td>
-<td>-0.006493</td>
-<td>-0.155394</td>
-<td>-0.013597</td>
-</tr>
-</tbody>
-</table>
-
-<p>5 rows × 259 columns</p>
-</div>
-</div>
-</div>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1872,4 +959,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/notebooks/11_retrieve_profiles.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/notebooks/11_retrieve_profiles.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/interactive/0_overview.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/interactive/0_overview.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

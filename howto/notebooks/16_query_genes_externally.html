@@ -398,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Interactive Tools</span></a>
+ <span class="menu-text">Notebooks overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -450,8 +450,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../howto/interactive/0_howto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Online notebooks</span></a>
+  <a href="../../howto/interactive/0_howto_interactive_tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 Howto Interactive Tools</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Interactive Tools</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -508,13 +514,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This how-to focuses on linking gene names from the NCBI databases. Whilst not JUMP-specific, it is useful to fetch more information on perturbations that our analysis deem important without having to manually search them. We will use <a href="https://biopython.org/">Biopython</a>, this only explores a subset of the options, the full Entrez <a href="https://www.ncbi.nlm.nih.gov/books/NBK25501/">documentation</a>, which contains all the options, is a useful reference to bookmark. ## Procedure</p>
-<div id="e03ba689" class="cell" title="Imports" data-execution_count="1">
+<div id="728add01" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> Bio <span class="im">import</span> Entrez</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> broad_babel.query <span class="im">import</span> get_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We define the fields that we need and an email to provide to the server we will query.</p>
-<div id="b3df283d" class="cell" data-execution_count="2">
+<div id="3e64cf53" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Entrez.email <span class="op">=</span> <span class="st">"example@email.com"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fields <span class="op">=</span> (</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Name"</span>,</span>
@@ -524,11 +530,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As an example, we will use a set of genes that we found in a JUMP cluster.</p>
-<div id="364b1fe1" class="cell" data-execution_count="3">
+<div id="c25b88a0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> (<span class="st">"CHRM4"</span>, <span class="st">"SCAPER"</span>, <span class="st">"GPR176"</span>, <span class="st">"LY6K"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Get a dictionary that maps Gene symbols to Entrez IDs</p>
-<div id="fe9aa4fc" class="cell" data-execution_count="4">
+<div id="8ba79af6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> get_mapper(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    query<span class="op">=</span>genes,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    input_column<span class="op">=</span><span class="st">"standard_key"</span>,</span>
@@ -545,10 +551,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        k: record[<span class="st">"DocumentSummarySet"</span>][<span class="st">"DocumentSummary"</span>][<span class="dv">0</span>][k] <span class="cf">for</span> k <span class="kw">in</span> fields</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    })</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="023b88bf" class="cell" data-execution_count="5">
+<div id="02541fcd" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the resultant information in a human-readable format</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a861b083" class="cell" data-execution_count="6">
+<div id="6b312036" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pl.Config(fmt_str_lengths<span class="op">=</span><span class="dv">1000</span>):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(pl.DataFrame(entries))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -558,6 +564,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 │ ---    ┆ ---                         ┆ ---                         ┆ ---                         │
 │ str    ┆ str                         ┆ str                         ┆ str                         │
 ╞════════╪═════════════════════════════╪═════════════════════════════╪═════════════════════════════╡
+│ GPR176 ┆ G protein-coupled receptor  ┆ Members of the G            ┆ G-protein coupled receptor  │
+│        ┆ 176                         ┆ protein-coupled receptor    ┆ 176|probable G-protein      │
+│        ┆                             ┆ family, such as GPR176, are ┆ coupled receptor 176        │
+│        ┆                             ┆ cell surface receptors      ┆                             │
+│        ┆                             ┆ involved in responses to    ┆                             │
+│        ┆                             ┆ hormones, growth factors,   ┆                             │
+│        ┆                             ┆ and neurotransmitters (Hata ┆                             │
+│        ┆                             ┆ et al., 1995 [PubMed        ┆                             │
+│        ┆                             ┆ 7893747]).[supplied by      ┆                             │
+│        ┆                             ┆ OMIM, Jul 2008]             ┆                             │
+│ LY6K   ┆ lymphocyte antigen 6 family ┆ Predicted to be involved in ┆ lymphocyte antigen          │
+│        ┆ member K                    ┆ binding activity of sperm   ┆ 6K|cancer/testis antigen    │
+│        ┆                             ┆ to zona pellucida.          ┆ 97|lymphocyte antigen 6     │
+│        ┆                             ┆ Predicted to act upstream   ┆ complex, locus              │
+│        ┆                             ┆ of or within flagellated    ┆ K|up-regulated in lung      │
+│        ┆                             ┆ sperm motility. Predicted   ┆ cancer 10                   │
+│        ┆                             ┆ to be located in cell       ┆                             │
+│        ┆                             ┆ surface and plasma          ┆                             │
+│        ┆                             ┆ membrane. Predicted to be   ┆                             │
+│        ┆                             ┆ active in acrosomal         ┆                             │
+│        ┆                             ┆ vesicle. [provided by       ┆                             │
+│        ┆                             ┆ Alliance of Genome          ┆                             │
+│        ┆                             ┆ Resources, Jun 2025]        ┆                             │
 │ CHRM4  ┆ cholinergic receptor        ┆ The muscarinic cholinergic  ┆ muscarinic acetylcholine    │
 │        ┆ muscarinic 4                ┆ receptors belong to a       ┆ receptor M4|acetylcholine   │
 │        ┆                             ┆ larger family of G          ┆ receptor, muscarinic 4      │
@@ -584,29 +613,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 │        ┆                             ┆ cyclase inhibition.         ┆                             │
 │        ┆                             ┆ [provided by RefSeq, Jul    ┆                             │
 │        ┆                             ┆ 2008]                       ┆                             │
-│ GPR176 ┆ G protein-coupled receptor  ┆ Members of the G            ┆ G-protein coupled receptor  │
-│        ┆ 176                         ┆ protein-coupled receptor    ┆ 176|probable G-protein      │
-│        ┆                             ┆ family, such as GPR176, are ┆ coupled receptor 176        │
-│        ┆                             ┆ cell surface receptors      ┆                             │
-│        ┆                             ┆ involved in responses to    ┆                             │
-│        ┆                             ┆ hormones, growth factors,   ┆                             │
-│        ┆                             ┆ and neurotransmitters (Hata ┆                             │
-│        ┆                             ┆ et al., 1995 [PubMed        ┆                             │
-│        ┆                             ┆ 7893747]).[supplied by      ┆                             │
-│        ┆                             ┆ OMIM, Jul 2008]             ┆                             │
-│ LY6K   ┆ lymphocyte antigen 6 family ┆ Predicted to be involved in ┆ lymphocyte antigen          │
-│        ┆ member K                    ┆ binding activity of sperm   ┆ 6K|cancer/testis antigen    │
-│        ┆                             ┆ to zona pellucida.          ┆ 97|lymphocyte antigen 6     │
-│        ┆                             ┆ Predicted to act upstream   ┆ complex, locus              │
-│        ┆                             ┆ of or within flagellated    ┆ K|up-regulated in lung      │
-│        ┆                             ┆ sperm motility. Predicted   ┆ cancer 10                   │
-│        ┆                             ┆ to be located in cell       ┆                             │
-│        ┆                             ┆ surface and plasma          ┆                             │
-│        ┆                             ┆ membrane. Predicted to be   ┆                             │
-│        ┆                             ┆ active in acrosomal         ┆                             │
-│        ┆                             ┆ vesicle. [provided by       ┆                             │
-│        ┆                             ┆ Alliance of Genome          ┆                             │
-│        ┆                             ┆ Resources, Jun 2025]        ┆                             │
 │ SCAPER ┆ S-phase cyclin A associated ┆ Predicted to enable nucleic ┆ S phase cyclin A-associated │
 │        ┆ protein in the ER           ┆ acid binding activity and   ┆ protein in the endoplasmic  │
 │        ┆                             ┆ zinc ion binding activity.  ┆ reticulum|zinc finger       │
