@@ -99,21 +99,27 @@ Create `manifests/profile_index.json` for the Chandrasekaran example:
 }
 ```
 
-The permalinks provide complete provenance - linking to the exact recipe version and config file used.
+The permalinks connect to specific recipe versions and config files. Input file versioning would be needed for complete reproducibility, but that is outside the current system's scope.
 
 ### 3. Add ETags for data integrity
 
-ETags are checksums that ensure data integrity when downloading:
+ETags are checksums that ensure data integrity when downloading. Use the automated script from the JUMP datasets repository:
 
 ```bash
-# Get ETag for each file
-curl -I https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet | grep ETag
+# First, download the update_etags.sh script
+mkdir -p manifests/src
+curl -o manifests/src/update_etags.sh https://raw.githubusercontent.com/jump-cellpainting/datasets/refs/tags/v0.10.0/manifests/src/update_etags.sh
 
-# Example output: 
-# ETag: "35cb79ad41b1a4eb9afeab0d90035dfa-330"
+# Make sure you have the required dependencies
+# Install if needed: jq, curl, and sponge (from moreutils package)
+
+# Update ETags automatically
+bash manifests/src/update_etags.sh manifests/profile_index.json | sponge manifests/profile_index.json
+
+# The script will fetch current ETags for all URLs in your manifest and update them in-place
 ```
 
-Insert the ETag values into your JSON manifest from Step 2.
+The script automatically fetches and updates ETags for all URLs in your manifest. See the [README](https://github.com/jump-cellpainting/datasets/blob/main/manifests/src/README.md) for details.
 
 ### 4. Commit and push
 
