@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-6a4c75c897c7090e25337f92bebeec5a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-0c23511428beaf87b29bbdf0654d5814.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-6a4c75c897c7090e25337f92bebeec5a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-d1029c8c0624b678ec1882d5dbfbed62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-317fa9c8a93cbaa92631be92f51646c5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-d1029c8c0624b678ec1882d5dbfbed62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -502,31 +502,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This is a tutorial on how to access profiles from the <a href="https://github.com/jump-cellpainting/datasets">JUMP Cell Painting datasets</a>. We will use polars to fetch the data frames lazily, with the help of <code>s3fs</code> and <code>pyarrow</code>. We prefer lazy loading because the data can be too big to be handled in memory.</p>
-<div id="a8366cef" class="cell" title="Imports" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="7ccf3cae" class="cell" title="Imports" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The JUMP Cell Painting project provides several processed datasets for morphological profiling:</p>
+<p>The JUMP Cell Painting project provides several processed datasets for morphological profiling. Choose the dataset that matches your perturbation type:</p>
 <ul>
 <li><strong><code>crispr</code></strong>: CRISPR knockout genetic perturbations</li>
 <li><strong><code>orf</code></strong>: Open Reading Frame (ORF) overexpression perturbations</li>
 <li><strong><code>compound</code></strong>: Chemical compound perturbations</li>
-<li><strong><code>all</code></strong>: Combined dataset containing all perturbation types</li>
+<li><strong><code>all</code></strong>: Combined dataset containing all perturbation types (use for cross-modality comparisons)</li>
 </ul>
-<p>Each dataset is available in two versions:</p>
+<p>Each dataset is available in two processing versions:</p>
 <ul>
-<li><strong>Standard</strong>: Fully processed including batch correction</li>
-<li><strong>Interpretable</strong>: Same processing but without batch correction steps (which involve transformations that lose the original feature space)</li>
+<li><p><strong>Standard</strong> (e.g., <code>crispr</code>, <code>compound</code>, <code>orf</code>): Fully processed including batch correction steps. <strong>Recommended for most analyses</strong> as they provide better cross-dataset comparability.</p></li>
+<li><p><strong>Interpretable</strong> (e.g., <code>crispr_interpretable</code>, <code>compound_interpretable</code>, <code>orf_interpretable</code>): Same initial processing but without batch correction transformations that modify the original feature space. Use these when you need to interpret individual morphological features.</p></li>
 </ul>
-<p>All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs. Snakemake workflows for producing these assembled profiles are available <a href="https://github.com/broadinstitute/jump-profiling-recipe/">here</a>. The specific commit used to produce the profiles can be found in the folder path of each parquet file. For example, <code>jump-profiling-recipe_2024_a917fa7</code> indicates commit <code>a917fa7</code> was used. The index file below contains the exact locations and metadata for each dataset:</p>
-<div id="d085e31d" class="cell" title="Paths" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs.</p>
+<p>The index file below contains the <strong>recommended profiles</strong> for each subset. Each profile includes: - Direct links to the processing recipe and configuration used - ETags for data integrity verification</p>
+<p>For details on creating your own profile manifests, see the <a href="https://github.com/broadinstitute/jump_hub/blob/main/howto/2_create_project_manifest.md">manifest guide</a>.</p>
+<div id="a677bd01" class="cell" title="Paths" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/main/manifests/profile_index.json"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We use the version-controlled CSV above to release the latest corrected profiles</p>
-<div id="767a551e" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>profile_index <span class="op">=</span> pl.read_csv(INDEX_FILE)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>profile_index.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<p>We use the version-controlled manifest above to release the latest corrected profiles</p>
+<div id="a4f5113e" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the JSON manifest</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(INDEX_FILE)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>profile_index <span class="op">=</span> response.json()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the manifest data</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dataset <span class="kw">in</span> profile_index:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"- </span><span class="sc">{</span>dataset[<span class="st">'subset'</span>]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>dataset[<span class="st">'url'</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>- orf: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/ORF/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.parquet
+- crispr: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/CRISPR/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.parquet
+- compound: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet
+- orf_interpretable: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/ORF/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/profiles_wellpos_cc_var_mad_outlier.parquet
+- crispr_interpretable: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/CRISPR/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected/profiles_wellpos_cc_var_mad_outlier.parquet
+- compound_interpretable: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int.parquet
+- all: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_0224e0f/ALL/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.parquet
+- all_interpretable: https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_0224e0f/ALL/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/profiles_wellpos_cc_var_mad_outlier_featselect.parquet</code></pre>
+</div>
+</div>
+<p>Each profile in the manifest includes direct links to: - <strong>recipe_permalink</strong>: The exact version of the processing code used - <strong>config_permalink</strong>: The specific configuration file that defines the processing steps</p>
+<p>Let’s display the key information from the manifest:</p>
+<div id="8bb46476" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert JSON to DataFrame for better display</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>profile_df <span class="op">=</span> pl.DataFrame(profile_index)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show key information in a clean table</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>display_df <span class="op">=</span> profile_df.select(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"subset"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"url"</span>).<span class="bu">str</span>.extract(<span class="vs">r"</span><span class="kw">(</span><span class="pp">[^/]</span><span class="op">+</span><span class="kw">)</span><span class="ch">\.</span><span class="vs">parquet</span><span class="dv">$</span><span class="vs">"</span>).alias(<span class="st">"filename"</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"recipe_permalink"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">str</span>.extract(<span class="vs">r"tree/</span><span class="kw">(</span><span class="pp">[^/]</span><span class="op">+</span><span class="kw">)</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        .<span class="bu">str</span>.<span class="bu">slice</span>(<span class="dv">0</span>, <span class="dv">7</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        .alias(<span class="st">"recipe_version"</span>),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        pl.col(<span class="st">"config_permalink"</span>).<span class="bu">str</span>.extract(<span class="vs">r"</span><span class="kw">(</span><span class="pp">[^/]</span><span class="op">+</span><span class="kw">)</span><span class="ch">\.</span><span class="vs">json</span><span class="dv">$</span><span class="vs">"</span>).alias(<span class="st">"config"</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>display_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -534,15 +571,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   white-space: pre-wrap;
 }
 </style>
-<small>shape: (5, 3)</small>
+<small>shape: (8, 4)</small>
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th">subset</th>
-<th data-quarto-table-cell-role="th">url</th>
-<th data-quarto-table-cell-role="th">etag</th>
+<th data-quarto-table-cell-role="th">filename</th>
+<th data-quarto-table-cell-role="th">recipe_version</th>
+<th data-quarto-table-cell-role="th">config</th>
 </tr>
 <tr class="even">
+<th>str</th>
 <th>str</th>
 <th>str</th>
 <th>str</th>
@@ -551,61 +590,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>"orf"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"c05a241135dcedda4e9cc639480b3f…</td>
+<td>"profiles_wellpos_cc_var_mad_ou…</td>
+<td>"a917fa7"</td>
+<td>"orf"</td>
 </tr>
 <tr class="even">
 <td>"crispr"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"4c59782c0dd5244f67d14323e83258…</td>
+<td>"profiles_wellpos_cc_var_mad_ou…</td>
+<td>"a917fa7"</td>
+<td>"crispr"</td>
 </tr>
 <tr class="odd">
 <td>"compound"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"1368a48ddbd4c44b1bfbc084591aaf…</td>
+<td>"profiles_var_mad_int_featselec…</td>
+<td>"a917fa7"</td>
+<td>"compound"</td>
 </tr>
 <tr class="even">
 <td>"orf_interpretable"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"97b0c31d7d678ca2a5e2353df5799f…</td>
+<td>"profiles_wellpos_cc_var_mad_ou…</td>
+<td>"a917fa7"</td>
+<td>"orf"</td>
 </tr>
 <tr class="odd">
 <td>"crispr_interpretable"</td>
-<td>"https://cellpainting-gallery.s…</td>
-<td>"90b08b824c06bcf16dfc5e788e74f0…</td>
+<td>"profiles_wellpos_cc_var_mad_ou…</td>
+<td>"a917fa7"</td>
+<td>"crispr"</td>
+</tr>
+<tr class="even">
+<td>"compound_interpretable"</td>
+<td>"profiles_var_mad_int"</td>
+<td>"a917fa7"</td>
+<td>"compound"</td>
+</tr>
+<tr class="odd">
+<td>"all"</td>
+<td>"profiles_wellpos_cc_var_mad_ou…</td>
+<td>"0224e0f"</td>
+<td>"pipeline_2"</td>
+</tr>
+<tr class="even">
+<td>"all_interpretable"</td>
+<td>"profiles_wellpos_cc_var_mad_ou…</td>
+<td>"0224e0f"</td>
+<td>"pipeline_2"</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>We do not need the ‘etag’ (used to check file integrity) column nor the ‘interpretable’ (i.e., before major modifications)</p>
-<div id="ad90ac75" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>selected_profiles <span class="op">=</span> profile_index.<span class="bu">filter</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"subset"</span>).is_in((<span class="st">"crispr"</span>, <span class="st">"orf"</span>, <span class="st">"compound"</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>).select(pl.exclude(<span class="st">"etag"</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>filepaths <span class="op">=</span> <span class="bu">dict</span>(selected_profiles.iter_rows())</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(filepaths)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let inspect the standard profiles.</p>
+<div id="240518ca" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dictionary of subset -&gt; url for the standard profiles only</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>filepaths <span class="op">=</span> {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    dataset[<span class="st">"subset"</span>]: dataset[<span class="st">"url"</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dataset <span class="kw">in</span> profile_index</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dataset[<span class="st">"subset"</span>] <span class="kw">in</span> (<span class="st">"crispr"</span>, <span class="st">"orf"</span>, <span class="st">"compound"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Selected profiles:"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subset, url <span class="kw">in</span> filepaths.items():</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>subset<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>url<span class="sc">.</span>split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'orf': 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/ORF/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.parquet', 'crispr': 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/CRISPR/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected/profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.parquet', 'compound': 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump-assembled/source_all/workspace/profiles/jump-profiling-recipe_2024_a917fa7/COMPOUND/profiles_var_mad_int_featselect_harmony/profiles_var_mad_int_featselect_harmony.parquet'}</code></pre>
+<pre><code>Selected profiles:
+  orf: profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.parquet
+  crispr: profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_PCA_corrected.parquet
+  compound: profiles_var_mad_int_featselect_harmony.parquet</code></pre>
 </div>
 </div>
 <p>We will lazy-load the dataframes and print the number of rows and columns</p>
-<div id="13d93337" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"dataset"</span>, <span class="st">"#rows"</span>, <span class="st">"#cols"</span>, <span class="st">"#Metadata cols"</span>, <span class="st">"Size (MB)"</span>)}</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> filepaths.items():</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pl.scan_parquet(path)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> data.select(pl.<span class="bu">len</span>()).collect().item()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    schema <span class="op">=</span> data.collect_schema()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    metadata_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> schema.keys() <span class="cf">if</span> col.startswith(<span class="st">"Metadata"</span>)]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> schema.<span class="bu">len</span>()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    n_meta_cols <span class="op">=</span> <span class="bu">len</span>(metadata_cols)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    estimated_size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">4.03</span> <span class="op">*</span> n_rows <span class="op">*</span> n_cols <span class="op">/</span> <span class="fl">1e6</span>, <span class="dv">0</span>))  <span class="co"># B -&gt; MB</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">zip</span>(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        info[k].append(v)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="96cb96f7" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>info <span class="op">=</span> {k: [] <span class="cf">for</span> k <span class="kw">in</span> (<span class="st">"dataset"</span>, <span class="st">"#rows"</span>, <span class="st">"#cols"</span>, <span class="st">"#Metadata cols"</span>, <span class="st">"Size (MB)"</span>)}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, path <span class="kw">in</span> filepaths.items():</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pl.scan_parquet(path)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    n_rows <span class="op">=</span> data.select(pl.<span class="bu">len</span>()).collect().item()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    schema <span class="op">=</span> data.collect_schema()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    metadata_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> schema.keys() <span class="cf">if</span> col.startswith(<span class="st">"Metadata"</span>)]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    n_cols <span class="op">=</span> schema.<span class="bu">len</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    n_meta_cols <span class="op">=</span> <span class="bu">len</span>(metadata_cols)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    estimated_size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">4.03</span> <span class="op">*</span> n_rows <span class="op">*</span> n_cols <span class="op">/</span> <span class="fl">1e6</span>, <span class="dv">0</span>))  <span class="co"># B -&gt; MB</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">zip</span>(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        info[k].append(v)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>pl.DataFrame(info)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -659,10 +728,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Let us now focus on the <code>crispr</code> dataset and use a regex to select the metadata columns. We will then sample rows and display the overview. Note that the collect() method enforces loading some data into memory.</p>
-<div id="08d1afca" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.scan_parquet(filepaths[<span class="st">"crispr"</span>])</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data.select(pl.col(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="2ee88de7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pl.scan_parquet(filepaths[<span class="st">"crispr"</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data.select(pl.col(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -723,10 +792,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The following line excludes the metadata columns:</p>
-<div id="4fee979c" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_only <span class="op">=</span> data.select(pl.<span class="bu">all</span>().exclude(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data_only</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div id="492c45e7" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data_only <span class="op">=</span> data.select(pl.<span class="bu">all</span>().exclude(<span class="st">"^Metadata.*$"</span>).sample(n<span class="op">=</span><span class="dv">5</span>, seed<span class="op">=</span><span class="dv">1</span>)).collect()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data_only</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -1284,9 +1353,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Finally, we can convert this to <code>pandas</code> if we want to perform analyses with that tool. Keep in mind that this loads the entire dataframe into memory.</p>
-<div id="c0fb90f3" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_only.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="41f51588" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data_only.to_pandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
