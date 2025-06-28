@@ -2,81 +2,17 @@
 
 Have custom-processed JUMP profiles? Here's how to share them with others.
 
-**Note**: This guide describes the recommended approach for new projects. Some existing datasets may use different URL structures with metadata embedded in paths. While existing JUMP manifests use CSV format, we now recommend JSON for new projects due to its flexibility and structure.
-
 ## Prerequisites
 
-- Processed profiles from [jump-profiling-recipe](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md)
-- AWS CLI configured (for S3 upload)
+- Profiles processed using [jump-profiling-recipe](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md)
 - A GitHub repository for your project
+- AWS CLI configured (for S3 upload)
+- `jq` and `curl` installed
 
-## URL Structure with Manifest-Based Provenance
+## Overview
 
-Store your processed profiles using semantic paths with versioning metadata tracked in the manifest:
+You will create a manifest file that documents your processed profiles:
 
-```
-https://s3.amazonaws.com/bucket/project/source_all/workspace/profiles/subset/version/pipeline_filename.parquet
-```
-
-**Components:**
-- `source_all/workspace/profiles/` - Standard JUMP dataset path structure
-- `subset/` - Data description (compound_no_source7, orf_combined, crispr, etc.)
-- `version/` - Dataset version (v1.0, v1.1, v2.0, etc.)
-- `pipeline_filename.parquet` - Filename preserves the pipeline string (e.g., `profiles_var_mad_int_featselect_harmony.parquet`)
-
-**Approach:**
-- **Semantic paths** organize data by subset and version for easy navigation
-- **Independent versioning** allows you to version different subsets separately
-- **Manifest-based provenance** captures all processing details without embedding them in paths
-- **GitHub permalinks** provide permanent references to exact code and configuration
-
-**Provenance Tracking:**
-Processing details (recipe version, config, commit) are captured in the manifest using GitHub permalinks that provide permanent links to the exact code and configuration used.
-
-## Steps
-
-We'll walk through creating a manifest for the 2024_Chandrasekaran_Production project as an example.
-
-### 1. Upload to S3
-
-Upload your profiles using semantic paths:
-
-```bash
-# Note the version/commit of jump-profiling-recipe used
-# For the Chandrasekaran example, we used v0.6.0
-
-# Set variables for the Chandrasekaran example
-SUBSET="compound_no_source7"  # Descriptive name for this data subset
-VERSION="v1.0"  # Dataset version 
-PROFILES_FILE="profiles_var_mad_int_featselect_harmony.parquet"  # Final processed profiles
-INTERPRETABLE_PROFILES_FILE="profiles_var_mad_int_featselect.parquet"  # Interpretable profiles
-
-# Upload to semantic paths:
-aws s3 cp /path/to/${PROFILES_FILE} \
-  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/${PROFILES_FILE}
-
-aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
-  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
-
-# Verify upload succeeded
-aws s3 ls s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/ --recursive --human-readable
-```
-
-This creates the final URLs:
-```
-https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet
-https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet
-```
-
-### 2. Create manifest in your project repo
-
-In your project repository, create the directory structure:
-
-```bash
-mkdir -p manifests
-```
-
-Create `manifests/profile_index.json` for the Chandrasekaran example:
 
 ```json
 {
@@ -99,29 +35,84 @@ Create `manifests/profile_index.json` for the Chandrasekaran example:
 }
 ```
 
-The permalinks connect to specific recipe versions and config files. Input file versioning would be needed for complete reproducibility, but that is outside the current system's scope.
+This manifest provides:
 
-### 3. Add ETags for data integrity
+1. **Centralized profile registry** - All processed profile sets in one place
+2. **Provenance tracking** - Recipe version and config file URLs enable reproducibility (Note: versioning of input files to the recipe would be needed for complete reproducibility, but that is outside the current system's scope)
+3. **Standardized paths** - URLs follow the [Cell Painting Gallery folder structure](https://broadinstitute.github.io/cellpainting-gallery/data_structure.html) convention:
+   - `source_all/workspace/profiles/` - Standard JUMP dataset path structure. The `source_all` is typically an institution identifier and should be present even if data is from a single source. While you may store data elsewhere, we recommend following this structure for compatibility.
+   - `subset/` - Data description (compound_no_source7, orf_combined, crispr, etc.)
+   - `version/` - Dataset version (v1.0, v1.1, v2.0, etc.)
+   - `pipeline_filename.parquet` - Filename preserves the pipeline string (e.g., `profiles_var_mad_int_featselect_harmony.parquet`)
 
-ETags are checksums that ensure data integrity when downloading. Use the automated script from the JUMP datasets repository:
+
+## Step-by-Step Guide
+
+We'll use the [2024_Chandrasekaran_Production](https://github.com/jump-cellpainting/2024_Chandrasekaran_Production) project as an example, specifically the `compound_no_source7_interpretable` subset.
+
+### Step 1: Define your dataset parameters
+
+Note the version of `jump-profiling-recipe` you used (e.g., `v0.6.0` for this example).
+
 
 ```bash
-# First, download the update_etags.sh script
+SUBSET="compound_no_source7"  # Descriptive name for this data subset
+VERSION="v1.0"  # Dataset version 
+PROFILES_FILE="profiles_var_mad_int_featselect_harmony.parquet"  # Final processed profiles
+INTERPRETABLE_PROFILES_FILE="profiles_var_mad_int_featselect.parquet"  # Interpretable profiles
+```
+
+### Step 2: Upload your profiles to storage
+
+This example shows uploading to S3, but adapt the commands for your storage location.
+
+```bash
+aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
+  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
+
+# Verify upload succeeded
+aws s3 ls s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/ --human-readable
+```
+
+### Step 3: Create the manifest file
+
+In your project repository, create `manifests/profile_index.json`:
+
+```json
+{
+    "datasets": [
+        {
+            "subset": "compound_no_source7_interpretable",
+            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet",
+            "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
+            "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
+            "etag": ""
+        }
+    ]
+}
+```
+
+### Step 4: Add ETags for data integrity
+
+ETags are checksums that ensure data integrity when downloading. Use the automated script from the JUMP datasets repository.
+
+Download the update_etags.sh script (check https://github.com/jump-cellpainting/datasets/tags for newer versions):
+
+```bash
 mkdir -p manifests/src
 curl -o manifests/src/update_etags.sh https://raw.githubusercontent.com/jump-cellpainting/datasets/refs/tags/v0.10.0/manifests/src/update_etags.sh
+```
 
-# Make sure you have the required dependencies
-# Install if needed: jq, curl, and sponge (from moreutils package)
 
-# Update ETags automatically
-bash manifests/src/update_etags.sh manifests/profile_index.json | sponge manifests/profile_index.json
+Run the script to update ETags automatically:
 
-# The script will fetch current ETags for all URLs in your manifest and update them in-place
+```bash
+bash manifests/src/update_etags.sh manifests/profile_index.json > manifests/profile_index.json.tmp && mv manifests/profile_index.json.tmp manifests/profile_index.json
 ```
 
 The script automatically fetches and updates ETags for all URLs in your manifest. See the [README](https://github.com/jump-cellpainting/datasets/blob/main/manifests/src/README.md) for details.
 
-### 4. Commit and push
+### Step 5: Commit and push your manifest
 
 ```bash
 git add manifests/profile_index.json
@@ -129,37 +120,13 @@ git commit -m "Add profile manifest"
 git push
 ```
 
-### 5. Use your manifest
+## Using Your Manifest
 
-Your Chandrasekaran project manifest is now ready for use:
+Your profiles are now documented and ready to share! See [`scripts/11_retrieve_profiles.py`](../scripts/11_retrieve_profiles.py) for an example of how to consume manifest files.
 
-```python
-# In any analysis script
-import requests
+## Reference Examples
 
-INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/2024_Chandrasekaran_Production/main/manifests/profile_index.json"
-manifest = requests.get(INDEX_FILE).json()
+See these projects for reference implementations:
+- [Main JUMP datasets](https://github.com/jump-cellpainting/datasets/blob/v0.10.0/manifests/profile_index.json)
+- [2024_Chandrasekaran_Production](https://github.com/jump-cellpainting/2024_Chandrasekaran_Production/blob/main/manifests/profile_index.json)
 
-# Access data and provenance for each dataset:
-for dataset in manifest["datasets"]:
-    print(dataset["subset"], dataset["url"])
-    # dataset["recipe_permalink"] - Exact processing code
-    # dataset["config_permalink"] - Exact configuration used
-
-# Continue with standard retrieval process
-# ... follow scripts/11_retrieve_profiles.py workflow
-```
-
-This provides complete reproducibility while organizing data by subset and version.
-
-## Example Projects
-
-See these projects for reference:
-- [Main JUMP datasets](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.csv) - uses CSV format (legacy)
-- [2024_Chandrasekaran_Production](https://github.com/jump-cellpainting/2024_Chandrasekaran_Production/blob/main/manifests/profile_index.json) - uses JSON format (recommended)
-
-Note: Existing projects may still use CSV format. New projects should use JSON as shown in this guide.
-
-## Need to Process Data First?
-
-See the [jump-profiling-recipe documentation](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md) for processing instructions.
