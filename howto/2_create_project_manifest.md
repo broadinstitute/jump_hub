@@ -6,7 +6,7 @@ Have custom-processed JUMP profiles? Here's how to share them with others.
 
 - Profiles processed using [jump-profiling-recipe](https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md)
 - A GitHub repository for your project
-- AWS CLI configured (for S3 upload)
+- AWS CLI configured (for S3 upload) or appropriate CLI for your cloud provider
 - `jq` and `curl` installed
 
 ## Overview
@@ -52,9 +52,6 @@ We'll use the [2024_Chandrasekaran_Production](https://github.com/jump-cellpaint
 
 ### Step 1: Define your dataset parameters
 
-Note the version of `jump-profiling-recipe` you used (e.g., `v0.6.0` for this example).
-
-
 ```bash
 SUBSET="compound_no_source7"  # Descriptive name for this data subset
 VERSION="v1.0"  # Dataset version 
@@ -65,6 +62,8 @@ INTERPRETABLE_PROFILES_FILE="profiles_var_mad_int_featselect.parquet"  # Interpr
 ### Step 2: Upload your profiles to storage
 
 This example shows uploading to S3, but adapt the commands for your storage location.
+
+**Note for Cell Painting Gallery uploads:** Please follow the [contribution guidelines](https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html) which will require creating a unique prefix (e.g., `cpg0042-chandrasekaran-jump`). 
 
 ```bash
 aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
@@ -92,6 +91,13 @@ In your project repository, create `manifests/profile_index.json`:
 }
 ```
 
+**Note on recipe versioning:**
+
+- If using a tagged version (e.g., `v0.6.0`), use the tag URL: `https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0`
+- If using an untagged version, use the commit hash: `https://github.com/broadinstitute/jump-profiling-recipe/tree/522aa81cad73d5776f62745fd0cd19336d4cfff3`
+- If using your own fork, point to your fork instead
+- The goal is to provide a permanent link to the exact recipe version used 
+
 ### Step 4: Add ETags for data integrity
 
 ETags are checksums that ensure data integrity when downloading. Use the automated script from the JUMP datasets repository.
@@ -102,7 +108,6 @@ Download the update_etags.sh script (check https://github.com/jump-cellpainting/
 mkdir -p manifests/src
 curl -o manifests/src/update_etags.sh https://raw.githubusercontent.com/jump-cellpainting/datasets/refs/tags/v0.10.0/manifests/src/update_etags.sh
 ```
-
 
 Run the script to update ETags automatically:
 
