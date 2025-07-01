@@ -102,7 +102,7 @@ Download the update_etags.sh script (check https://github.com/jump-cellpainting/
 
 ```bash
 mkdir -p manifests/src
-curl -o manifests/src/update_etags.sh https://raw.githubusercontent.com/jump-cellpainting/datasets/refs/tags/v0.10.0/manifests/src/update_etags.sh
+curl -o manifests/src/update_etags.sh https://raw.githubusercontent.com/jump-cellpainting/datasets/refs/heads/main/manifests/src/update_etags.sh
 ```
 
 Run the script to update ETags automatically:
@@ -128,6 +128,6 @@ Your profiles are now documented and ready to share! See [`scripts/11_retrieve_p
 ## Reference Examples
 
 See these projects for reference implementations:
-- [Main JUMP datasets](https://github.com/jump-cellpainting/datasets/blob/v0.10.0/manifests/profile_index.json)
+- [Main JUMP datasets](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json)
 - [2024_Chandrasekaran_Production](https://github.com/jump-cellpainting/2024_Chandrasekaran_Production/blob/main/manifests/profile_index.json)
 
