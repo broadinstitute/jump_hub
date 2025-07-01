@@ -19,14 +19,14 @@ You will create a manifest file that documents your processed profiles:
     "datasets": [
         {
             "subset": "compound_no_source7",
-            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
+            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles_assembled/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
             "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
             "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
             "etag": ""
         },
         {
             "subset": "compound_no_source7_interpretable",
-            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet",
+            "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles_assembled/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet",
             "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
             "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
             "etag": ""
@@ -40,7 +40,7 @@ This manifest provides:
 1. **Centralized profile registry** - All processed profile sets in one place
 2. **Provenance tracking** - Recipe version and config file URLs enable reproducibility (Note: versioning of input files to the recipe would be needed for complete reproducibility, but that is outside the current system's scope)
 3. **Standardized paths** - URLs follow the [Cell Painting Gallery folder structure](https://broadinstitute.github.io/cellpainting-gallery/data_structure.html) convention:
-   - `source_all/workspace/profiles/` - Standard JUMP dataset path structure. The `source_all` is typically an institution identifier and should be present even if data is from a single source. While you may store data elsewhere, we recommend following this structure for compatibility.
+   - `source_all/workspace/profiles_assembled/` - Standard JUMP dataset path structure. The `source_all` is typically an institution identifier and should be present even if data is from a single source. While you may store data elsewhere, we recommend following this structure for compatibility.
    - `subset/` - Data description (compound_no_source7, orf_combined, crispr, etc.)
    - `version/` - Dataset version (v1.0, v1.1, v2.0, etc.)
    - `pipeline_filename.parquet` - Filename preserves the pipeline string (e.g., `profiles_var_mad_int_featselect_harmony.parquet`)
@@ -67,7 +67,7 @@ This example shows uploading to S3, but adapt the commands for your storage loca
 
 ```bash
 aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
-  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
+  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles_assembled/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
 
 # Verify upload succeeded
 aws s3 ls s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/ --human-readable
