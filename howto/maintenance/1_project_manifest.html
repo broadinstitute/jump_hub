@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cite – JUMP documentation and examples</title>
+<title>project_manifest – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d1029c8c0624b678ec1882d5dbfbed62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-317fa9c8a93cbaa92631be92f51646c5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-d1029c8c0624b678ec1882d5dbfbed62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d1029c8c0624b678ec1882d5dbfbed62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-317fa9c8a93cbaa92631be92f51646c5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-d1029c8c0624b678ec1882d5dbfbed62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -245,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cite.html">Cite</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../howto/maintenance/1_project_manifest.html">For maintainers</a></li><li class="breadcrumb-item"><a href="../../howto/maintenance/1_project_manifest.html">Creating a Project Manifest</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">JUMP documentation and examples</a> 
+      <a href="../../">JUMP documentation and examples</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -277,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -292,25 +327,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/data_description.html" class="sidebar-item-text sidebar-link">
+  <a href="../../explanations/data_description.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dataset Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="../../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/known_issues.html" class="sidebar-item-text sidebar-link">
+  <a href="../../explanations/known_issues.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Known issues</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
+  <a href="../../explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quirks and details</span></a>
   </div>
 </li>
@@ -327,25 +362,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available genes in JUMP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/01_chemical_query.html" class="sidebar-item-text sidebar-link">
+  <a href="../../reference/01_chemical_query.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available chemicals in JUMP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/computational_pipelines.html" class="sidebar-item-text sidebar-link">
+  <a href="../../reference/computational_pipelines.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Computational Pipelines</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/glossary.html" class="sidebar-item-text sidebar-link">
+  <a href="../../reference/glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glossary and Acronyms</span></a>
   </div>
 </li>
@@ -362,43 +397,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview of Notebooks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retrieve JUMP profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/12_add_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/12_add_metadata.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Add metadata to profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculate phenotypic activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Display perturbation images</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explore perturbation clusters</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/notebooks/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Query genes for more info</span></a>
   </div>
 </li>
@@ -415,13 +450,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview of Interactive tools</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/interactive/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/interactive/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">JUMP_rr tutorial</span></a>
   </div>
 </li>
@@ -429,16 +464,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">For maintainers</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/maintenance/1_project_manifest.html" class="sidebar-item-text sidebar-link">
+  <a href="../../howto/maintenance/1_project_manifest.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Creating a Project Manifest</span></a>
   </div>
 </li>
@@ -446,7 +481,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cite.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../cite.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cite</span></a>
   </div>
 </li>
@@ -460,40 +495,139 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#citing-the-jump-resources" id="toc-citing-the-jump-resources" class="nav-link active" data-scroll-target="#citing-the-jump-resources">Citing the JUMP Resources</a>
+  <li><a href="#creating-a-project-manifest" id="toc-creating-a-project-manifest" class="nav-link active" data-scroll-target="#creating-a-project-manifest">Creating a Project Manifest</a>
   <ul class="collapse">
-  <li><a href="#citing-the-resource-as-a-whole" id="toc-citing-the-resource-as-a-whole" class="nav-link" data-scroll-target="#citing-the-resource-as-a-whole">Citing the Resource as a Whole</a></li>
-  <li><a href="#citing-individual-datasets" id="toc-citing-individual-datasets" class="nav-link" data-scroll-target="#citing-individual-datasets">Citing Individual Datasets</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#step-by-step-guide" id="toc-step-by-step-guide" class="nav-link" data-scroll-target="#step-by-step-guide">Step-by-Step Guide</a>
+  <ul class="collapse">
+  <li><a href="#step-1-define-your-dataset-parameters" id="toc-step-1-define-your-dataset-parameters" class="nav-link" data-scroll-target="#step-1-define-your-dataset-parameters">Step 1: Define your dataset parameters</a></li>
+  <li><a href="#step-2-upload-your-profiles-to-storage" id="toc-step-2-upload-your-profiles-to-storage" class="nav-link" data-scroll-target="#step-2-upload-your-profiles-to-storage">Step 2: Upload your profiles to storage</a></li>
+  <li><a href="#step-3-create-the-manifest-file" id="toc-step-3-create-the-manifest-file" class="nav-link" data-scroll-target="#step-3-create-the-manifest-file">Step 3: Create the manifest file</a></li>
+  <li><a href="#step-4-add-etags-for-data-integrity" id="toc-step-4-add-etags-for-data-integrity" class="nav-link" data-scroll-target="#step-4-add-etags-for-data-integrity">Step 4: Add ETags for data integrity</a></li>
+  <li><a href="#step-5-commit-and-push-your-manifest" id="toc-step-5-commit-and-push-your-manifest" class="nav-link" data-scroll-target="#step-5-commit-and-push-your-manifest">Step 5: Commit and push your manifest</a></li>
+  </ul></li>
+  <li><a href="#using-your-manifest" id="toc-using-your-manifest" class="nav-link" data-scroll-target="#using-your-manifest">Using Your Manifest</a></li>
+  <li><a href="#reference-examples" id="toc-reference-examples" class="nav-link" data-scroll-target="#reference-examples">Reference Examples</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/cite.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/cite.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="cite.ipynb" download="cite.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/maintenance/1_project_manifest.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/maintenance/1_project_manifest.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="1_project_manifest.ipynb" download="1_project_manifest.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../howto/maintenance/1_project_manifest.html">For maintainers</a></li><li class="breadcrumb-item"><a href="../../howto/maintenance/1_project_manifest.html">Creating a Project Manifest</a></li></ol></nav></header>
 
 
 
 
 
-<section id="citing-the-jump-resources" class="level1">
-<h1>Citing the JUMP Resources</h1>
-<p>All data is released under the CC0 1.0 Universal (CC0 1.0) license, but academic citation is expected and appreciated, given the effort invested in creating and maintaining this resource.</p>
-<section id="citing-the-resource-as-a-whole" class="level2">
-<h2 class="anchored" data-anchor-id="citing-the-resource-as-a-whole">Citing the Resource as a Whole</h2>
-<p>Please use the following format to cite the JUMP Cell Painting datasets:</p>
-<p><em>We used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (<a href="https://registry.opendata.aws/cellpainting-gallery/">https://registry.opendata.aws/cellpainting-gallery/</a>).</em></p>
-<p>Chandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023<br>
-Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
+<section id="creating-a-project-manifest" class="level1">
+<h1>Creating a Project Manifest</h1>
+<p>Have custom-processed JUMP profiles? Here’s how to share them with others.</p>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Profiles processed using <a href="https://github.com/broadinstitute/jump-profiling-recipe/blob/main/DOCUMENTATION.md">jump-profiling-recipe</a></li>
+<li>A GitHub repository for your project</li>
+<li>AWS CLI configured (for S3 upload) or appropriate CLI for your cloud provider</li>
+<li><code>jq</code> and <code>curl</code> installed</li>
+</ul>
 </section>
-<section id="citing-individual-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="citing-individual-datasets">Citing Individual Datasets</h2>
-<p>To cite individual JUMP Cell Painting datasets, follow the guidelines in the <a href="https://broadinstitute.github.io/cellpainting-gallery/citing.html">Cell Painting Gallery citation guide</a>. For example:</p>
-<p><em>We used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (<a href="https://registry.opendata.aws/cellpainting-gallery/">https://registry.opendata.aws/cellpainting-gallery/</a>).</em></p>
-<p>Cimini et al., 2022: doi:10.1038/s41596-023-00840-9<br>
-Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
-<p><em>We used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (<a href="https://registry.opendata.aws/cellpainting-gallery/">https://registry.opendata.aws/cellpainting-gallery/</a>).</em></p>
-<p>Chandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6<br>
-Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>You will create a manifest file that documents your processed profiles:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"subset"</span><span class="fu">:</span> <span class="st">"compound_no_source7"</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet"</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"recipe_permalink"</span><span class="fu">:</span> <span class="st">"https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0"</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"config_permalink"</span><span class="fu">:</span> <span class="st">"https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json"</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"etag"</span><span class="fu">:</span> <span class="st">""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"subset"</span><span class="fu">:</span> <span class="st">"compound_no_source7_interpretable"</span><span class="fu">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet"</span><span class="fu">,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"recipe_permalink"</span><span class="fu">:</span> <span class="st">"https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0"</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"config_permalink"</span><span class="fu">:</span> <span class="st">"https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json"</span><span class="fu">,</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"etag"</span><span class="fu">:</span> <span class="st">""</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This manifest provides:</p>
+<ol type="1">
+<li><strong>Centralized profile registry</strong> - All processed profile sets in one place</li>
+<li><strong>Provenance tracking</strong> - Recipe version and config file URLs enable reproducibility (Note: versioning of input files to the recipe would be needed for complete reproducibility, but that is outside the current system’s scope)</li>
+<li><strong>Standardized paths</strong> - URLs follow the <a href="https://broadinstitute.github.io/cellpainting-gallery/data_structure.html">Cell Painting Gallery folder structure</a> convention:
+<ul>
+<li><code>source_all/workspace/profiles_assembled/</code> - Standard JUMP dataset path structure. The <code>source_all</code> is typically an institution identifier and should be present even if data is from a single source. While you may store data elsewhere, we recommend following this structure for compatibility.</li>
+<li><code>subset/</code> - Data description (compound_no_source7, orf_combined, crispr, etc.)</li>
+<li><code>version/</code> - Dataset version (v1.0, v1.1, v2.0, etc.)</li>
+<li><code>pipeline_filename.parquet</code> - Filename preserves the pipeline string (e.g., <code>profiles_var_mad_int_featselect_harmony.parquet</code>)</li>
+</ul></li>
+</ol>
+</section>
+<section id="step-by-step-guide" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-guide">Step-by-Step Guide</h2>
+<p>We’ll use the <a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Production">2024_Chandrasekaran_Production</a> project as an example, specifically the <code>compound_no_source7_interpretable</code> subset.</p>
+<section id="step-1-define-your-dataset-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-define-your-dataset-parameters">Step 1: Define your dataset parameters</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">SUBSET</span><span class="op">=</span><span class="st">"compound_no_source7"</span>  <span class="co"># Descriptive name for this data subset</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">VERSION</span><span class="op">=</span><span class="st">"v1.0"</span>  <span class="co"># Dataset version </span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">PROFILES_FILE</span><span class="op">=</span><span class="st">"profiles_var_mad_int_featselect_harmony.parquet"</span>  <span class="co"># Final processed profiles</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">INTERPRETABLE_PROFILES_FILE</span><span class="op">=</span><span class="st">"profiles_var_mad_int_featselect.parquet"</span>  <span class="co"># Interpretable profiles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-2-upload-your-profiles-to-storage" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-upload-your-profiles-to-storage">Step 2: Upload your profiles to storage</h3>
+<p>This example shows uploading to S3, but adapt the commands for your storage location.</p>
+<p><strong>Note for Cell Painting Gallery uploads:</strong> Please follow the <a href="https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html">contribution guidelines</a> which will require creating a unique prefix (e.g., <code>cpg0042-chandrasekaran-jump</code>).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 cp /path/to/<span class="va">${INTERPRETABLE_PROFILES_FILE}</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles_assembled/<span class="va">${SUBSET}</span>/<span class="va">${VERSION}</span>/<span class="va">${INTERPRETABLE_PROFILES_FILE}</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify upload succeeded</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 ls s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/<span class="va">${SUBSET}</span>/<span class="va">${VERSION}</span>/ <span class="at">--human-readable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-3-create-the-manifest-file" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-create-the-manifest-file">Step 3: Create the manifest file</h3>
+<p>In your project repository, create <code>manifests/profile_index.json</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"subset"</span><span class="fu">:</span> <span class="st">"compound_no_source7"</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"recipe_permalink"</span><span class="fu">:</span> <span class="st">"https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0"</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"config_permalink"</span><span class="fu">:</span> <span class="st">"https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json"</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">"etag"</span><span class="fu">:</span> <span class="st">""</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ot">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Note on recipe versioning:</strong></p>
+<ul>
+<li>If using a tagged version (e.g., <code>v0.6.0</code>), use the tag URL: <code>https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0</code></li>
+<li>If using an untagged version, use the commit hash: <code>https://github.com/broadinstitute/jump-profiling-recipe/tree/522aa81cad73d5776f62745fd0cd19336d4cfff3</code></li>
+<li>If using your own fork, point to your fork instead</li>
+<li>The goal is to provide a permanent link to the exact recipe version used</li>
+</ul>
+</section>
+<section id="step-4-add-etags-for-data-integrity" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-add-etags-for-data-integrity">Step 4: Add ETags for data integrity</h3>
+<p>ETags are checksums that ensure data integrity when downloading. Use the automated script from the JUMP datasets repository.</p>
+<p>Download the update_etags.sh script (check https://github.com/jump-cellpainting/datasets/tags for newer versions):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> manifests/src</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-o</span> manifests/src/update_etags.sh https://raw.githubusercontent.com/jump-cellpainting/datasets/refs/heads/main/manifests/src/update_etags.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Run the script to update ETags automatically:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> manifests/src/update_etags.sh manifests/profile_index.json <span class="op">&gt;</span> manifests/profile_index.json.tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> manifests/profile_index.json.tmp manifests/profile_index.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The script automatically fetches and updates ETags for all URLs in your manifest. See the <a href="https://github.com/jump-cellpainting/datasets/blob/main/manifests/src/README.md">README</a> for details.</p>
+</section>
+<section id="step-5-commit-and-push-your-manifest" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-commit-and-push-your-manifest">Step 5: Commit and push your manifest</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add manifests/profile_index.json</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add profile manifest"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="using-your-manifest" class="level2">
+<h2 class="anchored" data-anchor-id="using-your-manifest">Using Your Manifest</h2>
+<p>Your profiles are now documented and ready to share! See <a href="../scripts/11_retrieve_profiles.py"><code>scripts/11_retrieve_profiles.py</code></a> for an example of how to consume manifest files.</p>
+</section>
+<section id="reference-examples" class="level2">
+<h2 class="anchored" data-anchor-id="reference-examples">Reference Examples</h2>
+<p>See these projects for reference implementations: - <a href="https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json">Main JUMP datasets</a> - <a href="https://github.com/jump-cellpainting/2024_Chandrasekaran_Production/blob/main/manifests/profile_index.json">2024_Chandrasekaran_Production</a></p>
 
 
 </section>
@@ -917,4 +1051,4 @@ Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/cite.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/cite.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/howto/maintenance/1_project_manifest.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/howto/maintenance/1_project_manifest.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
