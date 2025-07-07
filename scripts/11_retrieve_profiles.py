@@ -20,7 +20,10 @@
 # We prefer lazy loading because the data can be too big to be handled in memory.
 
 # %% Imports
+import pprint
+
 import polars as pl
+import requests
 
 # %% [markdown]
 # The JUMP Cell Painting project provides several processed datasets for morphological profiling:
@@ -42,31 +45,31 @@ import polars as pl
 # The index file below contains the exact locations and metadata for each dataset:
 
 # %% Paths
-INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.9.0/manifests/profile_index.csv"
+INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11.0/manifests/profile_index.json"
 
 # %% [markdown]
 # We use the version-controlled CSV above to release the latest corrected profiles
 
 # %%
-profile_index = pl.read_csv(INDEX_FILE)
-profile_index.head()
-
+profile_index = requests.get(INDEX_FILE).json()
+pprint.pformat(profile_index[:3], compact=True)
 # %% [markdown]
 # We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
 
 # %%
-selected_profiles = profile_index.filter(
-    pl.col("subset").is_in(("crispr", "orf", "compound"))
-).select(pl.exclude("etag"))
-filepaths = dict(selected_profiles.iter_rows())
-print(filepaths)
+subset_url = {
+    x["subset"]: x["url"]
+    for x in profile_index
+    if x["subset"] in ("crispr", "orf", "compound")
+}
+print(subset_url)
 
 # %% [markdown]
 # We will lazy-load the dataframes and print the number of rows and columns
 
 # %%
 info = {k: [] for k in ("dataset", "#rows", "#cols", "#Metadata cols", "Size (MB)")}
-for name, path in filepaths.items():
+for subset_name, path in subset_url.items():
     data = pl.scan_parquet(path)
     n_rows = data.select(pl.len()).collect().item()
     schema = data.collect_schema()
@@ -74,7 +77,9 @@ for name, path in filepaths.items():
     n_cols = schema.len()
     n_meta_cols = len(metadata_cols)
     estimated_size = int(round(4.03 * n_rows * n_cols / 1e6, 0))  # B -> MB
-    for k, v in zip(info.keys(), (name, n_rows, n_cols, n_meta_cols, estimated_size)):
+    for k, v in zip(
+        info.keys(), (subset_name, n_rows, n_cols, n_meta_cols, estimated_size)
+    ):
         info[k].append(v)
 
 pl.DataFrame(info)
@@ -85,7 +90,7 @@ pl.DataFrame(info)
 # Note that the collect() method enforces loading some data into memory.
 
 # %%
-data = pl.scan_parquet(filepaths["crispr"])
+data = pl.scan_parquet(subset_url["crispr"])
 data.select(pl.col("^Metadata.*$").sample(n=5, seed=1)).collect()
 
 # %% [markdown]
