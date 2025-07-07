@@ -123,7 +123,7 @@ git push
 
 ## Using Your Manifest
 
-Your profiles are now documented and ready to share! See [`scripts/11_retrieve_profiles.py`](../scripts/11_retrieve_profiles.py) for an example of how to consume manifest files.
+Your profiles are now documented and ready to share! See [`scripts/11_retrieve_profiles.py`](../../scripts/11_retrieve_profiles.py) for an example of how to consume manifest files.
 
 ## Reference Examples
 
