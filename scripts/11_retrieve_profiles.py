@@ -14,56 +14,85 @@
 #     name: python3
 # ---
 
-# %% [markdown]
-# This is a tutorial on how to access profiles from the [JUMP Cell Painting datasets](https://github.com/jump-cellpainting/datasets).
-# We will use polars to fetch the data frames lazily, with the help of `s3fs` and `pyarrow`.
-# We prefer lazy loading because the data can be too big to be handled in memory.
-
 # %% Imports
 import pprint
 
 import polars as pl
 import requests
-
 # %% [markdown]
-# The JUMP Cell Painting project provides several processed datasets for morphological profiling:
+#
+# The JUMP Cell Painting project provides several processed datasets for morphological profiling.
+# Choose the dataset that matches your perturbation type:
 #
 # - **`crispr`**: CRISPR knockout genetic perturbations
 # - **`orf`**: Open Reading Frame (ORF) overexpression perturbations
 # - **`compound`**: Chemical compound perturbations
-# - **`all`**: Combined dataset containing all perturbation types
+# - **`all`**: Combined dataset containing all perturbation types (use for cross-modality comparisons)
 #
-# Each dataset is available in two versions:
+# Each dataset is available in two processing versions:
 #
-# - **Standard**: Fully processed including batch correction
-# - **Interpretable**: Same processing but without batch correction steps (which involve transformations that lose the original feature space)
+# - **Standard** (e.g., `crispr`, `compound`, `orf`): Fully processed including batch correction steps. **Recommended for most analyses** as they provide better cross-dataset comparability.
+#
+# - **Interpretable** (e.g., `crispr_interpretable`, `compound_interpretable`, `orf_interpretable`): Same initial processing but without batch correction transformations that modify the original feature space. Use these when you need to interpret individual morphological features.
 #
 # All datasets are stored as Parquet files on AWS S3 and can be accessed directly via their URLs.
-# Snakemake workflows for producing these assembled profiles are available [here](https://github.com/broadinstitute/jump-profiling-recipe/).
-# The specific commit used to produce the profiles can be found in the folder path of each parquet file.
-# For example, `jump-profiling-recipe_2024_a917fa7` indicates commit `a917fa7` was used.
-# The index file below contains the exact locations and metadata for each dataset:
+#
+# The index file below contains the **recommended profiles** for each subset. Each profile includes:
+# - Direct links to the processing recipe and configuration used
+# - ETags for data integrity verification
+#
+# For details on creating your own profile manifests, see the [manifest guide](https://github.com/broadinstitute/jump_hub/blob/main/howto/2_create_project_manifest.md).
 
 # %% Paths
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11.0/manifests/profile_index.json"
-
 # %% [markdown]
-# We use the version-controlled CSV above to release the latest corrected profiles
+# We use the version-controlled manifest above to release the latest corrected profiles
 
 # %%
-profile_index = requests.get(INDEX_FILE).json()
-pprint.pformat(profile_index[:3], compact=True)
+# Load the JSON manifest
+response = requests.get(INDEX_FILE)
+profile_index = response.json()
+
+# Display the manifest data
+for dataset in profile_index:
+    print(f"- {dataset['subset']}: {dataset['url']}")
 # %% [markdown]
-# We do not need the 'etag' (used to check file integrity) column nor the 'interpretable' (i.e., before major modifications)
+# Each profile in the manifest includes direct links to:
+# - **recipe_permalink**: The exact version of the processing code used
+# - **config_permalink**: The specific configuration file that defines the processing steps
+#
+# Let's display the key information from the manifest:
 
 # %%
-subset_url = {
-    x["subset"]: x["url"]
-    for x in profile_index
-    if x["subset"] in ("crispr", "orf", "compound")
+# Convert JSON to DataFrame for better display
+profile_df = pl.DataFrame(profile_index)
+
+# Show key information in a clean table
+display_df = profile_df.select(
+    [
+        "subset",
+        pl.col("url").str.extract(r"([^/]+)\.parquet$").alias("filename"),
+        pl.col("recipe_permalink")
+        .str.extract(r"tree/([^/]+)$")
+        .str.slice(0, 7)
+        .alias("recipe_version"),
+        pl.col("config_permalink").str.extract(r"([^/]+)\.json$").alias("config"),
+    ]
+)
+display_df
+# %% [markdown]
+# Let inspect the standard profiles.
+
+# %%
+# Create dictionary of subset -> url for the standard profiles only
+filepaths = {
+    dataset["subset"]: dataset["url"]
+    for dataset in profile_index
+    if dataset["subset"] in ("crispr", "orf", "compound")
 }
-print(subset_url)
-
+print("Selected profiles:")
+for subset, url in filepaths.items():
+    print(f"  {subset}: {url.split('/')[-1]}")
 # %% [markdown]
 # We will lazy-load the dataframes and print the number of rows and columns
 
@@ -83,7 +112,6 @@ for subset_name, path in subset_url.items():
         info[k].append(v)
 
 pl.DataFrame(info)
-
 # %% [markdown]
 # Let us now focus on the `crispr` dataset and use a regex to select the metadata columns.
 # We will then sample rows and display the overview.
@@ -95,7 +123,6 @@ data.select(pl.col("^Metadata.*$").sample(n=5, seed=1)).collect()
 
 # %% [markdown]
 # The following line excludes the metadata columns:
-
 # %%
 data_only = data.select(pl.all().exclude("^Metadata.*$").sample(n=5, seed=1)).collect()
 data_only
@@ -103,6 +130,5 @@ data_only
 # %% [markdown]
 # Finally, we can convert this to `pandas` if we want to perform analyses with that tool.
 # Keep in mind that this loads the entire dataframe into memory.
-
 # %%
 data_only.to_pandas()

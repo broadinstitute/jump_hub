@@ -33,6 +33,9 @@ website:
             - section: "How-To: Interactive Tools"
               contents:
                   - auto: "howto/interactive/*"
+            - section: "For maintainers"
+              contents:
+                  - auto: "howto/maintenance/*"
             - text: Cite
               file: cite.md
         tools:
