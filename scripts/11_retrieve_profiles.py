@@ -43,8 +43,7 @@ import requests
 # For details on creating your own profile manifests, see the [manifest guide](https://github.com/broadinstitute/jump_hub/blob/main/howto/2_create_project_manifest.md).
 
 # %% Paths
-INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/main/manifests/profile_index.json"
-
+INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11.0/manifests/profile_index.json"
 # %% [markdown]
 # We use the version-controlled manifest above to release the latest corrected profiles
 
