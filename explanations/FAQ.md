@@ -34,9 +34,9 @@ You can find all positive and negative controls for JUMP-ORF, -CRISPR, and -comp
 For the compounds dataset the only negative control is 'JCP2022_033924' (DMSO). 
 Most chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map ([private link](https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031) | [html](https://zenodo.org/records/15699904/files/megamap_no_replicates.html?download=1)).
 
-### Which pipelines produced the final datasets?
+### Which pipelines produced the latest datasets?
 
-Details on the pipelines at each step can be found on [this](../reference/computational_pipelines.md) page.
+The [profiles_index.json](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) file contains links to the specific version of the [jump profiling recipe](https://github.com/broadinstitute/jump-profiling-recipe) used and its configuration.
 
 ### Do we expect one gene’s JCP ID (JUMP Cell Painting ID) to be associated with multiple targets?
 
