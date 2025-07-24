@@ -34,9 +34,13 @@ You can find all positive and negative controls for JUMP-ORF, -CRISPR, and -comp
 For the compounds dataset the only negative control is 'JCP2022_033924' (DMSO). 
 Most chemical compound plates contain 16 negative control wells, while some have as many as 28 wells. In the ORF dataset, replicates are positioned in wells O23, O24, P23 and P24. The remaining wells contain ORF treatments, with a single replicate of each per plate map and with five replicate plates produced per plate map ([private link](https://github.com/jump-cellpainting/megamap/issues/8#issuecomment-1413606031) | [html](https://zenodo.org/records/15699904/files/megamap_no_replicates.html?download=1)).
 
-### Which pipelines produced the latest datasets?
+### What are the CellProfiler pipelines used to process images and output raw single cell level profiles for JUMP?
 
-The [profiles_index.json](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) file contains links to the specific version of the [jump profiling recipe](https://github.com/broadinstitute/jump-profiling-recipe) used and its configuration.
+You can find the CellProfiler pipelines that perform illumination correction, segmentation and feature extraction [here](https://github.com/broadinstitute/imaging-platform-pipelines/tree/master/JUMP_production).
+
+### What are the data analysis pipelines that convert raw profiles into well-level profiles?
+
+There are two pipelines used: One converts single cell raw profiles into aggregated well level profiles, the second transforms these aggregated profiles to improve signal quality. We call the first pipeline `profiling-recipe` and it is located in [this](https://github.com/jump-cellpainting/profiling-recipe/tree/51a3a4b36814c0a721a2062928a703ea46c169c4) permalink. For the second pipeline, the [profiles_index.json](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) file contains links to the specific version of the [jump profiling recipe](https://github.com/broadinstitute/jump-profiling-recipe) used and its configuration. To clarify, the `profiling-recipe` and `jump-profiling-recipe` are not the same, they correspond to the first and second pipelines, respectively.
 
 ### Do we expect one gene’s JCP ID (JUMP Cell Painting ID) to be associated with multiple targets?
 
