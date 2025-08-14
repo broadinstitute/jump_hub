@@ -6,12 +6,12 @@ The JUMP_rr interactive [tools](https://github.com/broadinstitute/monorepo/tree/
 
 In this tutorial, you will learn how to:
 
-**Step 1: Understand the information displayed in the browser.**
+**Step 1: Understand the information displayed in the browser.**  
 **Step 2: Explore the data to answer the following questions:**
 
-**2.1**. Is my gene in the JUMP dataset?
-**2.2.** Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?
-  **2.2.1.** If yes, what are the specific morphological changes or features?
+**2.1**. Is my gene in the JUMP dataset?  
+**2.2.** Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?  
+  **2.2.1.** If yes, what are the specific morphological changes or features?  
   **2.2.2.** What other genes look similar or anticorrelated to my gene?
 
 ## **Step 1\. Understand the information displayed in the browser.**
