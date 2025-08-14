@@ -10,9 +10,10 @@ In this tutorial, you will learn how to:
 **Step 2: Explore the data to answer the following questions:**
 
 **2.1**. Is my gene in the JUMP dataset?  
-**2.2.** Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?  
-  **2.2.1.** If yes, what are the specific morphological changes or features?  
-  **2.2.2.** What other genes look similar or anticorrelated to my gene?
+**2.2**. How do cells with my gene perturbed look? And how its corresponding negative controls look?
+**2.3.** Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?  
+  **2.3.1.** If yes, what are the specific morphological changes or features?  
+  **2.3.2.** What other genes look similar or anticorrelated to my gene?
 
 ## **Step 1\. Understand the information displayed in the browser.**
 
@@ -43,7 +44,7 @@ Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not 
 ***Figure 3\.** **Querying the glucose transporter gene SLC2A in JUMP datasets using the “Available genes” tool.** Overview of the gene reference tool (red box on the left), to quickly check  whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knock-out) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa\_DMEM and HeLa\_HPLM) and Lacoste datasets.*
 </div>
 
-### **2.2. How does my gene look? And how its corresponding negative controls look?**
+### **2.2. How do cells with my gene perturbed look? And how its corresponding negative controls look?**
 <div style="text-align: justify;">
 We will identify then plates in which our perturbation of interest is present, and then select the plates in which it is present. Finally we add the negative controls, which are different between genetic perturbations (ORF or CRISPR datasets) and the chemical ones (Compounds dataset). This applies to the CRISPR/ORF/Compound galleries (e.g., [broad.io/crispr_gallery](https://broad.io/crispr_gallery)).
 
