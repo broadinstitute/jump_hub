@@ -38,7 +38,7 @@ The JUMP Hub includes a reference tool (Figure 3\) to quickly check whether a sp
 
 Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not express well, so this is roughly the maximum that could be tested) and 7,975 genes were tested in JUMP CRISPR dataset (due to resource limitations). Overall, 15,243 unique human genes were tested in one or the other datasets (or both), giving a \~75% chance your gene was tested in JUMP.
 
-<img src="https://zenodo.org/api/records/15252378/files/Figure3.png/content" style="max-width: 100%; height: auto; display: block;">
+<img src="https://zenodo.org/api/records/16878487/files/Figure3.png/content" style="max-width: 100%; height: auto; display: block;">
 
 ***Figure 3\.** **Querying the glucose transporter gene SLC2A in JUMP datasets using the “Available genes” tool.** Overview of the gene reference tool (red box on the left), to quickly check  whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knock-out) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa\_DMEM and HeLa\_HPLM) and Lacoste datasets.*
 </div>
@@ -51,7 +51,7 @@ We will identify then plates in which our perturbation of interest is present, a
 2. Select the "in" filter.
 3. Click on "Apply" to apply the filter.
 
-<img src="https://zenodo.org/api/records/16878406/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
+<img src="https://zenodo.org/api/records/16878487/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
 Figure 1: Steps 1-3 of the method to visualize negative controls in the galleries.
 
 4. Select the column "Plate".
