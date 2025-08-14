@@ -41,9 +41,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3fced2653c1411365395c6308d7f7025.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-1e815c4c50043f7e8fc9161d15dcdabb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-3fced2653c1411365395c6308d7f7025.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c1f1e6c05e4d9aa3145bdaa62cecd366.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-3f9a1c916a924db677bb40662d79ac4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-c1f1e6c05e4d9aa3145bdaa62cecd366.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -454,9 +454,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#step-2-explore-the-data-to-answer-the-following-questions" id="toc-step-2-explore-the-data-to-answer-the-following-questions" class="nav-link" data-scroll-target="#step-2-explore-the-data-to-answer-the-following-questions"><strong>Step 2: Explore the data to answer the following questions:</strong></a>
   <ul class="collapse">
   <li><a href="#was-my-gene-tested-in-the-jump-collection-of-perturbations" id="toc-was-my-gene-tested-in-the-jump-collection-of-perturbations" class="nav-link" data-scroll-target="#was-my-gene-tested-in-the-jump-collection-of-perturbations"><strong>2.1. Was my gene tested in the JUMP collection of perturbations?</strong></a></li>
-  <li><a href="#does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" id="toc-does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="nav-link" data-scroll-target="#does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></a></li>
-  <li><a href="#what-are-the-specific-morphology-changesfeatures" id="toc-what-are-the-specific-morphology-changesfeatures" class="nav-link" data-scroll-target="#what-are-the-specific-morphology-changesfeatures"><strong>2.2.1. What are the specific morphology changes/features?</strong></a></li>
-  <li><a href="#what-other-genes-look-similar-or-anti-similar-to-my-genes" id="toc-what-other-genes-look-similar-or-anti-similar-to-my-genes" class="nav-link" data-scroll-target="#what-other-genes-look-similar-or-anti-similar-to-my-genes"><strong>2.2.2. What other genes look similar or anti-similar to my genes?</strong></a></li>
+  <li><a href="#how-does-my-gene-look-and-how-its-corresponding-negative-controls-look" id="toc-how-does-my-gene-look-and-how-its-corresponding-negative-controls-look" class="nav-link" data-scroll-target="#how-does-my-gene-look-and-how-its-corresponding-negative-controls-look"><strong>2.2. How does my gene look? And how its corresponding negative controls look?</strong></a></li>
+  <li><a href="#does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" id="toc-does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="nav-link" data-scroll-target="#does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.3. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></a></li>
+  <li><a href="#what-are-the-specific-morphology-changesfeatures" id="toc-what-are-the-specific-morphology-changesfeatures" class="nav-link" data-scroll-target="#what-are-the-specific-morphology-changesfeatures"><strong>2.3.1. What are the specific morphology changes/features?</strong></a></li>
+  <li><a href="#what-other-genes-look-similar-or-anti-similar-to-my-genes" id="toc-what-other-genes-look-similar-or-anti-similar-to-my-genes" class="nav-link" data-scroll-target="#what-other-genes-look-similar-or-anti-similar-to-my-genes"><strong>2.3.2. What other genes look similar or anti-similar to my genes?</strong></a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -476,12 +477,8 @@ ul.task-list li input[type="checkbox"] {
 <div style="text-align: justify;">
 <p>The JUMP_rr interactive <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">tools</a> allow you to explore the JUMP dataset of genetic and chemical perturbations and their effects on cell morphology features. By applying different filters, you can investigate how specific perturbations influence cells, their structures, and the strength of the changes.</p>
 <p>In this tutorial, you will learn how to:</p>
-<p><strong>Step 1: Understand the information displayed in the browser.</strong><br>
-<strong>Step 2: Explore the data to answer the following questions:</strong></p>
-<p><strong>2.1</strong>. Is my gene in the JUMP dataset?<br>
-<strong>2.2.</strong> Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?<br>
-  <strong>2.2.1.</strong> If yes, what are the specific morphological changes or features?<br>
-  <strong>2.2.2.</strong> What other genes look similar or anticorrelated to my gene?</p>
+<p><strong>Step 1: Understand the information displayed in the browser.</strong> <strong>Step 2: Explore the data to answer the following questions:</strong></p>
+<p><strong>2.1</strong>. Is my gene in the JUMP dataset? <strong>2.2.</strong> Does my gene have a morphological phenotype when overexpressed or knocked down by CRISPR?   <strong>2.2.1.</strong> If yes, what are the specific morphological changes or features?   <strong>2.2.2.</strong> What other genes look similar or anticorrelated to my gene?</p>
 <section id="step-1.-understand-the-information-displayed-in-the-browser." class="level2">
 <h2 class="anchored" data-anchor-id="step-1.-understand-the-information-displayed-in-the-browser."><strong>Step 1. Understand the information displayed in the browser.</strong></h2>
 <p>When you open one of the interactive tables, such as the CRISPR knock-outs Feature Ranking <a href="http://broad.io/crispr_feature">table</a>, you will see an informational section explaining the available data columns for that table, and a filtering tool, followed by the data (Figure 1).</p>
@@ -498,22 +495,45 @@ ul.task-list li input[type="checkbox"] {
 <section id="was-my-gene-tested-in-the-jump-collection-of-perturbations" class="level3">
 <h3 class="anchored" data-anchor-id="was-my-gene-tested-in-the-jump-collection-of-perturbations"><strong>2.1. Was my gene tested in the JUMP collection of perturbations?</strong></h3>
 <div style="text-align: justify;">
-<p>The JUMP Hub includes a reference tool (Figure 3) to quickly check whether a specific gene is included in any of the catalogued genetic perturbation datasets, including the JUMP CRISPR and ORF datasets that are available via JUMP_rr tables. You can click on the ‘Available Genes’ tab in the sidebar from the <a href="https://broad.io/jump">JUMP Hub</a> page. Here, you can type the name of the gene of interest to search. Although all gene names in the tool are displayed in capital letters, the search is not case-sensitive. However, the tool does not recognize synonyms or alternative gene names, so queries must match the official gene symbols used in the datasets. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the <a href="https://github.com/broadinstitute/2022_PERISCOPE">PERISCOPE</a> dataset, and <a href="https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization">Lacoste</a> to a dataset focusing on pathogenic coding variants. This tool is especially useful when you want to collate data from multiple morphology-based datasets.</p>
-<p>Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not express well so this is roughly the maximum that could be tested) and 7,975 genes were tested in JUMP CRISPR dataset (due to resource limitations). Overall, 15,243 unique human genes were tested in one or the other datasets (or both), giving a ~75% chance your gene was tested in JUMP.</p>
+<p>The JUMP Hub includes a reference tool (Figure 3) to quickly check whether a specific gene is included in any of the catalogued genetic perturbation datasets, including the JUMP CRISPR and ORF datasets that are available via JUMP_rr tables. You can click on the ‘Available Genes’ tab in the sidebar from the <a href="https://broad.io/jump">JUMP Hub</a> page. Heer, you can type the name of the gene of interest to search. Although all gene names in the tool are displayed in capital letters, the search is not case-sensitive. However, the tool does not recognize synonyms or alternative gene names, so queries must match the official gene symbols used in the datasets. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the <a href="https://github.com/broadinstitute/2022_PERISCOPE">PERISCOPE</a> dataset, and <a href="https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization">Lacoste</a> to a dataset focusing on pathogenic coding variants. This tool is especially useful when you want to collate data from multiple morphology-based datasets.</p>
+<p>Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not express well, so this is roughly the maximum that could be tested) and 7,975 genes were tested in JUMP CRISPR dataset (due to resource limitations). Overall, 15,243 unique human genes were tested in one or the other datasets (or both), giving a ~75% chance your gene was tested in JUMP.</p>
 <p><img src="https://zenodo.org/api/records/15252378/files/Figure3.png/content" style="max-width: 100%; height: auto; display: block;"></p>
 <p><em><strong>Figure 3.</strong> <strong>Querying the glucose transporter gene SLC2A in JUMP datasets using the “Available genes” tool.</strong> Overview of the gene reference tool (red box on the left), to quickly check whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knock-out) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa_DMEM and HeLa_HPLM) and Lacoste datasets.</em></p>
 </div>
 </section>
+<section id="how-does-my-gene-look-and-how-its-corresponding-negative-controls-look" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-my-gene-look-and-how-its-corresponding-negative-controls-look"><strong>2.2. How does my gene look? And how its corresponding negative controls look?</strong></h3>
+<div style="text-align: justify;">
+<p>We will identify then plates in which our perturbation of interest is present, and then select the plates in which it is present. Finally we add the negative controls, which are different between genetic perturbations (ORF or CRISPR datasets) and the chemical ones (Compounds dataset). This applies to the CRISPR/ORF/Compound galleries (e.g., <a href="https://broad.io/crispr_gallery">broad.io/crispr_gallery</a>).</p>
+<ol type="1">
+<li>Select the column “Perturbation”.</li>
+<li>Select the “in” filter.</li>
+<li>Click on “Apply” to apply the filter.</li>
+</ol>
+<p><img src="https://zenodo.org/api/records/16878406/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;"> Figure 1: Steps 1-3 of the method to visualize negative controls in the galleries.</p>
+<ol start="4" type="1">
+<li>Select the column “Plate”.</li>
+<li>Select the “in” filter</li>
+<li>Copy and paste the different plates shown in the “Plate” column, comma separated.</li>
+<li>Add the control for the fielderturbation names, sepparated by commas, based on the table:
+<ul>
+<li>ORF/CRISPR: no-guide,non-targeting</li>
+<li>Compound: IAZDPXIOMUYVGZ-UHFFFAOYSA-N</li>
+</ul></li>
+<li>Click on apply</li>
+<li>After the new filters are applied, click on “Perturbation” for alphabetical sorting, press it once or twice until your perturbation of interest is at the top. Now you can scroll down to find the controls.</li>
+</ol>
+<p><img src="https://zenodo.org/api/records/16878406/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;"> <strong>Figure 2.</strong> Steps 4-9 of the method to visualize negative controls in the galleries.</p>
+</div>
+</section>
 <section id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr" class="level3">
-<h3 class="anchored" data-anchor-id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></h3>
+<h3 class="anchored" data-anchor-id="does-my-gene-of-interest-produce-a-morphology-phenotype-when-overexpressed-or-knocked-down-by-crispr"><strong>2.3. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?</strong></h3>
 <div style="text-align: justify;">
 <p>To answer this question, you will start by exploring the <strong>CRISPR knock-out dataset</strong> to identify genes whose loss affects the phenotype of interest. Then, you will use the ORF overexpression dataset to contrast results with gene overexpression. Of the 15,243 genes tested in JUMP, 68% (10,352) yielded a detectable phenotype (statistically significant “phenotypic activity”), that is, an image-based profile with a signal distinct from negative controls by ORF, CRISPR, or both.</p>
 <p>To begin exploring these morphological phenotypes, navigate to the <strong>“How to Guide → Interactive Tools”</strong>. Then, click on the <strong>“JUMP_rr tools”</strong> option, this will take you to the repository where the interactive tables are hosted. Once in the repository, scroll down to the <strong>“Quick Data Access”</strong> section. There, you’ll find links to the CRISPR, ORF, and Compound datasets. Click on the table of interest in the <strong>“Feature Ranking”</strong> column to see the morphological features associated with each perturbation. You can also directly access the feature ranking tables using the following short links:</p>
 <ul>
-<li><a href="http://broad.io/crispr_feature">CRISPR knock-out feature table</a><br>
-</li>
-<li><a href="http://broad.io/orf_feature">ORF overexpression feature table</a><br>
-</li>
+<li><a href="http://broad.io/crispr_feature">CRISPR knock-out feature table</a></li>
+<li><a href="http://broad.io/orf_feature">ORF overexpression feature table</a></li>
 <li><a href="http://broad.io/feature">Compound feature table</a></li>
 </ul>
 <p><strong><em>Search for your gene in the CRISPR dataset.</em></strong></p>
@@ -611,7 +631,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="what-are-the-specific-morphology-changesfeatures" class="level3">
-<h3 class="anchored" data-anchor-id="what-are-the-specific-morphology-changesfeatures"><strong>2.2.1. What are the specific morphology changes/features?</strong></h3>
+<h3 class="anchored" data-anchor-id="what-are-the-specific-morphology-changesfeatures"><strong>2.3.1. What are the specific morphology changes/features?</strong></h3>
 <div style="text-align: justify;">
 <p>In this section you will be able to identify which features are the most statistically significant within a perturbation. In this filtered view of the SLC2A2 perturbation, all values in the <strong>Feature significance</strong> column are <strong>0.0,</strong> which corresponds to values rounded to five decimal places and indicates that each listed morphological feature is statistically significant when compared to the control condition (Figure 7). If you’d like more information about the features extracted by CellProfiler, such as how they’re named, you can check out the “<em>How Measurements are Named</em>” section in <a href="https://cellprofiler-manual.s3.amazonaws.com/CellProfiler-4.0.4/help/output_measurements.html">CellProfiler Handbook</a>.</p>
 <p><img src="https://zenodo.org/api/records/15252378/files/Figure7.png/content" style="max-width: 100%; height: auto; display: block;"></p>
@@ -625,7 +645,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </section>
 <section id="what-other-genes-look-similar-or-anti-similar-to-my-genes" class="level3">
-<h3 class="anchored" data-anchor-id="what-other-genes-look-similar-or-anti-similar-to-my-genes"><strong>2.2.2. What other genes look similar or anti-similar to my genes?</strong></h3>
+<h3 class="anchored" data-anchor-id="what-other-genes-look-similar-or-anti-similar-to-my-genes"><strong>2.3.2. What other genes look similar or anti-similar to my genes?</strong></h3>
 <div style="text-align: justify;">
 <p>Before exploring which perturbations produce the most similar or anti-similar image-based profile (i.e., features that are high in one are lower in the other one), it’s important to understand the broader context and potential of image-based profiling.</p>
 <p>Morphological profiles can cluster genes into biologically meaningful groups, uncovering known pathways and revealing functional connections, such as a regulatory interaction between pathways (Rohban et al.&nbsp;2017). This clustering is based on the similarity of high-dimensional morphological features extracted from images after gene overexpression or CRISPR knock-out. Comparing these profiles systematically can also identify <em>anti-correlated</em> perturbations, such as cases where one perturbation produces the opposite phenotype of another (Rohban et al., 2022). This is particularly relevant for therapeutic discovery, as finding antagonistic morphological profiles may highlight candidate compounds or genes that <em>suppress</em> an undesired phenotype.</p>
