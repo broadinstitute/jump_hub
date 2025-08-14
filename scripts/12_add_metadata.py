@@ -20,14 +20,20 @@
 
 # %% Imports
 import polars as pl
+import requests
 from broad_babel.query import get_mapper
 
 # %% [markdown]
-# We will be using the CRISPR dataset specificed in our index csv.
+# We will be using the CRISPR dataset specificed in our json index file.
 
 # %% Fetch the CRISPR dataset
-INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/50cd2ab93749ccbdb0919d3adf9277c14b6343dd/manifests/profile_index.csv"
-CRISPR_URL = pl.read_csv(INDEX_FILE).filter(pl.col("subset") == "crispr").item(0, "url")
+INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11.0/manifests/profile_index.json"
+response = requests.get(INDEX_FILE)
+profile_index = response.json()
+
+CRISPR_URL = (
+    pl.DataFrame(profile_index).filter(pl.col("subset") == "crispr").item(0, "url")
+)
 profiles = pl.scan_parquet(CRISPR_URL)
 print(profiles.collect_schema().names()[:6])
 
