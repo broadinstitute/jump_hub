@@ -34,24 +34,49 @@ Below you will find the full table (Figure 2), which displays aggregated results
 ### **2.1. Was my gene tested in the JUMP collection of perturbations?**
 
 <div style="text-align: justify;">
-The JUMP Hub includes a reference tool (Figure 3\) to quickly check whether a specific gene is included in any of the catalogued genetic perturbation datasets, including the JUMP CRISPR and ORF datasets that are available via JUMP_rr tables. You can click on the 'Available Genes' tab in the sidebar from the [JUMP Hub](https://broad.io/jump) page. Here, you can type the name of the gene of interest to search. Although all gene names in the tool are displayed in capital letters, the search is not case-sensitive. However, the tool does not recognize synonyms or alternative gene names, so queries must match the official gene symbols used in the datasets. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the [PERISCOPE](https://github.com/broadinstitute/2022_PERISCOPE) dataset, and [Lacoste](https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization) to a dataset focusing on pathogenic coding variants. This tool is especially useful when you want to collate data from multiple morphology-based datasets.
+The JUMP Hub includes a reference tool (Figure 3\) to quickly check whether a specific gene is included in any of the catalogued genetic perturbation datasets, including the JUMP CRISPR and ORF datasets that are available via JUMP_rr tables. You can click on the 'Available Genes' tab in the sidebar from the [JUMP Hub](https://broad.io/jump) page. Heer, you can type the name of the gene of interest to search. Although all gene names in the tool are displayed in capital letters, the search is not case-sensitive. However, the tool does not recognize synonyms or alternative gene names, so queries must match the official gene symbols used in the datasets. The number of occurrences in multiple JUMP or JUMP-adjacent morphological profiling datasets will be displayed: “crispr” and “orf” are the JUMP knock-outs and over expression datasets, “A549”, “HeLa_DMEM” and “HeLa_HPLM” relate to the [PERISCOPE](https://github.com/broadinstitute/2022_PERISCOPE) dataset, and [Lacoste](https://github.com/carpenter-singh-lab/2024_LacosteHaghighi_Cell_Mislocalization) to a dataset focusing on pathogenic coding variants. This tool is especially useful when you want to collate data from multiple morphology-based datasets.
 
-Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not express well so this is roughly the maximum that could be tested) and 7,975 genes were tested in JUMP CRISPR dataset (due to resource limitations). Overall, 15,243 unique human genes were tested in one or the other datasets (or both), giving a \~75% chance your gene was tested in JUMP.
+Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not express well, so this is roughly the maximum that could be tested) and 7,975 genes were tested in JUMP CRISPR dataset (due to resource limitations). Overall, 15,243 unique human genes were tested in one or the other datasets (or both), giving a \~75% chance your gene was tested in JUMP.
 
 <img src="https://zenodo.org/api/records/15252378/files/Figure3.png/content" style="max-width: 100%; height: auto; display: block;">
 
 ***Figure 3\.** **Querying the glucose transporter gene SLC2A in JUMP datasets using the “Available genes” tool.** Overview of the gene reference tool (red box on the left), to quickly check  whether your gene of interest is available in the dataset. You can search using the full name or partial name of a gene in the search window (red box on the right). For each gene, the tool displays how many times it appears in the JUMP dataset under different perturbation types, such as CRISPR (for gene knock-out) and ORF (for overexpression), as well as across information related to the PERISCOPE (A549, HeLa\_DMEM and HeLa\_HPLM) and Lacoste datasets.*
 </div>
 
-### **2.2. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?**
+### **2.2. How does my gene look? And how its corresponding negative controls look?**
+<div style="text-align: justify;">
+We will identify then plates in which our perturbation of interest is present, and then select the plates in which it is present. Finally we add the negative controls, which are different between genetic perturbations (ORF or CRISPR datasets) and the chemical ones (Compounds dataset). This applies to the CRISPR/ORF/Compound galleries (e.g., [broad.io/crispr_gallery](https://broad.io/crispr_gallery)).
+
+1. Select the column "Perturbation".
+2. Select the "in" filter.
+3. Click on "Apply" to apply the filter.
+
+<img src="https://zenodo.org/api/records/16878406/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
+Figure 1: Steps 1-3 of the method to visualize negative controls in the galleries.
+
+4. Select the column "Plate".
+5. Select the "in" filter
+6. Copy and paste the different plates shown in the "Plate" column, comma separated.
+7. Add the control for the fielderturbation names, sepparated by commas, based on the table:
+   - ORF/CRISPR: no-guide,non-targeting
+   - Compound: IAZDPXIOMUYVGZ-UHFFFAOYSA-N
+8. Click on apply
+9. After the new filters are applied, click on "Perturbation" for alphabetical sorting, press it once or twice until your perturbation of interest is at the top. Now you can scroll down to find the controls.
+
+<img src="https://zenodo.org/api/records/16878406/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;">
+**Figure 2.** Steps 4-9 of the method to visualize negative controls in the galleries.
+
+</div>
+
+### **2.3. Does my gene of interest produce a morphology phenotype when overexpressed or knocked down by CRISPR?**
 
 <div style="text-align: justify;">
 To answer this question, you will start by exploring the **CRISPR knock-out dataset** to identify genes whose loss affects the phenotype of interest. Then, you will use the ORF overexpression dataset to contrast results with gene overexpression. Of the 15,243 genes tested in JUMP, 68% (10,352) yielded a detectable phenotype (statistically significant “phenotypic activity”), that is, an image-based profile with a signal distinct from negative controls by ORF, CRISPR, or both.
 
 To begin exploring these morphological phenotypes, navigate to the **“How to Guide → Interactive Tools”**. Then, click on the **“JUMP_rr tools”** option, this will take you to the repository where the interactive tables are hosted. Once in the repository, scroll down to the **“Quick Data Access”** section. There, you’ll find links to the CRISPR, ORF, and Compound datasets. Click on the table of interest in the **“Feature Ranking”** column to see the morphological features associated with each perturbation. You can also directly access the feature ranking tables using the following short links:
 
-* [CRISPR knock-out feature table](http://broad.io/crispr_feature)  
-* [ORF overexpression feature table](http://broad.io/orf_feature)  
+* [CRISPR knock-out feature table](http://broad.io/crispr_feature)
+* [ORF overexpression feature table](http://broad.io/orf_feature)
 * [Compound feature table](http://broad.io/feature)
 
 ***Search for your gene in the CRISPR dataset.***
@@ -108,7 +133,7 @@ After applying the filter for the **SLC2A2** perturbation, you can evaluate whet
 ***Figure 6\.**  **Corrected p-value that can be used to prioritize perturbations with significant morphological effects** The user interface displays the “Corrected p-value” for SLC2A2, which is calculated at the perturbation level. As a result, all rows associated with the SLC2A2 perturbation share the same value (0.00018). When exploring multiple perturbations, sorting by Corrected p-value (or filtering based on it) can help prioritize those with the most statistically significant morphological effects, making it a useful strategy for identifying relevant information. The rows are sorted in ascending/descending order by clicking the name column header.*
 </div>
 
-### **2.2.1. What are the specific morphology changes/features?**
+### **2.3.1. What are the specific morphology changes/features?**
 <div style="text-align: justify;">
 In this section you will be able to identify which features are the most statistically significant within a perturbation. In this filtered view of the SLC2A2 perturbation, all values in the **Feature significance** column are **0.0,** which corresponds to values rounded to five decimal places and  indicates that each listed morphological feature is statistically significant when compared to the control condition (Figure 7). If you'd like more information about the features extracted by CellProfiler, such as how they’re named, you can check out the “*How Measurements are Named*” section in [CellProfiler Handbook](https://cellprofiler-manual.s3.amazonaws.com/CellProfiler-4.0.4/help/output_measurements.html).
 
@@ -129,7 +154,7 @@ However, in the case of SLC2A2, it is still possible to identify individual morp
 ***Figure 8\.** **Top features that can be sorted and prioritized based on Feature Significance for the SLC2A2 perturbation in the JUMP ORF dataset.** The top features from the filtered dataset are sorted in ascending order based on the JUMP ORF Feature Ranking table, based on feature significance (per-feature p-values), ranked in increasing order, indicating statistically significant differences compared to the control condition. The Channel and Suffix columns are empty because these features solely come from an object mask and not a fluorescence image. The rows are sorted in ascending/descending order by clicking the name column header.*
 </div>
 
-### **2.2.2. What other genes look similar or anti-similar to my genes?**
+### **2.3.2. What other genes look similar or anti-similar to my genes?**
 
 <div style="text-align: justify;">
 Before exploring which perturbations produce the most similar or anti-similar image-based profile (i.e., features that are high in one are lower in the other one), it's important to understand the broader context and potential of image-based profiling. 
