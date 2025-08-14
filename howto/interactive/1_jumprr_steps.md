@@ -48,14 +48,14 @@ Note that 12,609 genes were tested in the JUMP ORF dataset (larger genes do not 
 We will identify then plates in which our perturbation of interest is present, and then select the plates in which it is present. Finally we add the negative controls, which are different between genetic perturbations (ORF or CRISPR datasets) and the chemical ones (Compounds dataset). This applies to the CRISPR/ORF/Compound galleries (e.g., [broad.io/crispr_gallery](https://broad.io/crispr_gallery)).
 
 1. Select the column "Perturbation".
-2. Select the "in" filter.
+2. Select the "in" filter and your perturbation of interest (e.g., MYT1).
 3. Click on "Apply" to apply the filter.
 
 <img src="https://zenodo.org/api/records/16878487/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
 Figure 1: Steps 1-3 of the method to visualize negative controls in the galleries.
 
 4. Select the column "Plate".
-5. Select the "in" filter
+5. Select the "in" filter.
 6. Copy and paste the different plates shown in the "Plate" column, comma separated.
 7. Add the control for the fielderturbation names, sepparated by commas, based on the table:
    - ORF/CRISPR: no-guide,non-targeting
