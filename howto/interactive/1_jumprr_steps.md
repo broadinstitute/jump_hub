@@ -63,7 +63,7 @@ Figure 1: Steps 1-3 of the method to visualize negative controls in the gallerie
 8. Click on apply
 9. After the new filters are applied, click on "Perturbation" for alphabetical sorting, press it once or twice until your perturbation of interest is at the top. Now you can scroll down to find the controls.
 
-<img src="https://zenodo.org/api/records/16878406/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;">
+<img src="https://zenodo.org/api/records/16878487/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;">
 **Figure 2.** Steps 4-9 of the method to visualize negative controls in the galleries.
 
 </div>
