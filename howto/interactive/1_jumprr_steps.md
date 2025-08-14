@@ -51,7 +51,7 @@ We will identify then plates in which our perturbation of interest is present, a
 2. Select the "in" filter and your perturbation of interest (e.g., MYT1).
 3. Click on "Apply" to apply the filter.
 
-<img src="https://zenodo.org/api/records/16878487/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
+<img src="https://zenodo.org/api/records/16878778/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
 Figure 1: Steps 1-3 of the method to visualize negative controls in the galleries.
 
 4. Select the column "Plate".
@@ -63,7 +63,7 @@ Figure 1: Steps 1-3 of the method to visualize negative controls in the gallerie
 8. Click on apply
 9. After the new filters are applied, click on "Perturbation" for alphabetical sorting, press it once or twice until your perturbation of interest is at the top. Now you can scroll down to find the controls.
 
-<img src="https://zenodo.org/api/records/16878487/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;">
+<img src="https://zenodo.org/api/records/16878778/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;">
 **Figure 2.** Steps 4-9 of the method to visualize negative controls in the galleries.
 
 </div>
