@@ -53,7 +53,7 @@ We will identify then plates in which our perturbation of interest is present, a
 3. Click on "Apply" to apply the filter.
 
 <img src="https://zenodo.org/api/records/16878778/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
-*Figure 1.** Steps 1-3 of the method to visualize negative controls in the galleries.
+**Figure 1.** Steps 1-3 of the method to visualize negative controls in the galleries.
 
 4. Select the column "Plate".
 5. Select the "in" filter.
