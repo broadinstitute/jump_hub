@@ -9,15 +9,15 @@ from pooch import retrieve
 
 # Files
 periscope = {
-    "crispr_A549": (
+    "A549": (
         "https://raw.githubusercontent.com/broadinstitute/2022_PERISCOPE//632557b77361777b5b728a7534ed8e9d9ed6c090/4_A549_Screen_Summary/outputs/A549_plate_level_median_per_feat_sig_genes_1_FDR_whole_cell_hits.csv",
         "5f2309b4dbb65377dd756ac8bb94a4b8eae70cfb8bc7edd023c06eb6a9392b6b",
     ),
-    "crispr_HeLa_DMEM": (
+    "HeLa_DMEM": (
         "https://raw.githubusercontent.com/broadinstitute/2022_PERISCOPE/632557b77361777b5b728a7534ed8e9d9ed6c090/2_HeLa_Screens_Summary/outputs/HeLa_DMEM_plate_level_median_per_feat_sig_genes_1_FDR_whole_cell_hits.csv",
         "d4f6a715364749fb01759c078e254d80c4e514fee853edc36af81a0fa36f974c",
     ),
-    "crispr_HeLa_HPLM": (
+    "HeLa_HPLM": (
         "https://raw.githubusercontent.com/broadinstitute/2022_PERISCOPE/632557b77361777b5b728a7534ed8e9d9ed6c090/2_HeLa_Screens_Summary/outputs/HeLa_HPLM_plate_level_median_per_feat_sig_genes_1_FDR_whole_cell_hits.csv",
         "b5508c768960c1ace5106824eaf8704fc1529b5a2f4154949247c7ec514b5922",
     ),
