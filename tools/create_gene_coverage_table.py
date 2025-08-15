@@ -36,7 +36,7 @@ jump_url, jump_hash = (
 local_files = {k: retrieve(url, known_hash=hsh) for k, (url, hsh) in periscope.items()}
 csvs = list(local_files.values())
 per_tidy = duckdb.sql(
-    f"SELECT Gene,'CRISPR_' || split_part(split_part(parse_filename(filename,true),'-',2), '_pl', 1) AS origin FROM read_csv({csvs}, filename=true)"
+    f"SELECT Gene,split_part(split_part(parse_filename(filename,true),'-',2), '_pl', 1) AS origin FROM read_csv({csvs}, filename=true)"
 )
 # This will be the table we will join
 per_p = duckdb.sql("PIVOT per_tidy ON origin")
@@ -50,7 +50,7 @@ jump_local = retrieve(
 duckdb.sql("INSTALL sqlite; LOAD sqlite;")
 duckdb.sql(f"ATTACH IF NOT EXISTS '{jump_local}'")
 jump_tidy = duckdb.sql(
-    f"SELECT standard_key AS Gene, UPPER(plate_type) || '_JUMP' AS origin FROM babel.babel WHERE plate_type IN ('orf', 'crispr')"
+    f"SELECT standard_key AS Gene, UPPER(plate_type) AS origin FROM babel.babel WHERE plate_type IN ('orf', 'crispr')"
 )
 jump_p = duckdb.sql("PIVOT jump_tidy ON origin")
 
@@ -59,7 +59,7 @@ merged = duckdb.sql("SELECT * FROM jump_p FULL JOIN per_p USING(Gene) ORDER BY G
 # %% Lacoste paper
 lacoste_local = retrieve(lacoste_url, known_hash=lacoste_hash)
 lacoste_uniq = duckdb.sql(
-    f"SELECT DISTINCT Gene,1 AS ORF_Lacoste FROM read_xlsx('{lacoste_local}', all_varchar = true);"
+    f"SELECT DISTINCT Gene,1 AS Lacoste FROM read_xlsx('{lacoste_local}', all_varchar = true);"
 )
 merged_last = duckdb.sql(
     "SELECT Gene,COALESCE(COLUMNS(* EXCLUDE(Gene)), 0) FROM merged FULL JOIN lacoste_uniq USING(Gene) ORDER BY Gene"

@@ -20,6 +20,8 @@
 #
 # This table was generated using [this](https://github.com/broadinstitute/jump_hub/blob/main/tools/create_gene_coverage_table.py) script.
 #
+# - Knock-out (CRISPR) datasets: CRISPR (from JUMP), Hela_X (from PERISCOPE)
+# - Overexpression (ORF) datasets: ORF (from JUMP), Lacoste
 # %%
 # | code-fold: true
 import polars as pl
@@ -30,8 +32,8 @@ logger = pooch.get_logger()
 logger.setLevel("WARNING")
 df = pl.read_csv(
     pooch.retrieve(
-        f"https://zenodo.org/api/records/16882914/files/table.csv/content",
-        known_hash="135654ca760699a2e69378cf59021efc1ed8a03e0870be312e0283d68c1523b3",
+        f"https://zenodo.org/api/records/16883068/files/table.csv/content",
+        known_hash="40f12b266d632d8593b29c4a327cd82cffc36ad354e92815bf77e6d2f5008ec7",
     )
 )
 show(df, maxBytes=0)
