@@ -508,9 +508,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Is my gene of interest in JUMP or other associated datasets? We provide a <a href="https://broadinstitute.github.io/jump_hub/howto/interactive/1_jumprr_steps.html#was-my-gene-tested-in-the-jump-collection-of-perturbations">tutorial</a> with details.</p>
-<p>The number in the table indicates how many copies are present (it is mostly 0’s and 1’s, but there are some genes that correspond to multiple JUMP ids). Note that the JUMP columns include all genes, whereas the PERISCOPE ones (A549, Hela_X) include the hits only (statistically significant). The Lacoste dataset contains all entries.</p>
+<p>The number in the table indicates how many copies are present (it is mostly 0’s and 1’s, but there are some genes that correspond to multiple JUMP ids). Note that the JUMP columns include all genes, whereas the PERISCOPE ones (A549, Hela_X) include only hits (statistically significant perturbations). The Lacoste dataset contains all entries.</p>
 <p>This table was generated using <a href="https://github.com/broadinstitute/jump_hub/blob/main/tools/create_gene_coverage_table.py">this</a> script.</p>
-<div id="48ca67fd" class="cell" data-execution_count="1">
+<div id="1d0bd192" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -529,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_dc3f1688_2d6d_4073_b1b7_58628f14ab16"><tbody><tr>
+<table id="itables_17256460_b77f_44d2_ad56_ffbcb86f1f00"><tbody><tr>
     <td style="vertical-align:middle; text-align:left">
     <a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
     <g style="fill:#d9d7fc">
@@ -595,7 +595,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="module">
     import { ITable, jQuery as $ } from 'https://www.unpkg.com/dt_for_itables@2.3.2/dt_bundle.js';
 
-    document.querySelectorAll("#itables_dc3f1688_2d6d_4073_b1b7_58628f14ab16:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#itables_17256460_b77f_44d2_ad56_ffbcb86f1f00:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
