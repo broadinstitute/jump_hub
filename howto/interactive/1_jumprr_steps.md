@@ -53,15 +53,15 @@ We will identify then plates in which our perturbation of interest is present, a
 3. Click on "Apply" to apply the filter.
 
 <img src="https://zenodo.org/api/records/16878778/files/gallery_negcon_123.png/content" style="max-width: 100%; height: auto; display: block;">
-Figure 1: Steps 1-3 of the method to visualize negative controls in the galleries.
+*Figure 1.** Steps 1-3 of the method to visualize negative controls in the galleries.
 
 4. Select the column "Plate".
 5. Select the "in" filter.
 6. Copy and paste the different plates shown in the "Plate" column, comma separated.
-7. Add the control for the fielderturbation names, sepparated by commas, based on the table:
+7. Add the control in the "Perturbation" entry for filtering, after your perturbation of interest and separated by commas, as follows:
    - ORF/CRISPR: no-guide,non-targeting
    - Compound: IAZDPXIOMUYVGZ-UHFFFAOYSA-N
-8. Click on apply
+8. Click on "Apply".
 9. After the new filters are applied, click on "Perturbation" for alphabetical sorting, press it once or twice until your perturbation of interest is at the top. Now you can scroll down to find the controls.
 
 <img src="https://zenodo.org/api/records/16878778/files/gallery_negcon_456789.png/content" style="max-width: 100%; height: auto; display: block;">
