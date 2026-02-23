@@ -492,7 +492,7 @@ wheels = [
 
 [[package]]
 name = "copairs"
-version = "0.5.1"
+version = "0.5.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "duckdb" },
@@ -500,9 +500,9 @@ dependencies = [
     { name = "statsmodels" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/61/d1/0f963aa7dc58c2e04a253b58caf89721c91b4cca40892d04188b6a77a250/copairs-0.5.1.tar.gz", hash = "sha256:ebf03739837909c86d51eda963475161b2dcadd5f2b729adfbfbd6bbc25b3087", size = 31557, upload-time = "2025-03-10T18:40:04.837Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/65/25/7e2b2327ce9b3a7312be41070f264a09761fccb146cf60206d27c50e24b6/copairs-0.5.4.tar.gz", hash = "sha256:4d821784fa42d388db66e6a90c4ca1849c79957059260655faa884ffe6559648", size = 41895, upload-time = "2026-01-27T12:21:07.836Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fc/60/89cb595b308b8154fe109b63081fb215769bab9f3c7d4661fa2071ff208d/copairs-0.5.1-py3-none-any.whl", hash = "sha256:d799ee16b3b96c7cc74fe989301de74a747ab73ef2d1b1e5911fcd86633ed975", size = 28157, upload-time = "2025-03-10T18:40:03.674Z" },
+    { url = "https://files.pythonhosted.org/packages/b7/2a/86a6255d7e892419833ba5951f7574d02c9c83648cd939bb5a921e386858/copairs-0.5.4-py3-none-any.whl", hash = "sha256:e24e41ffdcfabf8d76b4288423f8951ea9c69884d5c4e88f8d9d33ff1ee32bbf", size = 34092, upload-time = "2026-01-27T12:21:06.368Z" },
 ]
 
 [[package]]

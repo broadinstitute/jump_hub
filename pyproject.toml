@@ -12,7 +12,7 @@ dependencies = [
     "seaborn<1.0.0,>=0.13.2",
     "biopython<2.0,>=1.84",
     "broad-babel>=0.1.26",
-    "copairs<1.0.0,>=0.4.1",
+    "copairs>=0.4.1,<1.0.0",
     "jump-portrait>=0.1.0",
     "itables<3.0.0,>=2.2.5",
 ]
