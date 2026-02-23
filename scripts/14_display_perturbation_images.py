@@ -17,10 +17,10 @@
 # This notebook demonstrates how to retrieve and plot all channels for one site using the [jump_portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait) library.
 
 # %%
+import duckdb
 import matplotlib.colors as mpl  # noqa: CPY001
 import numpy as np
-import polars as pl
-from jump_portrait.fetch import get_item_location_info, get_jump_image
+from jump_portrait.fetch import get_item_location_metadata, get_jump_image
 from matplotlib import pyplot as plt
 
 #
@@ -30,7 +30,7 @@ from matplotlib import pyplot as plt
 # Here we retrieve image locations for the "RAB30" gene:
 
 # %%
-gene_info = get_item_location_info("RAB30")
+gene_info = get_item_location_metadata("RAB30")
 gene_info.shape
 
 # %% [markdown]
@@ -38,8 +38,8 @@ gene_info.shape
 # We can also retrieve locations for compound data. By default, the function assumes a query by INCHI key. We can also query by JCP ID by specifying the query column:
 
 # %%
-cmpd_info_byinchi = get_item_location_info("CLETVKMYAXARPO-UHFFFAOYSA-N")
-cmpd_info_byjcp = get_item_location_info("JCP2022_011844", input_column="JCP2022")
+cmpd_info_byinchi = get_item_location_metadata("CLETVKMYAXARPO-UHFFFAOYSA-N")
+cmpd_info_byjcp = get_item_location_metadata("JCP2022_011844", input_column="JCP2022")
 
 print(cmpd_info_byinchi.shape)
 print(cmpd_info_byjcp.shape)
@@ -98,7 +98,7 @@ def display_site(
     for ax, (channel, rgb) in zip(axes, channel_rgb.items()):
         cmap = mpl.LinearSegmentedColormap.from_list(channel, ("#000", rgb))
 
-        img = get_jump_image(source, batch, plate, well, channel, site, None)
+        img = get_jump_image(source, batch, plate, well, channel, site)
 
         ax.imshow(img, vmin=0, vmax=np.percentile(img, int_percentile), cmap=cmap)
         ax.axis("off")
@@ -137,18 +137,31 @@ def display_site(
 
 
 # %% [markdown]
-# We can get the required location parameters from the location info that we retrieved earlier. Here we get parameters for the first site in the JCP compound results:
+# We can get the required location parameters from the location info that we retrieved earlier. We transform the first row from pyarow format to Python. Here we get parameters for the first site in the JCP compound results:
 
 # %%
-(
-    source,
-    batch,
-    plate,
-    well,
-    site,
-) = cmpd_info_byjcp.select(
-    pl.col(f"Metadata_{x}" for x in ("Source", "Batch", "Plate", "Well", "Site"))
-).row(0)
+with duckdb.connect() as con:
+    meta_dict = (
+        con.sql(
+            "SELECT COLUMNS('Metadata_(Source|Batch|Plate|Well|Site)') FROM cmpd_info_byjcp"
+        )
+        .to_arrow_table()
+        .to_batches()[0]
+        .to_pylist()[0]
+    )
+    (
+        source,
+        batch,
+        plate,
+        well,
+        site,
+    ) = [
+        meta_dict[f"Metadata_{k}"] for k in ("Source", "Batch", "Plate", "Well", "Site")
+    ]
+
+# cmpd_info_byjcp.select(
+#     pl.col(f"Metadata_{x}" for x in ("Source", "Batch", "Plate", "Well", "Site"))
+# ).row(0)
 
 # %% [markdown]
 # Next, we define the label and make the plot:
@@ -167,16 +180,19 @@ display_site(
 )
 
 # %% [markdown]
-# Here, we plot one of the RAB30 ORF images:
+# Here, we plot one of the RAB30 ORF images (ORF JCP ids start with 9):
 
 # %%
-source, batch, plate, well, site = (
-    gene_info.filter(pl.col("Metadata_PlateType") == "ORF")
-    .select(
-        pl.col(f"Metadata_{x}" for x in ("Source", "Batch", "Plate", "Well", "Site"))
+with duckdb.connect() as con:
+    meta_dict = (
+        con.sql("FROM gene_info WHERE Metadata_JCP2022.starts_with('JCP2022_9')")
+        .to_arrow_table()
+        .to_batches()[0]
+        .to_pylist()[0]
     )
-    .row(0)
-)
+source, batch, plate, well, site = [
+    meta_dict[f"Metadata_{x}"] for x in ("Source", "Batch", "Plate", "Well", "Site")
+]
 display_site(
     source,
     batch,
@@ -188,16 +204,20 @@ display_site(
 )
 
 # %% [markdown]
-# And for CRISPR:
+# And for CRISPR (The JCP ID number starts with 8):
 
 # %%
-source, batch, plate, well, site = (
-    gene_info.filter(pl.col("Metadata_PlateType") == "CRISPR")
-    .select(
-        pl.col(f"Metadata_{x}" for x in ("Source", "Batch", "Plate", "Well", "Site"))
+with duckdb.connect() as con:
+    meta_dict = (
+        con.sql("FROM gene_info WHERE Metadata_JCP2022.starts_with('JCP2022_8')")
+        .to_arrow_table()
+        .to_batches()[0]
+        .to_pylist()[0]
     )
-    .row(0)
-)
+source, batch, plate, well, site = [
+    meta_dict[f"Metadata_{x}"] for x in ("Source", "Batch", "Plate", "Well", "Site")
+]
+
 display_site(
     source,
     batch,

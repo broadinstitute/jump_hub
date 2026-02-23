@@ -13,7 +13,7 @@ dependencies = [
     "biopython<2.0,>=1.84",
     "broad-babel>=0.1.26",
     "copairs<1.0.0,>=0.4.1",
-    "jump-portrait<1.0.0,>=0.0.27",
+    "jump-portrait>=0.1.0",
     "itables<3.0.0,>=2.2.5",
 ]
 name = "jump_deps"
