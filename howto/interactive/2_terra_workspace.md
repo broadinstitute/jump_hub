@@ -44,7 +44,7 @@ All data is hosted on the [Cell Painting Gallery](https://registry.opendata.aws/
     fi
     ```
 
-5. Open and run the sample notebook to load data from the principal dataset and visualize it.
+5. Open and run the [sample notebook](sample_notebook.ipynb) to load data from the principal dataset and visualize it. The notebook loads profiles from S3, joins them with compound metadata, plots morphology features, and displays Cell Painting images.
 
 ## About the data
 
