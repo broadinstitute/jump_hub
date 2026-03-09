@@ -1,6 +1,6 @@
 # Using JUMP data on Terra
 
-[Terra](https://app.terra.bio) is a cloud-based platform for biomedical research, operated by the Broad Institute and Verily. You can use Terra to explore JUMP Cell Painting data interactively via Jupyter notebooks in a cloud environment, without needing to set up a local computing environment.
+[Terra](https://app.terra.bio) is a cloud-based platform for biomedical research. You can use Terra to explore JUMP Cell Painting data interactively via Jupyter notebooks in a cloud environment, without needing to set up a local computing environment.
 
 ## Overview
 
