@@ -28,23 +28,14 @@ All data is hosted on the [Cell Painting Gallery](https://registry.opendata.aws/
 
 1. Clone the workspace and open the **Notebooks** tab.
 2. Create a cloud environment by clicking on the setup notebook and following prompts. If you don't have a runtime environment running, it will take a few minutes to create and start.
-3. Install the Python dependencies by running:
+3. Download the [Explore JUMP profiles](../../scripts/17_explore_profiles.py) script and convert it to a notebook:
 
     ```bash
-    pip install boto3 kaleido plotly s3fs
+    pip install jupytext
+    jupytext --to notebook 17_explore_profiles.py
     ```
 
-4. Clone the JUMP metadata:
-
-    ```bash
-    if [ ! -d ~/jump-cellpainting-datasets ]; then
-        git clone https://github.com/jump-cellpainting/datasets.git ~/jump-cellpainting-datasets
-    else
-        cd ~/jump-cellpainting-datasets && git pull
-    fi
-    ```
-
-5. Open and run the [sample notebook](sample_notebook.ipynb) to load data from the principal dataset and visualize it. The notebook loads profiles from S3, joins them with compound metadata, plots morphology features, and displays Cell Painting images.
+4. Upload the resulting `17_explore_profiles.ipynb` to the workspace and run it. The notebook reads batch-corrected profiles directly from S3 via the versioned manifest — no local data setup needed.
 
 ## About the data
 
