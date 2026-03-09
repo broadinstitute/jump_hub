@@ -6,7 +6,7 @@
 
 The JUMP Cell Painting dataset includes 116k chemical and >15k genetic perturbations (`cpg0016`), split across 12 data-generating centers, using human U2OS osteosarcoma cells. All data is hosted on the [Cell Painting Gallery](https://registry.opendata.aws/cellpainting-gallery/) on the Registry of Open Data on AWS.
 
-The [Explore JUMP profiles](../../scripts/17_explore_profiles.py) tutorial notebook loads batch-corrected profiles directly from S3, so no local data setup is needed — it works anywhere you can run a Jupyter notebook, including Terra.
+The [Explore JUMP profiles](../../scripts/17_explore_profiles.py) tutorial notebook fetches batch-corrected profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — it works anywhere you can run a Jupyter notebook, including Terra.
 
 ## Prerequisites
 
