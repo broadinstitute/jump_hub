@@ -6,14 +6,14 @@
 
 The JUMP Cell Painting dataset includes 116k chemical and >15k genetic perturbations (`cpg0016`), split across 12 data-generating centers, using human U2OS osteosarcoma cells. All data is hosted on the [Cell Painting Gallery](https://registry.opendata.aws/cellpainting-gallery/) on the Registry of Open Data on AWS.
 
-The [Explore JUMP profiles](../../scripts/17_explore_profiles.py) tutorial notebook fetches batch-corrected profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — it works anywhere you can run a Jupyter notebook, including Terra.
+The JUMP Hub [tutorial scripts](../../scripts/) fetch profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — they work anywhere you can run a Jupyter notebook, including Terra.
 
 ## Prerequisites
 
 <!-- TODO: Confirm Terra account details — is it free for all academics? Are there cloud compute costs beyond the free tier? -->
 - A [Terra](https://app.terra.bio) account with an active billing project.
 
-## Running the notebook on Terra
+## Running a tutorial on Terra
 
 1. Create or open a workspace on Terra.
 2. Start a cloud environment from the workspace. Recommended minimum settings:
@@ -24,15 +24,15 @@ The [Explore JUMP profiles](../../scripts/17_explore_profiles.py) tutorial noteb
     | Disk Size | 50 GB |
     | Memory | 3.75 GB |
 
-3. Download the [Jupytext script](../../scripts/17_explore_profiles.py) and convert it to a notebook locally:
+3. Pick a tutorial script from [`scripts/`](../../scripts/) and convert it to a notebook locally. For example, starting with [Retrieve JUMP profiles](../../scripts/11_retrieve_profiles.py):
 
     ```bash
     pip install jupytext
-    jupytext --to notebook 17_explore_profiles.py
+    jupytext --to notebook 11_retrieve_profiles.py
     ```
 
-4. Upload the resulting `17_explore_profiles.ipynb` to the Terra workspace **Analyses** tab.
-5. Open and run the notebook. It reads profiles directly from S3 — no additional data setup is required.
+4. Upload the resulting `.ipynb` to the Terra workspace **Analyses** tab.
+5. Open and run the notebook.
 
 ## About the data
 
