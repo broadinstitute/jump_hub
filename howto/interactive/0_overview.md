@@ -23,7 +23,6 @@ There are several no-code options for exploring JUMP data. These are very useful
    - Search similarities among perturbations and look at their images
    - Account creation required, but access is free
 
-
 ### Details and usage
 
 #### JUMP\_rr tools
