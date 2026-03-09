@@ -24,16 +24,14 @@ The [Explore JUMP profiles](../../scripts/17_explore_profiles.py) tutorial noteb
     | Disk Size | 50 GB |
     | Memory | 3.75 GB |
 
-3. Get the notebook. Either:
-    - Download the `.ipynb` from the [`colab` branch](https://github.com/broadinstitute/jump_hub/tree/colab) (CI-generated, ready to run), or
-    - Convert the [Jupytext script](../../scripts/17_explore_profiles.py) locally:
+3. Download the [Jupytext script](../../scripts/17_explore_profiles.py) and convert it to a notebook locally:
 
-        ```bash
-        pip install jupytext
-        jupytext --to notebook 17_explore_profiles.py
-        ```
+    ```bash
+    pip install jupytext
+    jupytext --to notebook 17_explore_profiles.py
+    ```
 
-4. Upload the `.ipynb` to the Terra workspace **Analyses** tab.
+4. Upload the resulting `17_explore_profiles.ipynb` to the Terra workspace **Analyses** tab.
 5. Open and run the notebook. It reads profiles directly from S3 — no additional data setup is required.
 
 ## About the data
