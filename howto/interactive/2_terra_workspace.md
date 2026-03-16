@@ -10,7 +10,6 @@ The JUMP Hub [tutorial scripts](../../scripts/) fetch profiles via HTTP from the
 
 ## Prerequisites
 
-<!-- TODO: Confirm Terra account details — is it free for all academics? Are there cloud compute costs beyond the free tier? -->
 - A [Terra](https://app.terra.bio) account with an active billing project.
 
 ## Running a tutorial on Terra
