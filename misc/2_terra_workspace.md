@@ -6,7 +6,7 @@
 
 The JUMP Cell Painting dataset includes 116k chemical and >15k genetic perturbations (`cpg0016`), split across 12 data-generating centers, using human U2OS osteosarcoma cells. All data is hosted on the [Cell Painting Gallery](https://registry.opendata.aws/cellpainting-gallery/) on the Registry of Open Data on AWS.
 
-The JUMP Hub [tutorial scripts](../../scripts/) fetch profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — they work anywhere you can run a Jupyter notebook, including Terra.
+The JUMP Hub [tutorial scripts](../scripts/) fetch profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — they work anywhere you can run a Jupyter notebook, including Terra.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ The JUMP Hub [tutorial scripts](../../scripts/) fetch profiles via HTTP from the
     | Disk Size | 50 GB |
     | Memory | 3.75 GB |
 
-3. Pick a tutorial script from [`scripts/`](../../scripts/) and convert it to a notebook locally. For example, starting with [Retrieve JUMP profiles](../../scripts/11_retrieve_profiles.py):
+3. Pick a tutorial script from [`scripts/`](../scripts/) and convert it to a notebook locally. For example, starting with [Retrieve JUMP profiles](../scripts/11_retrieve_profiles.py):
 
     ```bash
     pip install jupytext
