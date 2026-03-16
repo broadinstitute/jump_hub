@@ -1,6 +1,6 @@
 # Using JUMP data on Terra
 
-[Terra](https://app.terra.bio) is a cloud-based platform for biomedical research. You can use Terra to explore JUMP Cell Painting data interactively via Jupyter notebooks in a cloud environment, without needing to set up a local computing environment.
+[Terra](https://app.terra.bio) is a scalable and secure platform for biomedical researchers to access data, run analysis tools, and collaborate. It was co-developed by the Broad Institute of MIT and Harvard, Microsoft, and Verily. You can use Terra to explore JUMP Cell Painting data interactively via Jupyter notebooks in a cloud environment, without needing to set up a local computing environment.
 
 ## Overview
 
@@ -31,7 +31,13 @@ The JUMP Hub [tutorial scripts](../../scripts/) fetch profiles via HTTP from the
     ```
 
 4. Upload the resulting `.ipynb` to the Terra workspace **Analyses** tab.
-5. Open and run the notebook.
+5. Add a cell at the top of the notebook to install dependencies:
+
+    ```python
+    !pip install jump_deps
+    ```
+
+6. Run the notebook.
 
 ## About the data
 
