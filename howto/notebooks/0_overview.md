@@ -9,5 +9,7 @@ You can use the sidebar on the left to find tutorials demoing the most common an
 - [Explore perturbation clusters](https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/15_explore_distance_clusters.ipynb)
 - [Query genes for more info](https://colab.research.google.com/github/broadinstitute/jump_hub/blob/colab/colab/16_query_genes_externally.ipynb)
 
+You can also run these tutorials on [Terra](../../misc/terra_workspace.md), a cloud platform for biomedical research.
+
 If you are running the analyses on your computer, we have published a package containing all dependencies, you need only install in your environment using `pip install jump_deps` (Python 3.10 or 3.11).
 
