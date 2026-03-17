@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>JUMP documentation and examples</title>
+<title>terra_workspace – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9ea88c2e984ff4d1f8e3d3e5f66373f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-4eadbef31015351980ccb80f2898d1bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9ea88c2e984ff4d1f8e3d3e5f66373f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9ea88c2e984ff4d1f8e3d3e5f66373f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4eadbef31015351980ccb80f2898d1bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9ea88c2e984ff4d1f8e3d3e5f66373f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -245,7 +280,9 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      JUMP documentation and examples
+      </li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">JUMP documentation and examples</a> 
+      <a href="../">JUMP documentation and examples</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -277,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -292,19 +329,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/data_description.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/data_description.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dataset Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quirks and details</span></a>
   </div>
 </li>
@@ -321,19 +358,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available genes in JUMP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/01_chemical_query.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/01_chemical_query.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available chemicals in JUMP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/glossary.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glossary and Acronyms</span></a>
   </div>
 </li>
@@ -350,43 +387,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview of Notebooks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retrieve JUMP profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/12_add_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/12_add_metadata.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Add metadata to profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculate phenotypic activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Display perturbation images</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explore perturbation clusters</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Query genes for more info</span></a>
   </div>
 </li>
@@ -403,13 +440,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview of Interactive tools</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/interactive/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/interactive/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">JUMP_rr tutorial</span></a>
   </div>
 </li>
@@ -426,7 +463,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/maintenance/1_project_manifest.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/maintenance/1_project_manifest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Creating a Project Manifest</span></a>
   </div>
 </li>
@@ -434,7 +471,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cite.html" class="sidebar-item-text sidebar-link">
+  <a href="../cite.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cite</span></a>
   </div>
 </li>
@@ -448,15 +485,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#jump-cell-painting-hub" id="toc-jump-cell-painting-hub" class="nav-link active" data-scroll-target="#jump-cell-painting-hub">JUMP Cell Painting Hub</a>
+  <li><a href="#using-jump-data-on-terra" id="toc-using-jump-data-on-terra" class="nav-link active" data-scroll-target="#using-jump-data-on-terra">Using JUMP data on Terra</a>
   <ul class="collapse">
-  <li><a href="#getting-started-with-jump" id="toc-getting-started-with-jump" class="nav-link" data-scroll-target="#getting-started-with-jump">Getting Started with JUMP</a></li>
-  <li><a href="#choose-your-own-path" id="toc-choose-your-own-path" class="nav-link" data-scroll-target="#choose-your-own-path">Choose Your Own Path</a></li>
-  <li><a href="#need-help-or-more-information" id="toc-need-help-or-more-information" class="nav-link" data-scroll-target="#need-help-or-more-information">Need help or more information?</a></li>
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#running-a-tutorial-on-terra" id="toc-running-a-tutorial-on-terra" class="nav-link" data-scroll-target="#running-a-tutorial-on-terra">Running a tutorial on Terra</a></li>
+  <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the data</a></li>
+  <li><a href="#history" id="toc-history" class="nav-link" data-scroll-target="#history">History</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/index.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.ipynb" download="index.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/misc/terra_workspace.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/misc/terra_workspace.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="terra_workspace.ipynb" download="terra_workspace.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
@@ -465,47 +503,66 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="jump-cell-painting-hub" class="level1">
-<h1>JUMP Cell Painting Hub</h1>
-<p>JUMP (Joint Undertaking for Morphological Profiling) Cell Painting is an effort to produce data and resources to make use of <a href="https://jump-cellpainting.broadinstitute.org/cell-painting">Cell Painting</a> data. It is the result of years of work by the JUMP-CP <a href="https://jump-cellpainting.broadinstitute.org/partners">Consortium</a>.</p>
-<section id="getting-started-with-jump" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started-with-jump">Getting Started with JUMP</h2>
-<p>What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.</p>
+<section id="using-jump-data-on-terra" class="level1">
+<h1>Using JUMP data on Terra</h1>
+<p><a href="https://app.terra.bio">Terra</a> is a scalable and secure platform for biomedical researchers to access data, run analysis tools, and collaborate. It was co-developed by the Broad Institute of MIT and Harvard, Microsoft, and Verily. You can use Terra to explore JUMP Cell Painting data interactively via Jupyter notebooks in a cloud environment, without needing to set up a local computing environment.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The JUMP Cell Painting dataset includes 116k chemical and &gt;15k genetic perturbations (<code>cpg0016</code>), split across 12 data-generating centers, using human U2OS osteosarcoma cells. All data is hosted on the <a href="https://registry.opendata.aws/cellpainting-gallery/">Cell Painting Gallery</a> on the Registry of Open Data on AWS.</p>
+<p>The JUMP Hub <a href="../scripts/">tutorial scripts</a> fetch profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — they work anywhere you can run a Jupyter notebook, including Terra.</p>
 </section>
-<section id="choose-your-own-path" class="level2">
-<h2 class="anchored" data-anchor-id="choose-your-own-path">Choose Your Own Path</h2>
-<ol type="1">
-<li><p>Just exploring the data?</p>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
 <ul>
-<li>Use a web interface; no programming required. You can look up images for a gene or compound, distinguishing features, most-similar genes or compounds, and more! See the <a href="./howto/interactive/0_overview.html">Interactive Tools</a> page for instructions for these tools.</li>
-</ul></li>
-<li><p>Want to fetch and analyze data?</p>
-<ul>
-<li>Follow our <a href="./howto/notebooks/0_overview.html">how-to guides</a> for common analyses</li>
-</ul></li>
-<li><p>Looking to build tools?</p>
-<ul>
-<li>Use our Python libraries <a href="https://github.com/afermg/cp_measure">cp_measure</a>, <a href="https://github.com/broadinstitute/cpg/tree/main/cpgdata">cpgdata</a>, <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait">jump-portrait</a>, <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">jump-babel</a> and other libraries in the <a href="https://github.com/broadinstitute/monorepo/tree/main">monorepo</a></li>
-<li>Access the <a href="https://github.com/jump-cellpainting/datasets/tree/main/metadata">metadata schema</a></li>
-</ul></li>
-</ol>
-</section>
-<section id="need-help-or-more-information" class="level2">
-<h2 class="anchored" data-anchor-id="need-help-or-more-information">Need help or more information?</h2>
-<ul>
-<li>Read the papers creating the datasets for experimental and analysis details:
-<ul>
-<li><a href="https://www.nature.com/articles/s41592-024-02241-6">CPJUMP1</a></li>
-<li><a href="https://www.biorxiv.org/content/10.1101/2023.03.23.534023">JUMP data production biorxiv</a></li>
-<li><a href="https://www.biorxiv.org/content/10.1101/2024.12.02.624527">Morphmap</a></li>
-</ul></li>
-<li>Raise an issue or ask a question on <a href="https://github.com/jump-cellpainting/datasets/issues">Github</a></li>
-<li>Subscribe to (very infrequent) updates at <a href="https://jump-cellpainting.broadinstitute.org/more-info">jump-cellpainting.broadinstitute.org/more-info</a></li>
+<li>A <a href="https://app.terra.bio">Terra</a> account with an active billing project.</li>
 </ul>
 </section>
-<section id="acknowledgements" class="level2">
-<h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This resource was developed by <a href="https://github.com/afermg">Alan F. Muñoz</a></p>
+<section id="running-a-tutorial-on-terra" class="level2">
+<h2 class="anchored" data-anchor-id="running-a-tutorial-on-terra">Running a tutorial on Terra</h2>
+<ol type="1">
+<li><p>Create or open a workspace on Terra.</p></li>
+<li><p>Start a cloud environment from the workspace. Recommended minimum settings:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CPUs</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Disk Size</td>
+<td>50 GB</td>
+</tr>
+<tr class="odd">
+<td>Memory</td>
+<td>3.75 GB</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Pick a tutorial script from <a href="../scripts/"><code>scripts/</code></a> and convert it to a notebook locally. For example, starting with <a href="../scripts/11_retrieve_profiles.py">Retrieve JUMP profiles</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupytext</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupytext</span> <span class="at">--to</span> notebook 11_retrieve_profiles.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Upload the resulting <code>.ipynb</code> to the Terra workspace <strong>Analyses</strong> tab.</p></li>
+<li><p>Add a cell at the top of the notebook to install dependencies:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install jump_deps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Run the notebook.</p></li>
+</ol>
+</section>
+<section id="about-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="about-the-data">About the data</h2>
+<ul>
+<li>Most data components (images, raw CellProfiler output, single-cell profiles, aggregated CellProfiler profiles) are available from 12 sources for the principal dataset. Each source corresponds to a unique data-generating center (except <code>source_7</code> and <code>source_13</code>, which were from the same center).</li>
+<li>See <a href="https://github.com/jump-cellpainting/datasets">jump-cellpainting/datasets</a> for full details on available and planned data releases.</li>
+</ul>
+</section>
+<section id="history" class="level2">
+<h2 class="anchored" data-anchor-id="history">History</h2>
+<p>This guide was originally contributed by Nicole Deflaux (Verily) in March 2023 as part of the <a href="https://github.com/jump-cellpainting/datasets/pull/55">datasets repository</a> and has been adapted for the JUMP Hub.</p>
 
 
 </section>
@@ -929,4 +986,4 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/index.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/index.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/misc/terra_workspace.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/misc/terra_workspace.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
