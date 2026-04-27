@@ -29,6 +29,7 @@ What is the purpose of this website? To provide up-to-date info on everything JU
   - [CPJUMP1](https://www.nature.com/articles/s41592-024-02241-6)
   - [JUMP data production biorxiv](https://www.biorxiv.org/content/10.1101/2023.03.23.534023)
   - [Morphmap](https://www.biorxiv.org/content/10.1101/2024.12.02.624527)
+- For a comprehensive list of resources around understanding and working with Cell Painting data, see our [Guide to Cell Painting for Biologists](https://ciminilab.github.io/GuideToCellPainting/)
 - Raise an issue or ask a question on [Github](https://github.com/jump-cellpainting/datasets/issues)
 - Subscribe to (very infrequent) updates at [jump-cellpainting.broadinstitute.org/more-info](https://jump-cellpainting.broadinstitute.org/more-info)
 
