@@ -41,9 +41,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9ea88c2e984ff4d1f8e3d3e5f66373f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-4eadbef31015351980ccb80f2898d1bb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-9ea88c2e984ff4d1f8e3d3e5f66373f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-304f9e72be159657b119075e43036647.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-e4d940859d0ceb2554e2be174a29ba12.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-304f9e72be159657b119075e43036647.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -467,14 +467,12 @@ ul.task-list li input[type="checkbox"] {
 <h1>Glossary and Acronyms</h1>
 <p>Reference for terms and their definition.</p>
 <ul>
-<li><strong>Image-based profiling</strong> (also called morphological profiling): Method to study cell phenotypes by quantifying their shape, size and intensity features. The many features that are captured make up the profile of the cell or the population of cells in a sample.<br>
+<li><strong>Image-based profiling</strong> (also called morphological profiling): Method to study cell phenotypes by quantifying their shape, size and intensity features. The many features that are captured make up the profile of the cell or the population of cells in a sample. <em>Cell Painting</em> is the name of the particular microscopy assay often (but not always) used for image-based profiling.</li>
+<li><strong>Phenotypic activity</strong>: Does this sample have a detectable phenotype compared to negative controls? Phenotypic activity is a metric indicating how well we can distinguish a perturbed sample of cells from its negative controls, which quantifies how “strong” the phenotype is; (<a href="https://doi.org/10.1038/s41467-025-60306-2">Kalinin, et al.</a> elaborates on the term and the mAP retrieval framework used to calculate it).<br>
 </li>
-<li><strong>Phenotypic activity</strong>: Metric that indicates how well we can distinguish a perturbation from its negative controls, which quantifies how strong the phenotype is (<a href="https://doi.org/10.1038/s41467-025-60306-2">Kalinin, et al.&nbsp;elaborates on the term</a>).<br>
+<li><strong>Phenotypic consistency</strong>: Is this sample’s phenotype consistent with the phenotype of other samples that are supposed to look like it? Phenotypic consistency is a metric indicating how well a perturbation’s profile matches profiles of samples that are expected to be biologically related, according to an annotated resource such as known gene-gene or compound-target interactions; (<a href="https://doi.org/10.1038/s41467-025-60306-2">Kalinin, et al.</a> elaborates on the term and the mAP retrieval framework used to calculate it).<br>
 </li>
-<li><strong>Phenotypic consistency</strong>: Metric that indicates how well a perturbation’s profile matches profiles of samples that are expected to be biologically related, according to an annotated resource (e.g., known gene-gene or compound-target interactions (<a href="https://doi.org/10.1038/s41467-025-60306-2">Kalinin, et al.</a>).<br>
-</li>
-<li><strong>Phenotypic distinctiveness</strong>: Metric showing how distinctive a perturbation is relative to the other perturbations in a given experiment (not limited to negative controls, as in phenotypic activity).<br>
-</li>
+<li><strong>Phenotypic distinctiveness</strong>: Is this sample’s phenotype distinct from other samples in the experiment? Phenotypic distinctiveness is a metric indicating how distinctive a perturbation is relative to the other perturbations in a given experiment (not limited to negative controls, as in phenotypic activity); (<a href="https://doi.org/10.1038/s41467-025-60306-2">Kalinin, et al.</a> elaborates on the term and the mAP retrieval framework used to calculate it).</li>
 <li><strong>Cosine similarity</strong>: Metric capturing how close two vectors are. It assumes all the elements in them (usually features) have the same weight.<br>
 </li>
 <li><strong>Retrievability:</strong> Umbrella term for the methods that assess the quality of matching among a set of samples in a profiling experiment: <strong>phenotypic activity</strong>, <strong>consistency</strong>, and <strong>distinctiveness</strong>.<br>
