@@ -17,7 +17,7 @@ dependencies = [
     "itables<3.0.0,>=2.2.5",
 ]
 name = "jump_deps"
-version = "0.0.7"
+version = "0.0.8"
 description = "Convenience package to add dependencies for JUMP exploratory analysis"
 readme = "readme.md"
 
