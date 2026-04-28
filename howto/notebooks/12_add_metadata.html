@@ -508,13 +508,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>A very common task when processing morphological profiles is knowing which ones are treatments and which ones are controls. Here we will explore how we can use broad-babel to accomplish this task.</p>
-<div id="0eb25b35" class="cell" title="Imports" data-execution_count="1">
+<div id="91d67c52" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> broad_babel.query <span class="im">import</span> get_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We will be using the CRISPR dataset specificed in our json index file.</p>
-<div id="b6806545" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
+<div id="575f5a56" class="cell" title="Fetch the CRISPR dataset" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>INDEX_FILE <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11.0/manifests/profile_index.json"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(INDEX_FILE)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>profile_index <span class="op">=</span> response.json()</span>
@@ -529,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>For simplicity the contents of our processed profiles are minimal: “The profile origin” (source, plate and well) and the unique JUMP identifier for that perturbation. We will use broad-babel to further expand on this metadata, but for simplicity’s sake let us sample subset of data.</p>
-<div id="2c3648d4" class="cell" title="Subset data" data-execution_count="3">
+<div id="ad67d7d1" class="cell" title="Subset data" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jcp_ids <span class="op">=</span> (</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    profiles.select(pl.col(<span class="st">"Metadata_JCP2022"</span>)).unique().collect().to_series().sort()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -538,42 +538,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>subsample <span class="op">=</span> (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>subsample</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>('JCP2022_801270',
- 'JCP2022_802425',
- 'JCP2022_802356',
- 'JCP2022_805808',
- 'JCP2022_804300',
- 'JCP2022_801205',
- 'JCP2022_802539',
- 'JCP2022_803663',
- 'JCP2022_800116',
- 'JCP2022_801847',
+<pre><code>('JCP2022_806489',
+ 'JCP2022_802541',
+ 'JCP2022_807842',
+ 'JCP2022_805589',
+ 'JCP2022_806326',
+ 'JCP2022_804689',
+ 'JCP2022_801000',
+ 'JCP2022_804826',
+ 'JCP2022_801657',
+ 'JCP2022_807446',
  'JCP2022_800002')</code></pre>
 </div>
 </div>
 <p>We will use these JUMP ids to obtain a mapper that indicates the perturbation type (trt, negcon or, rarely, poscon)</p>
-<div id="8228f9b9" class="cell" title="Pull mapper" data-execution_count="4">
+<div id="e9e1f3fa" class="cell" title="Pull mapper" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pert_mapper <span class="op">=</span> get_mapper(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    subsample, input_column<span class="op">=</span><span class="st">"JCP2022"</span>, output_columns<span class="op">=</span><span class="st">"JCP2022,pert_type"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>pert_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>{'JCP2022_803663': 'trt',
- 'JCP2022_802356': 'trt',
+<pre><code>{'JCP2022_806326': 'trt',
+ 'JCP2022_807446': 'trt',
+ 'JCP2022_802541': 'trt',
+ 'JCP2022_804689': 'trt',
+ 'JCP2022_806489': 'trt',
+ 'JCP2022_804826': 'trt',
+ 'JCP2022_805589': 'trt',
  'JCP2022_800002': 'negcon',
- 'JCP2022_805808': 'trt',
- 'JCP2022_804300': 'trt',
- 'JCP2022_801847': 'trt',
- 'JCP2022_800116': 'trt',
- 'JCP2022_802539': 'trt',
- 'JCP2022_802425': 'trt',
- 'JCP2022_801205': 'trt',
- 'JCP2022_801270': 'trt'}</code></pre>
+ 'JCP2022_801000': 'trt',
+ 'JCP2022_801657': 'trt',
+ 'JCP2022_807842': 'trt'}</code></pre>
 </div>
 </div>
 <p>A couple of important notes about broad_babel’s get mapper and other functions: - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls - ‘get-mapper’ works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the ‘compounds’ dataset it is likely to fail. For these cases we suggest the more general function ‘run_query’. You can read more on this and other use-cases on Babel’s <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel">readme</a>.</p>
 <p>We will now repeat the process to get their ‘standard’ name</p>
-<div id="9545dab7" class="cell" title="Fetch standard name" data-execution_count="5">
+<div id="b45a66db" class="cell" title="Fetch standard name" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>name_mapper <span class="op">=</span> get_mapper(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    (<span class="op">*</span>subsample, <span class="st">"JCP2022_800002"</span>),</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    input_column<span class="op">=</span><span class="st">"JCP2022"</span>,</span>
@@ -581,21 +581,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>name_mapper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>{'JCP2022_801205': 'CDK20',
+<pre><code>{'JCP2022_807842': 'ZNF205',
+ 'JCP2022_804826': 'OTUD3',
+ 'JCP2022_802541': 'G6PC3',
+ 'JCP2022_806489': 'SLC2A4',
+ 'JCP2022_806326': 'SHOX2',
+ 'JCP2022_801000': 'CACNB1',
  'JCP2022_800002': 'non-targeting',
- 'JCP2022_805808': 'RAD51B',
- 'JCP2022_801847': 'DMRT2',
- 'JCP2022_802425': 'FLNC',
- 'JCP2022_802539': 'G6PC',
- 'JCP2022_802356': 'FDX1',
- 'JCP2022_803663': 'KIF16B',
- 'JCP2022_804300': 'MSX1',
- 'JCP2022_801270': 'CFB',
- 'JCP2022_800116': 'ACOT11'}</code></pre>
+ 'JCP2022_807446': 'UBE2B',
+ 'JCP2022_805589': 'PRSS41',
+ 'JCP2022_801657': 'CYP4F8',
+ 'JCP2022_804689': 'NR2F1'}</code></pre>
 </div>
 </div>
 <p>To wrap up, we will fetch all the available profiles for these perturbations and use the mappers to add the missing metadata. We also select a few features to showcase how how selection can be performed in polars.</p>
-<div id="a4505b94" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
+<div id="aa5e5bef" class="cell" title="Filter profiles and merge metadata" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>subsample_profiles <span class="op">=</span> profiles.<span class="bu">filter</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    pl.col(<span class="st">"Metadata_JCP2022"</span>).is_in(subsample)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>).collect()</span>
@@ -614,12 +614,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   white-space: pre-wrap;
 }
 </style>
-<small>shape: (2_806, 9)</small>
+<small>shape: (2_811, 9)</small>
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th">name</th>
-<th data-quarto-table-cell-role="th">pert_type</th>
 <th data-quarto-table-cell-role="th">Metadata_Source</th>
 <th data-quarto-table-cell-role="th">Metadata_Plate</th>
 <th data-quarto-table-cell-role="th">Metadata_Well</th>
@@ -627,23 +625,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th data-quarto-table-cell-role="th">X_1</th>
 <th data-quarto-table-cell-role="th">X_2</th>
 <th data-quarto-table-cell-role="th">X_3</th>
+<th data-quarto-table-cell-role="th">pert_type</th>
+<th data-quarto-table-cell-role="th">name</th>
 </tr>
 <tr class="even">
 <th>str</th>
 <th>str</th>
 <th>str</th>
 <th>str</th>
+<th>f32</th>
+<th>f32</th>
+<th>f32</th>
 <th>str</th>
 <th>str</th>
-<th>f32</th>
-<th>f32</th>
-<th>f32</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>"non-targeting"</td>
-<td>"negcon"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R1-01"</td>
 <td>"A02"</td>
@@ -651,10 +649,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.223417</td>
 <td>-0.049487</td>
 <td>-0.826231</td>
+<td>"negcon"</td>
+<td>"non-targeting"</td>
 </tr>
 <tr class="even">
-<td>"non-targeting"</td>
-<td>"negcon"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R1-01"</td>
 <td>"L23"</td>
@@ -662,10 +660,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.079349</td>
 <td>-0.016958</td>
 <td>-0.277558</td>
+<td>"negcon"</td>
+<td>"non-targeting"</td>
 </tr>
 <tr class="odd">
-<td>"non-targeting"</td>
-<td>"negcon"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R1-01"</td>
 <td>"I23"</td>
@@ -673,10 +671,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.023832</td>
 <td>-0.00537</td>
 <td>-0.29832</td>
+<td>"negcon"</td>
+<td>"non-targeting"</td>
 </tr>
 <tr class="even">
-<td>"non-targeting"</td>
-<td>"negcon"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R1-01"</td>
 <td>"J02"</td>
@@ -684,10 +682,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.169491</td>
 <td>-0.023422</td>
 <td>-0.088187</td>
+<td>"negcon"</td>
+<td>"non-targeting"</td>
 </tr>
 <tr class="odd">
-<td>"non-targeting"</td>
-<td>"negcon"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R1-01"</td>
 <td>"O23"</td>
@@ -695,6 +693,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.295112</td>
 <td>-0.124241</td>
 <td>1.055193</td>
+<td>"negcon"</td>
+<td>"non-targeting"</td>
 </tr>
 <tr class="even">
 <td>…</td>
@@ -708,59 +708,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>…</td>
 </tr>
 <tr class="odd">
-<td>"CFB"</td>
-<td>"trt"</td>
-<td>"source_13"</td>
-<td>"CP-CC9-R5-19"</td>
-<td>"G12"</td>
-<td>"JCP2022_801270"</td>
-<td>0.023277</td>
-<td>0.021747</td>
-<td>-0.914867</td>
-</tr>
-<tr class="even">
-<td>"DMRT2"</td>
-<td>"trt"</td>
-<td>"source_13"</td>
-<td>"CP-CC9-R5-21"</td>
-<td>"C10"</td>
-<td>"JCP2022_801847"</td>
-<td>-0.208865</td>
-<td>-0.046884</td>
-<td>0.845933</td>
-</tr>
-<tr class="odd">
-<td>"MSX1"</td>
-<td>"trt"</td>
 <td>"source_13"</td>
 <td>"CP-CC9-R5-24"</td>
-<td>"C03"</td>
-<td>"JCP2022_804300"</td>
-<td>-0.003333</td>
-<td>0.053181</td>
-<td>0.078227</td>
+<td>"M19"</td>
+<td>"JCP2022_807842"</td>
+<td>-0.025408</td>
+<td>-0.03758</td>
+<td>0.605146</td>
+<td>"trt"</td>
+<td>"ZNF205"</td>
 </tr>
 <tr class="even">
-<td>"CFB"</td>
-<td>"trt"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R6-19"</td>
-<td>"G12"</td>
-<td>"JCP2022_801270"</td>
-<td>0.18701</td>
-<td>0.072405</td>
-<td>0.381239</td>
+<td>"CP-CC9-R5-27"</td>
+<td>"D15"</td>
+<td>"JCP2022_807446"</td>
+<td>0.076753</td>
+<td>-0.040404</td>
+<td>-0.421323</td>
+<td>"trt"</td>
+<td>"UBE2B"</td>
 </tr>
 <tr class="odd">
-<td>"CFB"</td>
-<td>"trt"</td>
 <td>"source_13"</td>
-<td>"CP-CC9-R7-19"</td>
-<td>"G12"</td>
-<td>"JCP2022_801270"</td>
-<td>0.051818</td>
-<td>-0.129935</td>
-<td>-0.481606</td>
+<td>"CP-CC9-R6-01"</td>
+<td>"L07"</td>
+<td>"JCP2022_806489"</td>
+<td>-0.267132</td>
+<td>-0.136339</td>
+<td>1.994115</td>
+<td>"trt"</td>
+<td>"SLC2A4"</td>
+</tr>
+<tr class="even">
+<td>"source_13"</td>
+<td>"CP-CC9-R7-01"</td>
+<td>"L07"</td>
+<td>"JCP2022_806489"</td>
+<td>0.046167</td>
+<td>-0.180045</td>
+<td>-6.034665</td>
+<td>"trt"</td>
+<td>"SLC2A4"</td>
+</tr>
+<tr class="odd">
+<td>"source_13"</td>
+<td>"CP-CC9-R8-01"</td>
+<td>"L07"</td>
+<td>"JCP2022_806489"</td>
+<td>-0.0686</td>
+<td>-0.025567</td>
+<td>0.013707</td>
+<td>"trt"</td>
+<td>"SLC2A4"</td>
 </tr>
 </tbody>
 </table>

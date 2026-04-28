@@ -512,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Despite the aforementioned problems, we provide the full matrix of perturbation distances in case it is of use to data analysts. You can find this and other datasets on <a href="https://zenodo.org/records/13259495/latest">Zenodo</a>. The data files of interest for this exercise are “{org,crispr}_cosinesim_full.parquet”.</p>
 <p>The following analysis focuses on showcasing how to query one of these distance matrices to find all the distances between any given perturbation and all others. One use-case of this is testing how similar perturbation A and B are relative to perturbation C’s similarity to A.</p>
 <hr>
-<div id="8aa57b56" class="cell" title="Imports" data-execution_count="1">
+<div id="e5cfbdc2" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> choices, seed</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -521,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We select the CRISPR dataset for this example. As with previous examples, this is a lazy-loaded data frame. This enables us to download very big datasets without worrying about whether or not they will fill into memory. In these datasets, the values range between 0 and 2, where 0 means that two profiles are the same, 1 means that they are orthogonal (completely uncorrelated) and 2 means that they are completely anticorrelated.</p>
-<div id="5648a82f" class="cell" data-execution_count="2">
+<div id="8b3cdf78" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>latest_id <span class="op">=</span> requests.get(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://zenodo.org/api/records/15029005/versions/latest"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>).json()[<span class="st">"id"</span>]</span>
@@ -699,7 +699,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>0.999999</td>
 <td>-0.059666</td>
-<td>0.554028</td>
+<td>0.554029</td>
 <td>-0.04492</td>
 <td>0.084458</td>
 <td>0.198055</td>
@@ -793,7 +793,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.175636</td>
 <td>-0.080915</td>
 <td>0.268312</td>
-<td>0.081598</td>
+<td>0.081597</td>
 <td>-0.078976</td>
 <td>0.085061</td>
 <td>0.175086</td>
@@ -851,7 +851,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.004394</td>
 </tr>
 <tr class="odd">
-<td>0.554028</td>
+<td>0.554029</td>
 <td>0.068846</td>
 <td>1.0</td>
 <td>-0.021055</td>
@@ -866,7 +866,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.133311</td>
 <td>-0.013311</td>
 <td>0.13743</td>
-<td>0.234339</td>
+<td>0.23434</td>
 <td>0.275142</td>
 <td>0.016155</td>
 <td>0.040506</td>
@@ -876,7 +876,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.032407</td>
 <td>0.064835</td>
 <td>-0.033852</td>
-<td>-0.079084</td>
+<td>-0.079085</td>
 <td>0.096579</td>
 <td>0.033903</td>
 <td>0.148587</td>
@@ -973,7 +973,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>-0.1072</td>
 <td>0.024382</td>
 <td>-0.02293</td>
-<td>0.026178</td>
+<td>0.026179</td>
 <td>0.024607</td>
 <td>0.02788</td>
 <td>0.026813</td>
@@ -1087,7 +1087,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Note that the only metadata information in this matrix are the column names as JUMP IDs (JCP2022_X), meaning that we will need to use a mapper from these JUMP ids to conventional names; feel free to look at the previous how-to that demonstrates that. We will now select three features at random and look at their correlation matrix</p>
-<div id="2d21edb3" class="cell" data-execution_count="3">
+<div id="08280adc" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>seed(<span class="dv">42</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> distances.collect_schema().names()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ncols <span class="op">=</span> <span class="bu">len</span>(cols)</span>
@@ -1145,7 +1145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Finally, we plot them in a heatmap for easier visualisation</p>
-<div id="c5123250" class="cell" data-execution_count="4">
+<div id="8aef1871" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pandas_correlation <span class="op">=</span> sampled_distances.to_pandas()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pandas_correlation.index <span class="op">=</span> pandas_correlation.columns</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
@@ -1161,7 +1161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="15_explore_distance_clusters_files/figure-html/cell-5-output-1.png" width="643" height="470" class="figure-img"></p>
+<p><img src="15_explore_distance_clusters_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
