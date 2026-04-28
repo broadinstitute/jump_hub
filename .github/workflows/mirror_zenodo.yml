@@ -1,0 +1,44 @@
+name: Mirror Zenodo to CPG
+
+# Runs tools/mirror_zenodo_to_cpg.sh against the JUMP_rr Zenodo concept.
+#
+# Triggers:
+#   - Manual (workflow_dispatch) - safe to run any time; idempotent.
+#   - Scheduled cron (commented out by default) - enable once AWS_ACCESS_KEY_ID
+#     and AWS_SECRET_ACCESS_KEY repository secrets are wired to a CPG-write
+#     credential. Without those secrets the job will fail.
+
+on:
+  workflow_dispatch:
+    inputs:
+      concept_id:
+        description: "Zenodo concept ID to mirror"
+        required: false
+        default: "10408587"
+      dry_run:
+        description: "Set to 1 to preview without uploading"
+        required: false
+        default: "0"
+  # schedule:
+  #   - cron: "0 6 * * *"  # daily 06:00 UTC
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Run mirror script
+        env:
+          CONCEPT_ID: ${{ inputs.concept_id || '10408587' }}
+          DRY_RUN: ${{ inputs.dry_run || '0' }}
+          AWS_PROFILE_NAME: default
+        run: ./tools/mirror_zenodo_to_cpg.sh
