@@ -40,5 +40,8 @@ jobs:
         env:
           CONCEPT_ID: ${{ inputs.concept_id || '10408587' }}
           DRY_RUN: ${{ inputs.dry_run || '0' }}
-          AWS_PROFILE_NAME: default
+          # configure-aws-credentials sets env-var credentials, not a named
+          # profile in ~/.aws. Empty AWS_PROFILE_NAME tells the script to
+          # call `aws` without `--profile`.
+          AWS_PROFILE_NAME: ""
         run: ./tools/mirror_zenodo_to_cpg.sh

@@ -20,9 +20,18 @@ set -euo pipefail
 CONCEPT_ID="${CONCEPT_ID:-10408587}"
 S3_BUCKET="${S3_BUCKET:-cellpainting-gallery}"
 S3_PREFIX="${S3_PREFIX:-cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr}"
-AWS_PROFILE_NAME="${AWS_PROFILE_NAME:-cpg}"
+AWS_PROFILE_NAME="${AWS_PROFILE_NAME-cpg}"
 DRY_RUN="${DRY_RUN:-0}"
 ONLY_FILE="${ONLY_FILE:-}"
+
+# Build the optional `--profile <name>` arg only when AWS_PROFILE_NAME is set
+# and non-empty. In GitHub Actions, aws-actions/configure-aws-credentials
+# exports credentials as environment variables and does not create a
+# `default` profile, so passing `--profile default` would fail.
+profile_args=()
+if [ -n "${AWS_PROFILE_NAME}" ]; then
+    profile_args=(--profile "$AWS_PROFILE_NAME")
+fi
 
 log() { printf '%s %s\n' "[$(date -u +%H:%M:%SZ)]" "$*"; }
 
@@ -62,7 +71,7 @@ while IFS=$'\t' read -r name url size md5; do
 
     existing_md5=$(aws s3api head-object \
         --bucket "$S3_BUCKET" --key "$version_key" \
-        --profile "$AWS_PROFILE_NAME" 2>/dev/null \
+        "${profile_args[@]}" 2>/dev/null \
         | jq -r '.Metadata."zenodo-md5" // empty' || true)
 
     if [ "$existing_md5" = "$md5" ]; then
@@ -71,14 +80,14 @@ while IFS=$'\t' read -r name url size md5; do
     else
         log "  upload: streaming Zenodo -> $version_uri"
         if [ "$DRY_RUN" = "1" ]; then
-            printf '  DRY-RUN: curl -fsSL %s | aws s3 cp - %s --expected-size %s --metadata zenodo-md5=%s,zenodo-record-id=%s --profile %s\n' \
-                "$url" "$version_uri" "$size" "$md5" "$record_id" "$AWS_PROFILE_NAME"
+            printf '  DRY-RUN: curl -fsSL %s | aws s3 cp - %s --expected-size %s --metadata zenodo-md5=%s,zenodo-record-id=%s %s\n' \
+                "$url" "$version_uri" "$size" "$md5" "$record_id" "${profile_args[*]}"
         else
             curl -fsSL "$url" \
                 | aws s3 cp - "$version_uri" \
                     --expected-size "$size" \
                     --metadata "zenodo-md5=${md5},zenodo-record-id=${record_id}" \
-                    --profile "$AWS_PROFILE_NAME"
+                    "${profile_args[@]}"
         fi
         uploaded=$((uploaded + 1))
     fi
@@ -87,7 +96,7 @@ while IFS=$'\t' read -r name url size md5; do
     run_aws s3 cp "$version_uri" "$latest_uri" \
         --metadata-directive REPLACE \
         --metadata "zenodo-md5=${md5},zenodo-record-id=${record_id}" \
-        --profile "$AWS_PROFILE_NAME" \
+        "${profile_args[@]}" \
         --only-show-errors
     synced=$((synced + 1))
 done < <(printf '%s' "$record_json" \
