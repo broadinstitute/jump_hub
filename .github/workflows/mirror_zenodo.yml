@@ -1,0 +1,80 @@
+name: Mirror Zenodo to CPG
+
+# Runs tools/mirror_zenodo_to_cpg.sh against the JUMP_rr Zenodo concept.
+#
+# Triggers:
+#   - Manual (workflow_dispatch) - safe to run any time; idempotent.
+#   - Scheduled cron - daily 06:00 UTC. Idempotent runs with no Zenodo change
+#     are seconds; a real new-version run is hours but well under the 360-min
+#     timeout. The mirror is safe to re-trigger at any cadence.
+#
+# Credentials:
+#   AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are the static IAM access keys
+#   provisioned by cellpainting-gallery-infra (CDK ManagedPrefixGrant). Those
+#   keys only carry s3:GetDataAccess; this workflow uses them to mint
+#   temporary, prefix-scoped S3 credentials via s3control get-data-access
+#   (12h lifetime, far longer than the worst-case mirror) and runs the mirror
+#   script under those temp creds. The mirror script itself is unchanged --
+#   it sees standard AWS_* env vars and is unaware of Access Grants.
+
+on:
+  workflow_dispatch:
+    inputs:
+      concept_id:
+        description: "Zenodo concept ID to mirror"
+        required: false
+        default: "10408587"
+      dry_run:
+        description: "Set to 1 to preview without uploading"
+        required: false
+        default: "0"
+  schedule:
+    - cron: "0 6 * * *"  # daily 06:00 UTC
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Mint S3 Access Grants temporary credentials
+        env:
+          CPG_ACCOUNT_ID: "309624411020"
+          CPG_BUCKET: cellpainting-gallery
+          CPG_PREFIX: cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr
+        run: |
+          set -euo pipefail
+          creds=$(aws s3control get-data-access \
+            --account-id "$CPG_ACCOUNT_ID" \
+            --target "s3://${CPG_BUCKET}/${CPG_PREFIX}/*" \
+            --permission READWRITE \
+            --duration-seconds 43200 \
+            --region us-east-1 \
+            --output json)
+          for k in AccessKeyId SecretAccessKey SessionToken; do
+            v=$(jq -r ".Credentials.$k" <<< "$creds")
+            echo "::add-mask::$v"
+          done
+          {
+            echo "AWS_ACCESS_KEY_ID=$(jq -r .Credentials.AccessKeyId   <<< "$creds")"
+            echo "AWS_SECRET_ACCESS_KEY=$(jq -r .Credentials.SecretAccessKey <<< "$creds")"
+            echo "AWS_SESSION_TOKEN=$(jq -r .Credentials.SessionToken <<< "$creds")"
+          } >> "$GITHUB_ENV"
+
+      - name: Run mirror script
+        env:
+          CONCEPT_ID: ${{ inputs.concept_id || '10408587' }}
+          DRY_RUN: ${{ inputs.dry_run || '0' }}
+          # configure-aws-credentials sets env-var credentials, not a named
+          # profile in ~/.aws. Empty AWS_PROFILE_NAME tells the script to
+          # call `aws` without `--profile`.
+          AWS_PROFILE_NAME: ""
+        run: ./tools/mirror_zenodo_to_cpg.sh
