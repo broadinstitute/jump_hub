@@ -4,7 +4,9 @@ name: Mirror Zenodo to CPG
 #
 # Triggers:
 #   - Manual (workflow_dispatch) - safe to run any time; idempotent.
-#   - Scheduled cron (commented out by default).
+#   - Scheduled cron - daily 06:00 UTC. Idempotent runs with no Zenodo change
+#     are seconds; a real new-version run is hours but well under the 360-min
+#     timeout. The mirror is safe to re-trigger at any cadence.
 #
 # Credentials:
 #   AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are the static IAM access keys
@@ -26,8 +28,8 @@ on:
         description: "Set to 1 to preview without uploading"
         required: false
         default: "0"
-  # schedule:
-  #   - cron: "0 6 * * *"  # daily 06:00 UTC
+  schedule:
+    - cron: "0 6 * * *"  # daily 06:00 UTC
 
 jobs:
   mirror:
