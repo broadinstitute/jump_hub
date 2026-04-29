@@ -4,9 +4,16 @@ name: Mirror Zenodo to CPG
 #
 # Triggers:
 #   - Manual (workflow_dispatch) - safe to run any time; idempotent.
-#   - Scheduled cron (commented out by default) - enable once AWS_ACCESS_KEY_ID
-#     and AWS_SECRET_ACCESS_KEY repository secrets are wired to a CPG-write
-#     credential. Without those secrets the job will fail.
+#   - Scheduled cron (commented out by default).
+#
+# Credentials:
+#   AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY are the static IAM access keys
+#   provisioned by cellpainting-gallery-infra (CDK ManagedPrefixGrant). Those
+#   keys only carry s3:GetDataAccess; this workflow uses them to mint
+#   temporary, prefix-scoped S3 credentials via s3control get-data-access
+#   (12h lifetime, far longer than the worst-case mirror) and runs the mirror
+#   script under those temp creds. The mirror script itself is unchanged --
+#   it sees standard AWS_* env vars and is unaware of Access Grants.
 
 on:
   workflow_dispatch:
@@ -35,6 +42,30 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
+      - name: Mint S3 Access Grants temporary credentials
+        env:
+          CPG_ACCOUNT_ID: "309624411020"
+          CPG_BUCKET: cellpainting-gallery
+          CPG_PREFIX: cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr
+        run: |
+          set -euo pipefail
+          creds=$(aws s3control get-data-access \
+            --account-id "$CPG_ACCOUNT_ID" \
+            --target "s3://${CPG_BUCKET}/${CPG_PREFIX}/*" \
+            --permission READWRITE \
+            --duration-seconds 43200 \
+            --region us-east-1 \
+            --output json)
+          for k in AccessKeyId SecretAccessKey SessionToken; do
+            v=$(jq -r ".Credentials.$k" <<< "$creds")
+            echo "::add-mask::$v"
+          done
+          {
+            echo "AWS_ACCESS_KEY_ID=$(jq -r .Credentials.AccessKeyId   <<< "$creds")"
+            echo "AWS_SECRET_ACCESS_KEY=$(jq -r .Credentials.SecretAccessKey <<< "$creds")"
+            echo "AWS_SESSION_TOKEN=$(jq -r .Credentials.SessionToken <<< "$creds")"
+          } >> "$GITHUB_ENV"
 
       - name: Run mirror script
         env:

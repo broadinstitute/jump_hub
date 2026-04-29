@@ -44,6 +44,27 @@ CONCEPT_ID=12345678 ./tools/mirror_zenodo_to_cpg.sh
 AWS_PROFILE_NAME=my-profile ./tools/mirror_zenodo_to_cpg.sh
 ```
 
+## Credential paths
+
+There are two ways the script can be run, with different credential mechanics:
+
+1. **Direct S3 access (local maintainer use).** A profile like `cpg` mapped to an IAM user that has direct `s3:PutObject` / `s3:GetObject` on the bucket. The script's defaults (`AWS_PROFILE_NAME=cpg`) work as-is. This is the path most contributors will already have via the [Cell Painting Gallery contribution guidelines](https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html).
+
+2. **S3 Access Grants (CI / infra-issued credentials).** The IAM keys that [`cellpainting-gallery-infra`](https://github.com/broadinstitute/cellpainting-gallery-infra) provisions for a prefix carry only `s3:GetDataAccess`, not direct S3 actions. To use them you must first mint temporary, prefix-scoped credentials and export them as standard AWS env vars:
+
+   ```bash
+   creds=$(aws s3control get-data-access \
+     --account-id 309624411020 \
+     --target "s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr/*" \
+     --permission READWRITE --duration-seconds 43200 --region us-east-1 --output json)
+   export AWS_ACCESS_KEY_ID=$(jq -r .Credentials.AccessKeyId    <<< "$creds")
+   export AWS_SECRET_ACCESS_KEY=$(jq -r .Credentials.SecretAccessKey <<< "$creds")
+   export AWS_SESSION_TOKEN=$(jq -r .Credentials.SessionToken   <<< "$creds")
+   AWS_PROFILE_NAME="" ./tools/mirror_zenodo_to_cpg.sh
+   ```
+
+   The temp credentials live for up to 12 hours, comfortably more than the worst-case mirror runtime. The GitHub Actions workflow (`.github/workflows/mirror_zenodo.yml`) does exactly this in a dedicated step before invoking the script, so the script itself stays Access-Grants-unaware.
+
 ## How idempotency works
 
 The script stores the Zenodo MD5 checksum as S3 user metadata on each uploaded object under the key `zenodo-md5`. On subsequent runs, the script checks the existing object's `zenodo-md5` against the Zenodo file's MD5:
