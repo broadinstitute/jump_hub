@@ -16,7 +16,7 @@ s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publi
 
 The trailing `/content` suffix mirrors Zenodo's own download URL structure (`https://zenodo.org/api/records/<id>/files/<file>/content`). Datasette-Lite derives its table name from the URL's last path segment; preserving `content` as the last segment on both backends keeps the [JUMP_rr metadata JSONs](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr/metadata) (which key descriptions under `databases.data.tables.content`) valid against the CPG-served parquet.
 
-Zenodo remains the canonical, citable archive. CPG is the runtime origin that browser tools fetch from.
+Zenodo remains the canonical, citable archive. CPG is the storage origin; in practice browser tools fetch through the CloudFront edge cache that sits in front of the JUMP_rr subtree (`d3dw4c1b79pj57.cloudfront.net`, provisioned by [`cellpainting-gallery-infra`](https://github.com/broadinstitute/cellpainting-gallery-infra)'s `JumpRrCdnStack`). The CDN's 1h cache TTL means a daily-cron mirror update to `latest/` is visible to consumers within an hour without any manual cache invalidation. The mirror script itself writes only to S3 — it doesn't need to know about the CDN.
 
 ## When to run it
 
