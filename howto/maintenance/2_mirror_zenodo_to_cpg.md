@@ -8,11 +8,13 @@ For every file in the latest version of a Zenodo concept, the script writes the 
 
 ```
 s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr/
-    <record_id>/<file>      # immutable per-version copy
-    latest/<file>           # mutable pointer to the most recent version
+    <record_id>/<file>/content      # immutable per-version copy
+    latest/<file>/content           # mutable pointer to the most recent version
 ```
 
 `<record_id>` is the Zenodo record ID for that specific version (e.g. `19835081`). Each new Zenodo version gets a new record ID and a new `<record_id>/` directory on CPG; the previous one is left untouched. The `latest/` directory is always overwritten with the newest version, so `broad.io/*` short links can target `latest/` once and never need to be updated again.
+
+The trailing `/content` suffix mirrors Zenodo's own download URL structure (`https://zenodo.org/api/records/<id>/files/<file>/content`). Datasette-Lite derives its table name from the URL's last path segment; preserving `content` as the last segment on both backends keeps the [JUMP_rr metadata JSONs](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr/metadata) (which key descriptions under `databases.data.tables.content`) valid against the CPG-served parquet.
 
 Zenodo remains the canonical, citable archive. CPG is the runtime origin that browser tools fetch from.
 

@@ -3,8 +3,16 @@
 #
 # Streams each file from Zenodo straight to S3 (no large local downloads),
 # writing to two paths per file:
-#   - <S3_PREFIX>/<record_id>/<file>   immutable per-version copy
-#   - <S3_PREFIX>/latest/<file>        mutable pointer to the most recent version
+#   - <S3_PREFIX>/<record_id>/<file>/content   immutable per-version copy
+#   - <S3_PREFIX>/latest/<file>/content        mutable pointer to the most recent
+#
+# The trailing /content suffix mirrors Zenodo's own download URL structure
+# (https://zenodo.org/api/records/<id>/files/<file>/content) so that
+# Datasette-Lite, which derives its table name from the URL's last path
+# segment, registers the parquet under the same name on both backends. This
+# lets broad.io/* short links be repointed by swapping only the parquet=
+# URL parameter -- metadata table keys (`databases.data.tables.content` in
+# the jump_rr metadata JSONs) remain valid.
 #
 # Idempotent: stores the Zenodo MD5 as S3 user metadata `zenodo-md5` and skips
 # uploads when the existing object already carries the same checksum.
@@ -62,8 +70,8 @@ while IFS=$'\t' read -r name url size md5; do
         continue
     fi
 
-    version_key="${S3_PREFIX}/${record_id}/${name}"
-    latest_key="${S3_PREFIX}/latest/${name}"
+    version_key="${S3_PREFIX}/${record_id}/${name}/content"
+    latest_key="${S3_PREFIX}/latest/${name}/content"
     version_uri="s3://${S3_BUCKET}/${version_key}"
     latest_uri="s3://${S3_BUCKET}/${latest_key}"
 
