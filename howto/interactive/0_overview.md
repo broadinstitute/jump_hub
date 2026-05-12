@@ -40,23 +40,23 @@ There are several no-code options for exploring JUMP data. These are very useful
 #### Morpheus
 
 * How can I use Morpheus to view relationships among samples?
-1. Download the ORF and/or CRISPR data from [https://doi.org/10.5281/zenodo.14025602](https://doi.org/10.5281/zenodo.14025602) or from [https://zenodo.org/records/14165010](https://zenodo.org/records/14165010) (a smaller file with only genes having cosine similarity \> 0.5 with other genes).
+1. Download the profiles data from [https://doi.org/10.5281/zenodo.14164989](https://doi.org/10.5281/zenodo.14164989). The record hosts three GCT files — `crispr_filtered_thresh_0_5.gct`, `orf_filtered_thresh_0_5.gct`, and `compound_filtered_thresh_0_5.gct` — each containing only the perturbations with cosine similarity \> 0.5 to at least one other perturbation in the same dataset.
 2. Drag and drop one of those files into [Morpheus](https://software.broadinstitute.org/morpheus/) in your web browser; no need to install it)
 3. Go to Tools \> Similarity Matrix and choose Metric \= cosine similarity and Compute matrix for \= Columns
-4. Cluster the genes using Tools \> Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns
+4. Cluster the perturbations using Tools \> Hierarchical clustering (we recommend 1 minus Pearson correlation, but other options are fine) for both rows and columns
 
    ![][image1]
 
 6. Click the gear icon towards the top right and choose “Annotations” tab.
-7. Choose Symbol (for Rows and Columns) so that gene names will appear. You can also choose various annotations of genes, like biological process or molecular function but those names are long and make it hard to see unless you have a huge screen.
+7. Choose Symbol (CRISPR/ORF) or InChIKey (compound) for Rows and Columns so that perturbation names will appear. You can also choose various annotations of genes, like biological process or molecular function but those names are long and make it hard to see unless you have a huge screen.
 8. Play around\!
-   - To find a gene of interest, in the search box type Symbol: then start typing the name and it will appear as highlighted in the scroll bar so you can scroll to find it. But if you are looking for top matches to a gene, note that clustering can have weird behavior, putting the closest match pretty far away depending on the other data points. The broad.io Datasette links (JUMP_rr tools) more directly answer the “top/bottom matches” question and take less hands-on time to configure and less compute time to load.
-     - doubleclick a gene name and the data matrix will sort to show you the closest matches on one end and the strongest anti-correlators at the other. To go back to your original view, just keep clicking the same gene you originally sorted by, it will change back to the previous sort eventually.
-     - note that in clustered view you can't see anti-correlations which anecdotally seem more strong/common in CRISPR data. So clusters are a bit more interesting in ORF data.
-     - If you would like to trim the similarity matrix to only show genes with a strong match, you can follow this procedure:
-       - Add a new annotation by going to Tools \> Create Calculated Annotation, with the name '\#Matches' with the formula COUNTIF("\>0.7") This counts the number of genes where the similarity is above 0.7 (you can pick whatever threshold you prefer). Repeat this step for both rows and columns. *Warning: although this seems like a simple step, for some reason it is fairly intensive and might require a suitably powerful computer \- if the browser asks to Wait or Exit, waiting sometimes works.*
+   - To find a perturbation of interest, in the search box type Symbol: (or InChIKey: for compounds) then start typing the name and it will appear as highlighted in the scroll bar so you can scroll to find it. But if you are looking for top matches, note that clustering can have weird behavior, putting the closest match pretty far away depending on the other data points. The broad.io Datasette links (JUMP_rr tools) more directly answer the “top/bottom matches” question and take less hands-on time to configure and less compute time to load.
+     - doubleclick a perturbation name and the data matrix will sort to show you the closest matches on one end and the strongest anti-correlators at the other. To go back to your original view, just keep clicking the same perturbation you originally sorted by, it will change back to the previous sort eventually.
+     - note that in clustered view you can't see anti-correlations which anecdotally seem more strong/common in CRISPR data. So clusters are a bit more interesting in ORF and compound data.
+     - If you would like to trim the similarity matrix to only show perturbations with a strong match, you can follow this procedure:
+       - Add a new annotation by going to Tools \> Create Calculated Annotation, with the name '\#Matches' with the formula COUNTIF("\>0.7") This counts the number of perturbations where the similarity is above 0.7 (you can pick whatever threshold you prefer). Repeat this step for both rows and columns. *Warning: although this seems like a simple step, for some reason it is fairly intensive and might require a suitably powerful computer \- if the browser asks to Wait or Exit, waiting sometimes works.*
        - Filter samples where '\#Matches' \>=2 (because every sample matches itself); again repeat this for both rows and columns.
-       - This will yield \~350 genes in the ORF data, for example. You can increase the number of matches to filter (to 3 or 4, as you prefer).
+       - This will yield \~350 genes in the ORF data, for example. You can increase the number of matches to filter (to 3 or 4, as you prefer). The compound file is much larger, so a higher threshold or more aggressive \#Matches filter is recommended.
 
 #### Ardigen phenAID JUMP-CP Explorer
 Available here: https://phenaid.ardigen.com/jumpcpexplorer
