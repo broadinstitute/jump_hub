@@ -2,32 +2,34 @@
 
 The JUMP MCP server lets you query the JUMP Cell Painting dataset in plain language, directly from inside Claude (or any [Model Context Protocol](https://modelcontextprotocol.io) client). JUMP profiles how human cells respond — as high-dimensional morphological "fingerprints" — to hundreds of thousands of chemical and genetic perturbations. Answering even a basic question about that data normally means downloading multi-gigabyte profile tables and writing pandas/SQL. The JUMP MCP server removes that barrier: it exposes ~40 read-only query tools — gene/compound resolution, morphological nearest-neighbors, phenotypic activity and significance, interpretable CellProfiler features, gallery images, annotations, and provenance — so you can ask *"Was my gene tested? What does its knockout look like? What's morphologically similar to it?"* and get grounded, data-backed answers, complete with the original microscopy images, without writing code or moving data.
 
-It is useful for **both audiences**: bench biologists can use the natural-language path with no programming, while computational users get the same tools plus direct setup and authentication.
+It is useful for **both audiences**: bench biologists can use the natural-language path with no programming, while computational users get the same tools plus direct setup details.
 
 > **Source code (separate repository):** <https://github.com/yashaektefaie/JumpAgent>
 > — a FastAPI application deployed at [jump-agent.net](https://jump-agent.net) and exposed over MCP.
 
 ## Getting started
 
-The server is **hosted** at `https://jump-agent.net` and speaks MCP natively — there is nothing to install or run locally and no data to download. You only need an MCP client and an API key.
+The server is **hosted** at `https://jump-agent.net` and speaks MCP natively — there is nothing to install or run locally, no data to download, and no API key required. You only need an MCP client that supports HTTP MCP servers.
 
-### 1. Get an API key
-
-Access to the data tools requires an API key, sent on every request as the `X-API-Key` header. There is no public self-serve signup yet — request a key from the JUMP Agent maintainer. In the configuration below, replace `<your-api-key>` with the key you receive.
-
-### 2. Register the server
+### 1. Register the server
 
 For **Claude Code**, add the hosted endpoint and restart:
 
 ```bash
-claude mcp add --transport http jump https://jump-agent.net/mcp \
-  --header "X-API-Key: <your-api-key>"
+claude mcp add --transport http jump https://jump-agent.net/mcp
 # then restart Claude Code
 ```
 
-The same endpoint works with any MCP-compatible client that supports streamable-HTTP servers (e.g. Claude Desktop, Cursor): point the client at `https://jump-agent.net/mcp` and supply the `X-API-Key` header. Once connected, the `jump` tools appear automatically and Claude will call them when you ask JUMP-related questions.
+The same endpoint works with any MCP-compatible client that supports HTTP MCP servers (e.g. Claude Desktop, Cursor):
 
-### 3. Ask a question
+- **Name:** `jump`
+- **Transport:** HTTP
+- **URL:** `https://jump-agent.net/mcp`
+- **Authentication:** none
+
+Once connected, the client can call `tools/list` to discover the available tools and `tools/call` to run queries. Claude will call the tools when you ask JUMP-related questions.
+
+### 2. Ask a question
 
 That's it — ask in natural language. The worked examples below show the kinds of questions the server answers and the tool calls each one triggers.
 
@@ -39,7 +41,7 @@ The following five case studies all use one gene, **SLC2A2** (the glucose transp
 
 **Question** — "Was SLC2A2 tested in the JUMP collection of perturbations?"
 
-**Tool call** — `resolve`
+**Tool call** — `resolve_entity`
 
 **Result** — Yes, in both genetic modalities: a CRISPR knockout (`JCP2022_806487`) and an ORF overexpression reagent (`JCP2022_910380`). SLC2A2 is also a target of a JUMP compound — 2-deoxyglucose (`JCP2022_069590`), a glycolysis inhibitor annotated against `SLC2A1|SLC2A2|SLC2A3|SLC2A4`.
 
@@ -134,12 +136,12 @@ This DNA-replication / cell-cycle signature is a strong starting point for hypot
 ### How a query flows, end to end
 
 1. **You ask** a question in your MCP client.
-2. **Claude selects a tool** and calls the hosted MCP server at `https://jump-agent.net/mcp` over streamable HTTP, authenticated with your `X-API-Key`.
+2. **Claude selects a tool** and calls the hosted MCP server at `https://jump-agent.net/mcp` over HTTP MCP. The server is public and read-only, so no authentication header is required.
 3. **The server** (the FastAPI app at [github.com/yashaektefaie/JumpAgent](https://github.com/yashaektefaie/JumpAgent)) maps that tool to a **read-only** query over its data backends:
    - **DuckDB** over the JUMP production profile tables — e.g. `compound_no_source7`, the default Harmony-corrected compound profiles (source_7 excluded), plus the CRISPR, ORF, and compound modalities.
    - The **JUMP_rr Zenodo parquet tables** — per-modality `cosinesim`, `cohens_d`, `significance`, `gallery`, and `interpretable_features` — which power the similarity, feature, significance, and image lookups.
    - The **Cell Painting Gallery**, the source of the microscopy image URLs returned by the gallery tool.
-4. **Results return as structured JSON**, which Claude turns into the answer. Claude can chain tools — for example `resolve` → `gallery_images` → `interpretable_features` — to answer a multi-part question, exactly as in the case studies above.
+4. **Results return as structured JSON**, which Claude turns into the answer. Claude can chain tools — for example `resolve_entity` → `gallery_images` → `interpretable_features` — to answer a multi-part question, exactly as in the case studies above.
 
 ### Key tools
 
@@ -147,7 +149,7 @@ The server exposes ~40 tools; the ones used most often (and throughout the case 
 
 | Tool | What it does |
 | ----- | ----- |
-| `resolve` | Resolve a name, JCP ID, SMILES, gene, target, or MoA to canonical entities |
+| `resolve_entity` | Resolve a name, JCP ID, SMILES, gene, target, or MoA to canonical entities |
 | `get_entity_summary` | Compound/gene metadata, with optional activity |
 | `search_entities` | Filter compounds by metadata, properties, activity, and source |
 | `nearest_neighbors` | Morphological nearest matches for a perturbation (JUMP_rr) |
@@ -161,7 +163,7 @@ The server exposes ~40 tools; the ones used most often (and throughout the case 
 | `metadata_summary` | Bounded group-by summaries over metadata / copairs tables |
 | `provenance` | Data paths, sizes, and service provenance |
 
-The remaining tools cover dataset/schema discovery (`list_datasets`, `describe_schema`, `profile_features`, `profile_rows`), structure–activity analysis (`activity_cliffs`, `scaffold_series`, `dark_matter`), cross-config and cross-source comparisons (`compare_configs`, `activity_compare`, `consistency_compare`, `consistency_sweep`, `cross_source`), well-level QC (`well_cell_counts`), bundled neighborhood lookups (`workflow_neighborhood`, `workflow_compose`), and saved artifacts (`artifact_search`, `artifact_read`). Every tool is **read-only** — the server queries data, it never modifies it.
+The remaining tools cover dataset/schema discovery (`list_datasets`, `describe_schema`, `profile_features`, `profile_rows`), structure–activity analysis (`activity_cliffs`, `scaffold_series`, `dark_matter`), cross-config and cross-source comparisons (`compare_configs`, `activity_compare`, `consistency_compare`, `consistency_sweep`, `get_cross_source_reproducibility`), well-level QC (`well_cell_counts`), bundled neighborhood lookups (`workflow_neighborhood`, `workflow_compose`), and saved artifacts (`artifact_search`, `artifact_read`). Every tool is **read-only** — the server queries data, it never modifies it.
 
 ### Data it queries
 
