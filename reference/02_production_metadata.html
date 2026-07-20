@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cite – JUMP documentation and examples</title>
+<title>production_metadata – JUMP documentation and examples</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +20,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-75da932099d0fa9295cddc24eab62725.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8a1fef121934b975d97df0efa2d51ae9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-75da932099d0fa9295cddc24eab62725.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-75da932099d0fa9295cddc24eab62725.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-8a1fef121934b975d97df0efa2d51ae9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-75da932099d0fa9295cddc24eab62725.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -245,7 +280,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cite.html">Cite</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/00_gene_index.html">Reference</a></li><li class="breadcrumb-item"><a href="../reference/02_production_metadata.html">JUMP production metadata</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -260,7 +295,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">JUMP documentation and examples</a> 
+      <a href="../">JUMP documentation and examples</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -277,7 +312,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -292,19 +327,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/data_description.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/data_description.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Dataset Overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
+  <a href="../explanations/quirks_details.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quirks and details</span></a>
   </div>
 </li>
@@ -312,34 +347,34 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Reference</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/00_gene_index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available genes in JUMP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/01_chemical_query.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/01_chemical_query.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Available chemicals in JUMP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/02_production_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/02_production_metadata.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">JUMP production metadata</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./reference/glossary.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glossary and Acronyms</span></a>
   </div>
 </li>
@@ -356,43 +391,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/0_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview of Notebooks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/11_retrieve_profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Retrieve JUMP profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/12_add_metadata.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/12_add_metadata.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Add metadata to profiles</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/13_calculate_activity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculate phenotypic activity</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/14_display_perturbation_images.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Display perturbation images</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/15_explore_distance_clusters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Explore perturbation clusters</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/notebooks/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/notebooks/16_query_genes_externally.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Query genes for more info</span></a>
   </div>
 </li>
@@ -409,13 +444,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/interactive/0_overview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview of Interactive tools</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/interactive/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/interactive/1_jumprr_steps.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">JUMP_rr tutorial</span></a>
   </div>
 </li>
@@ -432,13 +467,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/maintenance/1_project_manifest.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/maintenance/1_project_manifest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Creating a Project Manifest</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./howto/maintenance/2_mirror_zenodo_to_cpg.html" class="sidebar-item-text sidebar-link">
+  <a href="../howto/maintenance/2_mirror_zenodo_to_cpg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mirroring Zenodo Datasets to Cell Painting Gallery</span></a>
   </div>
 </li>
@@ -446,7 +481,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cite.html" class="sidebar-item-text sidebar-link active">
+  <a href="../cite.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cite</span></a>
   </div>
 </li>
@@ -460,40 +495,70 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#citing-the-jump-resources" id="toc-citing-the-jump-resources" class="nav-link active" data-scroll-target="#citing-the-jump-resources">Citing the JUMP Resources</a>
+  <li><a href="#jump-production-metadata" id="toc-jump-production-metadata" class="nav-link active" data-scroll-target="#jump-production-metadata">JUMP production metadata</a>
   <ul class="collapse">
-  <li><a href="#citing-the-resource-as-a-whole" id="toc-citing-the-resource-as-a-whole" class="nav-link" data-scroll-target="#citing-the-resource-as-a-whole">Citing the Resource as a Whole</a></li>
-  <li><a href="#citing-individual-datasets" id="toc-citing-individual-datasets" class="nav-link" data-scroll-target="#citing-individual-datasets">Citing Individual Datasets</a></li>
+  <li><a href="#database-contents" id="toc-database-contents" class="nav-link" data-scroll-target="#database-contents">Database contents</a></li>
+  <li><a href="#attach-the-database-with-duckdb" id="toc-attach-the-database-with-duckdb" class="nav-link" data-scroll-target="#attach-the-database-with-duckdb">Attach the database with DuckDB</a></li>
+  <li><a href="#query-compound-annotations" id="toc-query-compound-annotations" class="nav-link" data-scroll-target="#query-compound-annotations">Query compound annotations</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/cite.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/cite.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="cite.ipynb" download="cite.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/reference/02_production_metadata.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/reference/02_production_metadata.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02_production_metadata.ipynb" download="02_production_metadata.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../reference/00_gene_index.html">Reference</a></li><li class="breadcrumb-item"><a href="../reference/02_production_metadata.html">JUMP production metadata</a></li></ol></nav></header>
 
 
 
 
 
-<section id="citing-the-jump-resources" class="level1">
-<h1>Citing the JUMP Resources</h1>
-<p>All data is released under the CC0 1.0 Universal (CC0 1.0) license, but academic citation is expected and appreciated, given the effort invested in creating and maintaining this resource.</p>
-<section id="citing-the-resource-as-a-whole" class="level2">
-<h2 class="anchored" data-anchor-id="citing-the-resource-as-a-whole">Citing the Resource as a Whole</h2>
-<p>Please use the following format to cite the JUMP Cell Painting datasets:</p>
-<p><em>We used the JUMP Cell Painting datasets (Chandrasekaran et al., 2023), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (<a href="https://registry.opendata.aws/cellpainting-gallery/">https://registry.opendata.aws/cellpainting-gallery/</a>).</em></p>
-<p>Chandrasekaran et al., 2023: doi:10.1101/2023.03.23.534023<br>
-Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
+<section id="jump-production-metadata" class="level1">
+<h1>JUMP production metadata</h1>
+<p>The JUMP production <a href="https://imaging-platform.s3.amazonaws.com/projects/cpg0042-chandrasekaran-jump/workspace/publication_data/2025_Chandrasekaran/jump_production_datastore/interim/jump_metadata_augmented.duckdb">augmented metadata database</a> is the source for the compound target and mechanism-of-action (MoA) annotations used in the JUMP production analysis. These are annotations of compounds, not annotations of the corresponding genetic perturbations.</p>
+<section id="database-contents" class="level2">
+<h2 class="anchored" data-anchor-id="database-contents">Database contents</h2>
+<p>The DuckDB database combines:</p>
+<ul>
+<li>core JUMP metadata for compounds, ORF and CRISPR perturbations, plates, wells, controls, and microscope configurations;</li>
+<li>Drug Repurposing Hub compound names, targets, MoAs, clinical phases, diseases, and indications;</li>
+<li>ChEMBL, Chemical Probes, and MOTIVE compound-target annotations;</li>
+<li>ToxCast, toxicity, pharmacokinetic, MitoTox, chemical-property, and cell-count annotations.</li>
+</ul>
+<p>The <code>compound_metadata</code> view provides one row per JUMP compound and joins the fields most commonly needed for analysis, including the JUMP ID, InChIKey, chemical structure, targets, and MoAs.</p>
 </section>
-<section id="citing-individual-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="citing-individual-datasets">Citing Individual Datasets</h2>
-<p>To cite individual JUMP Cell Painting datasets, follow the guidelines in the <a href="https://broadinstitute.github.io/cellpainting-gallery/citing.html">Cell Painting Gallery citation guide</a>. For example:</p>
-<p><em>We used the dataset cpg0001 (Cimini et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (<a href="https://registry.opendata.aws/cellpainting-gallery/">https://registry.opendata.aws/cellpainting-gallery/</a>).</em></p>
-<p>Cimini et al., 2022: doi:10.1038/s41596-023-00840-9<br>
-Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
-<p><em>We used the dataset cpg0000 (Chandrasekaran et al., 2022), available from the Cell Painting Gallery (Weisbart et al., 2024) on the Registry of Open Data on AWS (<a href="https://registry.opendata.aws/cellpainting-gallery/">https://registry.opendata.aws/cellpainting-gallery/</a>).</em></p>
-<p>Chandrasekaran et al., 2022: doi:10.1038/s41592-024-02241-6<br>
-Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
+<section id="attach-the-database-with-duckdb" class="level2">
+<h2 class="anchored" data-anchor-id="attach-the-database-with-duckdb">Attach the database with DuckDB</h2>
+<p>Open the <a href="https://shell.duckdb.org/">DuckDB Web Shell</a> or start a local DuckDB CLI session, then run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>INSTALL httpfs;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>LOAD httpfs;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ATTACH <span class="st">'https://imaging-platform.s3.amazonaws.com/projects/cpg0042-chandrasekaran-jump/workspace/publication_data/2025_Chandrasekaran/jump_production_datastore/interim/jump_metadata_augmented.duckdb'</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AS</span> meta (READ_ONLY);</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>DESCRIBE meta.compound_metadata;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The database remains remote and is attached read-only as the <code>meta</code> catalog. Tables and views can then be queried with names such as <code>meta.compound_metadata</code>, <code>meta.compound</code>, and <code>meta.repurposing_hub_annotations</code>.</p>
+</section>
+<section id="query-compound-annotations" class="level2">
+<h2 class="anchored" data-anchor-id="query-compound-annotations">Query compound annotations</h2>
+<p>Drug Repurposing Hub MoA annotations are available in <code>Metadata_repurposing_moa</code>. This example retrieves compounds annotated as HSP inhibitors:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="ot">"Metadata_JCP2022"</span> <span class="kw">AS</span> jump_id,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="ot">"Metadata_InChIKey"</span> <span class="kw">AS</span> inchikey,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="ot">"Metadata_repurposing_name"</span> <span class="kw">AS</span> compound_name</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> meta.compound_metadata</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="st">'HSP inhibitor'</span> <span class="kw">IN</span> (</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">trim</span>(x)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> UNNEST(string_split(<span class="ot">"Metadata_repurposing_moa"</span>, <span class="st">'|'</span>)) <span class="kw">AS</span> t(x)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Chemical Probes target genes are available in <code>Metadata_chmprb_target_genes</code>. This example retrieves the compounds associated with <code>HSP90AA1</code>, together with their Drug Repurposing Hub MoA when available:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="ot">"Metadata_JCP2022"</span> <span class="kw">AS</span> jump_id,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="ot">"Metadata_InChIKey"</span> <span class="kw">AS</span> inchikey,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="ot">"Metadata_repurposing_name"</span> <span class="kw">AS</span> compound_name,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       <span class="ot">"Metadata_repurposing_moa"</span> <span class="kw">AS</span> mechanism_of_action</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> meta.compound_metadata</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="st">'HSP90AA1'</span> <span class="kw">IN</span> (</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="fu">trim</span>(x)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> UNNEST(string_split(<span class="ot">"Metadata_chmprb_target_genes"</span>, <span class="st">'|'</span>)) <span class="kw">AS</span> t(x)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Replace <code>HSP inhibitor</code> or <code>HSP90AA1</code> with the exact MoA or target label of interest. The annotations can contain pipe-delimited lists; splitting those lists and testing exact membership avoids false matches between similarly named targets.</p>
 
 
 </section>
@@ -917,4 +982,4 @@ Weisbart et al., 2024: doi:10.1038/s41592-024-02399-z</p>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/cite.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/cite.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/edit/main/reference/02_production_metadata.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/blob/main/reference/02_production_metadata.md" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
