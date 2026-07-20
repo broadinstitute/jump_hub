@@ -42,7 +42,7 @@ You can find the CellProfiler pipelines that perform illumination correction, se
 
 There are two pipelines used: One converts single cell raw profiles into aggregated well level profiles, the second transforms these aggregated profiles to improve signal quality. We call the first pipeline `profiling-recipe` and it is located in [this](https://github.com/jump-cellpainting/profiling-recipe/tree/51a3a4b36814c0a721a2062928a703ea46c169c4) permalink. For the second pipeline, the [profiles_index.json](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) file contains links to the specific version of the [jump profiling recipe](https://github.com/broadinstitute/jump-profiling-recipe) used and its configuration. To clarify, the `profiling-recipe` and `jump-profiling-recipe` are not the same, they correspond to the first and second pipelines, respectively.
 
-### If processing the entirety of JUMP, which version of the JUMP profiles should I use?
+### If processing one or more complete JUMP modalities, which version of the profiles should I use?
 
 Several profile products are valid, but they answer different questions.
 
