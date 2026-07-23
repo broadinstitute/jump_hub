@@ -53,6 +53,8 @@ The **JUMP production profile** means the compound-only CellProfiler profile nam
 
 The production profile does **not** supersede the original public `compound` profile; both remain useful for their respective purposes. Its Harmony output retains 758 feature-aligned dimensions, so the same production profile supports similarity and CellProfiler feature analyses by restoring the original feature names positionally.
 
+The frozen paper-consistent tables are preserved independently in [Zenodo record 21515641](https://doi.org/10.5281/zenodo.21515641). You can explore the historical [compound matches](https://lite.datasette.io/?metadata=https://zenodo.org/api/records/21515641/files/compound_no_source7_matches.json/content&install=datasette-json-html&parquet=https://zenodo.org/api/records/21515641/files/compound_no_source7.parquet/content#/data/content) and [CellProfiler feature rankings](https://lite.datasette.io/?metadata=https://zenodo.org/api/records/21515641/files/compound_no_source7_feature.json/content&install=datasette-json-html&parquet=https://zenodo.org/api/records/21515641/files/compound_no_source7_features.parquet/content#/data/content) in Datasette Lite. These historical links are separate from the living jump_rr tables, which continue to track recommended profiles.
+
 Background discussion: [jump_hub PR #91](https://github.com/broadinstitute/jump_hub/pull/91#issuecomment-3993109928) and [monorepo issue #101](https://github.com/broadinstitute/monorepo/issues/101).
 
 ### Do we expect one gene’s JCP ID (JUMP Cell Painting ID) to be associated with multiple targets?
