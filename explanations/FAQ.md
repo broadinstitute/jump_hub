@@ -42,6 +42,21 @@ You can find the CellProfiler pipelines that perform illumination correction, se
 
 There are two pipelines used: One converts single cell raw profiles into aggregated well level profiles, the second transforms these aggregated profiles to improve signal quality. We call the first pipeline `profiling-recipe` and it is located in [this](https://github.com/jump-cellpainting/profiling-recipe/tree/51a3a4b36814c0a721a2062928a703ea46c169c4) permalink. For the second pipeline, the [profiles_index.json](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) file contains links to the specific version of the [jump profiling recipe](https://github.com/broadinstitute/jump-profiling-recipe) used and its configuration. To clarify, the `profiling-recipe` and `jump-profiling-recipe` are not the same, they correspond to the first and second pipelines, respectively.
 
+### What is the JUMP production profile, and how does it differ from the original public compound profile?
+
+The **JUMP production profile** means the compound-only CellProfiler profile named `compound_no_source7`, which was used for the JUMP production paper. It is not a new version of the whole JUMP dataset: it has no ORF, CRISPR, or gallery counterpart.
+
+| Compound profile | What it contains | When to use it |
+|------------------|------------------|----------------|
+| Original public [`compound`](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) | All compound sources, including `source_7`. | The default for general JUMP analyses and for consistency with work based on the original public release. |
+| JUMP production [`compound_no_source7`](https://github.com/jump-cellpainting/datasets/blob/main/manifests/profile_index.json) | The final paper profile, excluding `source_7` because it made batch correction difficult. | Reproducing the production paper or aligning a compound analysis with it. Removing `source_7` changes the data, so activity values and other statistics must be calculated from this profile rather than copied from the original public profile. |
+
+The production profile does **not** supersede the original public `compound` profile; both remain useful for their respective purposes. Its Harmony output retains 758 feature-aligned dimensions, so the same production profile supports similarity and CellProfiler feature analyses by restoring the original feature names positionally.
+
+The frozen paper-consistent tables are preserved independently in [Zenodo record 21515641](https://doi.org/10.5281/zenodo.21515641). You can explore the historical [compound matches](https://lite.datasette.io/?metadata=https://zenodo.org/api/records/21515641/files/compound_no_source7_matches.json/content&install=datasette-json-html&parquet=https://zenodo.org/api/records/21515641/files/compound_no_source7.parquet/content#/data/content) and [CellProfiler feature rankings](https://lite.datasette.io/?metadata=https://zenodo.org/api/records/21515641/files/compound_no_source7_feature.json/content&install=datasette-json-html&parquet=https://zenodo.org/api/records/21515641/files/compound_no_source7_features.parquet/content#/data/content) in Datasette Lite. These historical links are separate from the living jump_rr tables, which continue to track recommended profiles.
+
+Background discussion: [jump_hub PR #91](https://github.com/broadinstitute/jump_hub/pull/91#issuecomment-3993109928) and [monorepo issue #101](https://github.com/broadinstitute/monorepo/issues/101).
+
 ### Do we expect one gene’s JCP ID (JUMP Cell Painting ID) to be associated with multiple targets?
 
 Yes, many genes are associated with multiple targets and are correctly annotated as such. For instance, `JCP2022_050797` (quinidine/quinine) has the targets `KCNK1` and `KCNN4`. Other genes are annotated as targeting genes in disparate families.
