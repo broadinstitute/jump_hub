@@ -33,6 +33,8 @@ website:
             - section: "How-To: Interactive Tools"
               contents:
                   - auto: "howto/interactive/*"
+            - text: "How-To: JUMP MCP Server"
+              file: howto/jump_mcp_server.md
             - section: "For maintainers"
               contents:
                   - auto: "howto/maintenance/*"
