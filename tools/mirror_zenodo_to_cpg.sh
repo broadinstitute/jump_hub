@@ -52,7 +52,14 @@ run_aws() {
 }
 
 log "Resolving latest version of Zenodo concept $CONCEPT_ID"
-record_json=$(curl -fsSL "https://zenodo.org/api/records/${CONCEPT_ID}/versions/latest")
+# Zenodo occasionally returns transient 5xx responses. Retry this idempotent
+# metadata request so a brief outage does not fail the daily mirror run.
+record_json=$(curl -fsSL \
+    --retry 5 \
+    --retry-delay 5 \
+    --retry-max-time 300 \
+    --connect-timeout 30 \
+    "https://zenodo.org/api/records/${CONCEPT_ID}/versions/latest")
 record_id=$(printf '%s' "$record_json" | jq -r '.id')
 record_doi=$(printf '%s' "$record_json" | jq -r '.doi')
 pub_date=$(printf '%s' "$record_json" | jq -r '.metadata.publication_date')
