@@ -6,6 +6,7 @@ on:
     paths:
       - "scripts/**"
       - "tests/**"
+      - "tools/prepare_notebook_data.py"
       - "pyproject.toml"
       - "uv.lock"
       - ".github/workflows/test_notebooks.yml"
@@ -14,6 +15,7 @@ on:
     paths:
       - "scripts/**"
       - "tests/**"
+      - "tools/prepare_notebook_data.py"
       - "pyproject.toml"
       - "uv.lock"
       - ".github/workflows/test_notebooks.yml"
@@ -43,6 +45,21 @@ jobs:
 
       - name: Install locked dependencies
         run: uv sync --locked --dev
+
+      - name: Test download preparation
+        run: uv run --locked pytest tests/test_notebook_data.py -v --junitxml=test-results/data-preparation.xml
+
+      - name: Cache checksum-verified notebook data
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pooch
+          key: ${{ runner.os }}-notebook-data-v1-${{ hashFiles('uv.lock', 'tools/prepare_notebook_data.py') }}
+          restore-keys: |
+            ${{ runner.os }}-notebook-data-v1-
+
+      - name: Prepare pinned notebook data
+        timeout-minutes: 10
+        run: uv run --locked python tools/prepare_notebook_data.py
 
       - name: Register the project Python kernel
         run: uv run --locked python -m ipykernel install --sys-prefix --name python3

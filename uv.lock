@@ -1122,7 +1122,9 @@ dev = [
     { name = "jupyter" },
     { name = "jupytext" },
     { name = "nbclient" },
+    { name = "pooch" },
     { name = "pytest" },
+    { name = "requests" },
 ]
 
 [package.metadata]
@@ -1146,7 +1148,9 @@ dev = [
     { name = "jupyter", specifier = ">=1.0.0,<2.0.0" },
     { name = "jupytext", specifier = ">=1.15.0,<2.0.0" },
     { name = "nbclient", specifier = ">=0.10.4,<0.11" },
+    { name = "pooch", specifier = ">=1.8,<2" },
     { name = "pytest", specifier = ">=7.4.1,<8.0.0" },
+    { name = "requests", specifier = ">=2.32,<3" },
 ]
 
 [[package]]

@@ -40,7 +40,9 @@ dev = [
     "jupyter<2.0.0,>=1.0.0",
     "jupytext<2.0.0,>=1.15.0",
     "nbclient>=0.10.4,<0.11",
+    "pooch>=1.8,<2",
     "pytest<8.0.0,>=7.4.1",
+    "requests>=2.32,<3",
 ]
 
 [tool.uv.workspace]

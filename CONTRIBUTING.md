@@ -39,6 +39,7 @@ From the repository root:
 ```bash
 uv sync --locked --dev --python 3.11
 uv run --locked python -m ipykernel install --sys-prefix --name python3
+uv run --locked python tools/prepare_notebook_data.py
 JUPYTER_PREFER_ENV_PATH=1 MPLBACKEND=Agg uv run --locked pytest tests/test_notebooks.py -v
 ```
 
@@ -54,7 +55,18 @@ These are **integration tests**: they access public datasets and external APIs,
 so network outages can cause failures. The GitHub Actions check runs on pull
 requests and pushes to `main` that change scripts, dependencies, or the check
 itself, and can also be started manually. It has a 30-minute job limit and
-uploads a JUnit report for diagnosis. Documentation-only changes do not run it.
+uploads JUnit reports for diagnosis. Documentation-only changes do not run it.
+
+CI caches Pooch's downloaded data, keyed by the dependency lockfile and preparation
+script. `tools/prepare_notebook_data.py` prefetches the pinned well metadata using
+the library's own URL and checksum check. Other Pooch downloads enter the cache
+as the notebooks run and are revalidated by their libraries on access.
+Preparation retries only download timeouts and connection failures, up to three
+attempts with 5- and 10-second
+pauses. TLS, HTTP, checksum, and code errors fail immediately; persistent network
+failures also fail CI. Notebook execution itself is never retried or skipped.
+Run the offline cache/retry regression tests with
+`uv run --locked pytest tests/test_notebook_data.py -v`.
 
 This check isolates notebook code and dependency failures from Nix, Quarto, and
 publishing failures. The existing website workflow remains the end-to-end
