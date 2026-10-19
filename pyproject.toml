@@ -39,8 +39,14 @@ dev = [
     "ipdb<1.0.0,>=0.13.13",
     "jupyter<2.0.0,>=1.0.0",
     "jupytext<2.0.0,>=1.15.0",
+    "nbclient>=0.10.4,<0.11",
     "pytest<8.0.0,>=7.4.1",
 ]
 
 [tool.uv.workspace]
 members = []
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: tutorial execution using public datasets and external APIs",
+]

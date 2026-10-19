@@ -2,6 +2,9 @@
 /_site/
 .devenv/
 .venv/
+__pycache__/
+.pytest_cache/
+/test-results/
 /docs/
 .claude/
 CLAUDE.md

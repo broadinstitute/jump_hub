@@ -1,0 +1,60 @@
+name: Test notebook execution
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/test_notebooks.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/test_notebooks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: notebook-tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      MPLBACKEND: Agg
+      JUPYTER_PREFER_ENV_PATH: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.11"
+          enable-cache: true
+
+      - name: Install locked dependencies
+        run: uv sync --locked --dev
+
+      - name: Register the project Python kernel
+        run: uv run --locked python -m ipykernel install --sys-prefix --name python3
+
+      - name: Execute tutorial notebooks
+        run: uv run --locked pytest tests/test_notebooks.py -v --junitxml=test-results/notebooks.xml
+
+      - name: Upload execution results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: notebook-test-results
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 14

@@ -32,6 +32,34 @@ uv sync --group dev
 
 **Important**: DO NOT generate .ipynb files locally - they are created automatically during deployment
 
+### Test tutorial execution without Nix or Quarto
+
+From the repository root:
+
+```bash
+uv sync --locked --dev --python 3.11
+uv run --locked python -m ipykernel install --sys-prefix --name python3
+JUPYTER_PREFER_ENV_PATH=1 MPLBACKEND=Agg uv run --locked pytest tests/test_notebooks.py -v
+```
+
+To run one tutorial, add a selector such as `-k 13_calculate_activity`.
+The tests read the Jupytext scripts into memory and execute each in a fresh
+kernel and temporary working directory. They do not generate `.ipynb` files or
+modify the tutorial sources. A failing cell fails the test; each cell has a
+five-minute timeout. If UV-managed Python cannot locate your system's CA
+certificates, set `SSL_CERT_FILE` to the system's trusted CA bundle; do not
+disable TLS verification.
+
+These are **integration tests**: they access public datasets and external APIs,
+so network outages can cause failures. The GitHub Actions check runs on pull
+requests and pushes to `main` that change scripts, dependencies, or the check
+itself, and can also be started manually. It has a 30-minute job limit and
+uploads a JUnit report for diagnosis. Documentation-only changes do not run it.
+
+This check isolates notebook code and dependency failures from Nix, Quarto, and
+publishing failures. The existing website workflow remains the end-to-end
+rendering and deployment check.
+
 ## Deployment Process (Automated)
 
 When changes are merged to `main`, GitHub Actions automatically:
