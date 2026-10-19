@@ -21,6 +21,8 @@ website:
         contents:
             - text: Home
               file: index.md
+            - text: Announcements
+              file: announcements.md
             - section: Explanations
               contents:
                   - auto: "explanations/*"
