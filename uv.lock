@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10, <3.13"
 resolution-markers = [
     "python_full_version >= '3.11' and sys_platform == 'win32'",
@@ -1121,6 +1121,7 @@ dev = [
     { name = "ipdb" },
     { name = "jupyter" },
     { name = "jupytext" },
+    { name = "nbclient" },
     { name = "pytest" },
 ]
 
@@ -1144,6 +1145,7 @@ dev = [
     { name = "ipdb", specifier = ">=0.13.13,<1.0.0" },
     { name = "jupyter", specifier = ">=1.0.0,<2.0.0" },
     { name = "jupytext", specifier = ">=1.15.0,<2.0.0" },
+    { name = "nbclient", specifier = ">=0.10.4,<0.11" },
     { name = "pytest", specifier = ">=7.4.1,<8.0.0" },
 ]
 
