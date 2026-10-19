@@ -6,6 +6,8 @@ JUMP (Joint Undertaking for Morphological Profiling) Cell Painting is an effort 
 
 What is the purpose of this website? To provide up-to-date info on everything JUMP-related. We aim to minimize friction for developers, technical writers and biologists to produce and access novel insights and tools. We aim to make this the one-stop shop for the vast majority of JUMP questions, be it computational or biological.
 
+Find recently accepted papers, public preprints, publications, and important updates on the [Announcements](announcements.md) page.
+
 ## Choose Your Own Path
 
 1. Just exploring the data?

@@ -25,6 +25,20 @@ uv sync --group dev
 2. **Preview changes**: `quarto preview`
 3. **Check rendering**: Navigate to your changed pages in the preview
 
+#### For Announcements
+
+Edit [announcements.md](announcements.md) and copy the HTML-comment template in the
+appropriate section. Keep entries newest first within each section, using
+`YYYY-MM-DD` headings for the verified milestone: acceptance, publication,
+preprint posting, or announcement of an update. State which milestone the date
+represents. For acceptance news, confirm the final decision and conference
+edition; identify non-archival workshops. Distinguish accepted papers, published
+papers, and preprints, without implying that acceptance means proceedings are
+already published. Include a concise summary and public primary-source links.
+Keep private correspondence, review details, and unverified claims out of the
+page and repository. Remove the empty-state text when adding the first update.
+Preview the page with `quarto preview`.
+
 #### For Code Tutorials
 1. **Edit Python scripts** in `scripts/` (these use Jupytext percent format with `# %%` markers)
 2. **Test your script runs**: `uv run python scripts/your_tutorial.py`
