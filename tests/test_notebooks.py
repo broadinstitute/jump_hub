@@ -1,4 +1,4 @@
-"""Execute tutorial notebooks without Nix, Quarto, or generated notebook files."""
+"""Check that tutorial notebooks run with the declared Python dependencies."""
 
 from pathlib import Path
 
