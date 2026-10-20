@@ -13,3 +13,7 @@ You can also run these tutorials on [Terra](../../misc/terra_workspace.md), a cl
 
 If you are running the analyses on your computer, we have published a package containing all dependencies, you need only install in your environment using `pip install jump_deps` (Python 3.10 or 3.11).
 
+For a related application beyond JUMP, see [protein-localization benchmarking
+with MisLocus](17_mislocus_example.md). This example uses VarChAMP data and runs
+in its own companion repository rather than Colab.
+
