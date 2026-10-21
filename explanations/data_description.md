@@ -22,8 +22,7 @@ Cell counts for the principal JUMP dataset (`cpg0016`):
 | **Total** | **1,810,840,525** |
 
 Counts include `source_7` but exclude `source_15` and the pilot datasets.
-They describe cells across counted wells, not cells retained after profile
-filtering; the
+They describe cells across counted wells; the
 [`compound_no_source7` production profile](FAQ.md#what-is-the-jump-production-profile-and-how-does-it-differ-from-the-original-public-compound-profile)
 covers a narrower subset.
 
