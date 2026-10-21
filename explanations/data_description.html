@@ -41,9 +41,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-31997b880f7627768e48128250f3b4f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-be7d4d81c18fa5f290a0c4516bb0f3c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-31997b880f7627768e48128250f3b4f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-2cc33537dcf1649ad0e4a5dcfcf73073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c1721b060724650776264d23dc4bf13e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-2cc33537dcf1649ad0e4a5dcfcf73073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -530,7 +530,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="dataset-scale-and-cell-counts" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-scale-and-cell-counts">Dataset scale and cell counts</h2>
-<p>The principal JUMP dataset (<code>cpg0016</code>) contains <strong>1,810,840,525 cells (approximately 1.81 billion)</strong> in the pinned cell-count inputs below. The compound dataset accounts for approximately 1.53 billion cells; the genetic perturbation datasets (ORF and CRISPR) add 276,961,189 cells (approximately 277 million).</p>
+<p>Cell counts for the principal JUMP dataset (<code>cpg0016</code>):</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -557,9 +557,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p><strong>Source and verification:</strong> These totals were verified on <strong>2026-10-20</strong> by summing <code>Metadata_Count_Cells</code> in <code>compound_cell_counts.csv.gz</code>, <code>orf_cell_counts.csv.gz</code>, and <code>crispr_cell_counts.csv.gz</code> from the <a href="https://github.com/broadinstitute/jump-profiling-recipe/tree/d2512d978ca17aafead0e99de66386337e6312e4/inputs/cell_counts">public cell-count inputs pinned to commit <code>d2512d9</code></a>. Their sum matches the total in <code>all_cell_counts.csv.gz</code> at the same commit.</p>
-<p><strong>Scope:</strong> These are cell counts across the wells represented in those inputs, not counts of distinct perturbations, images, or cells retained in a particular filtered profile release. They include <code>source_7</code>; <code>source_15</code> has no cell counts in these inputs and is not included. In particular, the compound total is not restricted to the <a href="../explanations/FAQ.html#what-is-the-jump-production-profile-and-how-does-it-differ-from-the-original-public-compound-profile"><code>compound_no_source7</code> production profile</a>. The three pilot datasets listed above are not included in this total.</p>
-<p>Earlier summaries quoted approximately 1.6 billion cells; that historical figure has not been reconciled with this pinned snapshot. These counts alone do not establish that JUMP is the largest public image-based profiling dataset: comparisons require consistent counting units and dataset coverage.</p>
+<p>Counts include <code>source_7</code> but exclude <code>source_15</code> and the pilot datasets. They describe cells across counted wells, not cells retained after profile filtering; the <a href="../explanations/FAQ.html#what-is-the-jump-production-profile-and-how-does-it-differ-from-the-original-public-compound-profile"><code>compound_no_source7</code> production profile</a> covers a narrower subset.</p>
 </section>
 <section id="design-of-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="design-of-the-dataset">Design of the Dataset</h2>
