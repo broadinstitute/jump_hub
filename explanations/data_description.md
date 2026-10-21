@@ -12,11 +12,7 @@ This collection comprises 4 datasets:
 
 ## Dataset scale and cell counts {#dataset-scale-and-cell-counts}
 
-The principal JUMP dataset (`cpg0016`) contains **1,810,840,525 cells
-(approximately 1.81 billion)** in the pinned cell-count inputs below. The
-compound dataset accounts for approximately 1.53 billion cells; the genetic
-perturbation datasets (ORF and CRISPR) add 276,961,189 cells (approximately
-277 million).
+Cell counts for the principal JUMP dataset (`cpg0016`):
 
 | Dataset | Cell count |
 |---------|-----------:|
@@ -25,24 +21,11 @@ perturbation datasets (ORF and CRISPR) add 276,961,189 cells (approximately
 | CRISPR | 185,774,701 |
 | **Total** | **1,810,840,525** |
 
-**Source and verification:** These totals were verified on **2026-10-20** by
-summing `Metadata_Count_Cells` in `compound_cell_counts.csv.gz`,
-`orf_cell_counts.csv.gz`, and `crispr_cell_counts.csv.gz` from the
-[public cell-count inputs pinned to commit `d2512d9`](https://github.com/broadinstitute/jump-profiling-recipe/tree/d2512d978ca17aafead0e99de66386337e6312e4/inputs/cell_counts).
-Their sum matches the total in `all_cell_counts.csv.gz` at the same commit.
-
-**Scope:** These are cell counts across the wells represented in those inputs,
-not counts of distinct perturbations, images, or cells retained in a particular
-filtered profile release. They include `source_7`; `source_15` has no cell
-counts in these inputs and is not included. In particular, the compound total
-is not restricted to the
-[`compound_no_source7` production profile](FAQ.md#what-is-the-jump-production-profile-and-how-does-it-differ-from-the-original-public-compound-profile).
-The three pilot datasets listed above are not included in this total.
-
-Earlier summaries quoted approximately 1.6 billion cells; that historical
-figure has not been reconciled with this pinned snapshot. These counts alone
-do not establish that JUMP is the largest public image-based profiling dataset:
-comparisons require consistent counting units and dataset coverage.
+Counts include `source_7` but exclude `source_15` and the pilot datasets.
+They describe cells across counted wells, not cells retained after profile
+filtering; the
+[`compound_no_source7` production profile](FAQ.md#what-is-the-jump-production-profile-and-how-does-it-differ-from-the-original-public-compound-profile)
+covers a narrower subset.
 
 ## Design of the Dataset
 
