@@ -1,15 +1,5 @@
 # Frequently Asked Questions
 
-## Analyses
-
-### How can I reproduce an environment to explore JUMP data?
-
-The easiest way to set things up will be installing from pip in your environment of choice:
-
-```
-pip install jump-deps
-```
-
 ## Data
 
 ### Does JUMP contain my compound/gene of interest?
