@@ -78,7 +78,7 @@ To begin exploring these morphological phenotypes, navigate to the **“How to G
 
 * [CRISPR knock-out feature table](http://broad.io/crispr_feature)
 * [ORF overexpression feature table](http://broad.io/orf_feature)
-* [Compound feature table](http://broad.io/feature)
+* [Compound feature table](https://broad.io/compound_feature)
 
 ***Search for your gene in the CRISPR dataset.***
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Mirror a Zenodo record onto the Cell Painting Gallery S3 bucket.
 #
-# Streams each file from Zenodo straight to S3 (no large local downloads),
+# Streams each file from Zenodo to a verified S3 multipart upload (64 MiB parts),
 # writing to two paths per file:
 #   - <S3_PREFIX>/<record_id>/<file>/content   immutable per-version copy
 #   - <S3_PREFIX>/latest/<file>/content        mutable pointer to the most recent
@@ -14,8 +14,9 @@
 # URL parameter -- metadata table keys (`databases.data.tables.content` in
 # the jump_rr metadata JSONs) remain valid.
 #
-# Idempotent: stores the Zenodo MD5 as S3 user metadata `zenodo-md5` and skips
-# uploads when the existing object already carries the same checksum.
+# Idempotent: stores the verified MD5 as S3 user metadata `zenodo-md5` and skips
+# uploads only when checksum metadata AND object size match. New objects become
+# visible only after the streamed bytes pass MD5 and size verification.
 #
 # Usage:
 #   ./mirror_zenodo_to_cpg.sh                  # mirror default record
@@ -31,6 +32,7 @@ S3_PREFIX="${S3_PREFIX:-cpg0042-chandrasekaran-jump/source_all/workspace/publica
 AWS_PROFILE_NAME="${AWS_PROFILE_NAME-cpg}"
 DRY_RUN="${DRY_RUN:-0}"
 ONLY_FILE="${ONLY_FILE:-}"
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 
 # Build the optional `--profile <name>` arg only when AWS_PROFILE_NAME is set
 # and non-empty. In GitHub Actions, aws-actions/configure-aws-credentials
@@ -84,25 +86,24 @@ while IFS=$'\t' read -r name url size md5; do
 
     log "FILE $name (size=${size}, md5=${md5})"
 
-    existing_md5=$(aws s3api head-object \
+    existing_head=$(aws s3api head-object \
         --bucket "$S3_BUCKET" --key "$version_key" \
-        "${profile_args[@]}" 2>/dev/null \
-        | jq -r '.Metadata."zenodo-md5" // empty' || true)
+        "${profile_args[@]}" 2>/dev/null || true)
+    existing_md5=$(printf '%s' "$existing_head" | jq -r '.Metadata."zenodo-md5" // empty')
+    existing_size=$(printf '%s' "$existing_head" | jq -r '.ContentLength // empty')
 
-    if [ "$existing_md5" = "$md5" ]; then
-        log "  skip upload: $version_uri already has matching zenodo-md5"
+    if [ "$existing_md5" = "$md5" ] && [ "$existing_size" = "$size" ]; then
+        log "  skip upload: $version_uri already has matching zenodo-md5 and size"
         skipped=$((skipped + 1))
     else
         log "  upload: streaming Zenodo -> $version_uri"
         if [ "$DRY_RUN" = "1" ]; then
-            printf '  DRY-RUN: curl -fsSL %s | aws s3 cp - %s --expected-size %s --metadata zenodo-md5=%s,zenodo-record-id=%s %s\n' \
-                "$url" "$version_uri" "$size" "$md5" "$record_id" "${profile_args[*]}"
+            printf '  DRY-RUN: python3 %s/upload_verified_stream.py %s %s %s %s %s %s %s\n' \
+                "$script_dir" "$url" "$S3_BUCKET" "$version_key" "$size" "$md5" "$record_id" "${profile_args[*]}"
         else
-            curl -fsSL "$url" \
-                | aws s3 cp - "$version_uri" \
-                    --expected-size "$size" \
-                    --metadata "zenodo-md5=${md5},zenodo-record-id=${record_id}" \
-                    "${profile_args[@]}"
+            python3 "$script_dir/upload_verified_stream.py" \
+                "$url" "$S3_BUCKET" "$version_key" "$size" "$md5" "$record_id" \
+                "${profile_args[@]}"
         fi
         uploaded=$((uploaded + 1))
     fi
