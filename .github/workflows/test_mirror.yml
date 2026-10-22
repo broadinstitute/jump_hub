@@ -1,0 +1,30 @@
+name: Test Zenodo mirror
+
+on:
+  pull_request:
+    paths:
+      - tools/mirror_zenodo_to_cpg.sh
+      - tools/upload_verified_stream.py
+      - tests/test_mirror.py
+      - .github/workflows/test_mirror.yml
+  push:
+    branches: [main]
+    paths:
+      - tools/mirror_zenodo_to_cpg.sh
+      - tools/upload_verified_stream.py
+      - tests/test_mirror.py
+      - .github/workflows/test_mirror.yml
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - name: Validate shell script
+        run: bash -n tools/mirror_zenodo_to_cpg.sh
+      - name: Run offline mirror tests
+        run: python3 -m unittest discover -s tests -p test_mirror.py -v

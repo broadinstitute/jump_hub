@@ -18,6 +18,30 @@ The trailing `/content` suffix mirrors Zenodo's own download URL structure (`htt
 
 Zenodo remains the canonical, citable archive. CPG is the storage origin; in practice browser tools fetch through the CloudFront edge cache that sits in front of the JUMP_rr subtree (`d3dw4c1b79pj57.cloudfront.net`, provisioned by [`cellpainting-gallery-infra`](https://github.com/broadinstitute/cellpainting-gallery-infra)'s `JumpRrCdnStack`). The CDN's 1h cache TTL means a daily-cron mirror update to `latest/` is visible to consumers within an hour without any manual cache invalidation. The mirror script itself writes only to S3 — it doesn't need to know about the CDN.
 
+## Where the browser tables come from
+
+The live short links redirect to Datasette Lite. Their `parquet=` parameter points to
+`https://d3dw4c1b79pj57.cloudfront.net/latest/<file>/content`, while `metadata=`
+loads column descriptions from `broadinstitute/monorepo`, under
+`main/libs/jump_rr/metadata/`. Updating the metadata JSON does **not** update the
+Parquet data or the links embedded in its cells.
+
+| Short-link suffixes on `broad.io` | Parquet filenames |
+|---|---|
+| `crispr`, `orf`, `compound` | `<dataset>.parquet` |
+| `crispr_feature`, `orf_feature`, `compound_feature` | `<dataset>_interpretable_features.parquet` |
+| `crispr_gallery`, `orf_gallery`, `compound_gallery` | `<dataset>_gallery.parquet` |
+
+Use `compound_feature`, not `feature`: the latter is a nonexistent short link.
+Broad.io can return an HTTP 200 error page for a nonexistent link, so verify the
+redirect destination and its `parquet=` parameter, not just the HTTP status.
+
+To release updated tables: publish the Zenodo version, run the mirror workflow,
+and verify the CDN's `Content-Length`, `x-amz-meta-zenodo-md5`, and
+`x-amz-meta-zenodo-record-id` headers. Allow up to an hour for old `latest/`
+responses to expire. The short links do not need repointing when they already
+use these `latest/` URLs.
+
 ## When to run it
 
 Run the script after a new version of the Zenodo record has been published. It can also be run on a schedule (e.g. daily cron) - if Zenodo has not changed, the script does not re-upload anything.
@@ -25,7 +49,7 @@ Run the script after a new version of the Zenodo record has been published. It c
 ## Requirements
 
 - AWS CLI configured with a profile that has write access to the `cellpainting-gallery` bucket. By default the script uses a profile named `cpg`. See the [Cell Painting Gallery contribution guidelines](https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html).
-- `curl` and `jq` on `PATH`.
+- `curl`, `jq`, and Python 3 on `PATH` (the Python helper uses only the standard library).
 
 ## Usage
 
@@ -69,16 +93,28 @@ There are two ways the script can be run, with different credential mechanics:
 
 ## How idempotency works
 
-The script stores the Zenodo MD5 checksum as S3 user metadata on each uploaded object under the key `zenodo-md5`. On subsequent runs, the script checks the existing object's `zenodo-md5` against the Zenodo file's MD5:
-
-- Match: skip the upload. The version copy is already correct.
-- No match (or object missing): stream the file from Zenodo to S3.
+The script stores the verified Zenodo MD5 as S3 user metadata under `zenodo-md5`.
+On subsequent runs, both that metadata and the object's `ContentLength` must
+match the published file before the upload is skipped. A missing or mismatching
+object is uploaded again. This also detects truncated objects left by the older
+streaming implementation, which could carry the expected checksum metadata
+without containing the complete file.
 
 The `latest/` copy is always refreshed via a server-side S3-to-S3 copy from the version directory. This is cheap and ensures `latest/` self-heals if it ever drifts.
 
 ## Streaming behavior
 
-The script pipes `curl` directly into `aws s3 cp -`, so the file is never written to local disk. This matters for the larger files in the JUMP_rr record (the compound cosine-similarity table is around 49 GB), which would not fit on a typical CI runner's local disk.
+`tools/upload_verified_stream.py` downloads the file in 64 MiB parts, computes its
+MD5 and byte count, and stages the parts with S3's multipart-upload API. Only after
+both checks match the Zenodo manifest does it complete the upload, atomically
+making the verified version object available. Failed downloads, checksum
+mismatches, and part-upload failures abort the multipart upload; they never
+promote an incomplete object to `latest/` or overwrite an existing valid version.
+
+Only one temporary part is stored locally, not the full file. This matters for
+the roughly 45–50 GB compound cosine-similarity matrix, which would not fit on a
+typical CI runner's local disk. Interrupted transfers restart that file on a
+subsequent run; already completed matching files are retained.
 
 ## Why a `latest/` directory and not symlinks
 
