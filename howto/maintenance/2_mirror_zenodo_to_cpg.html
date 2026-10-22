@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-31997b880f7627768e48128250f3b4f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-be7d4d81c18fa5f290a0c4516bb0f3c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-31997b880f7627768e48128250f3b4f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2cc33537dcf1649ad0e4a5dcfcf73073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c1721b060724650776264d23dc4bf13e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-2cc33537dcf1649ad0e4a5dcfcf73073.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -510,6 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mirroring-zenodo-datasets-to-cell-painting-gallery" id="toc-mirroring-zenodo-datasets-to-cell-painting-gallery" class="nav-link active" data-scroll-target="#mirroring-zenodo-datasets-to-cell-painting-gallery">Mirroring Zenodo Datasets to Cell Painting Gallery</a>
   <ul class="collapse">
   <li><a href="#what-the-script-does" id="toc-what-the-script-does" class="nav-link" data-scroll-target="#what-the-script-does">What the script does</a></li>
+  <li><a href="#where-the-browser-tables-come-from" id="toc-where-the-browser-tables-come-from" class="nav-link" data-scroll-target="#where-the-browser-tables-come-from">Where the browser tables come from</a></li>
   <li><a href="#when-to-run-it" id="toc-when-to-run-it" class="nav-link" data-scroll-target="#when-to-run-it">When to run it</a></li>
   <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
@@ -542,6 +543,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The trailing <code>/content</code> suffix mirrors Zenodo’s own download URL structure (<code>https://zenodo.org/api/records/&lt;id&gt;/files/&lt;file&gt;/content</code>). Datasette-Lite derives its table name from the URL’s last path segment; preserving <code>content</code> as the last segment on both backends keeps the <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr/metadata">JUMP_rr metadata JSONs</a> (which key descriptions under <code>databases.data.tables.content</code>) valid against the CPG-served parquet.</p>
 <p>Zenodo remains the canonical, citable archive. CPG is the storage origin; in practice browser tools fetch through the CloudFront edge cache that sits in front of the JUMP_rr subtree (<code>d3dw4c1b79pj57.cloudfront.net</code>, provisioned by <a href="https://github.com/broadinstitute/cellpainting-gallery-infra"><code>cellpainting-gallery-infra</code></a>’s <code>JumpRrCdnStack</code>). The CDN’s 1h cache TTL means a daily-cron mirror update to <code>latest/</code> is visible to consumers within an hour without any manual cache invalidation. The mirror script itself writes only to S3 — it doesn’t need to know about the CDN.</p>
 </section>
+<section id="where-the-browser-tables-come-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-browser-tables-come-from">Where the browser tables come from</h2>
+<p>The live short links redirect to Datasette Lite. Their <code>parquet=</code> parameter points to <code>https://d3dw4c1b79pj57.cloudfront.net/latest/&lt;file&gt;/content</code>, while <code>metadata=</code> loads column descriptions from <code>broadinstitute/monorepo</code>, under <code>main/libs/jump_rr/metadata/</code>. Updating the metadata JSON does <strong>not</strong> update the Parquet data or the links embedded in its cells.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Short-link suffixes on <code>broad.io</code></th>
+<th>Parquet filenames</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>crispr</code>, <code>orf</code>, <code>compound</code></td>
+<td><code>&lt;dataset&gt;.parquet</code></td>
+</tr>
+<tr class="even">
+<td><code>crispr_feature</code>, <code>orf_feature</code>, <code>compound_feature</code></td>
+<td><code>&lt;dataset&gt;_interpretable_features.parquet</code></td>
+</tr>
+<tr class="odd">
+<td><code>crispr_gallery</code>, <code>orf_gallery</code>, <code>compound_gallery</code></td>
+<td><code>&lt;dataset&gt;_gallery.parquet</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use <code>compound_feature</code>, not <code>feature</code>: the latter is a nonexistent short link. Broad.io can return an HTTP 200 error page for a nonexistent link, so verify the redirect destination and its <code>parquet=</code> parameter, not just the HTTP status.</p>
+<p>To release updated tables: publish the Zenodo version, run the mirror workflow, and verify the CDN’s <code>Content-Length</code>, <code>x-amz-meta-zenodo-md5</code>, and <code>x-amz-meta-zenodo-record-id</code> headers. Allow up to an hour for old <code>latest/</code> responses to expire. The short links do not need repointing when they already use these <code>latest/</code> URLs.</p>
+</section>
 <section id="when-to-run-it" class="level2">
 <h2 class="anchored" data-anchor-id="when-to-run-it">When to run it</h2>
 <p>Run the script after a new version of the Zenodo record has been published. It can also be run on a schedule (e.g.&nbsp;daily cron) - if Zenodo has not changed, the script does not re-upload anything.</p>
@@ -550,7 +583,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
 <li>AWS CLI configured with a profile that has write access to the <code>cellpainting-gallery</code> bucket. By default the script uses a profile named <code>cpg</code>. See the <a href="https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html">Cell Painting Gallery contribution guidelines</a>.</li>
-<li><code>curl</code> and <code>jq</code> on <code>PATH</code>.</li>
+<li><code>curl</code>, <code>jq</code>, and Python 3 on <code>PATH</code> (the Python helper uses only the standard library).</li>
 </ul>
 </section>
 <section id="usage" class="level2">
@@ -589,16 +622,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="how-idempotency-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-idempotency-works">How idempotency works</h2>
-<p>The script stores the Zenodo MD5 checksum as S3 user metadata on each uploaded object under the key <code>zenodo-md5</code>. On subsequent runs, the script checks the existing object’s <code>zenodo-md5</code> against the Zenodo file’s MD5:</p>
-<ul>
-<li>Match: skip the upload. The version copy is already correct.</li>
-<li>No match (or object missing): stream the file from Zenodo to S3.</li>
-</ul>
+<p>The script stores the verified Zenodo MD5 as S3 user metadata under <code>zenodo-md5</code>. On subsequent runs, both that metadata and the object’s <code>ContentLength</code> must match the published file before the upload is skipped. A missing or mismatching object is uploaded again. This also detects truncated objects left by the older streaming implementation, which could carry the expected checksum metadata without containing the complete file.</p>
 <p>The <code>latest/</code> copy is always refreshed via a server-side S3-to-S3 copy from the version directory. This is cheap and ensures <code>latest/</code> self-heals if it ever drifts.</p>
 </section>
 <section id="streaming-behavior" class="level2">
 <h2 class="anchored" data-anchor-id="streaming-behavior">Streaming behavior</h2>
-<p>The script pipes <code>curl</code> directly into <code>aws s3 cp -</code>, so the file is never written to local disk. This matters for the larger files in the JUMP_rr record (the compound cosine-similarity table is around 49 GB), which would not fit on a typical CI runner’s local disk.</p>
+<p><code>tools/upload_verified_stream.py</code> downloads the file in 64 MiB parts, computes its MD5 and byte count, and stages the parts with S3’s multipart-upload API. Only after both checks match the Zenodo manifest does it complete the upload, atomically making the verified version object available. Failed downloads, checksum mismatches, and part-upload failures abort the multipart upload; they never promote an incomplete object to <code>latest/</code> or overwrite an existing valid version.</p>
+<p>Only one temporary part is stored locally, not the full file. This matters for the roughly 45–50 GB compound cosine-similarity matrix, which would not fit on a typical CI runner’s local disk. Interrupted transfers restart that file on a subsequent run; already completed matching files are retained.</p>
 </section>
 <section id="why-a-latest-directory-and-not-symlinks" class="level2">
 <h2 class="anchored" data-anchor-id="why-a-latest-directory-and-not-symlinks">Why a <code>latest/</code> directory and not symlinks</h2>
