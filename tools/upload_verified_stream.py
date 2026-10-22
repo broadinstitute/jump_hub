@@ -7,6 +7,7 @@ carrying the expected Zenodo checksum or overwrite an existing valid object.
 """
 
 import argparse
+import base64
 import hashlib
 import json
 from pathlib import Path
@@ -41,7 +42,8 @@ def upload_verified(url, bucket, key, size, md5, record_id, profile="", *,
             length = source.headers.get("Content-Length")
             if length is not None and int(length) != size:
                 raise ValueError(f"Unexpected Content-Length: {length}, expected {size}")
-            created = runner("create-multipart-upload", [*target, "--metadata", json.dumps(metadata)], profile)
+            created = runner("create-multipart-upload", [*target, "--metadata", json.dumps(metadata),
+                             "--checksum-algorithm", "SHA256"], profile)
             upload_id = created["UploadId"]
             part_path = Path(folder) / "part"
             parts, total, digest = [], 0, hashlib.md5()
@@ -56,8 +58,15 @@ def upload_verified(url, bucket, key, size, md5, record_id, profile="", *,
                 part_path.write_bytes(chunk)
                 part_number = len(parts) + 1
                 response = runner("upload-part", [*target, "--upload-id", upload_id,
-                                  "--part-number", str(part_number), "--body", str(part_path)], profile)
-                parts.append({"PartNumber": part_number, "ETag": response["ETag"]})
+                                  "--part-number", str(part_number), "--body", str(part_path),
+                                  "--checksum-algorithm", "SHA256"], profile)
+                part_checksum = base64.b64encode(hashlib.sha256(chunk).digest()).decode()
+                if response.get("ChecksumSHA256") != part_checksum:
+                    raise ValueError("S3 part checksum does not match the downloaded bytes")
+                # S3 requires each part's additional checksum at completion when
+                # a checksum algorithm was selected at multipart initialization.
+                parts.append({"PartNumber": part_number, "ETag": response["ETag"],
+                              "ChecksumSHA256": part_checksum})
                 if part_number == 1 or part_number % 16 == 0:
                     print(f"  staged {total}/{size} bytes ({part_number} parts)", flush=True)
             if total != size or digest.hexdigest() != md5:
