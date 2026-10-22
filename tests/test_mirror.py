@@ -1,4 +1,5 @@
 """Offline tests: no AWS credentials, network, or real object mutations."""
+import base64
 import hashlib
 import importlib.util
 import io
@@ -39,16 +40,24 @@ class FakeS3:
         if operation == self.fail:
             raise RuntimeError("Simulated S3 failure")
         if operation == "create-multipart-upload":
+            assert args[args.index("--checksum-algorithm") + 1] == "SHA256"
             self.metadata = json.loads(args[args.index("--metadata") + 1])
             return {"UploadId": "test-upload"}
         if operation == "upload-part":
             number = int(args[args.index("--part-number") + 1])
             self.parts[number] = Path(args[args.index("--body") + 1]).read_bytes()
-            return {"ETag": f'"part-{number}"'}
+            assert args[args.index("--checksum-algorithm") + 1] == "SHA256"
+            checksum = base64.b64encode(hashlib.sha256(self.parts[number]).digest()).decode()
+            if self.fail == "wrong-part-checksum":
+                checksum = "wrong"
+            return {"ETag": f'"part-{number}"', "ChecksumSHA256": checksum}
         if operation == "complete-multipart-upload":
             path = args[args.index("--multipart-upload") + 1].removeprefix("file://")
             parts = json.loads(Path(path).read_text())["Parts"]
             assert [p["PartNumber"] for p in parts] == list(range(1, len(parts) + 1))
+            for part in parts:
+                expected = base64.b64encode(hashlib.sha256(self.parts[part["PartNumber"]]).digest()).decode()
+                assert part["ChecksumSHA256"] == expected
             self.visible = b"".join(self.parts[p["PartNumber"]] for p in parts)
             return {"ETag": '"complete"'}
         if operation == "head-object":
@@ -113,6 +122,13 @@ class StreamTests(unittest.TestCase):
             self.run_upload(fail="upload-part")
         self.assertNotIn("complete-multipart-upload", self.s3.calls)
         self.assertIn("abort-multipart-upload", self.s3.calls)
+
+    def test_wrong_part_checksum_aborts_before_completion(self):
+        with self.assertRaises(ValueError):
+            self.run_upload(fail="wrong-part-checksum")
+        self.assertNotIn("complete-multipart-upload", self.s3.calls)
+        self.assertIn("abort-multipart-upload", self.s3.calls)
+        self.assertEqual(self.s3.visible, b"pre-existing valid object")
 
     def test_completion_failure_attempts_abort(self):
         with self.assertRaises(RuntimeError):
