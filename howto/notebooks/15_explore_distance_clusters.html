@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-31997b880f7627768e48128250f3b4f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-be7d4d81c18fa5f290a0c4516bb0f3c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-31997b880f7627768e48128250f3b4f0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-d9eda64f7c6a3d6fc303598326ab822b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-21131551909a40795ca9c33b99b9cd41.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-d9eda64f7c6a3d6fc303598326ab822b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -534,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To find perturbations with similar profiles, start with the <a href="https://github.com/broadinstitute/monorepo/tree/main/libs/jump_rr#quick-data-access">browsable Matches tables</a>. These show the top 100 most correlated/anticorrelated matches per perturbation rather than the full all-vs-all matrix.</p>
 <p>For comparisons outside those matches, the full cosine-similarity matrices are available on <a href="https://zenodo.org/records/20496083">Zenodo</a> and mirrored on Cell Painting Gallery. Here we query the CRISPR matrix to compare three perturbations without loading the entire matrix into memory.</p>
 <hr>
-<div id="c2f15b13" class="cell" title="Imports" data-execution_count="1">
+<div id="7d7eb882" class="cell" title="Imports" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> random <span class="im">import</span> choices, seed</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -543,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>We use a versioned Cell Painting Gallery mirror of the Zenodo release for reproducibility and faster HTTP range reads. Polars can read the metadata and selected columns without downloading the full 239 MB file. Avoid calling <code>head().collect()</code> on the full-width matrix: even a few rows would request all 7,977 columns.</p>
 <p>The stored values are <strong>cosine similarities</strong>: 1 means profiles point in the same direction, 0 means they are orthogonal, and -1 means they point in opposite directions. Cosine distance, if needed, is <code>1 - similarity</code>.</p>
-<div id="05bddd7d" class="cell" data-execution_count="2">
+<div id="ff1aca2b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ZENODO_RECORD_ID <span class="op">=</span> <span class="st">"20496083"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>CPG_BASE <span class="op">=</span> (</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://cellpainting-gallery.s3.amazonaws.com/"</span></span>
@@ -554,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Columns are JUMP IDs (<code>JCP2022_X</code>), and rows follow the same order. See the metadata tutorial for mapping these IDs to gene names. We select three perturbations, then collect only their columns and matching rows.</p>
-<div id="9ac879ae" class="cell" data-execution_count="3">
+<div id="ead2967a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>seed(<span class="dv">42</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> similarities.collect_schema().names()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>ncols <span class="op">=</span> <span class="bu">len</span>(cols)</span>
@@ -613,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Finally, we plot them in a heatmap for easier visualisation</p>
-<div id="7ea2bfb7" class="cell" data-execution_count="4">
+<div id="e210267d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pandas_similarity <span class="op">=</span> sampled_similarities.to_pandas()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pandas_similarity.index <span class="op">=</span> pandas_similarity.columns</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(</span>
