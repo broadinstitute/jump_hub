@@ -3,6 +3,7 @@
 There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.
 
 - Source 1 and 9 use higher-density plates (1536 vs the standard 384\)  
+- The known source 9 issue is limited to its nine TARGET2 plates; its 99 COMPOUND plates are not affected. In the public Harmony profiles, median positive-control activity is at chance on each TARGET2 plate (median normalized average precision across plates: -0.013), whereas it is strong across the COMPOUND plates (0.974). The expected treatment signal is therefore absent; exclude only the nine TARGET2 plates from cross-site alignment. [Public-data analysis and code](https://github.com/broadinstitute/jump_hub/pull/135).
 - Genetic replicates were usually not randomized across well positions. Approximately 99.4% of ORF IDs and 94.9% of CRISPR IDs occur at a single well across all plates on which they appear.
 - Source 7 and 13 are the same laboratory
 - In JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.  
