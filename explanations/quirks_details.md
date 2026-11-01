@@ -3,7 +3,7 @@
 There are additional details that are not commonly asked but it is important to retain on record. This is a compendium of those.
 
 - Source 1 and 9 use higher-density plates (1536 vs the standard 384\)  
-- Source 9's nine TARGET2 plates lack detectable treatment signal and should be excluded from cross-site alignment; its 99 COMPOUND plates are unaffected. Public profiles show positive-control activity near chance for TARGET2 (median normalized AP: -0.013) but strong for COMPOUND (0.974). [Evidence and code](https://github.com/broadinstitute/jump_hub/pull/135).
+- Source 9's nine TARGET2 plates lack expected positive-control activity and should be excluded from cross-site alignment; its 99 COMPOUND plates retain that activity. Public profiles show positive-control activity near chance for TARGET2 (median normalized AP: -0.013) but strong for COMPOUND (0.974); MorphEM on the original images gives -0.016 and 0.978, respectively. [Evidence and code](https://github.com/broadinstitute/jump_hub/pull/135).
 - Genetic replicates were usually not randomized across well positions. Approximately 99.4% of ORF IDs and 94.9% of CRISPR IDs occur at a single well across all plates on which they appear.
 - Source 7 and 13 are the same laboratory
 - In JUMP-Target there is an InChIKey that maps to 2 different perturbations: ‘LOUPRKONTZGTKE-UHFFFAOYSA-N’ maps to both quinidine and quinine.  
