@@ -18,14 +18,14 @@ You will create a manifest file that documents your processed profiles:
 [
     {
         "subset": "compound_no_source7",
-        "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
+        "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump/source_all/workspace/profiles_assembled/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
         "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
         "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
         "etag": ""
     },
     {
         "subset": "compound_no_source7_interpretable",
-        "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet",
+        "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump/source_all/workspace/profiles_assembled/compound_no_source7/v1.0/profiles_var_mad_int_featselect.parquet",
         "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
         "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
         "etag": ""
@@ -65,10 +65,10 @@ This example shows uploading to S3, but adapt the commands for your storage loca
 
 ```bash
 aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
-  s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles_assembled/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
+  s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/profiles_assembled/${SUBSET}/${VERSION}/${INTERPRETABLE_PROFILES_FILE}
 
 # Verify upload succeeded
-aws s3 ls s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/${SUBSET}/${VERSION}/ --human-readable
+aws s3 ls s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/profiles_assembled/${SUBSET}/${VERSION}/ --human-readable
 ```
 
 ### Step 3: Create the manifest file
@@ -79,7 +79,7 @@ In your project repository, create `manifests/profile_index.json`:
 [
     {
         "subset": "compound_no_source7",
-        "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0042-chandrasekaran-jump/source_all/workspace/profiles/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
+        "url": "https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump/source_all/workspace/profiles_assembled/compound_no_source7/v1.0/profiles_var_mad_int_featselect_harmony.parquet",
         "recipe_permalink": "https://github.com/broadinstitute/jump-profiling-recipe/tree/v0.6.0",
         "config_permalink": "https://github.com/broadinstitute/2025_jump_addon_orchestrator/blob/a15dedb35383cb342cd010106615f99939178126/1.convert/input/compound_no_source7.json",
         "etag": ""

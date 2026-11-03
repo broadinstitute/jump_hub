@@ -7,7 +7,7 @@ The JUMP_rr feature, match, gallery, and significance tables are published to Ze
 For every file in the latest version of a Zenodo concept, the script writes the file to two locations on CPG:
 
 ```
-s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr/
+s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/publication_data/jump_rr/
     <record_id>/<file>/content      # immutable per-version copy
     latest/<file>/content           # mutable pointer to the most recent version
 ```
@@ -81,7 +81,7 @@ There are two ways the script can be run, with different credential mechanics:
    ```bash
    creds=$(aws s3control get-data-access \
      --account-id 309624411020 \
-     --target "s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr/*" \
+     --target "s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/publication_data/jump_rr/*" \
      --permission READWRITE --duration-seconds 43200 --region us-east-1 --output json)
    export AWS_ACCESS_KEY_ID=$(jq -r .Credentials.AccessKeyId    <<< "$creds")
    export AWS_SECRET_ACCESS_KEY=$(jq -r .Credentials.SecretAccessKey <<< "$creds")
