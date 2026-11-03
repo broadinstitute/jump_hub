@@ -49,7 +49,7 @@ jobs:
         env:
           CPG_ACCOUNT_ID: "309624411020"
           CPG_BUCKET: cellpainting-gallery
-          CPG_PREFIX: cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr
+          CPG_PREFIX: cpg0016-jump/source_all/workspace/publication_data/jump_rr
         run: |
           set -euo pipefail
           creds=$(aws s3control get-data-access \

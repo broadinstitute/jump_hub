@@ -38,7 +38,7 @@ import seaborn as sns
 ZENODO_RECORD_ID = "20496083"
 CPG_BASE = (
     "https://cellpainting-gallery.s3.amazonaws.com/"
-    "cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr"
+    "cpg0016-jump/source_all/workspace/publication_data/jump_rr"
 )
 similarities = pl.scan_parquet(
     f"{CPG_BASE}/{ZENODO_RECORD_ID}/crispr_cosinesim_full.parquet/content"

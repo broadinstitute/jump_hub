@@ -28,7 +28,7 @@ set -euo pipefail
 
 CONCEPT_ID="${CONCEPT_ID:-10408587}"
 S3_BUCKET="${S3_BUCKET:-cellpainting-gallery}"
-S3_PREFIX="${S3_PREFIX:-cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr}"
+S3_PREFIX="${S3_PREFIX:-cpg0016-jump/source_all/workspace/publication_data/jump_rr}"
 AWS_PROFILE_NAME="${AWS_PROFILE_NAME-cpg}"
 DRY_RUN="${DRY_RUN:-0}"
 ONLY_FILE="${ONLY_FILE:-}"
