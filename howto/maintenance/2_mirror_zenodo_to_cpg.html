@@ -76,9 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-d9eda64f7c6a3d6fc303598326ab822b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-21131551909a40795ca9c33b99b9cd41.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-d9eda64f7c6a3d6fc303598326ab822b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c1e42506deee99b9d1fa97d51cc38bb0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-9fe5e3fc06cf91e5d66db703ab0d6792.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-c1e42506deee99b9d1fa97d51cc38bb0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -536,7 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-the-script-does" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-script-does">What the script does</h2>
 <p>For every file in the latest version of a Zenodo concept, the script writes the file to two locations on CPG:</p>
-<pre><code>s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr/
+<pre><code>s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/publication_data/jump_rr/
     &lt;record_id&gt;/&lt;file&gt;/content      # immutable per-version copy
     latest/&lt;file&gt;/content           # mutable pointer to the most recent version</code></pre>
 <p><code>&lt;record_id&gt;</code> is the Zenodo record ID for that specific version (e.g.&nbsp;<code>19835081</code>). Each new Zenodo version gets a new record ID and a new <code>&lt;record_id&gt;/</code> directory on CPG; the previous one is left untouched. The <code>latest/</code> directory is always overwritten with the newest version, so <code>broad.io/*</code> short links can target <code>latest/</code> once and never need to be updated again.</p>
@@ -611,7 +611,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>S3 Access Grants (CI / infra-issued credentials).</strong> The IAM keys that <a href="https://github.com/broadinstitute/cellpainting-gallery-infra"><code>cellpainting-gallery-infra</code></a> provisions for a prefix carry only <code>s3:GetDataAccess</code>, not direct S3 actions. To use them you must first mint temporary, prefix-scoped credentials and export them as standard AWS env vars:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">creds</span><span class="op">=</span><span class="va">$(</span><span class="ex">aws</span> s3control get-data-access <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--account-id</span> 309624411020 <span class="dt">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--target</span> <span class="st">"s3://cellpainting-gallery/cpg0042-chandrasekaran-jump/source_all/workspace/publication_data/jump_rr/*"</span> <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--target</span> <span class="st">"s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/publication_data/jump_rr/*"</span> <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--permission</span> READWRITE <span class="at">--duration-seconds</span> 43200 <span class="at">--region</span> us-east-1 <span class="at">--output</span> json<span class="va">)</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">AWS_ACCESS_KEY_ID</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="at">-r</span> .Credentials.AccessKeyId    <span class="op">&lt;&lt;&lt;</span> <span class="st">"</span><span class="va">$creds</span><span class="st">"</span><span class="va">)</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">AWS_SECRET_ACCESS_KEY</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="at">-r</span> .Credentials.SecretAccessKey <span class="op">&lt;&lt;&lt;</span> <span class="st">"</span><span class="va">$creds</span><span class="st">"</span><span class="va">)</span></span>
