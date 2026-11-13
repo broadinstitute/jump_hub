@@ -589,7 +589,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-2-upload-your-profiles-to-storage" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-upload-your-profiles-to-storage">Step 2: Upload your profiles to storage</h3>
 <p>This example shows uploading to S3, but adapt the commands for your storage location.</p>
-<p><strong>Note for Cell Painting Gallery uploads:</strong> Please follow the <a href="https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html">contribution guidelines</a> which will require creating a unique prefix (e.g., <code>cpg0042-chandrasekaran-jump</code>).</p>
+<p><strong>Note for Cell Painting Gallery uploads:</strong> Please follow the <a href="https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html">contribution guidelines</a> and contact the CPG maintainers before uploading.</p>
+<ul>
+<li><strong>Additions to JUMP</strong> (new profiles, embeddings, or other outputs derived from JUMP data) go under the existing <code>cpg0016-jump</code> prefix. Do not create a new prefix for them. Profiles go in <code>cpg0016-jump/source_all/workspace/profiles_assembled/&lt;SUBSET&gt;/&lt;VERSION&gt;/</code>, as in the example below.</li>
+<li><strong>Publication-specific artifacts</strong> (analysis databases, results tables) go in <code>cpg0016-jump/source_all/workspace/publication_data/&lt;YYYY_FirstAuthor&gt;/</code>, e.g.&nbsp;<code>publication_data/2025_Chandrasekaran/</code>.</li>
+<li><strong>New prefixes</strong> (<code>cpgNNNN-&lt;tag&gt;</code>) are only for new datasets, and CPG assigns them.</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 cp /path/to/<span class="va">${INTERPRETABLE_PROFILES_FILE}</span> <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  s3://cellpainting-gallery/cpg0016-jump/source_all/workspace/profiles_assembled/<span class="va">${SUBSET}</span>/<span class="va">${VERSION}</span>/<span class="va">${INTERPRETABLE_PROFILES_FILE}</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
