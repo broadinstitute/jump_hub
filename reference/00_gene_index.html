@@ -538,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Knock-out (CRISPR) datasets: CRISPR (from JUMP), A549 and Hela_X (from PERISCOPE).</li>
 <li>Overexpression (ORF) datasets: ORF (from JUMP), Lacoste.</li>
 </ul>
-<div id="9523b081" class="cell" data-execution_count="1">
+<div id="b12663c0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
@@ -557,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-display">
 <!--| quarto-html-table-processing: none -->
-<table id="itables_f95ef140_1f5f_435f_8b7f_3f1bc5de5b40">
+<table id="itables_8e03f0b4_b80b_42da_a1e0_ce06c1f9cc4f">
   <tbody>
     <tr>
       <td style="vertical-align:middle; text-align:left"><a href="https://mwouts.github.io/itables/"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="64" viewbox="0 0 500 400" style="font-family: 'Droid Sans', sans-serif;">
@@ -627,7 +627,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="module">
     import { ITable, jQuery as $ } from 'https://www.unpkg.com/dt_for_itables@2.5.1/dt_bundle.js';
 
-    document.querySelectorAll("#itables_f95ef140_1f5f_435f_8b7f_3f1bc5de5b40:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#itables_8e03f0b4_b80b_42da_a1e0_ce06c1f9cc4f:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -649,6 +649,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </main> <!-- /main -->
+<script>
+  // Prefill the footer "Report a problem" email with the page the reader was on.
+  (function () {
+    var link = document.getElementById("report-problem");
+    if (!link) return;
+    var body = "Page: " + window.location.href + "\n\nWhat went wrong:\n";
+    link.href += "&body=" + encodeURIComponent(body);
+  })();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1062,8 +1071,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p><a href="mailto:amunozgo@purdue.edu?subject=JUMP%20Hub%20website%20problem" id="report-problem">Report a problem with this website</a></p>
+<div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/jump_hub/edit/main/reference/00_gene_index.py" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/jump_hub/blob/main/reference/00_gene_index.py" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/jump_hub/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/broadinstitute/jump_hub/edit/main/reference/00_gene_index.py" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/broadinstitute/jump_hub/blob/main/reference/00_gene_index.py" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/broadinstitute/jump_hub/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+</body></html>
