@@ -1,6 +1,8 @@
 project:
     type: website
     output-dir: docs
+    post-render:
+        - tools/fix_source_links.py
 # author: Alán F. Muñoz
 # date: last-modified
 
@@ -9,7 +11,7 @@ language:
 
 website:
     title: "JUMP documentation and examples"
-    repo-url: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes
+    repo-url: https://github.com/broadinstitute/jump_hub
     repo-actions: [edit, source, issue]
     reader-mode: true
     search:
@@ -42,7 +44,7 @@ website:
               file: cite.md
         tools:
             - icon: github
-              href: https://github.com/broadinstitute/2023_12_JUMP_data_only_vignettes
+              href: https://github.com/broadinstitute/jump_hub
 
 format:
     html:
