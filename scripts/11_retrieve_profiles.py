@@ -51,6 +51,9 @@ INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11
 # Load the JSON manifest
 response = requests.get(INDEX_FILE)
 profile_index = response.json()
+# The Cell Painting Gallery moved these profiles from cpg0016-jump-assembled to cpg0016-jump.
+for dataset in profile_index:
+    dataset["url"] = dataset["url"].replace("/cpg0016-jump-assembled/", "/cpg0016-jump/")
 
 # Display the manifest data
 for dataset in profile_index:
