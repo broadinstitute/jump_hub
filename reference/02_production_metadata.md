@@ -1,6 +1,6 @@
 # JUMP production metadata
 
-The JUMP production [augmented metadata database](https://imaging-platform.s3.amazonaws.com/projects/cpg0042-chandrasekaran-jump/workspace/publication_data/2025_Chandrasekaran/jump_production_datastore/interim/jump_metadata_augmented.duckdb) is the source for the compound target and mechanism-of-action (MoA) annotations used in the JUMP production analysis. These are annotations of compounds, not annotations of the corresponding genetic perturbations.
+The JUMP production [augmented metadata database](https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump/source_all/workspace/publication_data/2025_Chandrasekaran/jump_production_datastore/interim/jump_metadata_augmented.duckdb) is the source for the compound target and mechanism-of-action (MoA) annotations used in the JUMP production analysis. These are annotations of compounds, not annotations of the corresponding genetic perturbations.
 
 ## Database contents
 
@@ -21,7 +21,7 @@ Open the [DuckDB Web Shell](https://shell.duckdb.org/) or start a local DuckDB C
 INSTALL httpfs;
 LOAD httpfs;
 
-ATTACH 'https://imaging-platform.s3.amazonaws.com/projects/cpg0042-chandrasekaran-jump/workspace/publication_data/2025_Chandrasekaran/jump_production_datastore/interim/jump_metadata_augmented.duckdb'
+ATTACH 'https://cellpainting-gallery.s3.amazonaws.com/cpg0016-jump/source_all/workspace/publication_data/2025_Chandrasekaran/jump_production_datastore/interim/jump_metadata_augmented.duckdb'
     AS meta (READ_ONLY);
 
 DESCRIBE meta.compound_metadata;
