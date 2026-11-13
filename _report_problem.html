@@ -1,0 +1,9 @@
+<script>
+  // Prefill the footer "Report a problem" email with the page the reader was on.
+  (function () {
+    var link = document.getElementById("report-problem");
+    if (!link) return;
+    var body = "Page: " + window.location.href + "\n\nWhat went wrong:\n";
+    link.href += "&body=" + encodeURIComponent(body);
+  })();
+</script>
