@@ -124,4 +124,4 @@ S3 has no native symlink mechanism. The two-directory pattern (immutable `<recor
 
 - Publishing to Zenodo. The Zenodo release is cut by whoever owns the JUMP_rr generation pipeline. This script only mirrors what is already on Zenodo.
 - Updating `broad.io/*` short links. If `latest/` is the persistent target, no updates are needed for ongoing releases. If a short link still references a Zenodo URL, that's a one-time repointing that lives outside this script.
-- Other artifacts on CPG (such as the v0.13 metadata DuckDB at `publication_data/datasets/v0.13/`) that are not sourced from this Zenodo concept.
+- Other artifacts on CPG (such as the v0.13 metadata DuckDB at `publication_data/2025_Chandrasekaran/datasets/v0.13/`) that are not sourced from this Zenodo concept.
