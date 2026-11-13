@@ -2,6 +2,20 @@
 
 Papers, public preprints, and community updates, newest first.
 
+## 2026-11-13 — The full JUMP Cell Painting chemical dataset
+
+**Preprint**
+
+Images and 1.53 billion single-cell profiles for 115,796 compounds in human
+(U2OS) cells, generated across 12 labs and freely available. This updated
+preprint describes the largest public Cell Painting dataset by number of
+chemicals tested, shows that biological signal survives multi-lab batch
+effects, and demonstrates applications in target and mechanism prediction,
+structure–activity relationships, and activity prediction.
+
+[bioRxiv](https://www.biorxiv.org/content/10.1101/2023.03.23.534023v4) ·
+[Data](http://broad.io/jump)
+
 ## 2026-08-07 — JUMP-lite: compact, reproducible benchmarking of cell representations
 
 **Preprint**
