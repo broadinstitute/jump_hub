@@ -61,7 +61,11 @@ INTERPRETABLE_PROFILES_FILE="profiles_var_mad_int_featselect.parquet"  # Interpr
 
 This example shows uploading to S3, but adapt the commands for your storage location.
 
-**Note for Cell Painting Gallery uploads:** Please follow the [contribution guidelines](https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html) which will require creating a unique prefix (e.g., `cpg0042-chandrasekaran-jump`). 
+**Note for Cell Painting Gallery uploads:** Please follow the [contribution guidelines](https://broadinstitute.github.io/cellpainting-gallery/contributing_to_cpg.html) and contact the CPG maintainers before uploading.
+
+- **Additions to JUMP** (new profiles, embeddings, or other outputs derived from JUMP data) go under the existing `cpg0016-jump` prefix. Do not create a new prefix for them. Profiles go in `cpg0016-jump/source_all/workspace/profiles_assembled/<SUBSET>/<VERSION>/`, as in the example below.
+- **Publication-specific artifacts** (analysis databases, results tables) go in `cpg0016-jump/source_all/workspace/publication_data/<YYYY_FirstAuthor>/`, e.g. `publication_data/2025_Chandrasekaran/`.
+- **New prefixes** (`cpgNNNN-<tag>`) are only for new datasets, and CPG assigns them.
 
 ```bash
 aws s3 cp /path/to/${INTERPRETABLE_PROFILES_FILE} \
