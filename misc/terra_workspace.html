@@ -533,7 +533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The JUMP Cell Painting dataset includes 116k chemical and &gt;15k genetic perturbations (<code>cpg0016</code>), split across 12 data-generating centers, using human U2OS osteosarcoma cells. All data is hosted on the <a href="https://registry.opendata.aws/cellpainting-gallery/">Cell Painting Gallery</a> on the Registry of Open Data on AWS.</p>
-<p>The JUMP Hub <a href="../scripts/">tutorial scripts</a> fetch profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — they work anywhere you can run a Jupyter notebook, including Terra.</p>
+<p>The JUMP Hub <a href="https://github.com/broadinstitute/jump_hub/tree/main/scripts">tutorial scripts</a> fetch profiles via HTTP from the Cell Painting Gallery, so no local data or cloud credentials are needed — they work anywhere you can run a Jupyter notebook, including Terra.</p>
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
@@ -568,7 +568,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table></li>
-<li><p>Pick a tutorial script from <a href="../scripts/"><code>scripts/</code></a> and convert it to a notebook locally. For example, starting with <a href="../scripts/11_retrieve_profiles.py">Retrieve JUMP profiles</a>:</p>
+<li><p>Pick a tutorial script from <a href="https://github.com/broadinstitute/jump_hub/tree/main/scripts"><code>scripts/</code></a> and convert it to a notebook locally. For example, starting with <a href="../scripts/11_retrieve_profiles.py">Retrieve JUMP profiles</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install jupytext</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupytext</span> <span class="at">--to</span> notebook 11_retrieve_profiles.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Upload the resulting <code>.ipynb</code> to the Terra workspace <strong>Analyses</strong> tab.</p></li>

@@ -40,7 +40,7 @@ import requests
 # - Direct links to the processing recipe and configuration used
 # - ETags for data integrity verification
 #
-# For details on creating your own profile manifests, see the [manifest guide](https://github.com/broadinstitute/jump_hub/blob/main/howto/2_create_project_manifest.md).
+# For details on creating your own profile manifests, see the [manifest guide](https://broadinstitute.github.io/jump_hub/howto/maintenance/1_project_manifest.html).
 
 # %% Paths
 INDEX_FILE = "https://raw.githubusercontent.com/jump-cellpainting/datasets/v0.11.0/manifests/profile_index.json"
