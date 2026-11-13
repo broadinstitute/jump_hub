@@ -64,7 +64,7 @@ pert_mapper
 # %% [markdown]
 # A couple of important notes about broad_babel's get mapper and other functions:
 # - these must be fed tuples, as these are cached and provide significant speed-ups for repeated calls
-# - 'get-mapper' works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the 'compounds' dataset it is likely to fail. For these cases we suggest the more general function 'run_query'. You can read more on this and other use-cases on Babel's [readme](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel).
+# - 'get-mapper' works for datasets for up to a few tens of thousands of samples. If you try to use it to get a mapper for the entirety of the 'compounds' dataset it is likely to fail. For these cases we suggest the more general function 'run_query'. You can read more on this and other use-cases on Babel's [readme](https://github.com/broadinstitute/monorepo/tree/main/libs/broad_babel).
 #
 # We will now repeat the process to get their 'standard' name
 
