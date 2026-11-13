@@ -45,11 +45,15 @@ website:
         tools:
             - icon: github
               href: https://github.com/broadinstitute/jump_hub
+    page-footer:
+        center: |
+            [Report a problem with this website](mailto:amunozgo@purdue.edu?subject=JUMP%20Hub%20website%20problem){#report-problem}
 
 format:
     html:
         default-image-extension: svg
         toc: true
+        include-after-body: _report_problem.html
         theme:
             light: flatly
             dark: darkly
