@@ -22,7 +22,7 @@ Find recently accepted papers, public preprints, publications, and important upd
 
 3. Looking to build tools?
    
-   - Use our Python libraries [cp_measure](https://github.com/afermg/cp_measure), [cpgdata](https://github.com/broadinstitute/cpg/tree/main/cpgdata), [jump-portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait), [jump-babel](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_babel) and other libraries in the [monorepo](https://github.com/broadinstitute/monorepo/tree/main)
+   - Use our Python libraries [cp_measure](https://github.com/afermg/cp_measure), [cpgdata](https://github.com/broadinstitute/cpg/tree/main/cpgdata), [jump-portrait](https://github.com/broadinstitute/monorepo/tree/main/libs/jump_portrait), [broad-babel](https://github.com/broadinstitute/monorepo/tree/main/libs/broad_babel) and other libraries in the [monorepo](https://github.com/broadinstitute/monorepo/tree/main)
    - Access the [metadata schema](https://github.com/jump-cellpainting/datasets/tree/main/metadata)
 
 ## Need help or more information?
